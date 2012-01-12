@@ -100,7 +100,7 @@ ul, ol {
           color: white;
         }
         a.on {
-          background-color: $primary_color;
+          background-color: $secondary_color;
           color: white;
         }
       }
@@ -199,6 +199,34 @@ ul, ol {
       padding: 0;
       border: 1px solid red;
     }
+  }
+}
+
+.pagination {
+  height: 23px;
+  padding: 20px 0 0 0;
+  span.previous_page, span.next_page {
+    padding: 3px 6px;
+  }
+  span.previous_page, a.previous_page {
+  }
+  span.next_page, a.next_page {
+  }
+  a {
+    margin: 0 5px 0 0;
+    padding: 3px 6px;
+    text-decoration: none;
+  }
+  a:hover {
+    background: none repeat scroll 0 0 #00555A;
+    color: #FFFFFF;
+  }
+  em {
+    margin: 0 5px 0 0;
+    padding: 3px 6px;
+    font-style: normal;
+    background: none repeat scroll 0 0 #00555A;
+    color: #FFFFFF;
   }
 }
 
@@ -340,10 +368,10 @@ ul, ol {
         .action {
           height: 30px;
           line-height: 30px;
-          color: #999;
+          color: #666;
           font-size: 12px;
           a {
-            color: #999;
+            color: #666;
             font-size: 12px;
           }
           .tags {

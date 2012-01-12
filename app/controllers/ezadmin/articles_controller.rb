@@ -4,7 +4,7 @@ class Ezadmin::ArticlesController < ApplicationController
   layout "admin"
   
   def index
-    @articles = Article.paginate(:page => params[:article], :per_page => 50, :order => "id desc")
+    @articles = Article.paginate(:page => params[:page], :per_page => 20, :order => "id desc")
     respond_to do |format|
       format.html
     end

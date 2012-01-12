@@ -1,0 +1,30 @@
+.banner
+  .layout
+    .title
+      查看时尚信息
+.layout
+  %table.styled
+    %thead
+      %tr
+        %th
+          
+        %th
+          
+    %tbody
+      %tr
+        %td{:width => "10%"}
+          标题
+        %td
+          = @article.title
+      %tr
+        %td
+          内容
+        %td
+          = html_escape(raw(@article.content))
+    %tfoot
+      %tr
+        %td{:colspan => 3}
+          .right
+            = link_to "返回", :back
+          = link_to "编辑", edit_ezadmin_article_url(@article)
+          = link_to "删除", ezadmin_article_url(@article), :title => "删除", :method => "delete", :confirm => "点击确定继续"

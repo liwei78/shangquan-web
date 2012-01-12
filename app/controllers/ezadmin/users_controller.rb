@@ -60,8 +60,6 @@ class Ezadmin::UsersController < ApplicationController
     end
   end
   
-  
-  
   private
   
   def set_admin_nav_flag

@@ -14,10 +14,14 @@ Shangquan::Application.routes.draw do
       get  'pubvideo'
       post 'postvideo'
     end
+    member do
+      get 'articles'
+    end
   end
   
   namespace :ezadmin do
     resources :users
+    resources :articles
     match 'login'      => 'dashboard#login',      :as => :login,       :via => :get
     match 'checklogin' => 'dashboard#checklogin', :as => :checklogin,  :via => :post
     match 'logout'     => 'dashboard#logout',     :as => :logout,      :via => :get

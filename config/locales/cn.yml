@@ -1,5 +1,7 @@
 #encoding: utf-8
 cn:
+  will_paginate:
+    page_gap: '...'
   date:
     formats:
       default: "%Y-%m-%d"

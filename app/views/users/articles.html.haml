@@ -1,26 +1,23 @@
 .leftarea
   = render :partial => "users/homebtn"
   
-  / .banner
-  /   = image_tag("/assets/banner.jpg")
-  
   %ul.homenav
-    %li= link_to "全部", user_url(current_user_id), :class => 'on'
-    %li= link_to "时尚", articles_user_url(current_user_id)
+    %li= link_to "全部", user_url(@user)
+    %li= link_to "时尚", articles_user_url(@user), :class => 'on'
     %li= link_to "活动", "#"
     .clearfix
     
   .list
-    - 5.times do
+    - for article in @articles
       .item
         .avatar= image_tag("/assets/avatar.jpg")
         .content
           .name
-            测试账号
+            = @user.name
           .title
-            标题标题标题标题标题标题标题标题标题标题标题标题标题标题
+            = article.title
           .text
-            = raw('内容'*110)
+            = html_escape(raw(article.content))
           .action
             .btn.right
               热度(9)
@@ -33,7 +30,7 @@
               %span= link_to "#标签", ""
         .clearfix
     .paginate
-    
+      = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
     
     
 .rightarea

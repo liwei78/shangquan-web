@@ -29,9 +29,9 @@
             %li= link_to "品牌", brand_url, :class => nav_class("brand")
             %li= link_to "商品", good_url, :class => nav_class("good")
             .clearfix
-    .layout
+    .layout.mb
       .messagediv
         = flash[:notice]
-      .mainbox.mb
+      .mainbox
         = yield
     = render :partial => "layouts/footer"

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :required_login, :except => [:new, :create, :login, :checklogin, :logout, :show]
   
   def login
-    
+    render :layout => "application"
   end
   
   def checklogin
@@ -50,16 +50,19 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render :layout => "user"
+  end
+  
+  def articles
+    @user = User.find(params[:id])
+    @articles = @user.articles.paginate(:page => params[:article], :per_page => 5)
   end
 
   def new
     @user = User.new
+    render :layout => "application"
   end
 
   def edit
-    @user = User.find(:signcode => cookies[:signcode])
-    render :layout => "user"
   end
 
   def create
@@ -82,7 +85,7 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @current_user.update_attributes(params[:user])
+      if current_user.update_attributes(params[:user])
         format.html { redirect_to :back, :notice => "更新成功" }
       else
         flash[:error] = "错误"
@@ -92,11 +95,14 @@ class UsersController < ApplicationController
   end
   
   def write
-    render :layout => "user"
+    
   end
   
   def postcontent
-    
+    article = Article.new(:title => params[:title], :content => params[:content])
+    article.user_id = current_user_id
+    article.save
+    redirect_to articles_user_id(current_user_id)
   end
   
   private

@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   before_create :encrypt_something
   before_update :change_password
   
+  has_many :articles, :order => "articles.id desc"
+  has_many :feeds,    :order => "feeds.id desc"
+  
   def self.authenticate(email, password)
     user = find_by_email(email)
     return if user.nil?

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user
-    @current_user = User.find_by_signcode(session[:signcode]||cookies[:signcode]) if loggin?
+    User.find_by_signcode(session[:signcode]||cookies[:signcode]) if loggin?
   end
   
   def current_user_name

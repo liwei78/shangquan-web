@@ -32,6 +32,7 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development do
+  # gem 'faker'
   gem 'sqlite3'
 end
 

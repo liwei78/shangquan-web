@@ -1,0 +1,23 @@
+.banner
+  .layout
+    .title
+      时尚信息管理
+.layout
+  %table.styled
+    %thead
+      %tr
+        %th
+          标题
+        %th
+          管理
+    %tbody
+      - for article in @articles
+        %tr
+          %td
+            = link_to article.title, ezadmin_article_url(article)
+          %td
+            = link_to "编辑", edit_ezadmin_article_url(article)
+    %tfoot
+      %tr
+        %td{:colspan => 3}
+          = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
