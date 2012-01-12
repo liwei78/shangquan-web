@@ -1,0 +1,31 @@
+.banner
+  .layout
+    .title
+      用户管理
+.layout
+  %table.styled
+    %thead
+      %tr
+        %th
+          登陆账号
+        %th
+          用户名
+        %th
+          管理
+    %tbody
+      - for user in @users
+        %tr
+          %td
+            = link_to user.email, ezadmin_user_url(user)
+          %td
+            = user.name
+          %td
+            = link_to "编辑", edit_ezadmin_user_url(user)
+    %tfoot
+      %tr
+        %td{:colspan => 3}
+          分页
+          
+  .btn
+    = link_to "添加", new_ezadmin_user_url, :class => "link"
+          

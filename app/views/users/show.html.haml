@@ -1,0 +1,45 @@
+.leftarea
+  = render :partial => "users/homebtn"
+  
+  / .banner
+  /   = image_tag("/assets/banner.jpg")
+  
+  %ul.homenav
+    %li= link_to "全部", "#", :class => 'on'
+    %li= link_to "时尚", "#"
+    %li= link_to "活动", "#"
+    .clearfix
+    
+  .list
+    - 5.times do
+      .item
+        .avatar= image_tag("/assets/avatar.jpg")
+        .content
+          .name
+            测试账号
+          .title
+            标题标题标题标题标题标题标题标题标题标题标题标题标题标题
+          .text
+            = raw('内容'*110)
+          .action
+            .btn.right
+              热度(9)
+              回应(4)
+              转载
+            .tags
+              %span= link_to "#标签", ""
+              %span= link_to "#标签", ""
+              %span= link_to "#标签", ""
+              %span= link_to "#标签", ""
+        .clearfix
+    .paginate
+    
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
+.clearfix

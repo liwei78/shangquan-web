@@ -1,0 +1,50 @@
+!!!
+%html(xmlns="http://www.w3.org/1999/xhtml")
+  %head
+    %title= site_title
+    %meta{'http-equiv' => "content-type", :content => "text/html; charset=UTF-8"}
+    = stylesheet_link_tag "admin"
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = yield :header
+  %body
+    .header
+      .layout
+        .topnav
+          .right
+            = link_to "退出", ezadmin_logout_url
+        .logo
+          = image_tag("adminlogo.png")
+        .nav
+          %ul
+            %li
+              = link_to "管理首页", ezadmin_dashboard_url, :class => admin_nav?("index")
+            %li
+              = link_to "用户管理", ezadmin_users_url, :class => admin_nav?("users")
+            %li
+              = link_to "商家管理", "", :class => admin_nav?("")
+            %li
+              = link_to "设计师管理", "", :class => admin_nav?("")
+            %li
+              = link_to "时尚信息管理", ezadmin_articles_url, :class => admin_nav?("articles")
+            %li
+              = link_to "活动管理", "", :class => admin_nav?("")
+            %li
+              = link_to "相册管理", "", :class => admin_nav?("")
+            %li
+              = link_to "商品管理", "", :class => admin_nav?("")
+            %li
+              = link_to "评论管理", "", :class => admin_nav?("")
+            %li
+              = link_to "视频管理", "", :class => admin_nav?("")
+            %li
+              = link_to "动态管理", "", :class => admin_nav?("")
+            .clearfix
+    .mainbox
+      - unless flash[:notice].nil?
+        .notice
+          = flash[:notice]
+      = yield
+    .footer
+      &copy 2012
+      = site_title

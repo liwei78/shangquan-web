@@ -1,0 +1,31 @@
+= form_for(user, :url => (user.new_record? ? ezadmin_users_url : ezadmin_user_url(user))) do |f|
+  %table.styled
+    %tbody
+      %tr
+        %td
+          登陆账号
+        %td
+          = f.text_field :email, :class => "input"
+      %tr
+        %td
+          登陆密码
+        %td
+          = f.password_field :password, :class => "input"
+      %tr
+        %td
+          显示名称
+        %td
+          = f.text_field :name, :class => "input"
+      %tr
+        %td
+          
+        %td
+          - unless user.new_record?
+            .right
+              = link_to "删除", ezadmin_user_url(user), :title => "删除", :method => "delete", :confirm => "点击确定继续"
+          = submit_tag("确定", :class => "submit")
+          = link_to "返回", :back
+            
+          
+            
+          

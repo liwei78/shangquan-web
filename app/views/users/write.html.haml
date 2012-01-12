@@ -1,0 +1,46 @@
+- content_for :header do
+  = javascript_include_tag "ckeditor/ckeditor"
+
+.leftarea
+  = render :partial => "users/homebtn"
+  
+  .writediv
+    = form_tag(postcontent_users_url) do
+      .singlediv
+        .title
+          标题
+          %small (可不填)
+        .inputdiv
+          = text_field_tag :title, "", :class => "input"
+      .singlediv
+        .title
+          内容
+        .inputdiv
+          = cktext_area_tag("content", "", :input_html => {:cols => 10, :rows => 20}, :toolbar => 'Basic')
+      .singlediv
+        .title
+          关联商品
+        .inputdiv
+          %br
+          %br
+          %br
+          %br
+          %br
+          %br
+          %br
+          %br
+          %br
+      .btns
+        .right
+          = submit_tag "发布", :class => "submit"
+        = link_to "取消", "#", :class => "cancel"
+          
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
+.clearfix

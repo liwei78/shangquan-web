@@ -1,0 +1,28 @@
+.formbox
+  = form_for(@user) do |f|
+    %ul
+      %li
+        %label 邮件:
+        %span= f.text_field :email, :class => "input"
+      %li
+        %label 密码:
+        %span
+          = f.password_field :password, :class => "input"
+          %br
+          4至20位长度
+      %li
+        %label 重复密码:
+        %span
+          = f.password_field :password, :class => "input"
+          %br
+          请重新输入一遍
+      %li
+        %label 显示名称:
+        %span
+          = f.text_field :name, :class => "input"
+          %br
+          您在本网站上的显示名称
+      %li
+        %div
+          = submit_tag('注册', :class => 'btn')
+    .clearfix

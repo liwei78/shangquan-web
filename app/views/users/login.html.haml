@@ -1,0 +1,24 @@
+.formbox.mb
+  = form_tag(checklogin_users_url) do
+    %ul
+      - unless flash[:error].nil?
+        %div.error
+          错误
+      %li
+        %label 邮件:
+        %span= text_field_tag :email, "", :class => "input"
+      %li
+        %label 密码:
+        %span
+          = password_field_tag :password, "", :class => "input"
+          %br
+          4至20位长度
+      %li
+        %div
+          = check_box_tag 'remember_me', "true", true
+          2周内免登录
+      %li
+        %div
+          = submit_tag("登录", :class => 'btn')
+          = link_to "找回密码", "", :class => "other"
+    .clearfix

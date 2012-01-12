@@ -1,0 +1,37 @@
+!!!
+%html(xmlns="http://www.w3.org/1999/xhtml")
+  %head
+    %title= site_title
+    %meta{'http-equiv' => "content-type", :content => "text/html; charset=UTF-8"}
+    = stylesheet_link_tag "main"
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = yield :header
+  %body.bg1
+    .header
+      .nav
+        .layout
+          .action.right
+            - if loggin?
+              =link_to "#{current_user_name}的空间", user_url(current_user_id), :class => "myhome"
+              =link_to "私信", ""
+              =link_to "设置", ""
+              =link_to "退出", logout_users_url
+            - else
+              = link_to "注册", new_user_url
+              = link_to "登录", welcome_users_url
+          %ul
+            %li.logo= link_to image_tag("slogo.png"), root_url
+            %li= link_to "首页", root_url
+            %li= link_to "时尚", fashion_url, :class => nav_class("fashion")
+            %li= link_to "活动", activity_url, :class => nav_class("activity")
+            %li= link_to "商家", member_url, :class => nav_class("member")
+            %li= link_to "品牌", brand_url, :class => nav_class("brand")
+            %li= link_to "商品", good_url, :class => nav_class("good")
+            .clearfix
+    .layout
+      .messagediv
+        = flash[:notice]
+      .mainbox.mb
+        = yield
+    = render :partial => "layouts/footer"

@@ -1,0 +1,10 @@
+settings: &common
+  site_title: '时尚商圈'
+  admin_key: 'china'
+  admin_account: 'admin'
+  admin_password: 'changchun'
+  
+development:
+  <<: *common
+production:
+  <<: *common
