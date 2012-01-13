@@ -11,16 +11,16 @@
     .clearfix
     
   .list
-    - 5.times do
+    - for feed in @feeds
       .item
         .avatar= image_tag("/assets/avatar.jpg")
         .content
           .name
-            测试账号
+            feed.username
           .title
-            标题标题标题标题标题标题标题标题标题标题标题标题标题标题
+            feed.title
           .text
-            = raw('内容'*110)
+            = html_escape(raw(article.content))
           .action
             .btn.right
               热度(9)
@@ -33,6 +33,7 @@
               %span= link_to "#标签", ""
         .clearfix
     .paginate
+      = will_paginate @feeds, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
     
     
     
