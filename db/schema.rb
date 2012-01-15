@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20120112022542) do
     t.datetime "updated_at"
   end
 
+  add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
     t.string   "data_content_type"
@@ -56,11 +58,17 @@ ActiveRecord::Schema.define(:version => 20120112022542) do
   end
 
   create_table "feeds", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "klass_id"
+    t.string   "klass_type"
+    t.string   "target_url"
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "feeds", ["user_id"], :name => "index_feeds_on_user_id"
 
   create_table "goods", :force => true do |t|
     t.string   "title"

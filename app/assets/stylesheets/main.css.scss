@@ -111,7 +111,7 @@ ul, ol {
     .action {
       a {
         display: inline-block;
-        width: 40px;
+        margin-left: 10px;
         height: $nav_height;
         line-height: $nav_height;
         font-size: 12px;
@@ -120,9 +120,6 @@ ul, ol {
       }
       a:hover {
         text-decoration: underline;
-      }
-      a.myhome {
-        width: 120px;
       }
     }
   }
@@ -361,6 +358,9 @@ ul, ol {
           line-height: 40px;
           font-size: 18px;
           color: #333;
+          a {
+            text-decoration: underline;
+          }
         }
         .text {
           line-height: 30px;
@@ -380,6 +380,57 @@ ul, ol {
               a {
                 text-decoration: underline;
               }
+            }
+          }
+        }
+      }
+    }
+  }
+  .show {
+    background-color: #fff;
+    border: 1px solid $border_color;
+    .avatar {
+      float: left;
+      width: 100px;
+      img {
+        width: 80px;
+        height: 80px;
+        border: 1px solid $grey1;
+      }
+    }
+    .content {
+      float: left;
+      width: 560px;
+      .name {
+        color: #cc3399;
+        height: 30px;
+        line-height: 30px;
+      }
+      .title {
+        line-height: 40px;
+        font-size: 18px;
+        color: #333;
+        a {
+          text-decoration: underline;
+        }
+      }
+      .text {
+        line-height: 30px;
+      }
+      .action {
+        height: 30px;
+        line-height: 30px;
+        color: #666;
+        font-size: 12px;
+        a {
+          color: #666;
+          font-size: 12px;
+        }
+        .tags {
+          span {
+            margin-right: 4px;
+            a {
+              text-decoration: underline;
             }
           }
         }

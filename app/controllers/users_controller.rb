@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @feeds = @user.feeds.paginate(:page => params[:page], :per_page => 5)
+    @feeds = @user.feeds.with_username.paginate(:page => params[:page], :per_page => 5)
   end
   
   def articles
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     article = Article.new(:title => params[:title], :content => params[:content])
     article.user_id = current_user_id
     article.save
-    redirect_to articles_user_id(current_user_id)
+    redirect_to articles_user_url(current_user_id)
   end
   
   private

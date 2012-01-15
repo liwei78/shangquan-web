@@ -1,0 +1,34 @@
+.leftarea
+  = render :partial => "users/homebtn"
+  = render :partial => "users/homenav"
+    
+  .show
+    .avatar= image_tag("/assets/avatar.jpg")
+    .content
+      .name
+        = @user.name
+      .title
+        = @article.title
+      .text
+        = html_escape(raw(@article.content))
+      .action
+        .btn.right
+          热度(9)
+          回应(4)
+          转载
+        .tags
+          %span= link_to "#标签", ""
+          %span= link_to "#标签", ""
+          %span= link_to "#标签", ""
+          %span= link_to "#标签", ""
+    .clearfix
+    
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
+.clearfix

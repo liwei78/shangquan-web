@@ -16,7 +16,7 @@
         .layout
           .action.right
             - if loggin?
-              =link_to "#{current_user_name}的空间", user_url(current_user_id), :class => "myhome"
+              =link_to "#{current_user_name}的空间", user_url(current_user_id)
               =link_to "私信", ""
               =link_to "设置", ""
               =link_to "退出", logout_users_url

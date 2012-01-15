@@ -3,6 +3,7 @@ Shangquan::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :users, :except => [:index, :destroy] do
+    resources :articles, :only => [:show]
     collection do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin

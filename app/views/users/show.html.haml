@@ -1,14 +1,6 @@
 .leftarea
   = render :partial => "users/homebtn"
-  
-  / .banner
-  /   = image_tag("/assets/banner.jpg")
-  
-  %ul.homenav
-    %li= link_to "全部", user_url(current_user_id), :class => 'on'
-    %li= link_to "时尚", articles_user_url(current_user_id)
-    %li= link_to "活动", "#"
-    .clearfix
+  = render :partial => "users/homenav"
     
   .list
     - for feed in @feeds
@@ -16,11 +8,11 @@
         .avatar= image_tag("/assets/avatar.jpg")
         .content
           .name
-            feed.username
+            = feed.username
           .title
-            feed.title
+            = link_to feed.title, feed.target_url, :target => "_blank"
           .text
-            = html_escape(raw(article.content))
+            = html_escape(raw(feed.content))
           .action
             .btn.right
               热度(9)
