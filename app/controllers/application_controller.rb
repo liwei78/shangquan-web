@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user
-    User.find_by_signcode(session[:signcode]||cookies[:signcode]) if loggin?
+    # user = User.find_by_signcode(session[:signcode]||cookies[:signcode])
+    User.first
   end
   
   def current_user_name
@@ -29,6 +30,13 @@ class ApplicationController < ActionController::Base
       flash[:error] = '管理员未登录'
       redirect_to ezadmin_login_url
     end
+  end
+  
+  def need_user_login
+    unless loggin?
+      flash[:notice] = "请登录"
+      redirect_to welcome_users_url
+    end 
   end
   
 end

@@ -30,8 +30,12 @@
             %li= link_to "商品", good_url, :class => nav_class("good")
             .clearfix
     .layout.mb
-      .messagediv
-        = flash[:notice]
-      .mainbox
+      - if flash[:notice]
+        .noticediv
+          = flash[:notice]
+      - if flash[:error]
+        .errordiv
+          = flash[:error]
+      .mainbox.pt
         = yield
     = render :partial => "layouts/footer"

@@ -227,14 +227,21 @@ ul, ol {
   }
 }
 
-.messagediv {
+.noticediv {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  color: green;
+}
+.errordiv {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: red;
 }
 
 .mainbox {
-  padding-bottom: 4px;
+  padding-top: 20px;
 }
 
 .leftarea {
@@ -389,48 +396,53 @@ ul, ol {
   .show {
     background-color: #fff;
     border: 1px solid $border_color;
-    .avatar {
-      float: left;
-      width: 100px;
-      img {
-        width: 80px;
-        height: 80px;
-        border: 1px solid $grey1;
-      }
-    }
-    .content {
-      float: left;
-      width: 560px;
-      .name {
-        color: #cc3399;
-        height: 30px;
-        line-height: 30px;
-      }
-      .title {
-        line-height: 40px;
-        font-size: 18px;
-        color: #333;
-        a {
-          text-decoration: underline;
+    .fixlayout {
+      width: 660px;
+      margin: 0 auto;
+      padding: 20px;
+      .avatar {
+        float: left;
+        width: 100px;
+        img {
+          width: 80px;
+          height: 80px;
+          border: 1px solid $grey1;
         }
       }
-      .text {
-        line-height: 30px;
-      }
-      .action {
-        height: 30px;
-        line-height: 30px;
-        color: #666;
-        font-size: 12px;
-        a {
+      .content {
+        float: left;
+        width: 560px;
+        .name {
+          color: #cc3399;
+          height: 30px;
+          line-height: 30px;
+        }
+        .title {
+          line-height: 40px;
+          font-size: 18px;
+          color: #333;
+          a {
+            text-decoration: underline;
+          }
+        }
+        .text {
+          line-height: 30px;
+        }
+        .action {
+          height: 30px;
+          line-height: 30px;
           color: #666;
           font-size: 12px;
-        }
-        .tags {
-          span {
-            margin-right: 4px;
-            a {
-              text-decoration: underline;
+          a {
+            color: #666;
+            font-size: 12px;
+          }
+          .tags {
+            span {
+              margin-right: 4px;
+              a {
+                text-decoration: underline;
+              }
             }
           }
         }

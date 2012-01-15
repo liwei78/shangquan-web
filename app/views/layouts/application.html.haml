@@ -33,7 +33,10 @@
             .clearfix
     .layout.mb
       - if flash[:notice]
-        .messagediv
+        .noticediv
           = flash[:notice]
+      - if flash[:error]
+        .errordiv
+          = flash[:error]
       = yield
     = render :partial => "layouts/footer"

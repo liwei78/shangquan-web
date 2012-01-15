@@ -1,9 +1,6 @@
 .formbox.mb
   = form_tag(checklogin_users_url) do
     %ul
-      - unless flash[:error].nil?
-        %div.error
-          错误
       %li
         %label 邮件:
         %span= text_field_tag :email, "", :class => "input"

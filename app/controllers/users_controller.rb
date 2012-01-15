@@ -1,7 +1,7 @@
 #encoding: utf-8
 class UsersController < ApplicationController
   
-  before_filter :required_login, :except => [:new, :create, :login, :checklogin, :logout, :show]
+  before_filter :need_user_login, :except => [:new, :create, :login, :checklogin, :logout, :show]
   
   def login
     render :layout => "application"
@@ -13,17 +13,17 @@ class UsersController < ApplicationController
       if user
         if params[:remember_me] == "true"
           cookies[:signcode] = {
-             :value => user.signcode,
-             :expires => 14.days.from_now
-           }
-           cookies[:user_name] = {
-              :value => user.name,
-              :expires => 14.days.from_now
-            }
-           cookies[:user_id]   =  {
-              :value => user.id,
-              :expires => 14.days.from_now
-            }
+            :value => user.signcode,
+            :expires => 14.days.from_now
+          }
+          cookies[:user_name] = {
+            :value => user.name,
+            :expires => 14.days.from_now
+          }
+          cookies[:user_id]   =  {
+            :value => user.id,
+            :expires => 14.days.from_now
+          }
         else
           session[:signcode]  = user.signcode
           session[:user_name] = user.name
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
         
         format.html {redirect_to user}
       else
-        flash[:error] = "失败"
+        flash[:error] = "登录失败"
         format.html {redirect_to :back}
       end
     end
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
   end
   
   def write
-    
+    @user = current_user
   end
   
   def postcontent
@@ -106,13 +106,5 @@ class UsersController < ApplicationController
     redirect_to articles_user_url(current_user_id)
   end
   
-  private
-  
-  def required_login
-    unless loggin?
-      flash[:notice] = "请登录"
-      redirect_to welcome_users_url
-    end 
-  end
 
 end
