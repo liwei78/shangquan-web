@@ -12,8 +12,7 @@ gem 'paperclip'
 gem 'execjs'
 gem 'therubyracer'
 gem 'jquery-rails', '>= 1.0.12'
-gem 'ckeditor', '3.7.0.rc1'         # https://github.com/galetahub/ckeditor
-
+# gem 'ckeditor', '3.7.0.rc1'         # https://github.com/galetahub/ckeditor
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,7 +32,6 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development do
-  # gem 'faker'
   gem 'sqlite3'
 end
 
