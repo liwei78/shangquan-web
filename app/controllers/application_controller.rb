@@ -10,10 +10,9 @@ class ApplicationController < ActionController::Base
     session[:signcode]||cookies[:signcode] ? true : false
   end
   
-  def current_user
-    # user = User.find_by_signcode(session[:signcode]||cookies[:signcode])
-    User.first
-  end
+  # def get_current_user
+  #   User.find_by_signcode(session[:signcode]||cookies[:signcode]) if loggin?
+  # end
   
   def current_user_name
     session[:user_name]||cookies[:user_name]

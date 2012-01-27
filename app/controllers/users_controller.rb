@@ -96,7 +96,7 @@ class UsersController < ApplicationController
   end
   
   def write
-    @user = current_user
+    # @user = get_current_user
   end
   
   def postcontent

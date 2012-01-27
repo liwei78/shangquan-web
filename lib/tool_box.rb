@@ -11,7 +11,6 @@ class ToolBox
   end
   
   def self.adminnow
-    
     puts "copy and paste in admin.yml"
     puts "- "*50
     puts "# updated at #{Time.now.to_s}"
