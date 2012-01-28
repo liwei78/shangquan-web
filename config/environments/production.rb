@@ -15,7 +15,7 @@ Shangquan::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -44,7 +44,7 @@ Shangquan::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # add admin assets here
-  config.assets.precompile += %w( admin.css )
+  config.assets.precompile += %w( admin.css main.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
