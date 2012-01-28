@@ -1,6 +1,6 @@
 .userbox
   .userpic
-    = image_tag("/assets/default.jpg")
+    = image_tag("default.jpg")
   .username
     = current_user_name
   .userinfo
@@ -27,4 +27,4 @@
           8
       .clearfix
   .homebtn
-    = link_to image_tag("/assets/myhome.jpg"), user_url(current_user_id)
+    = link_to image_tag("myhome.jpg"), user_url(current_user_id)
