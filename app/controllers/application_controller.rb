@@ -24,13 +24,6 @@ class ApplicationController < ActionController::Base
   
   private
   
-  def need_admin_login
-    unless ToolBox.admin_login?(session[:admin_key])
-      flash[:error] = '管理员未登录'
-      redirect_to ezadmin_login_url
-    end
-  end
-  
   def need_user_login
     unless loggin?
       flash[:notice] = "请登录"

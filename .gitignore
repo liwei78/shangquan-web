@@ -9,4 +9,4 @@ doc/app
 *.psd
 *~
 .DS_Store
-
+public/assets/

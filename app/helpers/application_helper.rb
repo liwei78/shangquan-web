@@ -27,10 +27,6 @@ module ApplicationHelper
   def nav_class(nav)
     'on' if action_name == nav
   end
-  
-  # used for admin nav
-  def admin_nav?(flag)
-    'on' if flag == @admin_nav_flag
-  end
+
 
 end
