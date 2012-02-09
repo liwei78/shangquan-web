@@ -1,0 +1,31 @@
+.showbox
+  .title= @company.title
+  .address
+    %span 地址
+    = @company.address
+  .tags
+    %span 标签
+    = link_to "综合商店", ""
+    = link_to "品牌折扣店", ""
+  .action
+    点评 去过 收藏 分享
+  .detail
+    .title
+      %strong 商家详细
+    .intro
+      = @company.intro
+    .title
+      %strong 所含品牌
+    .brands
+  
+.rightbox.medium-width
+  .box
+    地图
+  .box
+    .title
+      TA们去过
+  .box
+    .title
+      附近购物商户
+
+.clearfix

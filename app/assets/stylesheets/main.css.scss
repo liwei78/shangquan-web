@@ -9,7 +9,7 @@ $secondary_color: #333;  // #555
 $border_color: #dddddd;
 $grey1: #cccccc;
 $grey2: #f6f6f6;
-
+$blue: #3333cc; // main title a style
 
 /* general style */
 * {
@@ -57,8 +57,9 @@ ul, ol {
 .hide {
   display: none; }
 
+$layout-width: 1100px;
 .layout {
-  width: 960px;
+  width: $layout-width;
   margin: 0 auto;
 }
 
@@ -215,14 +216,14 @@ ul, ol {
     text-decoration: none;
   }
   a:hover {
-    background: none repeat scroll 0 0 #00555A;
+    background: none repeat scroll 0 0 $primary_color;
     color: #FFFFFF;
   }
   em {
     margin: 0 5px 0 0;
     padding: 3px 6px;
     font-style: normal;
-    background: none repeat scroll 0 0 #00555A;
+    background: none repeat scroll 0 0 $primary_color;
     color: #FFFFFF;
   }
 }
@@ -233,6 +234,7 @@ ul, ol {
   text-align: center;
   color: green;
 }
+
 .errordiv {
   height: 40px;
   line-height: 40px;
@@ -242,11 +244,122 @@ ul, ol {
 
 .mainbox {
   padding-top: 20px;
+  $leftbox-width: 190px;
+  $rightbox-width: 190px;
+  $rightbox-width-wide: 320px;
+  $margin: 10px;
+  .leftbox {
+    width: $leftbox-width;
+    float: left;
+  }
+  .rightbox {
+    width: $rightbox-width;
+    float: right;
+  }
+  .middlebox {
+    width: $layout-width - $leftbox-width - $rightbox-width - $margin - $margin; 
+    float: left;
+    margin-left: $margin;
+  }
+  .medium-width {
+    width: $rightbox-width-wide !important;
+  }
+  .with-medium-width {
+    width: $layout-width - $leftbox-width - $rightbox-width-wide - $margin - $margin !important;
+  }
+  .box {
+    $padding: 10px;
+    border: 1px solid $border_color;
+    margin-bottom: $margin;
+    .title {
+      height: 30px;
+      line-height: 30px;
+      padding-left: $padding;
+      color: red;
+    }
+    .content {
+      $height: 24px;
+      padding: $padding;
+      padding-top: 0;
+      .category li {
+        float: left;
+        width: 80px;
+        line-height: $height;
+        a {
+          color: $blue;
+        }
+      }
+      .news-list li {
+        line-height: $height;
+        a {
+          text-decoration: underline;
+          color: $blue;
+        }
+        a:hover {
+          text-decoration: none;
+        }
+        .info {
+          color: grey;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .showbox {
+    float: left;
+    width: $layout-width - $rightbox-width-wide - $margin;
+    .title {
+      line-height: 32px;
+      font-size: 18px;
+    }
+    span {
+      color: grey;
+    }
+    .address {
+      line-height: 26px;
+    }
+    .tags {
+      line-height: 26px;
+      a {
+        color: $blue;
+      }
+      a:hover {
+        background-color: $blue;
+        color: white;
+      }
+    }
+    .action {
+      height: 32px;
+      line-height: 32px;
+      border-top: 1px solid $grey1;
+      margin-bottom: 20px;
+    }
+    .detail {
+      border: 1px solid $grey1;
+      .title {
+        height: 32px;
+        line-height: 32px;
+        background-color: $primary_color;
+        border-bottom: 1px solid $grey1;
+        strong {
+          margin-left: 20px;
+          font-size: 14px;
+        }
+      }
+      .intro {
+        padding: 20px;
+      }
+      .brands {
+        height: 40px;
+      }
+    }
+  }
 }
 
+$rightarea-width: 250px;
 .leftarea {
   $mb: 20px;
-  width: 700px;
+  width: $layout-width - $rightarea-width - 10px;
   min-height: 500px;
   float: left;
   .banner {
@@ -452,7 +565,7 @@ ul, ol {
 }
 
 .rightarea {
-  width: 250px;
+  width: $rightarea-width;
   min-height: 480px;
   float: right;
   .userbox {
@@ -549,11 +662,60 @@ ul, ol {
   }
 }
 
+.comp_area {
+  li {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    margin-right: 10px;
+    a {
+      color: $blue;
+    }
+    a:hover {
+      background-color: $blue;
+      color: white;
+    }
+  }
+}
 
+.display_select {
+  height: 32px;
+  line-height: 32px;
+  border: 1px solid #E4E4E4;
+  background: image-url("32bg.jpg") repeat-x;
+}
 
-
-
-
+.infos_list {
+  $margin: 10px;
+  .item {
+    min-height: 120px;
+    margin: 0 10px;
+    margin-bottom: $margin;
+    border-bottom: 1px dashed $grey1;
+    .title {
+      line-height: 32px;
+      a {
+        color: $blue;
+      }
+    }
+    span {
+      color: grey;
+    }
+    .address {
+      line-height: 26px;
+    }
+    .tags {
+      line-height: 26px;
+      a {
+        color: $blue;
+      }
+      a:hover {
+        background-color: $blue;
+        color: white;
+      }
+    }
+  }
+}
 
 
 

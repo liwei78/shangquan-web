@@ -11,10 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115130620) do
+ActiveRecord::Schema.define(:version => 20120207134918) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
+    t.string   "time"
+    t.string   "address"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -53,6 +55,15 @@ ActiveRecord::Schema.define(:version => 20120115130620) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "title"
+    t.string   "address"
+    t.string   "telphone"
+    t.text     "intro"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,2 +1,53 @@
-<h1>Home#activity</h1>
-<p>Find me in app/views/home/activity.html.erb</p>
+.leftbox
+  .box
+    .title
+      所有分类
+    .content
+      %ul.category
+        %li= link_to "商场", ""
+        %li= link_to "美食", ""
+        %li= link_to "专卖店", ""
+        %li= link_to "电子商务", ""
+        %li= link_to "化妆品", ""
+        %li= link_to "折扣店", ""
+        .clearfix
+.middlebox.with-medium-width
+  .comp_area
+    %ul
+      %li 按商区
+      %li= link_to "西单", company_url(:area => "xidan")
+      %li= link_to "朝阳", company_url(:area => "xidan")
+      %li= link_to "中关村", company_url(:area => "xidan")
+      %li= link_to "王府井/东单", company_url(:area => "xidan")
+      %li= link_to "大望路", company_url(:area => "xidan")
+      %li= link_to "三里屯", company_url(:area => "xidan")
+      %li= link_to "建外大街", company_url(:area => "xidan")
+      %li= link_to "望京", company_url(:area => "xidan")
+      %li= link_to "崇文门", company_url(:area => "xidan")
+      .clearfix
+  .display_select
+    
+  .infos_list
+    - for activity in @activities
+      .item
+        .title
+          = link_to activity.title, "/activities/#{activity.id}"
+        .time
+          %span 活动时间
+          = activity.time
+        .address
+          %span 活动商场
+          = activity.address
+        .tags
+          %span 标签
+          = link_to "综合商场", ""
+          = link_to "品牌折扣店", ""
+  = will_paginate @activities, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+  
+.rightbox.medium-width
+  .box
+    .title
+      网友线报
+    .content
+
+.clearfix

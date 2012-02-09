@@ -1,3 +1,4 @@
+#encoding: utf-8
 # test account
 puts "Create Some Test Account"
 User.create([
@@ -28,3 +29,12 @@ puts "200 Articles for All Users rand"
   Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => '<p>'+Faker::Lorem.paragraphs(paragraph_count = 3).join('</p><p>')+'</p>', :user_id => rand(22) )
 end
 
+puts "50 Companies"
+50.times do
+  Company.create(:title => Faker::Lorem.sentence(word_count = 4))
+end
+
+puts "50 Activities"
+50.times do
+  Activity.create(:title => Faker::Lorem.sentence(word_count = 4), :time => "2012年1月1日-2012年1月15日", :address => "巴黎春天中山公园店")
+end

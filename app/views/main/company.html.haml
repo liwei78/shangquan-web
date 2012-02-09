@@ -1,0 +1,83 @@
+.leftbox
+  .box
+    .title
+      所有分类
+    .content
+      %ul.category
+        %li= link_to "商场", ""
+        %li= link_to "美食", ""
+        %li= link_to "专卖店", ""
+        %li= link_to "电子商务", ""
+        %li= link_to "化妆品", ""
+        %li= link_to "折扣店", ""
+        .clearfix
+.middlebox
+  .comp_area
+    %ul
+      %li 按商区
+      %li= link_to "西单", company_url(:area => "xidan")
+      %li= link_to "朝阳", company_url(:area => "xidan")
+      %li= link_to "中关村", company_url(:area => "xidan")
+      %li= link_to "王府井/东单", company_url(:area => "xidan")
+      %li= link_to "大望路", company_url(:area => "xidan")
+      %li= link_to "三里屯", company_url(:area => "xidan")
+      %li= link_to "建外大街", company_url(:area => "xidan")
+      %li= link_to "望京", company_url(:area => "xidan")
+      %li= link_to "崇文门", company_url(:area => "xidan")
+      .clearfix
+  .display_select
+    
+  .infos_list
+    - for company in @companies
+      .item
+        .title
+          = link_to company.title, "/companies/#{company.id}"
+        .address
+          %span 地址
+          = company.address
+        .tags
+          %span 标签
+          = link_to "综合商店", ""
+          = link_to "品牌折扣店", ""
+  = will_paginate @companies, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+  
+.rightbox
+  .box
+    .title
+      相关活动
+    .content
+      %ul.news-list
+        %li
+          = link_to "文字文字文字文字文字", ""
+          .info
+            11月17日-11月27日
+        %li
+          = link_to "文字文字文字文字文字", ""
+          .info
+            11月17日-11月27日
+        %li
+          = link_to "文字文字文字文字文字", ""
+          .info
+            11月17日-11月27日
+        %li
+          = link_to "文字文字文字文字文字", ""
+          .info
+            11月17日-11月27日
+        %li
+          = link_to "文字文字文字文字文字", ""
+          .info
+            11月17日-11月27日
+        .clearfix
+  .box
+    .title
+      商家新闻动态
+    .content
+      %ul.news-list
+        %li= link_to "文字文字文字文字文字", ""
+        %li= link_to "文字文字文字文字文字", ""
+        %li= link_to "文字文字文字文字文字", ""
+        %li= link_to "文字文字文字文字文字", ""
+        %li= link_to "文字文字文字文字文字", ""
+        .clearfix
+
+.clearfix

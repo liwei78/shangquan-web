@@ -1,6 +1,9 @@
 Shangquan::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
+  
+  resources :companies
+  resources :activities
 
   resources :users, :except => [:index, :destroy] do
     resources :articles, :only => [:show]
@@ -22,7 +25,7 @@ Shangquan::Application.routes.draw do
   
   get "main/fashion", :as => :fashion
   get "main/activity", :as => :activity
-  get "main/member", :as => :member
+  get "main/company", :as => :company
   get "main/brand", :as => :brand
   get "main/good", :as => :good
 

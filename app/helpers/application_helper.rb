@@ -4,7 +4,7 @@ module ApplicationHelper
   end
   
   def seo_title
-    SITE_SETTINGS["site_title"]
+    @page_title ? "#{@page_title} - #{site_title}" : site_title
   end
   
   def loggin?
@@ -25,7 +25,7 @@ module ApplicationHelper
   
   # used for front site nav
   def nav_class(nav)
-    'on' if action_name == nav
+    'on' if action_name == nav or controller_name == nav.pluralize
   end
 
 
