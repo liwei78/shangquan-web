@@ -1,7 +1,6 @@
 .showbox
   .area.mb
     .right
-      = image_path("#{SITE_SETTINGS['upload_host']}#{@activity.poster.url(:small)}")
       = image_tag(image_path("#{SITE_SETTINGS['upload_host']}#{@activity.poster.url(:small)}"))
     .title= @activity.title
     .schedule
