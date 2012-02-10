@@ -5,6 +5,8 @@ settings: &common
   admin_password: 'changchun'
   
 development:
+  upload_host: 'http://localhost'
   <<: *common
 production:
+  upload_host: 'http://admin.youtuos.com'
   <<: *common
