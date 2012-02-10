@@ -36,5 +36,5 @@ end
 
 puts "50 Activities"
 50.times do
-  Activity.create(:title => Faker::Lorem.sentence(word_count = 4), :time => "2012年1月1日-2012年1月15日", :address => "巴黎春天中山公园店")
+  Activity.create(:title => Faker::Lorem.sentence(word_count = 4), :schedule => "2012年1月1日-2012年1月15日", :address => "巴黎春天中山公园店")
 end

@@ -15,8 +15,16 @@ ActiveRecord::Schema.define(:version => 20120207134918) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
-    t.string   "time"
+    t.string   "schedule"
+    t.string   "place"
     t.string   "address"
+    t.string   "telphone"
+    t.string   "office_time"
+    t.string   "bus_info"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -61,9 +69,12 @@ ActiveRecord::Schema.define(:version => 20120207134918) do
 
   create_table "companies", :force => true do |t|
     t.string   "title"
+    t.string   "other_title"
     t.string   "address"
     t.string   "telphone"
-    t.text     "intro"
+    t.string   "office_time"
+    t.string   "bus_info"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

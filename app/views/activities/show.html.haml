@@ -1,25 +1,30 @@
 .showbox
-  .title= @activity.title
-  .time
-    %span 活动时间
-    = @activity.time
-  .address
-    %span 地址
-    = @activity.address
-  .telphone
-    %span 电话
-    = @activity.telphone
-  .tags
-    %span 标签
-    = link_to "综合商店", ""
-    = link_to "品牌折扣店", ""
-  .action
-    点评 去过 收藏 分享
-  .detail
-    .title
-      %strong 活动详细
-    .intro
-      = @activity.content
+  .area.mb
+    .right
+      = image_tag(@activity.poster.url(:small))
+    .title= @activity.title
+    .schedule
+      %span 活动时间
+      = @activity.schedule
+    .address
+      %span 地址
+      = @activity.address
+    .telphone
+      %span 电话
+      = @activity.telphone
+    .tags
+      %span 标签
+      = link_to "综合商店", ""
+      = link_to "品牌折扣店", ""
+    .clearfix
+  .area
+    .action
+      点评 去过 收藏 分享
+    .detail
+      .title
+        %strong 活动详细
+      .intro
+        = @activity.content
   
 .rightbox.medium-width
   .box
