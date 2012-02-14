@@ -1,2 +1,6 @@
-<h1>Home#good</h1>
-<p>Find me in app/views/home/good.html.erb</p>
+- for good in @goods
+  .item
+    .title
+      = link_to good.title, good
+
+= will_paginate @goods, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

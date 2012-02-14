@@ -15,15 +15,15 @@
   .comp_area
     %ul
       %li 按商区
-      %li= link_to "西单", company_url(:area => "xidan")
-      %li= link_to "朝阳", company_url(:area => "xidan")
-      %li= link_to "中关村", company_url(:area => "xidan")
-      %li= link_to "王府井/东单", company_url(:area => "xidan")
-      %li= link_to "大望路", company_url(:area => "xidan")
-      %li= link_to "三里屯", company_url(:area => "xidan")
-      %li= link_to "建外大街", company_url(:area => "xidan")
-      %li= link_to "望京", company_url(:area => "xidan")
-      %li= link_to "崇文门", company_url(:area => "xidan")
+      %li= link_to "西单", nav_company_url(:area => "xidan")
+      %li= link_to "朝阳", nav_company_url(:area => "xidan")
+      %li= link_to "中关村", nav_company_url(:area => "xidan")
+      %li= link_to "王府井/东单", nav_company_url(:area => "xidan")
+      %li= link_to "大望路", nav_company_url(:area => "xidan")
+      %li= link_to "三里屯", nav_company_url(:area => "xidan")
+      %li= link_to "建外大街", nav_company_url(:area => "xidan")
+      %li= link_to "望京", nav_company_url(:area => "xidan")
+      %li= link_to "崇文门", nav_company_url(:area => "xidan")
       .clearfix
   .display_select
     
@@ -31,7 +31,7 @@
     - for company in @companies
       .item
         .title
-          = link_to company.title, "/companies/#{company.id}"
+          = link_to company.title, company
         .address
           %span 地址
           = company.address

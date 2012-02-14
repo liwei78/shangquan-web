@@ -38,3 +38,15 @@ puts "50 Activities"
 50.times do
   Activity.create(:title => Faker::Lorem.sentence(word_count = 4), :schedule => "2012年1月1日-2012年1月15日", :address => "巴黎春天中山公园店")
 end
+
+puts "50 Brands"
+50.times do
+  Brand.create(:title => Faker::Lorem.sentence(word_count = 1), :nation => 1, :letter => "A", :category_id => 1 )
+end
+
+puts "50 Goods"
+50.times do
+  Good.create(:title => Faker::Lorem.sentence(word_count = 1), :price => 200.80, :brand_id => 1, :likes_count => 200)
+end
+
+

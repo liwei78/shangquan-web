@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   
   has_many :articles, :order => "articles.id desc"
   has_many :feeds,    :order => "feeds.id desc"
+  has_many :likes
+  has_many :goods, :through => :likes
   
   def self.authenticate(email, password)
     user = find_by_email(email)

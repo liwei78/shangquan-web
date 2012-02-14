@@ -1,2 +1,6 @@
-<h1>Home#brand</h1>
-<p>Find me in app/views/home/brand.html.erb</p>
+- for brand in @brands
+  .item
+    .title
+      = link_to brand.title, brand
+
+= will_paginate @brands, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

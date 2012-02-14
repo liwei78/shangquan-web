@@ -5,8 +5,10 @@ settings: &common
   admin_password: 'changchun'
   
 development:
-  upload_host: 'http://localhost:3000'
+  paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"
+  paperclip_path: ":rails_root/public/upload_files/:class/:attachment/:id/:style/:filename"
   <<: *common
 production:
-  upload_host: 'http://admin.youtuos.com'
+  paperclip_url:  "http://upload_files.youtuos.com/:class/:attachment/:id/:style/:filename"
+  paperclip_path: "/path/to/upload_files/:class/:attachment/:id/:style/:filename"
   <<: *common

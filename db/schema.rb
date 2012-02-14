@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207134918) do
+ActiveRecord::Schema.define(:version => 20120214072227) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(:version => 20120207134918) do
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
+  create_table "brands", :force => true do |t|
+    t.string   "title"
+    t.integer  "nation"
+    t.string   "letter"
+    t.integer  "category_id"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
     t.string   "data_content_type"
@@ -62,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20120207134918) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "comments", :force => true do |t|
+    t.integer  "klass_id"
+    t.integer  "klass_type"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -94,7 +109,20 @@ ActiveRecord::Schema.define(:version => 20120207134918) do
 
   create_table "goods", :force => true do |t|
     t.string   "title"
-    t.text     "content"
+    t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "brand_id"
+    t.integer  "likes_count"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "likes", :force => true do |t|
+    t.integer  "good_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

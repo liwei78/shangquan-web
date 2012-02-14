@@ -4,7 +4,8 @@ class MainController < ApplicationController
   end
 
   def fashion
-    @articles = Article.paginate(:page => params[:page], :per_page => 20, :order => "id desc")
+    @articles = Article.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    @page_title = "时尚"
   end
 
   def activity
@@ -18,9 +19,13 @@ class MainController < ApplicationController
   end
 
   def brand
+    @brands = Brand.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    @page_title = "品牌"
   end
 
   def good
+    @goods = Good.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    @page_title = "商品"
   end
 
 end
