@@ -3,6 +3,8 @@ settings: &common
   admin_key: 'china'
   admin_account: 'admin'
   admin_password: 'changchun'
+  company_type:   ['其他', '百货商场', '专卖店', '美食', '电子商务']
+  activity_type:   ['其他', '商场活动', '品牌活动', '美食活动', '电商活动']
   
 development:
   paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"

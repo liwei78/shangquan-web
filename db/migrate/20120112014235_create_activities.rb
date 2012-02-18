@@ -1,6 +1,7 @@
 class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
+      t.integer  :activity_type, :default => 0
       t.string   :title
       t.string   :schedule
       t.string   :place
@@ -8,6 +9,8 @@ class CreateActivities < ActiveRecord::Migration
       t.string   :telphone
       t.string   :office_time
       t.string   :bus_info
+      t.string   :discount
+      t.string   :website
       t.string   :poster_file_name
       t.string   :poster_content_type
       t.integer  :poster_file_size

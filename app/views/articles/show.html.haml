@@ -4,14 +4,21 @@
     
   .show
     .fixlayout
-      .avatar= image_tag("avatar.jpg")
+      .avatar= image_tag(@user.avatar.url(:thumb))
       .content
         .name
           = @user.name
         .title
           = @article.title
+        - if @article.code.present?
+          .player
+            = flashplayer(@article.code)
+        - if @article.photos.present?
+          .album
+            - for photo in @article.photos
+              = image_tag(photo.file.url(:small))
         .text
-          = html_escape(raw(@article.content))
+          = @article.content.html_safe
         .action
           .btn.right
             热度(9)

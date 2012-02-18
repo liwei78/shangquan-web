@@ -29,7 +29,6 @@ class UsersController < ApplicationController
           session[:user_name] = user.name
           session[:user_id]   = user.id
         end
-        
         format.html {redirect_to user}
       else
         flash[:error] = "登录失败"
@@ -43,6 +42,8 @@ class UsersController < ApplicationController
     session.delete(:user_name)
     session.delete(:user_id)
     cookies.delete(:signcode)
+    cookies.delete(:user_name)
+    cookies.delete(:user_id)
     respond_to do |format|
       format.html { redirect_to root_url }
     end
@@ -51,13 +52,55 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @feeds = @user.feeds.with_username.paginate(:page => params[:page], :per_page => 5)
+    @nav_all = "on"
+    @page_title = @user.name + "的空间"
   end
   
   def articles
     @user = User.find(params[:id])
-    @articles = @user.articles.paginate(:page => params[:page], :per_page => 5)
+    @articles = @user.articles.type_0.paginate(:page => params[:page], :per_page => 5)
+    @nav_articles = "on"
   end
 
+  def photos
+    @user = User.find(params[:id])
+    @articles = @user.articles.type_1.paginate(:page => params[:page], :per_page => 5)
+    @nav_photos = "on"
+  end
+
+  def videos
+    @user = User.find(params[:id])
+    @articles = @user.articles.type_2.paginate(:page => params[:page], :per_page => 5)
+    @nav_videos = "on"
+  end
+
+  def goods
+    @user = User.find(params[:id])
+    @goods = @user.goods.paginate(:page => params[:page], :per_page => 5)
+    @nav_goods = "on"
+  end
+  
+  def setting
+    @nav_setting = 'on'
+    @user = get_current_user
+  end
+  
+  def write
+    @user = get_current_user
+  end
+  
+  def upload
+    @user = get_current_user
+  end
+  
+  def pubvideo
+    @user = get_current_user
+  end
+  
+  def pubgood
+    @user = get_current_user
+  end
+  
   def new
     @user = User.new
     render :layout => "application"
@@ -95,16 +138,51 @@ class UsersController < ApplicationController
     end
   end
   
-  def write
-    # @user = get_current_user
-  end
-  
   def postcontent
-    article = Article.new(:title => params[:title], :content => params[:content])
+    article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article')
     article.user_id = current_user_id
     article.save
     redirect_to articles_user_url(current_user_id)
   end
   
+  def uploadphoto
+    article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'photo')
+    article.user_id = current_user_id
+    article.save
+    files = params[:photos].present? ? params[:photos][:file] : []
+    files.each do |file|
+      Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
+    end
+    redirect_to photos_user_url(current_user_id)
+  end
+  
+  def postvideo
+    article = Article.new(:title => params[:title], :content => params[:content], :code => params[:code], :article_type => 'video')
+    article.user_id = current_user_id
+    article.save
+    redirect_to videos_user_url(current_user_id)
+  end
 
+  def postgood
+    good = Good.new(:title => params[:title], :price => params[:price], :content => params[:content], :poster => params[:poster])
+    good.user_id = current_user_id
+    good.save
+    files = params[:photos].present? ? params[:photos][:file] : []
+    files.each do |file|
+      Photo.create(:file => file, :klass_type => "Good", :klass_id => good.id) if file.present?
+    end
+    redirect_to goods_user_url(current_user_id)
+  end
+
+  def updatesetting
+    user = User.find(current_user_id)
+    user.avatar = params[:avatar]
+    if user.save
+      flash[:notice] = '头像保存成功！'
+    else
+      flash[:error] = '头像保存失败！'
+    end
+    redirect_to :back
+  end
+  
 end

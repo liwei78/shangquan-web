@@ -1,10 +1,41 @@
-.showbox
-  .right
-    = image_tag(image_path("#{@good.poster.url(:small)}"))
-  .title= @good.title
-  
-.rightbox.medium-width
-  .box
-    地图
-
+.leftarea
+  = render :partial => "users/homebtn"
+  = render :partial => "users/homenav"
+    
+  .show
+    .fixlayout
+      .avatar= image_tag(@user.avatar.url(:thumb))
+      .content
+        .name
+          = @user.name
+        .title
+          = @good.title
+        .poster
+          = image_tag(@good.poster.url(:small))
+        - if @good.photos.present?
+          .album
+            - for photo in @good.photos
+              = image_tag(photo.file.url(:small))
+        .text
+          = @good.content.html_safe
+        .action
+          .btn.right
+            热度(9)
+            回应(4)
+            转载
+          .tags
+            %span= link_to "#标签", ""
+            %span= link_to "#标签", ""
+            %span= link_to "#标签", ""
+            %span= link_to "#标签", ""
+      .clearfix
+    
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
 .clearfix

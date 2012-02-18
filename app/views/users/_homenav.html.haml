@@ -1,5 +1,7 @@
 %ul.homenav
-  %li= link_to "全部", user_url(@user), :class => 'on'
-  %li= link_to "时尚", articles_user_url(@user)
-  %li= link_to "活动", "#"
+  %li= link_to "全部", user_url(@user), :class => @nav_all
+  %li= link_to "时尚", articles_user_url(@user), :class => @nav_articles
+  %li= link_to "图片", photos_user_url(@user), :class => @nav_photos
+  %li= link_to "影像", videos_user_url(@user), :class => @nav_videos
+  %li= link_to "商品", goods_user_url(@user), :class => @nav_goods
   .clearfix

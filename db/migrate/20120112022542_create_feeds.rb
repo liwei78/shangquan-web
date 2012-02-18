@@ -5,8 +5,10 @@ class CreateFeeds < ActiveRecord::Migration
       t.integer :klass_id
       t.string  :klass_type
       t.string  :target_url
+      t.string  :template_type
       t.string  :title
       t.text    :content
+      t.string  :code
 
       t.timestamps
     end

@@ -10,3 +10,5 @@ doc/app
 *~
 .DS_Store
 public/assets/
+public/player/
+public/upload_files/

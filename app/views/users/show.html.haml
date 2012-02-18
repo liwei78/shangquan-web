@@ -5,14 +5,26 @@
   .list
     - for feed in @feeds
       .item
-        .avatar= image_tag("avatar.jpg")
+        .avatar= image_tag(@user.avatar.url(:thumb))
         .content
           .name
             = feed.username
           .title
             = link_to feed.title, feed.target_url, :target => "_blank"
+          - if feed.template_type == 'article'
+            / it's a article
+          - if feed.template_type == 'photo'
+            .album
+              - for photo in Photo.where(:klass_type => 'Article', :klass_id => feed.klass_id)
+                = image_tag(photo.file.url(:small))
+          - if feed.template_type == 'video'
+            .player
+              = flashplayer(article.code)
+          - if feed.template_type == 'good'
+            .poster
+              = image_tag(Good.find(feed.klass_id).poster.url(:small))
           .text
-            = html_escape(raw(feed.content))
+            = feed.content.html_safe
           .action
             .btn.right
               热度(9)

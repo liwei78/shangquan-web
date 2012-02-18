@@ -1,6 +1,8 @@
 class Good < ActiveRecord::Base
+  after_create :create_user_feed
   has_many :likes
   has_many :users, :through => :likes 
+  has_many :photos, :as => :klass
   belongs_to :brand
   
   has_attached_file :poster,
@@ -8,4 +10,17 @@ class Good < ActiveRecord::Base
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "nopic.jpg"
+  
+  # TODO: poster cache for feed
+  def create_user_feed
+    Feed.create(
+      :user_id       => self.user_id,
+      :klass_type    => "Good", 
+      :klass_id      => self.id, 
+      :target_url    => "/users/#{self.user_id}/goods/#{self.id}",
+      :template_type => 'good',
+      :title         => self.title, 
+      :content       => self.content
+    )
+  end
 end

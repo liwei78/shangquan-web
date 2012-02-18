@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor  :password, :signcode
+  # attr_accessor  :password
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -32,7 +32,14 @@ class User < ActiveRecord::Base
   has_many :articles, :order => "articles.id desc"
   has_many :feeds,    :order => "feeds.id desc"
   has_many :likes
-  has_many :goods, :through => :likes
+  has_many :goods, :order => "goods.id desc"
+  has_many :photos, :as => :klass
+  
+  has_attached_file :avatar,
+    :styles      => { :original => "160x160", :thumb => "80x80", :small => "20x20" },
+    :url         => SITE_SETTINGS["paperclip_url"],
+    :path        => SITE_SETTINGS["paperclip_path"],
+    :default_url => "avatar.jpg"
   
   def self.authenticate(email, password)
     user = find_by_email(email)

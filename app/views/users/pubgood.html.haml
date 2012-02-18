@@ -1,8 +1,14 @@
+- content_for :header do
+  :javascript
+    function add_upload_file() {
+      $('#upload_div').clone().insertBefore('.addmore');
+    }
+
 .leftarea
   = render :partial => "users/homebtn"
   
   .writediv
-    = form_tag(postcontent_users_url, :multipart => true) do
+    = form_tag(postgood_users_url, :multipart => true) do
       .singlediv
         .title
           标题
@@ -15,6 +21,22 @@
           %small 不填是种损失哦
         .inputdiv
           = file_field_tag :poster
+      .singlediv
+        .title
+          商品图片
+          %small
+            = link_to("增加上传", js_void, :onclick => "add_upload_file();")
+      .singlediv#upload_div
+        .inputdiv
+          = file_field_tag "photos[file][]"
+      .addmore.mb
+      
+      .singlediv
+        .title
+          价格
+        .inputdiv
+          = text_field_tag :price, "", :class => "input small"
+          元
       .singlediv
         .title
           内容

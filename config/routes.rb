@@ -9,6 +9,7 @@ Shangquan::Application.routes.draw do
 
   resources :users, :except => [:index, :destroy] do
     resources :articles, :only => [:show]
+    resources :goods, :only => [:show]
     collection do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin
@@ -16,12 +17,19 @@ Shangquan::Application.routes.draw do
       get  'write'
       post 'postcontent'
       get  'upload'
-      post 'uploadpic'
+      post 'uploadphoto'
       get  'pubvideo'
       post 'postvideo'
+      get  'pubgood'
+      post 'postgood'
+      get  'setting'
+      post 'updatesetting'
     end
     member do
       get 'articles'
+      get 'photos'
+      get 'videos'
+      get 'goods'
     end
   end
   

@@ -22,11 +22,11 @@ end
 # Some Article for users/1
 puts "50 Articles for users/1"
 50.times do
-  Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => Faker::Lorem.paragraphs(paragraph_count = 3), :user_id => 1 )
+  Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => Faker::Lorem.paragraphs(paragraph_count = 3), :user_id => 1, :article_type =>'article')
 end
 puts "200 Articles for All Users rand"
 200.times do
-  Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => '<p>'+Faker::Lorem.paragraphs(paragraph_count = 3).join('</p><p>')+'</p>', :user_id => rand(22) )
+  Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => '<p>'+Faker::Lorem.paragraphs(paragraph_count = 3).join('</p><p>')+'</p>', :user_id => rand(22), :article_type =>'article')
 end
 
 puts "50 Companies"

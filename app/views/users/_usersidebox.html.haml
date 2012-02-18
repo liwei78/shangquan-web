@@ -1,8 +1,8 @@
 .userbox
   .userpic
-    = image_tag("default.jpg")
+    = image_tag(@user.avatar.url)
   .username
-    = current_user_name
+    = @user.name
   .userinfo
     %ul
       %li

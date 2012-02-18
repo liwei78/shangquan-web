@@ -2,7 +2,7 @@
   = render :partial => "users/homebtn"
   
   .writediv
-    = form_tag(postcontent_users_url, :multipart => true) do
+    = form_tag(postvideo_users_url, :multipart => true) do
       .singlediv
         .title
           标题
@@ -15,6 +15,12 @@
           %small 不填是种损失哦
         .inputdiv
           = file_field_tag :poster
+      .singlediv
+        .title
+          swf代码
+          %small 支持优酷/土豆/酷6/六间房/56网/音悦台/搜狐/奇艺的swf格式的视频代码,如 http://www.youku.com/sample.swf
+        .inputdiv
+          = text_field_tag :code, "", :class => "input"
       .singlediv
         .title
           内容

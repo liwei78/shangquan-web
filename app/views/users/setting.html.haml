@@ -1,0 +1,26 @@
+.leftarea
+  = render :partial => "users/settingnav"
+    
+  .writediv
+    = form_tag(updatesetting_users_url, :multipart => true) do
+      .singlediv
+        .title
+          显示昵称
+        .inputdiv
+          = text_field_tag :name, "", :class => "input"
+      .singlediv
+        .title
+          头像
+        .inputdiv
+          = file_field_tag :avatar
+      .btns
+        = submit_tag "确定", :class => "submit"
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
+.clearfix

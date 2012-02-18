@@ -11,9 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214072227) do
+ActiveRecord::Schema.define(:version => 20120217153406) do
 
   create_table "activities", :force => true do |t|
+    t.integer  "activity_type",       :default => 0
     t.string   "title"
     t.string   "schedule"
     t.string   "place"
@@ -21,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
     t.string   "telphone"
     t.string   "office_time"
     t.string   "bus_info"
+    t.string   "discount"
+    t.string   "website"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
@@ -38,9 +41,15 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
   end
 
   create_table "articles", :force => true do |t|
+    t.string   "article_type"
     t.integer  "user_id"
     t.string   "title"
     t.text     "content"
+    t.string   "code"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,12 +92,14 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
   end
 
   create_table "companies", :force => true do |t|
+    t.integer  "ctype",       :default => 0
     t.string   "title"
     t.string   "other_title"
     t.string   "address"
     t.string   "telphone"
     t.string   "office_time"
     t.string   "bus_info"
+    t.string   "website"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -99,8 +110,10 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
     t.integer  "klass_id"
     t.string   "klass_type"
     t.string   "target_url"
+    t.string   "template_type"
     t.string   "title"
     t.text     "content"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -108,10 +121,12 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
   add_index "feeds", ["user_id"], :name => "index_feeds_on_user_id"
 
   create_table "goods", :force => true do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.integer  "brand_id"
     t.integer  "likes_count"
+    t.text     "content"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
@@ -138,6 +153,23 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
     t.datetime "updated_at"
   end
 
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "name"
@@ -145,6 +177,10 @@ ActiveRecord::Schema.define(:version => 20120214072227) do
     t.string   "encrypted_password"
     t.string   "signcode"
     t.string   "verifycode"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
