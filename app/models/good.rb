@@ -6,7 +6,8 @@ class Good < ActiveRecord::Base
   belongs_to :brand
   
   has_attached_file :poster,
-    :styles      => { :original => "600>", :small => "120>" },
+    :styles      => { :original => SITE_SETTINGS["good_original"], :thumb => SITE_SETTINGS["good_thumb"] },
+    :convert_options => { :thumb => SITE_SETTINGS["good_thumb_covert"] },
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "nopic.jpg"

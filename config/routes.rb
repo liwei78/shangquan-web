@@ -24,6 +24,8 @@ Shangquan::Application.routes.draw do
       post 'postgood'
       get  'setting'
       post 'updatesetting'
+      get  'avatarsetting'
+      post 'updateavatarsetting'
     end
     member do
       get 'articles'

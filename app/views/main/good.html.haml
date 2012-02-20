@@ -1,6 +1,16 @@
-- for good in @goods
-  .item
-    .title
-      = link_to good.title, good
+.goods_list.left
+  - for good in @goods
+    .item
+      .poster
+        = image_tag(good.poster.url(:thumb), :width => "200", :height => "290")
+      .title
+        = link_to good.title, good
+  .clearfix
+  = will_paginate @goods, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+.goods_tags.right
+  %ul
+    - 20.times do
+      %li= link_to "文字", "#"
+  .clearfix
 
-= will_paginate @goods, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+.clearfix

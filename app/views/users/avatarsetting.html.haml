@@ -1,0 +1,28 @@
+.leftarea
+  = render :partial => "users/settingnav"
+    
+  .writediv
+    = form_tag(updateavatarsetting_users_url, :multipart => true) do
+      .singlediv
+        .title
+          显示头像
+        .inputdiv
+          = image_tag(@user.avatar.url)
+          = image_tag(@user.avatar.url(:thumb))
+          = image_tag(@user.avatar.url(:small))
+      .singlediv
+        .title
+          选择文件
+        .inputdiv
+          = file_field_tag :avatar
+      .btns
+        = submit_tag "确定", :class => "submit"
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
+.clearfix

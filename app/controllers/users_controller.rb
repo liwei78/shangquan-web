@@ -85,6 +85,11 @@ class UsersController < ApplicationController
     @user = get_current_user
   end
   
+  def avatarsetting
+    @nav_avatarsetting = 'on'
+    @user = get_current_user
+  end
+  
   def write
     @user = get_current_user
   end
@@ -175,6 +180,17 @@ class UsersController < ApplicationController
   end
 
   def updatesetting
+    user = User.find(current_user_id)
+    user.name = params[:name]
+    if user.save
+      flash[:notice] = '保存成功！'
+    else
+      flash[:error] = '保存失败！'
+    end
+    redirect_to :back
+  end
+  
+  def updateavatarsetting
     user = User.find(current_user_id)
     user.avatar = params[:avatar]
     if user.save

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  # attr_accessor  :password
+  attr_accessor  :password
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_many :photos, :as => :klass
   
   has_attached_file :avatar,
-    :styles      => { :original => "160x160", :thumb => "80x80", :small => "20x20" },
+    :styles      => { :original => SITE_SETTINGS["avatar_original"], :thumb => SITE_SETTINGS["avatar_thumb"], :small => SITE_SETTINGS["avatar_small"] },
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "avatar.jpg"

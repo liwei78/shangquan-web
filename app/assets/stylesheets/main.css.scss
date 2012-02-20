@@ -443,6 +443,7 @@ $rightarea-width: 250px;
       a.on {
         background: image-url('bg.png');
         border-bottom: 1px solid $grey2;
+        border-bottom: none;
       }
       a.on:hover {
         text-decoration: none;
@@ -724,5 +725,15 @@ $rightarea-width: 250px;
   }
 }
 
-
+.goods_list {
+  width: 660px;
+  .item {
+    width: 200px;
+    float: left;
+    margin-right: 20px;
+  }
+}
+.goods_tags {
+  width: 300px;
+}
 
