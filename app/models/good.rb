@@ -4,9 +4,11 @@ class Good < ActiveRecord::Base
   has_many :users, :through => :likes 
   has_many :photos, :as => :klass
   belongs_to :brand
+  belongs_to :user
+  has_many :comments, :as => :klass
   
   has_attached_file :poster,
-    :styles      => { :original => SITE_SETTINGS["good_original"], :thumb => SITE_SETTINGS["good_thumb"] },
+    :styles      => { :original => SITE_SETTINGS["good_original"], :thumb => SITE_SETTINGS["good_thumb"], :small => SITE_SETTINGS["good_small"] },
     :convert_options => { :thumb => SITE_SETTINGS["good_thumb_covert"] },
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
@@ -24,4 +26,5 @@ class Good < ActiveRecord::Base
       :content       => self.content
     )
   end
+  
 end

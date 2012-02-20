@@ -22,7 +22,7 @@
               = flashplayer(article.code)
           - if feed.template_type == 'good'
             .poster
-              = image_tag(Good.find(feed.klass_id).poster.url(:small))
+              = image_tag(Good.find(feed.klass_id).poster.url(:thumb))
           .text
             = feed.content.html_safe
           .action

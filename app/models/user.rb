@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     
   validates :name,
     :presence => true,
-    :length => {:maximum => 16, :minimum => 3},
+    :length => {:maximum => 16, :minimum => 1},
     :allow_blank => true
     
   validates :signcode,   :uniqueness => true
@@ -34,9 +34,11 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :goods, :order => "goods.id desc"
   has_many :photos, :as => :klass
+  has_many :comments, :order => "comments.id desc"
   
   has_attached_file :avatar,
     :styles      => { :original => SITE_SETTINGS["avatar_original"], :thumb => SITE_SETTINGS["avatar_thumb"], :small => SITE_SETTINGS["avatar_small"] },
+    :convert_options => { :thumb => SITE_SETTINGS["avatar_thumb_covert"] },
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "avatar.jpg"
@@ -55,8 +57,8 @@ class User < ActiveRecord::Base
   
   def encrypt_something
     self.salt               = make_salt if new_record?
-    self.signcode           = encrypt(Time.now.to_s + rand(9999).to_s)
-    self.verifycode         = encrypt(Time.now.to_s + rand(8888).to_s)
+    self.signcode           = encrypt(self.salt + rand(9999).to_s)
+    self.verifycode         = encrypt(self.salt + rand(8888).to_s)
     self.encrypted_password = encrypt(password)
   end
   

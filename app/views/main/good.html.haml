@@ -1,12 +1,27 @@
 .goods_list.left
   - for good in @goods
-    .item
-      .poster
-        = image_tag(good.poster.url(:thumb), :width => "200", :height => "290")
-      .title
-        = link_to good.title, good
+    - if good.user_id.present?
+      .item
+        .poster
+          .action
+            = link_to "喜欢", js_void
+            = link_to "评论", js_void
+          = link_to image_tag(good.poster.url(:thumb), :width => "180", :height => "270"), user_good_url(good.user_id, good)
+        .userbox
+          = link_to image_tag(good.user.avatar.url(:small)), good.user
+          = link_to good.user.name, good.user, :class => "user_name"
+    - else
+      .item
+        .poster
+          .action
+            = link_to "喜欢", js_void
+            = link_to "评论", js_void
+          = link_to image_tag(good.poster.url(:thumb), :width => "180", :height => "270"), view_good_url(good)
+        .title
+          = link_to good.title, view_good_url(good)
   .clearfix
   = will_paginate @goods, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+  
 .goods_tags.right
   %ul
     - 20.times do

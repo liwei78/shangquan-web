@@ -5,7 +5,12 @@ Shangquan::Application.routes.draw do
   resources :companies, :only => [:show]
   resources :activities, :only => [:show]
   resources :brands, :only => [:show]
-  resources :goods, :only => [:show]
+  resources :goods, :only => [:show] do
+    member do
+      get 'view'
+      post 'write', 'like'
+    end
+  end
 
   resources :users, :except => [:index, :destroy] do
     resources :articles, :only => [:show]

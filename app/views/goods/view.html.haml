@@ -1,0 +1,54 @@
+.goods_view.left
+  .display
+    .poster.left
+      = image_tag(@good.poster.url, :width => 320)
+    .intro.right
+      .title
+        = @good.title
+      .price
+        %span
+          价格：
+        = @good.price
+        元
+      .like
+        = link_to "喜欢", like_good_url(@good), :remote => true, :method => :post
+        %span#likes_count
+          = @good.likes_count
+    .clearfix
+  .shares
+    .title
+      TA们的分享
+    .thumb_list
+      - for good in Good.order('id').limit(8)
+        .thumb.left
+          = link_to image_tag(good.poster.url(:small), :width => 80, :height => 80), view_good_url(good)
+      .clearfix
+  .comments
+    .title
+      TA们说
+    .write
+      = form_tag(write_good_url(@good)) do
+        = text_area_tag :content, "", :class => "input"
+        .action
+          = submit_tag("确定", :class => "btn")
+    .list
+      - for comment in @comments
+        .item
+          .avatar
+            = link_to image_tag(comment.user.avatar.url(:small)), comment.user
+          .intro
+            .name
+              = link_to comment.user.name, comment.user
+            .content
+              = comment.content.html_safe
+          .clearfix
+    .paginate
+      = will_paginate @comments, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+    
+.goods_tags.right
+  %ul
+    - 20.times do
+      %li= link_to "文字", "#"
+  .clearfix
+
+.clearfix

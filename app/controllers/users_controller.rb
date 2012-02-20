@@ -183,6 +183,11 @@ class UsersController < ApplicationController
     user = User.find(current_user_id)
     user.name = params[:name]
     if user.save
+      cookies[:user_name] = {
+        :value => user.name,
+        :expires => 14.days.from_now
+      } if cookies[:user_name].present?
+      session[:user_name] = user.name if session[:user_name].present?
       flash[:notice] = '保存成功！'
     else
       flash[:error] = '保存失败！'

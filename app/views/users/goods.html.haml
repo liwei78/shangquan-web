@@ -12,7 +12,7 @@
           .title
             = link_to good.title, user_good_path(@user, good)
           .poster
-            = image_tag(good.poster.url(:small))
+            = image_tag(good.poster.url(:thumb))
           .album
             - for photo in good.photos
               = image_tag(photo.file.url(:small))

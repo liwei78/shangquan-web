@@ -11,7 +11,7 @@
         .title
           = @good.title
         .poster
-          = image_tag(@good.poster.url(:small))
+          = image_tag(@good.poster.url(:thumb))
         - if @good.photos.present?
           .album
             - for photo in @good.photos
