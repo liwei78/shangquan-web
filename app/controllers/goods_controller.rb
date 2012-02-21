@@ -17,6 +17,7 @@ class GoodsController < ApplicationController
     good = Good.find(params[:id])
     comment = good.comments.new(:content => params[:content], :user_id => current_user_id)
     if comment.save
+      good.increment!(:comments_count)
       flash[:notice] = "评论成功"
     else
       flash[:error] = "评论失败"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120217153406) do
+ActiveRecord::Schema.define(:version => 20120221085029) do
 
   create_table "activities", :force => true do |t|
     t.integer  "activity_type",       :default => 0
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.integer  "comments_count",      :default => 0
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -93,7 +94,7 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
   end
 
   create_table "companies", :force => true do |t|
-    t.integer  "ctype",       :default => 0
+    t.integer  "company_type",   :default => 0
     t.string   "title"
     t.string   "other_title"
     t.string   "address"
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
     t.string   "office_time"
     t.string   "bus_info"
     t.string   "website"
+    t.integer  "comments_count", :default => 0
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -126,7 +128,8 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
     t.string   "title"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.integer  "brand_id"
-    t.integer  "likes_count"
+    t.integer  "likes_count",                                       :default => 0
+    t.integer  "comments_count",                                    :default => 0
     t.text     "content"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
@@ -137,7 +140,8 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
   end
 
   create_table "likes", :force => true do |t|
-    t.integer  "good_id"
+    t.integer  "klass_id"
+    t.string   "klass_type"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -178,6 +182,10 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
     t.string   "encrypted_password"
     t.string   "signcode"
     t.string   "verifycode"
+    t.integer  "articles_count",      :default => 0
+    t.integer  "followers_count",     :default => 0
+    t.integer  "followings_count",    :default => 0
+    t.integer  "favorites_count",     :default => 0
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -193,6 +201,15 @@ ActiveRecord::Schema.define(:version => 20120217153406) do
     t.string   "title"
     t.text     "content"
     t.text     "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "visits", :force => true do |t|
+    t.integer  "klass_id"
+    t.string   "klass_type"
+    t.integer  "user_id"
+    t.string   "user_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

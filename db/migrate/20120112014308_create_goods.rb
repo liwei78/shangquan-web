@@ -6,6 +6,7 @@ class CreateGoods < ActiveRecord::Migration
       t.decimal  :price, :precision => 8, :scale =>2, :default=>0.00
       t.integer  :brand_id
       t.integer  :likes_count, :default => 0
+      t.integer  :comments_count, :default => 0
       t.text     :content
       t.string   :poster_file_name
       t.string   :poster_content_type

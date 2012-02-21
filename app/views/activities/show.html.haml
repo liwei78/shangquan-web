@@ -19,12 +19,35 @@
     .clearfix
   .area
     .action
-      点评 去过 收藏 分享
+      = link_to '去过', visited_activity_url(@activity), :remote => true, :method => :post
+      = link_to '收藏', favorite_activity_url(@activity), :remote => true, :method => :post
+      = link_to '分享', share_activity_url(@activity), :remote => true, :method => :post
     .detail
       .title
         %strong 活动详细
       .intro
-        = @activity.content
+        = @activity.content.html_safe
+    .comments
+      .title
+        TA们说
+      .write
+        = form_tag(write_activity_url(@activity)) do
+          = text_area_tag :content, "", :class => "input"
+          .write_action
+            = submit_tag("确定", :class => "btn")
+      .list
+        - for comment in @comments
+          .item
+            .avatar
+              = link_to image_tag(comment.user.avatar.url(:small), :width => 40, :height => 40), comment.user
+            .intro
+              .name
+                = link_to comment.user.name, comment.user
+              .content
+                = comment.content.html_safe
+            .clearfix
+      .paginate
+        = will_paginate @comments, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
   
 .rightbox.medium-width
   .box

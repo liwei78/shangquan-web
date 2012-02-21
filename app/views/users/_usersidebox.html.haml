@@ -9,22 +9,22 @@
         .up
           文章
         .down
-          8
+          = @user.articles_count
       %li
         .up
           粉丝
         .down
-          8
+          = @user.followers_count
       %li
         .up
           关注
         .down
-          8
+          = @user.followings_count
       %li.noborder
         .up
           收藏
         .down
-          8
+          = @user.favorites_count
       .clearfix
   .homebtn
     = link_to image_tag("myhome.jpg"), user_url(current_user_id)

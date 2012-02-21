@@ -4,8 +4,8 @@
       .item
         .poster
           .action
-            = link_to "喜欢", js_void
-            = link_to "评论", js_void
+            = link_to "喜欢", like_good_url(good), :remote => true, :method => :post
+            = link_to "评论", view_good_url(good)
           = link_to image_tag(good.poster.url(:thumb), :width => "180", :height => "270"), user_good_url(good.user_id, good)
         .userbox
           = link_to image_tag(good.user.avatar.url(:small)), good.user
@@ -14,8 +14,8 @@
       .item
         .poster
           .action
-            = link_to "喜欢", js_void
-            = link_to "评论", js_void
+            = link_to "喜欢", like_good_url(good), :remote => true, :method => :post
+            = link_to "评论", view_good_url(good)
           = link_to image_tag(good.poster.url(:thumb), :width => "180", :height => "270"), view_good_url(good)
         .title
           = link_to good.title, view_good_url(good)

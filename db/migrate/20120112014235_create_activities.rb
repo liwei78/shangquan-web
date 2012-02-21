@@ -15,9 +15,8 @@ class CreateActivities < ActiveRecord::Migration
       t.string   :poster_content_type
       t.integer  :poster_file_size
       t.datetime :poster_updated_at
-      
+      t.integer  :comments_count, :default => 0
       t.text     :content
-
       t.timestamps
     end
   end

@@ -146,7 +146,12 @@ class UsersController < ApplicationController
   def postcontent
     article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article')
     article.user_id = current_user_id
-    article.save
+    if article.save
+      User.update_counters current_user_id, :articles_count => 1
+      flash[:notice] = "发布成功"
+    else
+      flash[:error] = "发布失败"
+    end
     redirect_to articles_user_url(current_user_id)
   end
   

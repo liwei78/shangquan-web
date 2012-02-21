@@ -2,8 +2,16 @@ Shangquan::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   
-  resources :companies, :only => [:show]
-  resources :activities, :only => [:show]
+  resources :companies, :only => [:show] do
+    member do
+      post 'visited', 'favorite', 'share', "write"
+    end
+  end
+  resources :activities, :only => [:show] do
+    member do
+      post 'visited', 'favorite', 'share', "write"
+    end
+  end
   resources :brands, :only => [:show]
   resources :goods, :only => [:show] do
     member do

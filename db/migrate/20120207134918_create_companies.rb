@@ -1,7 +1,7 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies do |t|
-      t.integer :ctype, :default => 0
+      t.integer :company_type, :default => 0
       t.string  :title
       t.string  :other_title
       t.string  :address
@@ -9,8 +9,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.string  :office_time
       t.string  :bus_info
       t.string  :website
+      t.integer :comments_count, :default => 0
       t.text    :content
-
       t.timestamps
     end
   end

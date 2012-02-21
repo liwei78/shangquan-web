@@ -7,6 +7,12 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :encrypted_password
       t.string   :signcode   # used for login, stored in session
       t.string   :verifycode # validate user from email
+
+      t.integer  :articles_count,   :default => 0
+      t.integer  :followers_count,  :default => 0
+      t.integer  :followings_count, :default => 0
+      t.integer  :favorites_count,  :default => 0
+
       t.string   :avatar_file_name
       t.string   :avatar_content_type
       t.integer  :avatar_file_size

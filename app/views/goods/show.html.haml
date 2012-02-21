@@ -9,7 +9,7 @@
         .name
           = @user.name
         .title
-          = @good.title
+          = link_to @good.title, view_good_url(@good)
         .poster
           = image_tag(@good.poster.url(:thumb))
         - if @good.photos.present?
@@ -20,8 +20,8 @@
           = @good.content.html_safe
         .action
           .btn.right
-            热度(9)
-            回应(4)
+            喜欢(#{@good.likes_count})
+            评论(#{@good.comments_count})
             转载
           .tags
             %span= link_to "#标签", ""
