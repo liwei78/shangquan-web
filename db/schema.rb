@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120221085029) do
 
   create_table "activities", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "activity_type",       :default => 0
     t.string   "title"
     t.string   "schedule"

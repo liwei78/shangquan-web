@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :feeds,    :order => "feeds.id desc"
   has_many :likes
   has_many :goods, :order => "goods.id desc"
+  has_many :activities, :order => "activities.id desc"
   has_many :photos, :as => :klass
   has_many :comments, :order => "comments.id desc"
   

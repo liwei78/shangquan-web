@@ -23,6 +23,7 @@ Shangquan::Application.routes.draw do
   resources :users, :except => [:index, :destroy] do
     resources :articles, :only => [:show]
     resources :goods, :only => [:show]
+    resources :activities, :only => [:show]
     collection do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin
@@ -35,6 +36,8 @@ Shangquan::Application.routes.draw do
       post 'postvideo'
       get  'pubgood'
       post 'postgood'
+      get  'pubactivity'
+      post 'postactivity'
       get  'setting'
       post 'updatesetting'
       get  'avatarsetting'
@@ -45,6 +48,7 @@ Shangquan::Application.routes.draw do
       get 'photos'
       get 'videos'
       get 'goods'
+      get 'activities'
     end
   end
   

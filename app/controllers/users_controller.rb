@@ -80,6 +80,12 @@ class UsersController < ApplicationController
     @nav_goods = "on"
   end
   
+  def activities
+    @user = User.find(params[:id])
+    @activities = @user.activities.paginate(:page => params[:page], :per_page => 5)
+    @nav_activities = "on"
+  end
+  
   def setting
     @nav_setting = 'on'
     @user = get_current_user
@@ -103,6 +109,10 @@ class UsersController < ApplicationController
   end
   
   def pubgood
+    @user = get_current_user
+  end
+  
+  def pubactivity
     @user = get_current_user
   end
   
@@ -145,6 +155,7 @@ class UsersController < ApplicationController
   
   def postcontent
     article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article')
+    article.poster = params[:poster]
     article.user_id = current_user_id
     if article.save
       User.update_counters current_user_id, :articles_count => 1
@@ -182,6 +193,13 @@ class UsersController < ApplicationController
       Photo.create(:file => file, :klass_type => "Good", :klass_id => good.id) if file.present?
     end
     redirect_to goods_user_url(current_user_id)
+  end
+
+  def postactivity
+    activity = Activity.new(:title => params[:title], :content => params[:content], :poster => params[:poster])
+    activity.user_id = current_user_id
+    activity.save
+    redirect_to activities_user_url(current_user_id)
   end
 
   def updatesetting

@@ -10,6 +10,8 @@
           = @user.name
         .title
           = @article.title
+        .poster
+          = image_tag(@article.poster.url)
         - if @article.code.present?
           .player
             = flashplayer(@article.code)
