@@ -14,8 +14,8 @@
       = @activity.telphone
     .tags
       %span 标签
-      = link_to "综合商店", ""
-      = link_to "品牌折扣店", ""
+      - for tag in @activity.tags
+        = link_to tag.name, nav_activity_url(:tag => URI.encode(tag.name))
     .clearfix
   .area
     .action

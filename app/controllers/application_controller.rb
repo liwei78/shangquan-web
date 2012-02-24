@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def loggin?
-    session[:signcode].present?||cookies[:signcode].present? ? true : false
+    (session[:signcode].present?||cookies[:signcode].present?)&&current_user_name.present?&&current_user_id.present? ? true : false
   end
   
   private

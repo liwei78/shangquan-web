@@ -4,26 +4,17 @@
       所有分类
     .content
       %ul.category
-        %li= link_to "商场", ""
-        %li= link_to "美食", ""
-        %li= link_to "专卖店", ""
-        %li= link_to "电子商务", ""
-        %li= link_to "化妆品", ""
-        %li= link_to "折扣店", ""
+        - for cat in ActivityCategory.order("position")
+          %li
+            = link_to cat.name, nav_activity_url(:category => URI.encode(cat.name))
         .clearfix
 .middlebox.with-medium-width
   .comp_area
     %ul
       %li 按商区
-      %li= link_to "西单", nav_company_url(:area => "xidan")
-      %li= link_to "朝阳", nav_company_url(:area => "xidan")
-      %li= link_to "中关村", nav_company_url(:area => "xidan")
-      %li= link_to "王府井/东单", nav_company_url(:area => "xidan")
-      %li= link_to "大望路", nav_company_url(:area => "xidan")
-      %li= link_to "三里屯", nav_company_url(:area => "xidan")
-      %li= link_to "建外大街", nav_company_url(:area => "xidan")
-      %li= link_to "望京", nav_company_url(:area => "xidan")
-      %li= link_to "崇文门", nav_company_url(:area => "xidan")
+      - for cat in ActivityArea.order("position")
+        %li
+          = link_to cat.name, nav_activity_url(:area => URI.encode(cat.name))
       .clearfix
   .display_select
     

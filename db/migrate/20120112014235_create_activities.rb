@@ -3,6 +3,8 @@ class CreateActivities < ActiveRecord::Migration
     create_table :activities do |t|
       t.integer  :user_id
       t.integer  :activity_type, :default => 0
+      t.string   :activity_category
+      t.string   :activity_area
       t.string   :title
       t.string   :schedule
       t.string   :place

@@ -11,11 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221085029) do
+ActiveRecord::Schema.define(:version => 20120223153208) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
     t.integer  "activity_type",       :default => 0
+    t.string   "activity_category"
+    t.string   "activity_area"
     t.string   "title"
     t.string   "schedule"
     t.string   "place"
@@ -31,6 +33,20 @@ ActiveRecord::Schema.define(:version => 20120221085029) do
     t.datetime "poster_updated_at"
     t.integer  "comments_count",      :default => 0
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_areas", :force => true do |t|
+    t.string   "name"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "position",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -95,7 +111,9 @@ ActiveRecord::Schema.define(:version => 20120221085029) do
   end
 
   create_table "companies", :force => true do |t|
-    t.integer  "company_type",   :default => 0
+    t.integer  "company_type",     :default => 0
+    t.string   "company_category"
+    t.string   "company_area"
     t.string   "title"
     t.string   "other_title"
     t.string   "address"
@@ -103,8 +121,22 @@ ActiveRecord::Schema.define(:version => 20120221085029) do
     t.string   "office_time"
     t.string   "bus_info"
     t.string   "website"
-    t.integer  "comments_count", :default => 0
+    t.integer  "comments_count",   :default => 0
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_areas", :force => true do |t|
+    t.string   "name"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "position",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
