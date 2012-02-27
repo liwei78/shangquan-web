@@ -1,4 +1,5 @@
 class Good < ActiveRecord::Base
+  acts_as_taggable
   after_create :create_user_feed
   has_many :likes
   has_many :users, :through => :likes 

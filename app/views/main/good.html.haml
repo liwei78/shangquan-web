@@ -8,7 +8,7 @@
             = link_to "评论", view_good_url(good)
           = link_to image_tag(good.poster.url(:thumb), :width => "180", :height => "270"), user_good_url(good.user_id, good)
         .userbox
-          = link_to image_tag(good.user.avatar.url(:small)), good.user
+          = link_to image_tag(good.user.avatar.url(:small), :width => 40, :height => 40), good.user
           = link_to good.user.name, good.user, :class => "user_name"
     - else
       .item
@@ -24,8 +24,8 @@
   
 .goods_tags.right
   %ul
-    - 20.times do
-      %li= link_to "文字", "#"
+    -for tag in Good.tag_counts
+      %li= link_to tag, nav_goood_url(:tag => URI.encode(tag.name))
   .clearfix
 
 .clearfix

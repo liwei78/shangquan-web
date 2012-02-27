@@ -12,8 +12,19 @@ Shangquan::Application.routes.draw do
       post 'visited', 'favorite', 'share', "write"
     end
   end
-  resources :brands, :only => [:show]
+  resources :brands, :only => [:show] do
+    member do
+      get 'view'
+      post 'write', 'like'
+    end
+  end
   resources :goods, :only => [:show] do
+    member do
+      get 'view'
+      post 'write', 'like'
+    end
+  end
+  resources :articles, :only => [:show] do
     member do
       get 'view'
       post 'write', 'like'
@@ -24,6 +35,7 @@ Shangquan::Application.routes.draw do
     resources :articles, :only => [:show]
     resources :goods, :only => [:show]
     resources :activities, :only => [:show]
+    resources :brands, :only => [:show]
     collection do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin
@@ -38,6 +50,8 @@ Shangquan::Application.routes.draw do
       post 'postgood'
       get  'pubactivity'
       post 'postactivity'
+      get  'pubbrand'
+      post 'postbrand'
       get  'setting'
       post 'updatesetting'
       get  'avatarsetting'
@@ -49,10 +63,11 @@ Shangquan::Application.routes.draw do
       get 'videos'
       get 'goods'
       get 'activities'
+      get 'brands'
     end
   end
   
-  get "main/fashion", :as => :nav_fashion
+  get "main/article", :as => :nav_article
   get "main/activity", :as => :nav_activity
   get "main/company", :as => :nav_company
   get "main/brand", :as => :nav_brand

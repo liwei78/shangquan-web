@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.integer  "likes_count",         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -11,6 +11,16 @@
           = text_field_tag :title, "", :class => "input"
       .singlediv
         .title
+          分类
+        .inputdiv
+          = f.select_tag :activity_category, ActivityCategory.order('position').map{|c| c.name}
+      .singlediv
+        .title
+          地区
+        .inputdiv
+          = f.select_tag :activity_area, ActivityArea.order('position').map{|a| a.name}
+      .singlediv
+        .title
           封面图片
           %small 不填是种损失哦
         .inputdiv

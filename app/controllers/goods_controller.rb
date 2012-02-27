@@ -1,5 +1,6 @@
 #encoding: utf-8
 class GoodsController < ApplicationController
+  before_filter :need_user_login, :except => [:show, :view]
   def show
     @good = Good.find(params[:id])
     @user = User.find(params[:user_id])

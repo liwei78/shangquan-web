@@ -7,9 +7,9 @@
         .title
           显示头像
         .inputdiv
-          = image_tag(@user.avatar.url)
-          = image_tag(@user.avatar.url(:thumb))
-          = image_tag(@user.avatar.url(:small))
+          = image_tag(@user.avatar.url, :width => 160, :height => 160)
+          = image_tag(@user.avatar.url(:thumb), :width => 80, :height => 80)
+          = image_tag(@user.avatar.url(:small), :width => 40, :height => 40)
       .singlediv
         .title
           选择文件

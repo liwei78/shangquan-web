@@ -1,5 +1,6 @@
 #encoding: utf-8
 class CompaniesController < ApplicationController
+  before_filter :need_user_login, :except => [:show]
   def show
     @company = Company.find(params[:id])
     @comments = @company.comments.paginate(:page => params[:page], :per_page => 10)

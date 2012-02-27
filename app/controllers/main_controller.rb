@@ -3,9 +3,14 @@ class MainController < ApplicationController
   def index
   end
 
-  def fashion
-    @articles = Article.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-    @page_title = "时尚"
+  def article
+    if params[:tag].present?
+      @articles = Article.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+      @page_title = "#{URI.decode(params[:tag])} - 时尚"
+    else
+      @articles = Article.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+      @page_title = "时尚"
+    end
   end
 
   def activity
@@ -35,7 +40,11 @@ class MainController < ApplicationController
   end
 
   def brand
-    @brands = Brand.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    if params[:tag].present?
+      @brands = Article.type_3.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    else
+      @brands = Article.type_3.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    end
     @page_title = "品牌"
   end
 

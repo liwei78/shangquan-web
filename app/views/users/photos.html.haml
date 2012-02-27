@@ -22,10 +22,8 @@
               回应(4)
               转载
             .tags
-              %span= link_to "#标签", ""
-              %span= link_to "#标签", ""
-              %span= link_to "#标签", ""
-              %span= link_to "#标签", ""
+              - for tag in article.tags
+                %span= link_to tag.name, nav_article_url(:tag => URI.encode(tag.name))
         .clearfix
     .paginate
       = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

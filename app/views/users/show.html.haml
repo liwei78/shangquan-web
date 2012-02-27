@@ -27,14 +27,11 @@
             = feed.content.html_safe
           .action
             .btn.right
-              喜欢(9)
-              评论(4)
+              喜欢
+              评论
               转载
             .tags
-              %span= link_to "#标签", ""
-              %span= link_to "#标签", ""
-              %span= link_to "#标签", ""
-              %span= link_to "#标签", ""
+              
         .clearfix
     .paginate
       = will_paginate @feeds, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

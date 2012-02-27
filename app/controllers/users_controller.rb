@@ -86,6 +86,12 @@ class UsersController < ApplicationController
     @nav_activities = "on"
   end
   
+  def brands
+    @user = User.find(params[:id])
+    @brands = @user.articles.type_3.paginate(:page => params[:page], :per_page => 5)
+    @nav_brands = "on"
+  end
+  
   def setting
     @nav_setting = 'on'
     @user = get_current_user
@@ -113,6 +119,10 @@ class UsersController < ApplicationController
   end
   
   def pubactivity
+    @user = get_current_user
+  end
+  
+  def pubbrand
     @user = get_current_user
   end
   
@@ -154,7 +164,7 @@ class UsersController < ApplicationController
   end
   
   def postcontent
-    article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article')
+    article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article', :tag_list => params[:tag_list])
     article.poster = params[:poster]
     article.user_id = current_user_id
     if article.save
@@ -196,10 +206,17 @@ class UsersController < ApplicationController
   end
 
   def postactivity
-    activity = Activity.new(:title => params[:title], :content => params[:content], :poster => params[:poster])
+    activity = Activity.new(:title => params[:title], :content => params[:content], :poster => params[:poster], :tag_list => params[:tag_list])
     activity.user_id = current_user_id
     activity.save
     redirect_to activities_user_url(current_user_id)
+  end
+
+  def postbrand
+    brand = Article.new(:title => params[:title], :content => params[:content], :poster => params[:poster], :article_type => 'brand', :tag_list => params[:tag_list])
+    brand.user_id = current_user_id
+    brand.save
+    redirect_to brands_user_url(current_user_id)
   end
 
   def updatesetting

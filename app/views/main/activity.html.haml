@@ -30,9 +30,10 @@
           %span 活动商场
           = activity.address
         .tags
-          %span 标签
-          = link_to "综合商场", ""
-          = link_to "品牌折扣店", ""
+          %span
+            标签
+          - for tag in activity.tags
+            = link_to tag.name, nav_activity_url(:tag => URI.encode(tag.name))
   = will_paginate @activities, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
   
 .rightbox.medium-width

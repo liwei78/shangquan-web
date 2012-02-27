@@ -24,10 +24,8 @@
             评论(#{@good.comments_count})
             转载
           .tags
-            %span= link_to "#标签", ""
-            %span= link_to "#标签", ""
-            %span= link_to "#标签", ""
-            %span= link_to "#标签", ""
+            - for tag in @good.tags
+              %span= link_to tag.name, nav_good_url(:tag => URI.encode(tag.name))
       .clearfix
     
     

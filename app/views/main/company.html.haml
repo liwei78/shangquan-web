@@ -28,8 +28,8 @@
           = company.address
         .tags
           %span 标签
-          = link_to "综合商店", ""
-          = link_to "品牌折扣店", ""
+          - for tag in company.tags
+            %span= link_to tag.name, nav_company_url(:tag => URI.encode(tag.name))
   = will_paginate @companies, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
   
 .rightbox

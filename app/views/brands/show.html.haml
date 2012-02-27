@@ -1,10 +1,42 @@
-.showbox
-  .right
-    = image_tag(image_path("#{@brand.poster.url(:small)}"))
-  .title= @brand.title
-  
-.rightbox.medium-width
-  .box
-    地图
-
+.leftarea
+  = render :partial => "users/homebtn"
+  = render :partial => "users/homenav"
+    
+  .show
+    .fixlayout
+      .avatar= image_tag(@user.avatar.url(:thumb))
+      .content
+        .name
+          = @user.name
+        .title
+          = @article.title
+        .poster
+          = image_tag(@article.poster.url)
+        - if @article.code.present?
+          .player
+            = flashplayer(@article.code)
+        - if @article.photos.present?
+          .album
+            - for photo in @article.photos
+              = image_tag(photo.file.url(:small))
+        .text
+          = @article.content.html_safe
+        .action
+          .btn.right
+            热度(9)
+            回应(4)
+            转载
+          .tags
+            - for tag in @article.tags
+              %span= link_to tag.name, nav_brand_url(:tag => URI.encode(tag.name))
+      .clearfix
+    
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
 .clearfix

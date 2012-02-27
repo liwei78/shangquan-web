@@ -12,6 +12,8 @@ class CreateArticles < ActiveRecord::Migration
       t.integer  :poster_file_size
       t.datetime :poster_updated_at
       
+      t.integer  :likes_count, :default => 0
+      
       t.timestamps
     end
     add_index :articles, :user_id
