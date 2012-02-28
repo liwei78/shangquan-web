@@ -206,7 +206,15 @@ class UsersController < ApplicationController
   end
 
   def postactivity
-    activity = Activity.new(:title => params[:title], :content => params[:content], :poster => params[:poster], :tag_list => params[:tag_list])
+    activity = Activity.new(
+      :title => params[:title], 
+      :content => params[:content], 
+      :poster => params[:poster], 
+      :tag_list => params[:tag_list], 
+      :activity_category => params[:activity_category], 
+      :activity_area => params[:activity_area],
+      :schedule => params[:schedule], 
+      :address => params[:address])
     activity.user_id = current_user_id
     activity.save
     redirect_to activities_user_url(current_user_id)

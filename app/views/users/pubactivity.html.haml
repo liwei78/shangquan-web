@@ -9,16 +9,24 @@
           %small (可不填)
         .inputdiv
           = text_field_tag :title, "", :class => "input"
+        .title
+          活动时间
+        .inputdiv
+          = text_field_tag :schedule, "", :class => "input"
+        .title
+          活动商场
+        .inputdiv
+          = text_field_tag :address, "", :class => "input"
       .singlediv
         .title
           分类
         .inputdiv
-          = f.select_tag :activity_category, ActivityCategory.order('position').map{|c| c.name}
+          = select_tag :activity_category, options_for_select(ActivityCategory.order('position').map{|c| c.name})
       .singlediv
         .title
           地区
         .inputdiv
-          = f.select_tag :activity_area, ActivityArea.order('position').map{|a| a.name}
+          = select_tag :activity_area, options_for_select(ActivityArea.order('position').map{|a| a.name})
       .singlediv
         .title
           封面图片
@@ -27,22 +35,15 @@
           = file_field_tag :poster
       .singlediv
         .title
+          标签
+          %small 中文逗号分割
+        .inputdiv
+          = text_field_tag :tag_list, "", :class => "input"
+      .singlediv
+        .title
           内容
         .inputdiv
           = cktext_area_tag("content", "", :input_html => {:cols => 10, :rows => 20}, :toolbar => 'Basic')
-      .singlediv
-        .title
-          关联商品
-        .inputdiv
-          %br
-          %br
-          %br
-          %br
-          %br
-          %br
-          %br
-          %br
-          %br
       .btns
         .right
           = submit_tag "发布", :class => "submit"
