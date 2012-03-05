@@ -13,6 +13,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string   :website
       t.integer  :comments_count, :default => 0
       t.text     :content
+      t.integer  :resource_type, :default => 1 # 0:block 1:normal 2:white 3:deleted
       t.timestamps
     end
   end

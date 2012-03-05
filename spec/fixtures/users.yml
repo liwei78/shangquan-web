@@ -1,0 +1,24 @@
+test:
+  id: 1
+  name: test
+  email: test@123.com
+  signcode: test
+  promotion: 0
+
+white:
+  id: 2
+  name: white
+  email: white@123.com
+  signcode: white
+  promotion: 1
+
+black:
+  id: 3
+  name: black
+  email: black@123.com
+  signcode: black
+  promotion: 2
+
+
+
+  

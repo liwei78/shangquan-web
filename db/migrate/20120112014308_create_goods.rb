@@ -12,6 +12,7 @@ class CreateGoods < ActiveRecord::Migration
       t.string   :poster_content_type
       t.integer  :poster_file_size
       t.datetime :poster_updated_at
+      t.integer  :resource_type, :default => 1 # 0:block 1:normal 2:white 3:deleted
       t.timestamps
     end
   end

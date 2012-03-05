@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.datetime "poster_updated_at"
     t.integer  "comments_count",      :default => 0
     t.text     "content"
+    t.integer  "resource_type",       :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,13 +52,6 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.datetime "updated_at"
   end
 
-  create_table "albums", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "articles", :force => true do |t|
     t.string   "article_type"
     t.integer  "user_id"
@@ -69,24 +63,12 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
     t.integer  "likes_count",         :default => 0
+    t.integer  "resource_type",       :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
-
-  create_table "brands", :force => true do |t|
-    t.string   "title"
-    t.integer  "nation"
-    t.string   "letter"
-    t.integer  "category_id"
-    t.string   "poster_file_name"
-    t.string   "poster_content_type"
-    t.integer  "poster_file_size"
-    t.datetime "poster_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -107,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.integer  "klass_id"
     t.integer  "klass_type"
     t.text     "content"
+    t.integer  "resource_type", :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -124,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.string   "website"
     t.integer  "comments_count",   :default => 0
     t.text     "content"
+    t.integer  "resource_type",    :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.integer  "resource_type",                                     :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -224,20 +209,14 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "promotion",           :default => 10
+    t.boolean  "deleted",             :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["signcode"], :name => "index_users_on_signcode", :unique => true
-
-  create_table "videos", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.text     "code"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "visits", :force => true do |t|
     t.integer  "klass_id"

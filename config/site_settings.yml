@@ -24,6 +24,10 @@ development:
   paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"
   paperclip_path: ":rails_root/public/upload_files/:class/:attachment/:id/:style/:filename"
   <<: *common
+test:
+  paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"
+  paperclip_path: ":rails_root/public/upload_files/:class/:attachment/:id/:style/:filename"
+  <<: *common
 production:
   paperclip_url:  "http://upload-files.youtuos.com/:class/:attachment/:id/:style/:filename"
   paperclip_path: "/home/liwei/wwwroot/shangquan/upload_files/:class/:attachment/:id/:style/:filename"

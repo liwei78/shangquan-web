@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
   def current_user_id
     session[:user_id]||cookies[:user_id]
   end
+  
+  def current_user_promotion
+    session[:promotion]||cookies[:promotion]
+  end
 
   def loggin?
     (session[:signcode].present?||cookies[:signcode].present?)&&current_user_name.present?&&current_user_id.present? ? true : false

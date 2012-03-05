@@ -43,6 +43,17 @@ class User < ActiveRecord::Base
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "avatar.jpg"
+
+  scope :normal, :conditions => ["users.promotion = ?", 1]
+  scope :white,  :conditions => ["users.promotion = ?", 2]
+  scope :black,  :conditions => ["users.promotion = ?", 0]
+  
+  def resource_type
+    rtype = 1 if self.promotion >0&&self.promotion<20  # 0 < promotion < 20
+    rtype = 2 if self.promotion = 20                   # in white list
+    rtype = 0 if self.promotion = 0                    # in black list
+    rtype
+  end
   
   def self.authenticate(email, password)
     user = find_by_email(email)

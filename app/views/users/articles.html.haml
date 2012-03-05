@@ -21,7 +21,7 @@
               回应(4)
               转载
             .tags
-              - for tag in @article.tags
+              - for tag in article.tags
                 %span= link_to tag.name, nav_article_url(:tag => URI.encode(tag.name))
         .clearfix
     .paginate

@@ -1,5 +1,6 @@
 Shangquan::Application.routes.draw do
 
+
   mount Ckeditor::Engine => '/ckeditor'
   
   resources :companies, :only => [:show] do
@@ -56,6 +57,8 @@ Shangquan::Application.routes.draw do
       post 'updatesetting'
       get  'avatarsetting'
       post 'updateavatarsetting'
+      get  'publish'
+      post 'postpublish'
     end
     member do
       get 'articles'

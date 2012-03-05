@@ -8,6 +8,11 @@ class Good < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :as => :klass
   
+  scope :promote, :conditions => ["goods.resource_type = ?", 1]
+  scope :block,   :conditions => ["goods.resource_type = ?", 0]
+  scope :white,   :conditions => ["goods.resource_type = ?", 2]
+  scope :deleted, :conditions => ["goods.resource_type = ?", 3]
+  
   has_attached_file :poster,
     :styles      => { :original => SITE_SETTINGS["good_original"], :thumb => SITE_SETTINGS["good_thumb"], :small => SITE_SETTINGS["good_small"] },
     :convert_options => { :thumb => SITE_SETTINGS["good_thumb_covert"] },

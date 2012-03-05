@@ -10,6 +10,11 @@ class Article < ActiveRecord::Base
   scope :type_2, :conditions => ["article_type = ?", 'video']
   scope :type_3, :conditions => ["article_type = ?", 'brand']
   
+  scope :promote, :conditions => ["articles.resource_type = ?", 1]
+  scope :block,   :conditions => ["articles.resource_type = ?", 0]
+  scope :white,   :conditions => ["articles.resource_type = ?", 2]
+  scope :deleted, :conditions => ["articles.resource_type = ?", 3]
+  
   has_attached_file :poster,
     :styles      => { :original => SITE_SETTINGS["crop_original"], :small => SITE_SETTINGS["crop_small"] },
     :url         => SITE_SETTINGS["paperclip_url"],

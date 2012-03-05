@@ -24,10 +24,15 @@ class UsersController < ApplicationController
             :value => user.id,
             :expires => 14.days.from_now
           }
+          cookies[:promotion]   =  {
+            :value => user.promotion,
+            :expires => 14.days.from_now
+          }
         else
           session[:signcode]  = user.signcode
           session[:user_name] = user.name
           session[:user_id]   = user.id
+          session[:promotion]   = user.promotion
         end
         format.html {redirect_to user}
       else
@@ -46,6 +51,53 @@ class UsersController < ApplicationController
     cookies.delete(:user_id)
     respond_to do |format|
       format.html { redirect_to root_url }
+    end
+  end
+  
+  def new
+    @user = User.new
+    render :layout => "application"
+  end
+
+  def create
+    @user = User.new(params[:user])
+    respond_to do |format|
+      if @user.save
+        cookies[:signcode] = {
+          :value => @user.signcode,
+          :expires => 14.days.from_now
+        }
+        cookies[:user_name] = {
+          :value => @user.name,
+          :expires => 14.days.from_now
+        }
+        cookies[:user_id]   =  {
+          :value => @user.id,
+          :expires => 14.days.from_now
+        }
+        cookies[:promotion]   =  {
+          :value => @user.promotion,
+          :expires => 14.days.from_now
+        }
+        format.html { redirect_to(@user, :notice => '注册成功') }
+      else
+        flash[:error] = "错误"
+        format.html { render :action => "new" }
+      end
+    end
+  end
+  
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if current_user.update_attributes(params[:user])
+        format.html { redirect_to :back, :notice => "更新成功" }
+      else
+        flash[:error] = "错误"
+        format.html { redirect_to :back }
+      end
     end
   end
 
@@ -126,47 +178,16 @@ class UsersController < ApplicationController
     @user = get_current_user
   end
   
-  def new
-    @user = User.new
-    render :layout => "application"
+  def publish
+    @user = get_current_user
   end
-
-  def edit
-  end
-
-  def create
-    @user = User.new(params[:user])
-    respond_to do |format|
-      if @user.save
-        cookies[:signcode] = {
-           :value => @user.signcode,
-           :expires => 14.days.from_now
-         }
-         cookies[:user_name] = @user.name
-         cookies[:user_id] = @user.id
-        format.html { redirect_to(@user, :notice => '注册成功') }
-      else
-        flash[:error] = "错误"
-        format.html { render :action => "new" }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if current_user.update_attributes(params[:user])
-        format.html { redirect_to :back, :notice => "更新成功" }
-      else
-        flash[:error] = "错误"
-        format.html { redirect_to :back }
-      end
-    end
-  end
+  
   
   def postcontent
     article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article', :tag_list => params[:tag_list])
     article.poster = params[:poster]
     article.user_id = current_user_id
+    article.resource_type = current_user_promotion
     if article.save
       User.update_counters current_user_id, :articles_count => 1
       flash[:notice] = "发布成功"
@@ -179,6 +200,7 @@ class UsersController < ApplicationController
   def uploadphoto
     article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'photo')
     article.user_id = current_user_id
+    article.resource_type = current_user_promotion
     article.save
     files = params[:photos].present? ? params[:photos][:file] : []
     files.each do |file|
@@ -190,6 +212,7 @@ class UsersController < ApplicationController
   def postvideo
     article = Article.new(:title => params[:title], :content => params[:content], :code => params[:code], :article_type => 'video')
     article.user_id = current_user_id
+    article.resource_type = current_user_promotion
     article.save
     redirect_to videos_user_url(current_user_id)
   end
@@ -197,6 +220,7 @@ class UsersController < ApplicationController
   def postgood
     good = Good.new(:title => params[:title], :price => params[:price], :content => params[:content], :poster => params[:poster])
     good.user_id = current_user_id
+    good.resource_type = current_user_promotion
     good.save
     files = params[:photos].present? ? params[:photos][:file] : []
     files.each do |file|
@@ -216,6 +240,7 @@ class UsersController < ApplicationController
       :schedule => params[:schedule], 
       :address => params[:address])
     activity.user_id = current_user_id
+    activity.resource_type = current_user_promotion
     activity.save
     redirect_to activities_user_url(current_user_id)
   end
@@ -223,6 +248,7 @@ class UsersController < ApplicationController
   def postbrand
     brand = Article.new(:title => params[:title], :content => params[:content], :poster => params[:poster], :article_type => 'brand', :tag_list => params[:tag_list])
     brand.user_id = current_user_id
+    brand.resource_type = current_user_promotion
     brand.save
     redirect_to brands_user_url(current_user_id)
   end
@@ -252,6 +278,54 @@ class UsersController < ApplicationController
       flash[:error] = '头像保存失败！'
     end
     redirect_to :back
+  end
+  
+  def postpublish
+    article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article', :tag_list => params[:tag_list])
+    article.poster = params[:poster]
+    article.user_id = current_user_id
+    article.resource_type = current_user_promotion
+    if article.save
+      User.update_counters current_user_id, :articles_count => 1
+      
+      if params[:relate_activity] == "1"
+        activity = Activity.new(
+          :title => params[:title], 
+          :content => params[:content], 
+          :poster => params[:poster], 
+          :tag_list => params[:tag_list], 
+          :activity_category => params[:activity_category], 
+          :activity_area => params[:activity_area],
+          :schedule => params[:schedule], 
+          :address => params[:address])
+        activity.user_id = current_user_id
+        activity.resource_type = current_user_promotion
+        activity.save
+      end
+      
+      if params[:relate_good] == "1"
+        good = Good.new(:title => params[:title], :price => params[:price], :content => params[:content], :poster => params[:poster])
+        good.user_id = current_user_id
+        good.resource_type = current_user_promotion
+        good.save
+        files = params[:photos].present? ? params[:photos][:file] : []
+        files.each do |file|
+          Photo.create(:file => file, :klass_type => "Good", :klass_id => good.id) if file.present?
+        end
+      end
+      
+      if params[:relate_brand] == "1"
+        brand = Article.new(:title => params[:title], :content => params[:content], :poster => params[:poster], :article_type => 'brand', :tag_list => params[:tag_list])
+        brand.user_id = current_user_id
+        brand.resource_type = current_user_promotion
+        brand.save
+      end
+      
+      flash[:notice] = "发布成功"
+    else
+      flash[:error] = "发布失败"
+    end
+    redirect_to articles_user_url(current_user_id)
   end
   
 end

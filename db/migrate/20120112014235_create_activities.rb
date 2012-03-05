@@ -20,6 +20,7 @@ class CreateActivities < ActiveRecord::Migration
       t.datetime :poster_updated_at
       t.integer  :comments_count, :default => 0
       t.text     :content
+      t.integer  :resource_type, :default => 1 # 0:block 1:normal 2:white 3:deleted
       t.timestamps
     end
   end

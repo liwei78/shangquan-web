@@ -1,0 +1,100 @@
+- content_for :header do
+  :javascript
+    function add_upload_file() {
+      $('#upload_div').clone().insertBefore('.addmore');
+    }
+
+.leftarea
+  
+  .writediv
+    = form_tag(postpublish_users_url, :multipart => true) do
+      .singlediv
+        .title
+          标题
+          %small (可不填)
+        .inputdiv
+          = text_field_tag :title, "", :class => "input"
+      .singlediv
+        .title
+          封面图片
+          %small 不填是种损失哦
+        .inputdiv
+          = file_field_tag :poster
+      .singlediv
+        .title
+          我要关联
+          = check_box_tag :relate_activity, 1, false, :onclick => "change_div('activity_div');"
+          = label_tag :relate_activity, "一个活动"
+          = check_box_tag :relate_good, 1, false, :onclick => "change_div('good_div');"
+          = label_tag :relate_good, "一个商品"
+          = check_box_tag :relate_brand, 1, false, :onclick => "change_div('brand_div');"
+          = label_tag :relate_brand, "一个品牌"
+          :javascript
+            function change_div(dividname) {
+              $('#'+dividname).toggle();
+            }
+
+        .inputdiv.hide#activity_div
+          .singlediv
+            .title
+              活动时间
+            .inputdiv
+              = text_field_tag :schedule, "", :class => "input"
+          .singlediv
+            .title
+              活动商场
+            .inputdiv
+              = text_field_tag :address, "", :class => "input"
+          .singlediv
+            .title
+              活动分类
+            .inputdiv
+              = select_tag :activity_category, options_for_select(ActivityCategory.order('position').map{|c| c.name})
+          .singlediv
+            .title
+              活动地区
+            .inputdiv
+              = select_tag :activity_area, options_for_select(ActivityArea.order('position').map{|a| a.name})
+        .inputdiv.hide#good_div
+          .singlediv
+            .title
+              商品价格
+            .inputdiv
+              = text_field_tag :price, "", :class => "input small"
+              元
+        .inputdiv.hide#brand_div
+          .singlediv
+            .title
+              品牌图集
+              %small
+                = link_to("增加上传", js_void, :onclick => "add_upload_file();")
+          .singlediv#upload_div
+            .inputdiv
+              = file_field_tag "photos[file][]"
+          .addmore.mb
+
+      .singlediv
+        .title
+          内容
+        .inputdiv
+          = cktext_area_tag("content", "", :input_html => {:cols => 10, :rows => 20}, :toolbar => 'Basic')
+      .singlediv
+        .title
+          标签
+          %small 中文逗号分割
+        .inputdiv
+          = text_field_tag :tag_list, "", :class => "input"
+      .btns
+        .right
+          = submit_tag "发布", :class => "submit"
+        = link_to "取消", "#", :class => "cancel"
+          
+    
+    
+.rightarea
+  = render :partial => "users/usersidebox"
+  .siderbox
+    
+  .siderbox
+    
+.clearfix
