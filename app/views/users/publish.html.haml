@@ -23,6 +23,24 @@
           = file_field_tag :poster
       .singlediv
         .title
+          我要发布
+          = check_box_tag :relate_0, 0, true, :onclick => "change_div('div1');"
+          = label_tag :relate_0, "时尚"
+          
+          = check_box_tag :relate_3, 3, false, :onclick => "change_div('div3');"
+          = label_tag :relate_3, "商家活动"
+          
+          = check_box_tag :relate_4, 4, false, :onclick => "change_div('div4');"
+          = label_tag :relate_4, "品牌"
+
+          = check_box_tag :relate_5, 5, false, :onclick => "change_div('div5');"
+          = label_tag :relate_5, "商品"
+
+          = check_box_tag :relate_6, 6, false, :onclick => "change_div('div5');"
+          = label_tag :relate_6, "团购"
+          
+      .singlediv
+        .title
           我要关联
           = check_box_tag :relate_1, 1, false, :onclick => "change_div('div1');"
           = label_tag :relate_1, "系列图片"
@@ -30,12 +48,6 @@
           = check_box_tag :relate_2, 2, false, :onclick => "change_div('div2');"
           = label_tag :relate_2, "视频代码"
           
-          = check_box_tag :relate_3, 3, false, :onclick => "change_div('div3');"
-          = label_tag :relate_3, "一个商家活动"
-          
-          = check_box_tag :relate_4, 4, false, :onclick => "change_div('div4');"
-          = label_tag :relate_4, "一个品牌"
-
           = check_box_tag :relate_5, 5, false, :onclick => "change_div('div5');"
           = label_tag :relate_5, "一个商品"
 
@@ -124,6 +136,14 @@
             .inputdiv
               = text_field_tag :price, "", :class => "input small"
               元
+
+        .inputdiv.hide#div6
+          .singlediv
+            .title
+              团购描述
+            .inputdiv
+              = text_field_tag :groupbuy_desc, "", :class => "input"
+
 
       .singlediv
         .title

@@ -298,6 +298,11 @@ class UsersController < ApplicationController
       :state    => current_user_rtype)
 
       # video code
+      if params[:relate_0] == "0"
+        article.is_article = true
+      end
+
+      # video code
       if params[:relate_2] == "2"
         article.code = params[:code]
         article.is_video = true
@@ -324,6 +329,12 @@ class UsersController < ApplicationController
       if params[:relate_5] == "5"
         article.price = params[:price]
         article.is_good = true
+      end
+
+      # groupbuy
+      if params[:relate_6] == "6"
+        article.groupbuy_desc = params[:groupbuy_desc]
+        article.is_groupbuy = true
       end
 
       if article.save

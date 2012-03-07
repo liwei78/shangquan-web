@@ -46,6 +46,9 @@ class CreateArticles < ActiveRecord::Migration
       # brand
       t.string   :brand_name
       t.string   :brand_desc
+      
+      # groupbuy
+      t.string   :groupbuy_desc
 
       # map info
       t.string   :category
