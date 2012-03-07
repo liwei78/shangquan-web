@@ -2,16 +2,22 @@
 class MainController < ApplicationController
   def index
     if params[:tag].present?
-      @articles = Article.white.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+      @articles = Article.white.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
       @page_title = "#{URI.decode(params[:tag])} - 时尚"
     else
-      @articles = Article.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+      @articles = Article.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
       @page_title = "时尚"
     end
   end
 
   def article
-    
+    if params[:tag].present?
+      @articles = Article.white.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
+      @page_title = "#{URI.decode(params[:tag])} - 时尚"
+    else
+      @articles = Article.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
+      @page_title = "时尚"
+    end
   end
   # 
   # def activity

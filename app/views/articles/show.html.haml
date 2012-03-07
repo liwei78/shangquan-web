@@ -7,7 +7,7 @@
         .name
           = link_to @user.name, @user
         .title
-          = @article.title
+          = link_to @article.title, view_article_url(@article)
         - if @article.poster.file?
           .poster
             = image_tag(@article.poster.url)
