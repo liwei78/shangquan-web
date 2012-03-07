@@ -29,6 +29,6 @@ test:
   paperclip_path: ":rails_root/public/upload_files/:class/:attachment/:id/:style/:filename"
   <<: *common
 production:
-  paperclip_url:  "http://58.215.184.210:5000/:class/:attachment/:id/:style/:filename"
-  paperclip_path: "/root/wwwroot/upload_files/public/:class/:attachment/:id/:style/:filename"
+  paperclip_url:  "http://58.215.184.210:3000/:class/:attachment/:id/:style/:filename"
+  paperclip_path: "/root/wwwroot/shangquan-web/public/:class/:attachment/:id/:style/:filename"
   <<: *common
