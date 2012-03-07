@@ -30,5 +30,5 @@ test:
   <<: *common
 production:
   paperclip_url:  "http://58.215.184.210:5000/:class/:attachment/:id/:style/:filename"
-  paperclip_path: "/root/wwwroot/shangquan/upload_files/public/:class/:attachment/:id/:style/:filename"
+  paperclip_path: "/root/wwwroot/upload_files/public/:class/:attachment/:id/:style/:filename"
   <<: *common
