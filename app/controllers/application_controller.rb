@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     session[:user_id]||cookies[:user_id]
   end
   
-  def current_user_promotion
-    session[:promotion]||cookies[:promotion]
+  def current_user_rtype
+    session[:rtype]||cookies[:rtype]
   end
 
   def loggin?

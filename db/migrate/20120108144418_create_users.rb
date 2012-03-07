@@ -20,6 +20,7 @@ class CreateUsers < ActiveRecord::Migration
 
       t.integer  :promotion, :default => 10   # 0:black_list  0<normal<20  20:white_list
       t.boolean  :deleted, :default => false
+      t.integer  :role, :default => 0         # 0:normal, 1:designer, 2:company
 
       t.timestamps
     end

@@ -19,22 +19,22 @@
   .display_select
     
   .infos_list
-    - for activity in @activities
+    - for article in @articles
       .item
         .title
-          = link_to activity.title, activity
+          = link_to article.title, article
         .schedule
           %span 活动时间
-          = activity.schedule
+          = article.schedule
         .address
           %span 活动商场
-          = activity.address
+          = article.address
         .tags
           %span
             标签
-          - for tag in activity.tags
+          - for tag in article.tags
             = link_to tag.name, nav_activity_url(:tag => URI.encode(tag.name))
-  = will_paginate @activities, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+  = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
   
 .rightbox.medium-width
   .box

@@ -50,7 +50,7 @@
 #   Good.create(:title => Faker::Lorem.sentence(word_count = 1), :price => 200.80, :brand_id => 1, :likes_count => 200)
 # end
 
-ActivityArea.create([
+Area.create([
   {:name => "西单", :position => "1"}, 
   {:name => "朝阳", :position => "2"}, 
   {:name => "中关村", :position => "3"}, 
@@ -62,34 +62,13 @@ ActivityArea.create([
   {:name => "崇文门", :position => "9"}]
 )
 
-ActivityCategory.create([
+Category.create([
   {:name => "商场", :position => "1"}, 
   {:name => "美食", :position => "2"}, 
   {:name => "专卖店", :position => "3"}, 
   {:name => "电子商务", :position => "4"},
   {:name => "化妆品", :position => "5"},
-  {:name => "折扣店", :position => "6"}]
+  {:name => "折扣店", :position => "6"},
+  {:name => "团购", :position => "7"}]
 )
-
-CompanyArea.create([
-  {:name => "西单", :position => "1"}, 
-  {:name => "朝阳", :position => "2"}, 
-  {:name => "中关村", :position => "3"}, 
-  {:name => "王府井/东单", :position => "4"},
-  {:name => "大望路", :position => "5"},
-  {:name => "三里屯", :position => "6"},
-  {:name => "建外大街", :position => "7"},
-  {:name => "建外大街", :position => "8"},
-  {:name => "崇文门", :position => "9"}]
-)
-
-CompanyCategory.create([
-  {:name => "商场", :position => "1"}, 
-  {:name => "美食", :position => "2"}, 
-  {:name => "专卖店", :position => "3"}, 
-  {:name => "电子商务", :position => "4"},
-  {:name => "化妆品", :position => "5"},
-  {:name => "折扣店", :position => "6"}]
-)
-
 

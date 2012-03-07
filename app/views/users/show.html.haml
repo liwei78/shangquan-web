@@ -1,5 +1,5 @@
 .leftarea
-  = render :partial => "users/homebtn"
+
   = render :partial => "users/homenav"
     
   .list
@@ -11,32 +11,13 @@
             = feed.username
           .title
             = link_to feed.title, feed.target_url, :target => "_blank"
-          - if feed.template_type == 'article'
-            / it's a article
-          - if feed.template_type == 'photo'
-            .album
-              - for photo in Photo.where(:klass_type => 'Article', :klass_id => feed.klass_id)
-                = image_tag(photo.file.url(:small))
-          - if feed.template_type == 'video'
-            .player
-              = flashplayer(article.code)
-          - if feed.template_type == 'good'
-            .poster
-              = image_tag(Good.find(feed.klass_id).poster.url(:thumb))
+          .poster
+            = image_tag(feed.klass.poster.url(:thumb))
           .text
             = feed.content.html_safe
-          .action
-            .btn.right
-              喜欢
-              评论
-              转载
-            .tags
-              
         .clearfix
     .paginate
       = will_paginate @feeds, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
-    
-    
     
 .rightarea
   = render :partial => "users/usersidebox"

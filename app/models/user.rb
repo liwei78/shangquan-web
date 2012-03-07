@@ -1,3 +1,4 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessor  :password
   
@@ -9,6 +10,12 @@ class User < ActiveRecord::Base
     :uniqueness => true
   
   validates :password,
+    :presence => true,
+    :confirmation => true,
+    :length => {:within => 4..20},
+    :on => :create
+    
+  validates :password_confirmation,
     :presence => true,
     :length => {:within => 4..20},
     :on => :create
@@ -44,12 +51,12 @@ class User < ActiveRecord::Base
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "avatar.jpg"
 
-  scope :normal, :conditions => ["users.promotion = ?", 1]
-  scope :white,  :conditions => ["users.promotion = ?", 2]
+  scope :white,  :conditions => ["users.promotion = ?", 20]
   scope :black,  :conditions => ["users.promotion = ?", 0]
   
-  def resource_type
-    rtype = 1 if self.promotion >0&&self.promotion<20  # 0 < promotion < 20
+  # recource_type base on user's promotion
+  def rtype
+    rtype = 1 if self.promotion > 0 && self.promotion < 20  # 0 < promotion < 20
     rtype = 2 if self.promotion = 20                   # in white list
     rtype = 0 if self.promotion = 0                    # in black list
     rtype
@@ -63,6 +70,10 @@ class User < ActiveRecord::Base
   
   def right_password?(password)
     encrypted_password == encrypt(password)
+  end
+  
+  def site_role
+    ["普通用户", "时尚设计师", "商家"][self.role]
   end
   
   private

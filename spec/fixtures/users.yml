@@ -3,22 +3,18 @@ test:
   name: test
   email: test@123.com
   signcode: test
-  promotion: 0
+  promotion: 10
 
 white:
   id: 2
   name: white
   email: white@123.com
   signcode: white
-  promotion: 1
+  promotion: 20
 
 black:
   id: 3
   name: black
   email: black@123.com
   signcode: black
-  promotion: 2
-
-
-
-  
+  promotion: 0

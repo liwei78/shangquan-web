@@ -24,10 +24,7 @@ class Good < ActiveRecord::Base
   def create_user_feed
     Feed.create(
       :user_id       => self.user_id,
-      :klass_type    => "Good", 
-      :klass_id      => self.id, 
       :target_url    => "/users/#{self.user_id}/goods/#{self.id}",
-      :template_type => 'good',
       :title         => self.title, 
       :content       => self.content
     )

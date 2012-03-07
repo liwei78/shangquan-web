@@ -13,3 +13,5 @@ public/assets/
 public/player/
 public/upload_files/
 config/database.yml
+Gemfile
+Gemfile.lock

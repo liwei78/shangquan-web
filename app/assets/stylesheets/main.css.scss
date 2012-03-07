@@ -591,6 +591,9 @@ $rightarea-width: 250px;
           color: #cc3399;
           height: 30px;
           line-height: 30px;
+          a {
+            color: #cc3399;
+          }
         }
         .title {
           line-height: 40px;
@@ -646,6 +649,13 @@ $rightarea-width: 250px;
       text-align: center;
       height: 40px;
       line-height: 40px;
+      font-size: 16px;
+    }
+    .siterole {
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
     }
     .userinfo {
       ul {

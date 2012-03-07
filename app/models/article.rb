@@ -1,19 +1,23 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   after_create :create_user_feed
+  has_many :feeds, :as => :klass
   has_many :photos, :as => :klass
   has_many :comments, :as => :klass
   acts_as_taggable
   
-  scope :type_0, :conditions => ["article_type = ?", 'article']
-  scope :type_1, :conditions => ["article_type = ?", 'photo']
-  scope :type_2, :conditions => ["article_type = ?", 'video']
-  scope :type_3, :conditions => ["article_type = ?", 'brand']
+  scope :is_article, :conditions => ["articles.is_article = ?", true]
+  scope :is_photo,   :conditions => ["articles.is_photo = ?", true]
+  scope :is_video,   :conditions => ["articles.is_video = ?", true]
+  scope :is_brand,   :conditions => ["articles.is_brand = ?", true]
+  scope :is_activity,:conditions => ["articles.is_activity = ?", true]
+  scope :is_company, :conditions => ["articles.is_company = ?", true]
+  scope :is_good,    :conditions => ["articles.is_good = ?", true]
   
-  scope :promote, :conditions => ["articles.resource_type = ?", 1]
-  scope :block,   :conditions => ["articles.resource_type = ?", 0]
-  scope :white,   :conditions => ["articles.resource_type = ?", 2]
-  scope :deleted, :conditions => ["articles.resource_type = ?", 3]
+  scope :block,    :conditions => ["articles.state = ?", 0]
+  scope :auditing, :conditions => ["articles.state = ?", 1]
+  scope :white,    :conditions => ["articles.state = ?", 2]
+  scope :deleted,  :conditions => ["articles.state = ?", 3]
   
   has_attached_file :poster,
     :styles      => { :original => SITE_SETTINGS["crop_original"], :small => SITE_SETTINGS["crop_small"] },
@@ -29,10 +33,8 @@ class Article < ActiveRecord::Base
       :klass_type    => "Article", 
       :klass_id      => self.id, 
       :target_url    => "/users/#{self.user_id}/articles/#{self.id}",
-      :template_type => self.article_type,
       :title         => self.title, 
-      :content       => self.content,
-      :code          => self.code.presence
+      :content       => self.content
     )
   end
   

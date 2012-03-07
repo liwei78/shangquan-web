@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120223153208) do
+ActiveRecord::Schema.define(:version => 20120306144217) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -52,23 +52,67 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.datetime "updated_at"
   end
 
+  create_table "areas", :force => true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "articles", :force => true do |t|
-    t.string   "article_type"
     t.integer  "user_id"
     t.string   "title"
+    t.string   "other_title"
+    t.text     "summary"
     t.text     "content"
     t.string   "code"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
-    t.integer  "likes_count",         :default => 0
-    t.integer  "resource_type",       :default => 1
+    t.integer  "likes_count",                                       :default => 0
+    t.integer  "shares_count",                                      :default => 0
+    t.integer  "collections_count",                                 :default => 0
+    t.integer  "state",                                             :default => 1
+    t.integer  "comments_count",                                    :default => 0
+    t.integer  "source_type",                                       :default => 0
+    t.boolean  "is_article",                                        :default => true
+    t.boolean  "is_photo",                                          :default => false
+    t.boolean  "is_video",                                          :default => false
+    t.boolean  "is_news",                                           :default => false
+    t.boolean  "is_activity",                                       :default => false
+    t.boolean  "is_company",                                        :default => false
+    t.boolean  "is_brand",                                          :default => false
+    t.boolean  "is_good",                                           :default => false
+    t.boolean  "is_groupbuy",                                       :default => false
+    t.string   "schedule"
+    t.string   "place"
+    t.string   "address"
+    t.string   "telphone"
+    t.string   "office_time"
+    t.string   "bus_info"
+    t.string   "discount"
+    t.string   "website"
+    t.string   "brand_name"
+    t.string   "brand_desc"
+    t.string   "category"
+    t.string   "area"
+    t.string   "province"
+    t.string   "city"
+    t.string   "map"
+    t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -159,9 +203,9 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
   end
 
   create_table "likes", :force => true do |t|
-    t.integer  "klass_id"
-    t.string   "klass_type"
     t.integer  "user_id"
+    t.integer  "article_id"
+    t.integer  "like_type",  :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -211,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20120223153208) do
     t.datetime "avatar_updated_at"
     t.integer  "promotion",           :default => 10
     t.boolean  "deleted",             :default => false
+    t.integer  "role",                :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

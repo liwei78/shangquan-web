@@ -4,9 +4,6 @@ class ArticlesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @article = @user.articles.find(params[:id])
-    @nav_articles = 'on' if @article.article_type == 'article'
-    @nav_photos   = 'on' if @article.article_type == 'photo'
-    @nav_videos   = 'on' if @article.article_type == 'video'
     render :layout => "users"
   end
 
@@ -31,6 +28,24 @@ class ArticlesController < ApplicationController
   def like
     @article = Article.find(params[:id])
     @article.increment!(:likes_count)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def share
+    @article = Article.find(params[:id])
+    @article.increment!(:shares_count)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def collect
+    @article = Article.find(params[:id])
+    @article.increment!(:collections_count)
     respond_to do |format|
       format.html
       format.js

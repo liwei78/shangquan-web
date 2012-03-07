@@ -3,32 +3,32 @@ Shangquan::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   
-  resources :companies, :only => [:show] do
-    member do
-      post 'visited', 'favorite', 'share', "write"
-    end
-  end
-  resources :activities, :only => [:show] do
-    member do
-      post 'visited', 'favorite', 'share', "write"
-    end
-  end
-  resources :brands, :only => [:show] do
-    member do
-      get 'view'
-      post 'write', 'like'
-    end
-  end
-  resources :goods, :only => [:show] do
-    member do
-      get 'view'
-      post 'write', 'like'
-    end
-  end
+  # resources :companies, :only => [:show] do
+  #   member do
+  #     post 'visited', 'favorite', 'share', "write"
+  #   end
+  # end
+  # resources :activities, :only => [:show] do
+  #   member do
+  #     post 'visited', 'favorite', 'share', "write"
+  #   end
+  # end
+  # resources :brands, :only => [:show] do
+  #   member do
+  #     get 'view'
+  #     post 'write', 'like'
+  #   end
+  # end
+  # resources :goods, :only => [:show] do
+  #   member do
+  #     get 'view'
+  #     post 'write', 'like'
+  #   end
+  # end
   resources :articles, :only => [:show] do
     member do
       get 'view'
-      post 'write', 'like'
+      post 'write', 'like', 'share', 'collect'
     end
   end
 
@@ -41,18 +41,18 @@ Shangquan::Application.routes.draw do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin
       get  'logout',     :as => :logout
-      get  'write'
-      post 'postcontent'
-      get  'upload'
-      post 'uploadphoto'
-      get  'pubvideo'
-      post 'postvideo'
-      get  'pubgood'
-      post 'postgood'
-      get  'pubactivity'
-      post 'postactivity'
-      get  'pubbrand'
-      post 'postbrand'
+      # get  'write'
+      # post 'postcontent'
+      # get  'upload'
+      # post 'uploadphoto'
+      # get  'pubvideo'
+      # post 'postvideo'
+      # get  'pubgood'
+      # post 'postgood'
+      # get  'pubactivity'
+      # post 'postactivity'
+      # get  'pubbrand'
+      # post 'postbrand'
       get  'setting'
       post 'updatesetting'
       get  'avatarsetting'

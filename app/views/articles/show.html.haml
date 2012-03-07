@@ -1,17 +1,16 @@
 .leftarea
-  = render :partial => "users/homebtn"
-  = render :partial => "users/homenav"
-    
+  
   .show
     .fixlayout
-      .avatar= image_tag(@user.avatar.url(:thumb))
+      .avatar= link_to image_tag(@user.avatar.url(:thumb)), @user
       .content
         .name
-          = @user.name
+          = link_to @user.name, @user
         .title
           = @article.title
-        .poster
-          = image_tag(@article.poster.url)
+        - if @article.poster.file?
+          .poster
+            = image_tag(@article.poster.url)
         - if @article.code.present?
           .player
             = flashplayer(@article.code)
@@ -23,9 +22,14 @@
           = @article.content.html_safe
         .action
           .btn.right
-            热度(9)
-            回应(4)
-            转载
+            = link_to raw("喜欢(<span id='likes_count_#{@article.id}'>#{@article.likes_count}</span>)"), like_article_url(@article), :remote => true, :method => :post
+            
+            = link_to raw("评论(<span>#{@article.comments_count}</span>)"), view_article_url(@article)
+
+            = link_to "分享", share_article_url(@article), :remote => true, :method => :post
+            
+            = link_to "收藏", collect_article_url(@article), :remote => true, :method => :post
+            
           .tags
             - for tag in @article.tags
               %span= link_to tag.name, nav_article_url(:tag => URI.encode(tag.name))
