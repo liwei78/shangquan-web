@@ -349,6 +349,7 @@ class UsersController < ApplicationController
         User.update_counters current_user_id, :articles_count => 1
         flash[:notice] = "发布成功"
       else
+        p article.errors
         flash[:error] = "发布失败"
       end
 
