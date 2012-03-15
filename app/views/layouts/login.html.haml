@@ -1,0 +1,18 @@
+!!!
+%html(xmlns="http://www.w3.org/1999/xhtml")
+  %head
+    %title= seo_title
+    %meta{'http-equiv' => "content-type", :content => "text/html; charset=UTF-8"}
+    = stylesheet_link_tag :login
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = yield :header
+  %body
+    .header
+      .layout
+        = link_to image_tag("slogo2.jpg"), root_url
+    .mainbox
+      .layout
+        = yield
+        .foot
+          

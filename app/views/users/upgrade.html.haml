@@ -1,0 +1,36 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      升级
+    .nav
+      %ul
+        %li= link_to "用户角色", setting_users_url, :class => "on"
+        .clearfix
+    .formstyle
+      = form_tag(upgraderole_users_url, :multipart => true) do
+        %table{:width => '100%', :cellspadding => 6}
+          %tr
+            %td{:width => 100} 等级
+            %td
+              = radio_button_tag :role, 0, @user.role==0
+              普通用户
+          %tr
+            %td
+            %td
+              = radio_button_tag :role, 1, @user.role==1
+              时尚设计师
+          %tr
+            %td
+            %td
+              = radio_button_tag :role, 2, @user.role==2
+              商家用户
+          %tr
+            %td
+            %td
+              = radio_button_tag :role, 3, @user.role==3
+              品牌用户
+        .btn
+          = submit_tag "确定", :class => "submit"
+        
+.clearfix

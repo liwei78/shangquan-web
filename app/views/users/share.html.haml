@@ -2,11 +2,11 @@
 .mainbox
   .formbox
     .title
-      设置
+      发表
     .nav
       %ul
-        %li= link_to "昵称设置", setting_users_url, :class => "on"
-        %li= link_to "用户头像", avatarsetting_users_url
+        %li= link_to "分享", share_users_url, :class => "on"
+        %li= link_to "发现", discover_users_url
         .clearfix
     .formstyle
       = form_tag(updatesetting_users_url, :multipart => true) do

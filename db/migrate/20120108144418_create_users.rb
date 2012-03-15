@@ -18,9 +18,9 @@ class CreateUsers < ActiveRecord::Migration
       t.integer  :avatar_file_size
       t.datetime :avatar_updated_at
 
-      t.integer  :promotion, :default => 10   # 0:black_list  0<normal<20  20:white_list
-      t.boolean  :deleted, :default => false
-      t.integer  :role, :default => 0         # 0:normal, 1:designer, 2:company
+      t.integer  :promotion, :default => 10        # 0:black_list  0<normal<20  20:white_list
+      t.boolean  :deleted,   :default => false
+      t.integer  :role,      :default => 0         # 0:normal普通用户, 1:designer, 2:company商家用户, 3:brand品牌用户
 
       t.timestamps
     end

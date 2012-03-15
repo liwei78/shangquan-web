@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     :convert_options => { :thumb => SITE_SETTINGS["avatar_thumb_covert"] },
     :url         => SITE_SETTINGS["paperclip_url"],
     :path        => SITE_SETTINGS["paperclip_path"],
-    :default_url => "avatar.jpg"
+    :default_url => "avatar190.jpg"
 
   scope :white,  :conditions => ["users.promotion = ?", 20]
   scope :black,  :conditions => ["users.promotion = ?", 0]
@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   end
   
   def site_role
-    ["普通用户", "时尚设计师", "商家"][self.role]
+    ["普通用户", "时尚设计师", "商家用户", "品牌用户"][self.role]
   end
   
   private

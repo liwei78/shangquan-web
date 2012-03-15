@@ -11,7 +11,7 @@
     #pagewrap
       .header
         .top
-          .layout
+          .layoutfullwidth
             .right.action
               - if loggin?
                 =link_to "#{current_user_name}", user_url(current_user_id)
@@ -24,7 +24,7 @@
               = link_to(image_tag("slogo.jpg"), root_url)
         
         .nav#site_nav
-          .layout
+          .layoutfullwidth
             .new-action.right
               = link_to "新分享", share_users_url, :class => "new-share"
               = link_to "新发现", js_void, :class => "new-discover"
@@ -41,20 +41,6 @@
               %li= link_to "最新", ""
               %li= link_to "活动", ""
               .clearfix
-        - unless loggin?
-          .altcontainer
-            .regbar
-              时尚商圈，找到你的最爱。
-              = link_to "登录", welcome_users_url, :class => "login"
-              或
-              = link_to "注册", new_user_url
-        - if flash[:notice].present?
-          .noticebox
-            = flash[:notice]
-        - if flash[:error].present?
-          .errorbox
-            = flash[:error]
-          
-      .layout
+      .layoutfullwidth
         = yield
-      = render :partial => "layouts/footer"
+      = render :partial => "layouts/footer2"

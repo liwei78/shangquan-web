@@ -1,21 +1,40 @@
-.formbox.mb
-  = form_tag(checklogin_users_url) do
-    %ul
-      %li
-        %label 邮件:
-        %span= text_field_tag :email, "", :class => "input"
-      %li
-        %label 密码:
-        %span
-          = password_field_tag :password, "", :class => "input"
-          %br
-          4至20位长度
-      %li
-        %div
-          = check_box_tag 'remember_me', "true", true
-          2周内免登录
-      %li
-        %div
-          = submit_tag("登录", :class => 'btn')
-          = link_to "找回密码", "", :class => "other"
-    .clearfix
+.top
+  %span
+    还没有商圈网账号？
+    = link_to "立即注册", new_user_url
+.main
+  .left.cooplogin
+    %h1
+      用合作网站帐号登录
+    
+  .right.loginbox
+    %h1
+      登录商圈网
+    = form_tag(checklogin_users_url) do
+      %table{:width => '100%'}
+        %tr
+          %td{:width => 76}
+            电子邮箱
+          %td{:width => 220}
+            = text_field_tag :email, "", :class => "input"
+          %td
+            
+        %tr
+          %td
+            登录密码
+          %td
+            = password_field_tag :password, "", :class => "input"
+          %td
+        %tr
+          %td
+            
+          %td
+            = check_box_tag 'remember_me', "true", true
+            我同意商圈网服务条款
+          %td
+        %tr
+          %td
+            
+          %td{:colspan => 2}
+            = submit_tag("登录")
+  .clearfix

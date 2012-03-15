@@ -15,9 +15,9 @@ settings: &common
   good_small:      "80x80#"
   good_thumb_covert: "-gravity north -thumbnail 180x270^ -extent 180x270"
   
-  avatar_original: "160x160#"
+  avatar_original: "190x190#"
   avatar_thumb:    "80x80#"
-  avatar_small:    "40x40#"
+  avatar_small:    "30x30#"
   avatar_thumb_covert: "-gravity north -thumbnail 80x80^ -extent 80x80"
   
 development:

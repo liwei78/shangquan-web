@@ -1,28 +1,58 @@
-.formbox
-  = form_for(@user) do |f|
-    %ul
-      %li
-        %label 邮件:
-        %span= f.text_field :email, :class => "input"
-      %li
-        %label 密码:
-        %span
-          = f.password_field :password, :class => "input"
-          %br
-          4至20位长度
-      %li
-        %label 重复密码:
-        %span
-          = f.password_field :password_confirmation, :class => "input"
-          %br
-          请重新输入一遍
-      %li
-        %label 显示名称:
-        %span
-          = f.text_field :name, :class => "input"
-          %br
-          您在本网站上的显示名称，1-16字符长度
-      %li
-        %div
-          = submit_tag('注册', :class => 'btn')
-    .clearfix
+.top
+  %span
+    已经有商圈账号了？
+    = link_to "立即登录", welcome_users_url
+.main
+  .left.cooplogin
+    %h1
+      用合作网站帐号登录
+    
+  .right.loginbox
+    %h1
+      欢迎加入商圈网
+    = form_for(@user) do |f|
+      %table{:width => '100%'}
+        %tr
+          %td{:width => 76}
+            显示昵称
+          %td{:width => 220}
+            = f.text_field :name, :class => "input"
+          %td
+            - if @user.errors[:name].any?
+              %span
+                昵称错误
+        %tr
+          %td
+            电子邮箱
+          %td
+            = f.text_field :email, :class => "input"
+          %td
+            - if @user.errors[:email].any?
+              %span
+                邮件错误
+        %tr
+          %td
+            设置密码
+          %td
+            = f.password_field :password, :class => "input"
+          %td
+            - if @user.errors[:password].any?
+              %span
+                密码错误
+        %tr
+          %td
+            重复密码
+          %td{:colspan => 2}
+            = f.password_field :password_confirmation, :class => "input"
+        %tr
+          %td
+            
+          %td{:colspan => 2}
+            = check_box_tag 'agree', "true", true
+            我同意商圈网服务条款
+        %tr
+          %td
+            
+          %td{:colspan => 2}
+            = submit_tag("立即注册")
+  .clearfix

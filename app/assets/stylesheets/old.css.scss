@@ -58,7 +58,7 @@ ul, ol {
 .hide {
   display: none; }
 
-$layout-width: 1100px;
+$layout-width: 954px;
 .layout {
   width: $layout-width;
   margin: 0 auto;
@@ -77,12 +77,26 @@ $layout-width: 1100px;
 }
 
 .header {
+  $nav_li_width: 70px;
+  $nav_height: 36px;
   .logo {
-    height: 120px;
+    text-align: center;
+    .action {
+      a {
+        display: inline-block;
+        margin-left: 10px;
+        height: $nav_height;
+        line-height: $nav_height;
+        font-size: 12px;
+        color: $secondary_color;
+        text-align: center;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
   }
   .nav {
-    $nav_li_width: 70px;
-    $nav_height: 36px;
     background-color: $primary_color;
     ul {
       li {
@@ -110,20 +124,12 @@ $layout-width: 1100px;
         width: 128px;
       }
     }
-    .action {
-      a {
-        display: inline-block;
-        margin-left: 10px;
-        height: $nav_height;
-        line-height: $nav_height;
-        font-size: 12px;
-        color: $secondary_color;
-        text-align: center;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    }
+  }
+  .topfixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9000;
   }
 }
 

@@ -1,0 +1,129 @@
+$link_color: #1D8B74;
+$grey: #888;
+
+* {
+  margin: 0;
+  outline: medium none;
+  padding: 0; }
+
+body {
+  color: #333;
+  font-size: 14px;
+  padding: 0;
+  margin: 0; 
+  font-family: Tahoma,Arial,Helvetica,STHeiti,"微软雅黑";
+  background-color: #65C5B3;
+}
+
+a {
+  text-decoration: none;
+  color: $link_color; }
+  img {
+    border: none; }
+
+a:hover {
+  text-decoration: none; }
+
+ul, ol {
+  list-style: none; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.text-right {
+  text-align: right; }
+
+.text-left {
+  text-align: left; }
+
+.text-center {
+  text-align: center; }
+
+.clearfix {
+  clear: both; }
+
+.hide {
+  display: none; }
+
+$layout-width: 774px;
+.layout {
+  width: $layout-width;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 10px 0;
+}
+
+.mainbox {
+  .top {
+    background: image-url("login_top.gif") no-repeat top;
+    height: 70px;
+    line-height: 70px;
+    font-size: 18px;
+    word-spacing: 10px;
+    font-family: "微软雅黑";
+    text-align: right;
+    color: #1D8B74;
+    a {
+      color: #fff;
+    }
+    span {
+      padding-right: 20px;
+    }
+  }
+  .main {
+    width: 744px;
+    margin: 0 auto;
+    padding-top: 30px;
+    background-color: #fff;
+    h1 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .cooplogin {
+      width: 258px;
+      background: image-url("line_vertical_bg.gif") no-repeat right 30px;
+      height: 300px;
+      text-align: center;
+    }
+    .loginbox {
+      width: 462px;
+      .input {
+        width: 196px;
+        border: 1px solid #AAA;
+        padding-left: 6px;
+        height: 34px;
+        line-height: 24px;
+        font-size: 16px;
+      }
+      table {
+        tr {
+          height: 60px;
+          line-height: 60px;
+          span {
+            color: #F86;
+          }
+        }
+      }
+      .btn {
+        background: image-url("reg_btn.gif") no-repeat bottom;
+      }
+    }
+  }
+  .foot {
+    background: image-url("login_top.gif") no-repeat bottom;
+    font-size: 0;
+    height: 10px;
+  }
+}
+
+
+
+
+
+
+

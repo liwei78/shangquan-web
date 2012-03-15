@@ -1,10 +1,11 @@
 .userbox
-  .userpic
+  .avatar
     = image_tag(@user.avatar.url)
   .username
     = @user.name
   .siterole
     = @user.site_role
+    = link_to "升级", upgrade_users_url if @user.role == 0
   .userinfo
     %ul
       %li
@@ -28,5 +29,11 @@
         .down
           = @user.favorites_count
       .clearfix
-  .homebtn
-    = link_to image_tag("myhome.jpg"), user_url(current_user_id)
+  .following
+    .title
+      TA关注的人
+    .list
+      %ul
+        - for user in User.all
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+        .clearfix

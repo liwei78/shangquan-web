@@ -11,43 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120306144217) do
+ActiveRecord::Schema.define(:version => 20120311081643) do
 
-  create_table "activities", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "activity_type",       :default => 0
-    t.string   "activity_category"
-    t.string   "activity_area"
+  create_table "activity_reports", :force => true do |t|
     t.string   "title"
-    t.string   "schedule"
-    t.string   "place"
-    t.string   "address"
-    t.string   "telphone"
-    t.string   "office_time"
-    t.string   "bus_info"
-    t.string   "discount"
-    t.string   "website"
-    t.string   "poster_file_name"
-    t.string   "poster_content_type"
-    t.integer  "poster_file_size"
-    t.datetime "poster_updated_at"
-    t.integer  "comments_count",      :default => 0
     t.text     "content"
-    t.integer  "resource_type",       :default => 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "activity_areas", :force => true do |t|
-    t.string   "name"
-    t.integer  "position",   :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "activity_categories", :force => true do |t|
-    t.string   "name"
-    t.integer  "position",   :default => 0
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -65,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20120306144217) do
     t.string   "other_title"
     t.text     "summary"
     t.text     "content"
-    t.string   "code"
+    t.string   "video_code"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
@@ -73,10 +42,10 @@ ActiveRecord::Schema.define(:version => 20120306144217) do
     t.integer  "likes_count",                                       :default => 0
     t.integer  "shares_count",                                      :default => 0
     t.integer  "collections_count",                                 :default => 0
-    t.integer  "state",                                             :default => 1
     t.integer  "comments_count",                                    :default => 0
+    t.integer  "state",                                             :default => 1
     t.integer  "source_type",                                       :default => 0
-    t.boolean  "is_article",                                        :default => true
+    t.boolean  "is_article",                                        :default => false
     t.boolean  "is_photo",                                          :default => false
     t.boolean  "is_video",                                          :default => false
     t.boolean  "is_news",                                           :default => false
@@ -95,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120306144217) do
     t.string   "website"
     t.string   "brand_name"
     t.string   "brand_desc"
+    t.string   "groupbuy_desc"
     t.string   "category"
     t.string   "area"
     t.string   "province"
@@ -138,38 +108,6 @@ ActiveRecord::Schema.define(:version => 20120306144217) do
     t.datetime "updated_at"
   end
 
-  create_table "companies", :force => true do |t|
-    t.integer  "company_type",     :default => 0
-    t.string   "company_category"
-    t.string   "company_area"
-    t.string   "title"
-    t.string   "other_title"
-    t.string   "address"
-    t.string   "telphone"
-    t.string   "office_time"
-    t.string   "bus_info"
-    t.string   "website"
-    t.integer  "comments_count",   :default => 0
-    t.text     "content"
-    t.integer  "resource_type",    :default => 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "company_areas", :force => true do |t|
-    t.string   "name"
-    t.integer  "position",   :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "company_categories", :force => true do |t|
-    t.string   "name"
-    t.integer  "position",   :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "feeds", :force => true do |t|
     t.integer  "user_id"
     t.integer  "klass_id"
@@ -185,19 +123,26 @@ ActiveRecord::Schema.define(:version => 20120306144217) do
 
   add_index "feeds", ["user_id"], :name => "index_feeds_on_user_id"
 
-  create_table "goods", :force => true do |t|
-    t.integer  "user_id"
+  create_table "item_reports", :force => true do |t|
     t.string   "title"
-    t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "brand_id"
-    t.integer  "likes_count",                                       :default => 0
-    t.integer  "comments_count",                                    :default => 0
     t.text     "content"
-    t.string   "poster_file_name"
-    t.string   "poster_content_type"
-    t.integer  "poster_file_size"
-    t.datetime "poster_updated_at"
-    t.integer  "resource_type",                                     :default => 1
+    t.integer  "user_id"
+    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.string   "brand_name"
+    t.integer  "brand_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "unique_id"
+    t.string   "title"
+    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.string   "brand_name"
+    t.integer  "brand_id"
+    t.text     "content"
+    t.integer  "state",                                    :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

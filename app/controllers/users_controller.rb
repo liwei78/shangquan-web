@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :need_user_login, :except => [:new, :create, :login, :checklogin, :logout, :show]
   
   def login
-    render :layout => "application"
+    render :layout => "login"
   end
   
   def checklogin
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    render :layout => "application"
+    render :layout => "login"
   end
 
   def create
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
         format.html { redirect_to(@user, :notice => '注册成功') }
       else
         flash[:error] = "错误"
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :layout => "login" }
       end
     end
   end
@@ -106,61 +106,66 @@ class UsersController < ApplicationController
     @feeds = @user.feeds.with_username.paginate(:page => params[:page], :per_page => 5)
     @nav_all = "on"
     @page_title = @user.name + "的空间"
+    render :layout => "layoutfullwidth"
   end
   
-  def articles
-    @user = User.find(params[:id])
-    @articles = @user.articles.is_article.paginate(:page => params[:page], :per_page => 5)
-    @nav_articles = "on"
-  end
-
-  def photos
-    @user = User.find(params[:id])
-    @articles = @user.articles.is_photo.paginate(:page => params[:page], :per_page => 5)
-    @nav_photos = "on"
-  end
-
-  def videos
-    @user = User.find(params[:id])
-    @articles = @user.articles.is_video.paginate(:page => params[:page], :per_page => 5)
-    @nav_videos = "on"
-  end
-
-  def activities
-    @user = User.find(params[:id])
-    @activities = @user.articles.is_activity.paginate(:page => params[:page], :per_page => 5)
-    @nav_activities = "on"
-  end
-
-  def companies
-    @user = User.find(params[:id])
-    @activities = @user.articles.is_company.paginate(:page => params[:page], :per_page => 5)
-    @nav_activities = "on"
-  end
-
-  def brands
-    @user = User.find(params[:id])
-    @brands = @user.articles.is_brand.paginate(:page => params[:page], :per_page => 5)
-    @nav_brands = "on"
-  end
-
-  def goods
-    @user = User.find(params[:id])
-    @goods = @user.articles.is_good.paginate(:page => params[:page], :per_page => 5)
-    @nav_goods = "on"
-  end
+  # def articles
+  #   @user = User.find(params[:id])
+  #   @articles = @user.articles.is_article.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_articles = "on"
+  # end
+  # 
+  # def photos
+  #   @user = User.find(params[:id])
+  #   @articles = @user.articles.is_photo.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_photos = "on"
+  # end
+  # 
+  # def videos
+  #   @user = User.find(params[:id])
+  #   @articles = @user.articles.is_video.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_videos = "on"
+  # end
+  # 
+  # def activities
+  #   @user = User.find(params[:id])
+  #   @activities = @user.articles.is_activity.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_activities = "on"
+  # end
+  # 
+  # def companies
+  #   @user = User.find(params[:id])
+  #   @activities = @user.articles.is_company.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_activities = "on"
+  # end
+  # 
+  # def brands
+  #   @user = User.find(params[:id])
+  #   @brands = @user.articles.is_brand.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_brands = "on"
+  # end
+  # 
+  # def goods
+  #   @user = User.find(params[:id])
+  #   @goods = @user.articles.is_good.paginate(:page => params[:page], :per_page => 5)
+  #   @nav_goods = "on"
+  # end
   
   
   
   def setting
-    @nav_setting = 'on'
     @user = get_current_user
   end
   
   def avatarsetting
-    @nav_avatarsetting = 'on'
     @user = get_current_user
   end
+  
+  def upgrade
+    @user = get_current_user
+  end
+  
+  
   
   # def write
   #   @user = get_current_user
@@ -186,7 +191,11 @@ class UsersController < ApplicationController
   #   @user = get_current_user
   # end
   
-  def publish
+  # def publish
+  #   @user = get_current_user
+  # end
+  
+  def share
     @user = get_current_user
   end
   
@@ -287,6 +296,18 @@ class UsersController < ApplicationController
     end
     redirect_to :back
   end
+  
+  def upgraderole
+    user = User.find(current_user_id)
+    user.role = params[:role]
+    if user.save
+      flash[:notice] = '保存成功！'
+    else
+      flash[:error] = '保存失败！'
+    end
+    redirect_to :back
+  end
+  
   
   def postpublish
     article = Article.new(

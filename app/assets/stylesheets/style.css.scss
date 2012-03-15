@@ -1,0 +1,425 @@
+/*
+* design by liwei
+* railser.cn
+* hi@liwei.me
+*/
+$primary_color: #65C5B3;
+$grey: #888;
+/* general style */
+* {
+  margin: 0;
+  outline: medium none;
+  padding: 0; }
+
+body {
+  color: #000000;
+  font-size: 14px;
+  padding: 0;
+  margin: 0; 
+  font-family: 'arial', '宋体', 'sans-serif';
+  background-color: #F0EEEE;
+}
+
+a {
+  text-decoration: none;
+  color: $primary_color; }
+  img {
+    border: none; }
+
+a:hover {
+  text-decoration: none; }
+
+ul, ol {
+  list-style: none; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.text-right {
+  text-align: right; }
+
+.text-left {
+  text-align: left; }
+
+.text-center {
+  text-align: center; }
+
+.clearfix {
+  clear: both; }
+
+.hide {
+  display: none; }
+
+$layout-width: 954px;
+.layout {
+  width: $layout-width;
+  margin: 0 auto;
+}
+.layoutfullwidth {
+  margin: 0 100px;
+}
+.mb {
+  margin-bottom: 20px;
+}
+
+.noborder {
+  border: none !important;
+}
+
+.header {
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 30px;
+  .top {
+    $height: 58px;
+    height: $height;
+    text-align: center;
+    border-bottom: 1px solid #DAD9D9;
+    .logo {
+      width: 160px;
+      height: 48px;
+      margin: 0 auto;
+      padding-top: 8px;
+    }
+    .action {
+      a {
+        display: inline-block;
+        height: $height;
+        line-height: $height;
+        padding: 0 10px;
+        font-size: 14px;
+        color: $grey;
+        text-align: center;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .nav {
+    $height: 43px;
+    height: $height;
+    border-bottom: 1px solid #DAD9D9;
+    background-color: #fff;
+    ul {
+      li {
+        height: $height;
+        line-height: $height;
+        float: left;
+        text-align: center;
+        margin-right: 10px;
+        span {
+          color: $grey;
+        }
+        a {
+          font-weight: bold;
+          display: inline-block;
+          height: $height;
+          line-height: $height;
+          font-size: 16px;
+          background: image-url("dot.gif") no-repeat 0 center;
+          padding-left: 10px;
+        }
+        a.index {
+          color: #666;
+          background: none !important;
+          padding-left: 0 !important;
+        }
+        a.sub-nav {
+          font-size: 12px;
+          background: none !important;
+          padding-left: 0 !important;
+          margin-right: 4px;
+        }
+      }
+    }
+    .new-action {
+      a:hover {
+        background-color: #f0eeee;
+      }
+      .new-share {
+        background: image-url("newcreat.gif") no-repeat scroll 12px 17px transparent;
+        color: #65C5B3;
+        display: inline-block;
+        font-size: 14px;
+        height: $height;
+        line-height: $height;
+        padding-left: 26px;
+        vertical-align: middle;
+        width: 54px;
+      }
+      .new-discover {
+        background: image-url("newcreat.gif") no-repeat scroll 12px -25px transparent;
+        color: #65C5B3;
+        display: inline-block;
+        font-size: 14px;
+        height: $height;
+        line-height: $height;
+        padding-left: 26px;
+        vertical-align: middle;
+        width: 54px;
+      }
+    }
+  }
+  .topfixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9000;
+  }
+  .noticebox {
+    height: 40;
+    line-height: 40px;
+    color: green;
+    background-color: #F0EEEE;
+  }
+  .errorbox {
+    height: 40;
+    line-height: 40px;
+    color: red;
+    background-color: #F0EEEE;
+  }
+}
+
+.footer {
+  height: 40px;
+  line-height: 40px;
+  background: #E2E0E0;
+  color: #666;
+  width: 100%;
+  line-height: 40px;
+  margin-top: 30px;
+  text-align: right;
+}
+
+.altcontainer {
+  background-color: #F0EEEE;
+  .regbar {
+    background: image-url("alertbarbg.png") no-repeat scroll 0 0 transparent;
+    font-size: 16px;
+    height: 62px;
+    line-height: 50px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 688px;
+    z-index: 2;
+    .login {
+      background: image-url("floatbarbt.gif") no-repeat scroll 0 0 transparent;
+      color: #FFFFFF;
+      display: inline-block;
+      height: 31px;
+      line-height: 31px;
+      text-align: center;
+      width: 55px;
+    }
+    .login:hover {
+      background-position: -71px 0;
+    }
+    .login:active {
+      background-position: -142px 0;
+    }
+  }
+}
+
+.userbox {
+  width: 222px;
+  float: right;
+  border-top: 3px solid $primary_color;
+  background-color: #fff;
+  padding-top: 16px;
+  .avatar {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+  }
+  .username {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .siterole {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    color: grey;
+  }
+  .userinfo {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    ul {
+      border-top: 1px solid $grey;
+      border-bottom: 1px solid $grey;
+      padding: 10px 0;
+      margin-bottom: 10px;
+      li {
+        float: left;
+        width: 47px;
+        height: 54px;
+        text-align: center;
+        .up {
+          height: 24px;
+          line-height: 24px;
+        }
+        .down {
+          height: 30px;
+          line-height: 30px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  .following {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    .title {
+      font-size: 14px;
+      line-height: 30px;
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.sharelist {
+  padding-right: 220px;
+  .top {
+    color: #333;
+    border-left: 3px solid $primary_color;
+    background: image-url("home.png") no-repeat white 15px 13px;
+    height: 47px;
+    line-height: 47px;
+    margin: 0 20px 12px 0;
+    .action {
+      padding-right: 10px;
+    }
+    span.name {
+      margin-left: 40px;
+      font-size: 20px;
+    }
+    span.dot {
+      height: 47px;
+      padding: 4px 16px;
+      background: image-url("dot.gif") no-repeat center center;
+    }
+  }
+  .list {
+    .hover {
+      border: 3px solid $primary_color !important;
+    }
+    .shareitem {
+      float: left;
+      margin: 0 14px 14px 0;
+      display: inline;
+      background: white;
+      width: 222px;
+      height: 286px;
+      overflow: hidden;
+      border: 3px solid white;
+      border-bottom: 3px solid $primary_color;
+      padding-bottom: 4px;
+      .box {
+        border: 3px solid white;
+        padding: 0 13px;
+        color: #333;
+        .title {
+          line-height: 36px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.mainbox {
+  float: left;
+  width: 722px;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  .formbox {
+    background-color: white;
+    padding: 16px 32px;
+    .title {
+      font-size: 24px;
+      margin-bottom: 9px;
+    }
+    .nav {
+      position: relative;
+      border-bottom: 1px solid #65C5B3;
+      height: 47px;
+      ul {
+        position: absolute;
+        height: 32px;
+        top: 16px;
+        left: 16px;
+        li {
+          float: left;
+          height: 31px;
+          line-height: 31px;
+          background: #65C5B3;
+          color: white;
+          font-size: 14px;
+          margin-right: 8px;
+          border: 1px solid #4FB3A0;
+          border-bottom: 0;
+          a {
+            color: white;
+            display: block;
+            padding: 0 16px;
+          }
+          a.on {
+            background: white;
+            border-bottom: 0;
+            color: #333;
+          }
+        }
+      }
+    }
+    .formstyle {
+      padding-top: 30px;
+      margin-bottom: 6px;
+      .input {
+        width: 270px;
+        border: 1px solid #AAA;
+        padding-left: 6px;
+        height: 28px;
+        line-height: 28px;
+        background: image-url('input_bg.gif') repeat-x top;
+        font-size: 16px;
+      }
+      td {
+        padding-bottom: 16px;
+      }
+    }
+    .btn {
+      border-top: 1px solid #D6D6D6;
+      padding-top: 24px;
+      clear: both;
+      .submit {
+        background-image: image-url('big_btn.gif');
+        background-repeat: no-repeat;
+        line-height: 42px;
+        height: 42px;
+        display: inline-block;
+        width: 84px;
+        vertical-align: middle;
+        text-align: center;
+        zoom: 1;
+        color: white;
+        font-size: 14px;
+        background-position: left top;
+        border: 0;
+      }
+      .submit:active {
+        background-position: -192px top;
+      }
+    }
+  }
+}
+

@@ -1,28 +1,25 @@
-.leftarea
-
-  = render :partial => "users/homenav"
-    
-  .list
-    - for feed in @feeds
-      .item
-        .avatar= image_tag(@user.avatar.url(:thumb))
-        .content
-          .name
-            = feed.username
+= render :partial => "users/usersidebox"
+.sharelist
+  .top
+    .right.action
+      = @user.articles_count
+      篇文章
+      %span.dot
+      = @user.followings_count
+      个关注
+      %span.dot
+      = @user.favorites_count
+      个收藏
+    %span.name
+      = @user.name
+  .list#sharelist
+    - 20.times do
+      .shareitem
+        .box
           .title
-            = link_to feed.title, feed.target_url, :target => "_blank"
-          .poster
-            = image_tag(feed.klass.poster.url(:thumb))
-          .text
-            = feed.content.html_safe
-        .clearfix
-    .paginate
-      = will_paginate @feeds, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
-    
-.rightarea
-  = render :partial => "users/usersidebox"
-  .siderbox
-    
-  .siderbox
-    
+            文字文字文字
+          .content
+          .action
+        
+    .clearfix
 .clearfix

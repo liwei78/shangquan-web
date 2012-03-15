@@ -57,8 +57,14 @@ Shangquan::Application.routes.draw do
       post 'updatesetting'
       get  'avatarsetting'
       post 'updateavatarsetting'
-      get  'publish'
-      post 'postpublish'
+      get  'upgrade'
+      post 'upgraderole'
+      # get  'publish'
+      # post 'postpublish'
+      get  'share'
+      post 'postshare'
+      get  'discover'
+      post 'postdiscover'
     end
     member do
       get 'articles'
