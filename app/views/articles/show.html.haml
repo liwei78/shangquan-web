@@ -1,46 +1,27 @@
-.leftarea
-  
+= render :partial => "users/usersidebox"
+.shareview
   .show
-    .fixlayout
-      .avatar= link_to image_tag(@user.avatar.url(:thumb)), @user
-      .content
-        .name
-          = link_to @user.name, @user
-        .title
-          = link_to @article.title, view_article_url(@article)
-        - if @article.poster.file?
-          .poster
-            = image_tag(@article.poster.url)
-        - if @article.code.present?
-          .player
-            = flashplayer(@article.code)
-        - if @article.photos.present?
-          .album
-            - for photo in @article.photos
-              = image_tag(photo.file.url(:small))
-        .text
-          = @article.content.html_safe
-        .action
-          .btn.right
-            = link_to raw("喜欢(<span id='likes_count_#{@article.id}'>#{@article.likes_count}</span>)"), like_article_url(@article), :remote => true, :method => :post
-            
-            = link_to raw("评论(<span>#{@article.comments_count}</span>)"), view_article_url(@article)
-
-            = link_to "分享", share_article_url(@article), :remote => true, :method => :post
-            
-            = link_to "收藏", collect_article_url(@article), :remote => true, :method => :post
-            
-          .tags
-            - for tag in @article.tags
-              %span= link_to tag.name, nav_article_url(:tag => URI.encode(tag.name))
+    .head
+      .right
+        = link_to raw("<span id='likes_count_#{@article.id}'>#{@article.likes_count}</span><em></em>"), like_article_url(@article), :remote => true, :method => :post, :class => "like"
+        = link_to raw("<span id='shares_count_#{@article.id}'>#{@article.shares_count}</span><em></em>"), share_article_url(@article), :remote => true, :method => :post, :class => "share"
+      .block
+        .avatar
+          = link_to image_tag(@user.avatar.url(:small), :width => 60, :height => 60), @user
+        .info
+          .name
+            = link_to @user.name, @user
+          .time
+            = @article.created_at.to_s(:db)
+        .clearfix
       .clearfix
-    
-    
-    
-.rightarea
-  = render :partial => "users/usersidebox"
-  .siderbox
-    
-  .siderbox
-    
+    .intro
+    .body
+      - if @article.poster.file?
+        .poster
+          = image_tag(@article.poster.url)
+      .content
+        = @article.content.html_safe
+    .content
+    .comments
 .clearfix

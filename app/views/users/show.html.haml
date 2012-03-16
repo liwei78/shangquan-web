@@ -13,13 +13,21 @@
     %span.name
       = @user.name
   .list#sharelist
-    - 20.times do
+    - for article in @articles
       .shareitem
         .box
           .title
-            文字文字文字
+            = article.title
           .content
+            - if article.poster.file?
+              = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article
           .action
-        
+            = link_to raw("喜欢(<span id='likes_count_#{article.id}'>#{article.likes_count}</span>)"), like_article_url(article), :remote => true, :method => :post
+            
+            = link_to raw("评论(<span>#{article.comments_count}</span>)"), view_article_url(article)
+
+            = link_to "分享", share_article_url(article), :remote => true, :method => :post
+            
+            = link_to "收藏", collect_article_url(article), :remote => true, :method => :post
     .clearfix
 .clearfix

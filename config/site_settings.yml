@@ -6,9 +6,9 @@ settings: &common
   company_type:    ['其他', '百货商场', '专卖店', '美食', '电子商务']
   activity_type:   ['其他', '商场活动', '品牌活动', '美食活动', '电商活动']
   
-  crop_original:   "160>"
-  crop_small:      "120x120#"
-  crop_small_covert: "-gravity north -thumbnail 120x120^ -extent 120x120"
+  crop_original:   "640>"
+  crop_small:      "190x190#"
+  crop_small_covert: "-gravity north -thumbnail 190x190^ -extent 190x190"
   
   good_original:   "320>"
   good_thumb:      "180x270#"

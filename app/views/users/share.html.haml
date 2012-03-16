@@ -1,3 +1,10 @@
+- content_for :header do
+  :javascript
+    function add_upload_file() {
+      $('#upload_div').clone().insertBefore('.addmore');}
+    function change_div(dividname) {
+      $('#'+dividname).toggle();}
+      
 = render :partial => "users/usersidebox"
 .mainbox
   .formbox
@@ -9,11 +16,54 @@
         %li= link_to "发现", discover_users_url
         .clearfix
     .formstyle
-      = form_tag(updatesetting_users_url, :multipart => true) do
+      = form_tag(postshare_users_url, :multipart => true) do
         %table{:width => '100%', :cellspadding => 6}
           %tr
-            %td{:width => 100} 显示昵称
-            %td= text_field_tag :name, @user.name, :class => "input"
+            %td{:width => 100} 标题
+            %td= text_field_tag :title, "", :class => "input"
+          %tr
+            %td 封面图片
+            %td= file_field_tag :poster
+          %tr#upload_div
+            %td 图集
+            %td
+              = file_field_tag "photos[file][]"
+          %tr.addmore
+            %td
+            %td
+              = link_to("增加上传", js_void, :onclick => "add_upload_file();")
+          %tr
+            %td 视频代码
+            %td
+              = text_field_tag :code, "", :class => "input"
+              %br
+              %small.grey 支持优酷/土豆/酷6/六间房/56网/音悦台/搜狐/奇艺的swf格式的视频代码,如 http://www.youku.com/sample.swf
+          %tr
+            %td 内容
+            %td= cktext_area_tag("content", "", :input_html => {:cols => 10, :rows => 10}, :toolbar => 'Basic')
+          %tr
+            %td 标签
+            %td= text_field_tag :tag_list, "", :class => "input"
+          %tr
+            %td 
+            %td 关联商品
+          %tr
+            %td 名称
+            %td
+              = text_field_tag "item[title]", "", :class => "input"
+              = link_to "从商品库中选择", js_void, :remote => true, :method => :post
+          %tr
+            %td 货号
+            %td= text_field_tag "item[unique_id]", "", :class => "input"
+          %tr
+            %td 品牌
+            %td= select_tag "item[brand_id]", options_for_select([["Nike", 0], ["adiddas", 1], ["lining", 2]]), :class => "select"
+          %tr
+            %td 价格
+            %td= text_field_tag "item[price]", "", :class => "input"
+          %tr
+            %td
+            %td
         .btn
           = submit_tag "确定", :class => "submit"
         

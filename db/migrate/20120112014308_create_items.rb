@@ -11,6 +11,13 @@ class CreateItems < ActiveRecord::Migration
       t.integer  :brand_id
       t.text     :content
       t.integer  :state, :default => 1 # 系统内容类型 0:block 1:auditing 2:white 3:deleted
+      
+      # 封面
+      t.string   :poster_file_name
+      t.string   :poster_content_type
+      t.integer  :poster_file_size
+      t.datetime :poster_updated_at
+      
       t.timestamps
     end
   end

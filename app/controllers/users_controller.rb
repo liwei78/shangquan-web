@@ -104,7 +104,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @feeds = @user.feeds.with_username.paginate(:page => params[:page], :per_page => 5)
-    @nav_all = "on"
+    @articles = @user.articles
     @page_title = @user.name + "的空间"
     render :layout => "layoutfullwidth"
   end
@@ -376,5 +376,38 @@ class UsersController < ApplicationController
 
     redirect_to articles_user_url(current_user_id)
   end
+  
+  def postshare
+    article = Article.new(
+      :title    => params[:title], 
+      :content  => params[:content], 
+      :tag_list => params[:tag_list],
+      :poster   => params[:poster],
+      :user_id  => current_user_id,
+      :state    => current_user_rtype)
+    if params[:code].present?
+      article.code = params[:code]
+      article.is_video = true
+    end
+    
+    if article.save
+      # photos
+      files = params[:photos].present? ? params[:photos][:file] : []
+      unless files.blank?
+        files.each do |file|
+          Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
+        end
+        article.update_attribute(:is_photo, true)
+      end
+      User.update_counters current_user_id, :articles_count => 1
+      flash[:notice] = "发布成功"
+    else
+      p article.errors
+      flash[:error] = "发布失败"
+    end
+    redirect_to user_url(current_user_id)
+    
+  end
+  
   
 end

@@ -52,7 +52,9 @@ ul, ol {
 
 .hide {
   display: none; }
-
+.grey {
+  color: grey;
+}
 $layout-width: 954px;
 .layout {
   width: $layout-width;
@@ -332,6 +334,117 @@ $layout-width: 954px;
           line-height: 36px;
           font-size: 14px;
         }
+        .action {
+          line-height: 40px;
+        }
+      }
+    }
+  }
+}
+
+.shareview {
+  float: left;
+  width: 722px;
+  background-color: white;
+  .show {
+    .head {
+      background: none repeat scroll 0 0 #E5E5E5;
+      .avatar {
+        width: 60px;
+        height: 60px;
+        float: left;
+        margin-right: 10px;
+      }
+      .info {
+        float: left;
+        .name {
+          height: 40px;
+          line-height: 40px;
+          a {
+            font-size: 20px;
+          }
+        }
+        .time {
+          height: 20px;
+          line-height: 20px;
+          color: grey;
+          font-size: 12px;
+        }
+      }
+      a.like {
+        background: none repeat scroll 0 0 #D9D9D9;
+        color: #666666;
+        cursor: pointer;
+        display: block;
+        float: left;
+        font-family: "微软雅黑";
+        height: 60px;
+        width: 80px;
+        span {
+          display: block;
+          font-family: arial;
+          font-size: 14px;
+          height: 38px;
+          line-height: 38px;
+          text-align: center;
+        }
+        em {
+          background: image-url("icons.gif") no-repeat scroll center -59px transparent;
+          color: #FFFFFF;
+          display: block;
+          height: 22px;
+          line-height: 22px;
+          text-align: center;
+        }
+      }
+      a.share {
+        background: none repeat scroll 0 0 #D9D9D9;
+        color: #666666;
+        cursor: pointer;
+        display: block;
+        float: left;
+        font-family: "微软雅黑";
+        height: 60px;
+        width: 80px;
+        span {
+          display: block;
+          font-family: arial;
+          font-size: 14px;
+          height: 38px;
+          line-height: 38px;
+          text-align: center;
+        }
+        em {
+          background: image-url("icons.gif") no-repeat scroll center -85px transparent;
+          color: #FFFFFF;
+          display: block;
+          height: 22px;
+          line-height: 22px;
+          text-align: center;
+        }
+      }
+      a.like:hover {
+        background-color: #65c5b3;
+      }
+      a.share:hover {
+        background-color: #65c5b3;
+      }
+    }
+    .intro {
+      height: 32px;
+    }
+    .body {
+      .poster {
+        width: 640px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .content {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0 auto;
+        padding: 16px 0 0;
+        width: 654px;
       }
     }
   }
@@ -395,6 +508,21 @@ $layout-width: 954px;
       }
       td {
         padding-bottom: 16px;
+        vertical-align: top;
+      }
+      .select {
+        width: 239px;
+        background: image-url("select_bg.gif") repeat-x scroll 0 0 transparent;
+        border-color: -moz-use-text-color #EDEDED -moz-use-text-color -moz-use-text-color;
+        border-style: none solid none none;
+        border-width: 0 1px 0 0;
+        cursor: pointer;
+        font-size: 14px;
+        height: 28px;
+        line-height: 28px;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
       }
     }
     .btn {

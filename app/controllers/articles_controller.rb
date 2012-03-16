@@ -2,16 +2,15 @@
 class ArticlesController < ApplicationController
   before_filter :need_user_login, :except => [:show, :view]
   def show
-    @user = User.find(params[:user_id])
-    @article = @user.articles.find(params[:id])
-    render :layout => "users"
+    @article = Article.find(params[:id])
+    @user = @article.user
   end
 
-  def view
-    @article = Article.find(params[:id])
-    @comments = @article.comments.paginate(:page => params[:page], :per_page => 10)
-    @nav_articles = 'on'
-  end
+  # def view
+  #   @article = Article.find(params[:id])
+  #   @comments = @article.comments.paginate(:page => params[:page], :per_page => 10)
+  #   @nav_articles = 'on'
+  # end
   
   def write
     article = Article.find(params[:id])
