@@ -1,3 +1,42 @@
+- content_for :header do
+  :javascript
+    $(document).ready(function() {
+      $(":radio").bind('click', function(){
+        if($(this).val()=="0") {
+          $("#com1_input").hide();
+          $("#com2_input").hide();
+          $("tr").remove("#com2_input_more");
+          $("#brand_input").hide();
+        }
+        if($(this).val()=="1") {
+          $("#com1_input").hide();
+          $("#com2_input").hide();
+          $("tr").remove("#com2_input_more");
+          $("#brand_input").hide();
+        }
+        if($(this).val()=="2") {
+          $("#com1_input").show();
+          $("#com2_input").hide();
+          $("tr").remove("#com2_input_more");
+          $("#brand_input").hide();
+        }
+        if($(this).val()=="3") {
+          $("#com1_input").hide();
+          $("#com2_input").show();
+          $("#brand_input").hide();
+        }
+        if($(this).val()=="4") {
+          $("#com1_input").hide();
+          $("#com2_input").hide();
+          $("tr").remove("#com2_input_more");
+          $("#brand_input").show();
+        }
+      });
+    });
+    function add_more(){
+      $('<tr id="com2_input_more"><td></td><td colspan="2"><input class="input" name="brand_name[]" type="text" value=""></td></tr>').insertAfter('#com2_input');}
+    
+  
 = render :partial => "users/usersidebox"
 .mainbox
   .formbox
@@ -15,22 +54,59 @@
             %td
               = radio_button_tag :role, 0, @user.role==0
               普通用户
+            %td.grey
+              
           %tr
             %td
             %td
               = radio_button_tag :role, 1, @user.role==1
               时尚设计师
+            %td.grey
+              独立专栏显示您的发布内容
+
           %tr
             %td
             %td
-              = radio_button_tag :role, 2, @user.role==2
-              商家用户
+              = radio_button_tag :role, 2, @user.role==2, :id => "com1"
+              商家用户(专卖店)
+            %td.grey
+              可拥有一个品牌栏目
+          %tr.hide.input_tr#com1_input
+            %td
+              品牌名称
+            %td{:colspan => 2}
+              = text_field_tag "brand_name[]", "", :class => "input"
+
           %tr
             %td
             %td
               = radio_button_tag :role, 3, @user.role==3
+              商家用户(百货店)
+            %td.grey
+              可拥有多个品牌栏目
+          %tr.hide.input_tr#com2_input
+            %td
+              品牌名称
+            %td{:colspan => 2}
+              = text_field_tag "brand_name[]", "", :class => "input"
+              = link_to("增加", js_void, :onclick => "add_more();")
+
+          %tr
+            %td
+            %td
+              = radio_button_tag :role, 4, @user.role==4
               品牌用户
+            %td.grey
+              可拥有品牌专栏
+          %tr.hide.input_tr#brand_input
+            %td
+              品牌名称
+            %td{:colspan => 2}
+              = text_field_tag "brand_name[]", "", :class => "input"
+            
+          
         .btn
-          = submit_tag "确定", :class => "submit"
+          = submit_tag "申请", :class => "submit"
+            
         
 .clearfix

@@ -15,7 +15,7 @@
             .right.action
               - if loggin?
                 =link_to "#{current_user_name}", user_url(current_user_id)
-                =link_to "信息", ""
+                =link_to "信息", messages_url
                 =link_to "设置", setting_users_url
               - else
                 = link_to "注册", new_user_url

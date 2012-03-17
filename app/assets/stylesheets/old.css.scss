@@ -467,10 +467,10 @@ $rightarea-width: 250px;
       a.activity:hover {
         background-position: -200px -74px;
       }
-      a.goods {
+      a.items {
         background-position: -400px 0;
       }
-      a.goods:hover {
+      a.items:hover {
         background-position: -400px -74px;
       }
       a.brands {
@@ -803,7 +803,7 @@ $rightarea-width: 250px;
   }
 }
 
-.goods_list {
+.items_list {
   width: 800px;
   .item {
     width: 220px;
@@ -855,7 +855,7 @@ $rightarea-width: 250px;
   }
 }
 
-.goods_tags {
+.items_tags {
   width: 300px;
   ul {
     li {
@@ -874,7 +874,7 @@ $rightarea-width: 250px;
   }
 }
 
-.goods_view {
+.items_view {
   width: 790px;
   .display {
     margin-bottom: 10px;

@@ -39,10 +39,12 @@ class User < ActiveRecord::Base
   has_many :articles, :order => "articles.id desc"
   has_many :feeds,    :order => "feeds.id desc"
   has_many :likes
-  has_many :goods, :order => "goods.id desc"
-  has_many :activities, :order => "activities.id desc"
+  has_many :items, :order => "items.id desc"
   has_many :photos, :as => :klass
   has_many :comments, :order => "comments.id desc"
+  has_many :messages, :order => "messages.id desc"
+  has_many :brand_users
+  has_many :brands, :through => :brand_users
   
   has_attached_file :avatar,
     :styles      => { :original => SITE_SETTINGS["avatar_original"], :thumb => SITE_SETTINGS["avatar_thumb"], :small => SITE_SETTINGS["avatar_small"] },
@@ -57,8 +59,8 @@ class User < ActiveRecord::Base
   # recource_type base on user's promotion
   def rtype
     rtype = 1 if self.promotion > 0 && self.promotion < 20  # 0 < promotion < 20
-    rtype = 2 if self.promotion = 20                   # in white list
-    rtype = 0 if self.promotion = 0                    # in black list
+    rtype = 2 if self.promotion = 20                        # in white list
+    rtype = 0 if self.promotion = 0                         # in black list
     rtype
   end
   
@@ -73,7 +75,11 @@ class User < ActiveRecord::Base
   end
   
   def site_role
-    ["普通用户", "时尚设计师", "商家用户", "品牌用户"][self.role]
+    SITE_SETTINGS["site_role"][self.role]
+  end
+  
+  def site_upgrade_state
+    SITE_SETTINGS["site_upgrade_state"][self.upgrade_state]
   end
   
   private

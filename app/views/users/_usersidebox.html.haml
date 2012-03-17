@@ -5,7 +5,19 @@
     = @user.name
   .siterole
     = @user.site_role
-    = link_to "升级", upgrade_users_url if @user.role == 0
+    - if @user.role == 0
+      = link_to "升级", upgrade_users_url 
+    - if @user.upgrade_state == 1
+      审核中
+  - if [2,3,4].include?(@user.role)
+    .brands
+      .grey
+        品牌
+      %ul
+        - for brand in @user.brands.formal
+          %li= brand.name
+        .clearfix
+      
   .userinfo
     %ul
       %li
@@ -35,5 +47,11 @@
     .list
       %ul
         - for user in User.all
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
           %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
         .clearfix

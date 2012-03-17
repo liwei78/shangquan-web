@@ -1,12 +1,13 @@
 #encoding: utf-8
 
 # test account
-# puts "Create Some Test Account"
-# User.create([
-#   {:email => "aaa@123.com", :name => "AAA", :password => "1234"},
-#   {:email => "bbb@123.com", :name => "BBB", :password => "1234"},
-#   {:email => "ccc@123.com", :name => "CCC", :password => "1234"}]
-# )
+puts "Create Test Account"
+User.create([
+  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234"},
+  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234"},
+  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234"}]
+)
+
 # 
 # # fake account
 # puts "Create Some Fake Account"
@@ -45,9 +46,9 @@
 #   Brand.create(:title => Faker::Lorem.sentence(word_count = 1), :nation => 1, :letter => "A", :category_id => 1 )
 # end
 # 
-# puts "50 Goods"
+# puts "50 Items"
 # 50.times do
-#   Good.create(:title => Faker::Lorem.sentence(word_count = 1), :price => 200.80, :brand_id => 1, :likes_count => 200)
+#   Item.create(:title => Faker::Lorem.sentence(word_count = 1), :price => 200.80, :brand_id => 1, :likes_count => 200)
 # end
 
 Area.create([
@@ -71,4 +72,36 @@ Category.create([
   {:name => "折扣店", :position => "6"},
   {:name => "团购", :position => "7"}]
 )
+
+puts "aaa@123.com sysmsg for 50"
+50.times do
+  Message.create(:user_id => 1, :sysmsg => true, :title => "测试标题长度", :content => "文字文字"*20)
+end
+
+puts "aaa@123.com msg from other for 50"
+20.times do
+  Message.create(:user_id => 1, :send_by => 2,  :title => "好友私信测试标题长度", :content => "文字文字"*20)
+end
+20.times do
+  Message.create(:user_id => 1, :send_by => 3,  :title => "好友私信测试标题长度", :content => "文字文字"*20)
+end
+
+puts "10 brands"
+Brand.create([
+    {:name => "特步"},
+    {:name => "NBA"},
+    {:name => "CBA"},
+    {:name => "英超"},
+    {:name => "美特斯邦威"},
+    {:name => "锐步"},
+    {:name => "蒙牛"},
+    {:name => "马自达"}
+  ])
+brands = Brand.find([1,2,3,4,5,6,7,8])
+User.first.update_attribute(:role, 3)
+User.first.brands = brands
+
+
+
+
 

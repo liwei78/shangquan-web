@@ -109,50 +109,6 @@ class UsersController < ApplicationController
     render :layout => "layoutfullwidth"
   end
   
-  # def articles
-  #   @user = User.find(params[:id])
-  #   @articles = @user.articles.is_article.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_articles = "on"
-  # end
-  # 
-  # def photos
-  #   @user = User.find(params[:id])
-  #   @articles = @user.articles.is_photo.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_photos = "on"
-  # end
-  # 
-  # def videos
-  #   @user = User.find(params[:id])
-  #   @articles = @user.articles.is_video.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_videos = "on"
-  # end
-  # 
-  # def activities
-  #   @user = User.find(params[:id])
-  #   @activities = @user.articles.is_activity.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_activities = "on"
-  # end
-  # 
-  # def companies
-  #   @user = User.find(params[:id])
-  #   @activities = @user.articles.is_company.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_activities = "on"
-  # end
-  # 
-  # def brands
-  #   @user = User.find(params[:id])
-  #   @brands = @user.articles.is_brand.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_brands = "on"
-  # end
-  # 
-  # def goods
-  #   @user = User.find(params[:id])
-  #   @goods = @user.articles.is_good.paginate(:page => params[:page], :per_page => 5)
-  #   @nav_goods = "on"
-  # end
-  
-  
-  
   def setting
     @user = get_current_user
   end
@@ -161,114 +117,17 @@ class UsersController < ApplicationController
     @user = get_current_user
   end
   
+  def messages
+    @user = get_current_user
+  end
+  
   def upgrade
     @user = get_current_user
   end
   
-  
-  
-  # def write
-  #   @user = get_current_user
-  # end
-  # 
-  # def upload
-  #   @user = get_current_user
-  # end
-  # 
-  # def pubvideo
-  #   @user = get_current_user
-  # end
-  # 
-  # def pubgood
-  #   @user = get_current_user
-  # end
-  # 
-  # def pubactivity
-  #   @user = get_current_user
-  # end
-  # 
-  # def pubbrand
-  #   @user = get_current_user
-  # end
-  
-  # def publish
-  #   @user = get_current_user
-  # end
-  
   def share
     @user = get_current_user
   end
-  
-  
-  # def postcontent
-  #   article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'article', :tag_list => params[:tag_list])
-  #   article.poster = params[:poster]
-  #   article.user_id = current_user_id
-  #   article.resource_type = current_user_promotion
-  #   if article.save
-  #     User.update_counters current_user_id, :articles_count => 1
-  #     flash[:notice] = "发布成功"
-  #   else
-  #     flash[:error] = "发布失败"
-  #   end
-  #   redirect_to articles_user_url(current_user_id)
-  # end
-  # 
-  # def uploadphoto
-  #   article = Article.new(:title => params[:title], :content => params[:content], :article_type => 'photo')
-  #   article.user_id = current_user_id
-  #   article.resource_type = current_user_promotion
-  #   article.save
-  #   files = params[:photos].present? ? params[:photos][:file] : []
-  #   files.each do |file|
-  #     Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
-  #   end
-  #   redirect_to photos_user_url(current_user_id)
-  # end
-  # 
-  # def postvideo
-  #   article = Article.new(:title => params[:title], :content => params[:content], :code => params[:code], :article_type => 'video')
-  #   article.user_id = current_user_id
-  #   article.resource_type = current_user_promotion
-  #   article.save
-  #   redirect_to videos_user_url(current_user_id)
-  # end
-  # 
-  # def postgood
-  #   good = Good.new(:title => params[:title], :price => params[:price], :content => params[:content], :poster => params[:poster])
-  #   good.user_id = current_user_id
-  #   good.resource_type = current_user_promotion
-  #   good.save
-  #   files = params[:photos].present? ? params[:photos][:file] : []
-  #   files.each do |file|
-  #     Photo.create(:file => file, :klass_type => "Good", :klass_id => good.id) if file.present?
-  #   end
-  #   redirect_to goods_user_url(current_user_id)
-  # end
-  # 
-  # def postactivity
-  #   activity = Activity.new(
-  #     :title => params[:title], 
-  #     :content => params[:content], 
-  #     :poster => params[:poster], 
-  #     :tag_list => params[:tag_list], 
-  #     :activity_category => params[:activity_category], 
-  #     :activity_area => params[:activity_area],
-  #     :schedule => params[:schedule], 
-  #     :address => params[:address])
-  #   activity.user_id = current_user_id
-  #   activity.resource_type = current_user_promotion
-  #   activity.save
-  #   redirect_to activities_user_url(current_user_id)
-  # end
-  # 
-  # def postbrand
-  #   brand = Article.new(:title => params[:title], :content => params[:content], :poster => params[:poster], :article_type => 'brand', :tag_list => params[:tag_list])
-  #   brand.user_id = current_user_id
-  #   brand.resource_type = current_user_promotion
-  #   brand.save
-  #   redirect_to brands_user_url(current_user_id)
-  # end
 
   def updatesetting
     user = User.find(current_user_id)
@@ -298,16 +157,24 @@ class UsersController < ApplicationController
   end
   
   def upgraderole
-    user = User.find(current_user_id)
+    user = get_current_user
     user.role = params[:role]
+    user.upgrade_state = 1
     if user.save
-      flash[:notice] = '保存成功！'
+      Message.sys_send_to(user, SITE_SETTINGS["upgrade_role_title"], "您已经申请成为 #{SITE_SETTINGS["site_role"][user.role]}，请等待审核通知。")
+      if [2,3,4].include?(params[:role].to_i)
+        brands = []
+        for name in params[:brand_name]
+          brands << Brand.create(:name => name, :tmp => true) unless name.blank?
+        end
+        user.brands = brands
+      end
+      flash[:notice] = '申请结果请等待系统通知。'
     else
-      flash[:error] = '保存失败！'
+      flash[:error] = '申请失败。'
     end
-    redirect_to :back
+    redirect_to upgrade_users_url
   end
-  
   
   def postpublish
     article = Article.new(
@@ -346,10 +213,10 @@ class UsersController < ApplicationController
         article.is_brand = true
       end
       
-      # good
+      # item
       if params[:relate_5] == "5"
         article.price = params[:price]
-        article.is_good = true
+        article.is_item = true
       end
 
       # groupbuy
@@ -385,6 +252,7 @@ class UsersController < ApplicationController
       :poster   => params[:poster],
       :user_id  => current_user_id,
       :state    => current_user_rtype)
+      
     if params[:code].present?
       article.code = params[:code]
       article.is_video = true

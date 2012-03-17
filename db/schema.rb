@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311081643) do
+ActiveRecord::Schema.define(:version => 20120317163804) do
 
   create_table "activity_reports", :force => true do |t|
     t.string   "title"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20120311081643) do
     t.boolean  "is_activity",                                       :default => false
     t.boolean  "is_company",                                        :default => false
     t.boolean  "is_brand",                                          :default => false
-    t.boolean  "is_good",                                           :default => false
+    t.boolean  "is_item",                                           :default => false
     t.boolean  "is_groupbuy",                                       :default => false
     t.string   "schedule"
     t.string   "place"
@@ -76,6 +76,24 @@ ActiveRecord::Schema.define(:version => 20120311081643) do
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "brand_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "brand_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "brands", :force => true do |t|
+    t.string   "name"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.boolean  "tmp",               :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -138,11 +156,15 @@ ActiveRecord::Schema.define(:version => 20120311081643) do
     t.integer  "user_id"
     t.string   "unique_id"
     t.string   "title"
-    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.string   "brand_name"
     t.integer  "brand_id"
     t.text     "content"
-    t.integer  "state",                                    :default => 1
+    t.integer  "state",                                             :default => 1
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,6 +173,18 @@ ActiveRecord::Schema.define(:version => 20120311081643) do
     t.integer  "user_id"
     t.integer  "article_id"
     t.integer  "like_type",  :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "send_by"
+    t.boolean  "sysmsg",     :default => false
+    t.boolean  "top",        :default => false
+    t.boolean  "read",       :default => false
+    t.string   "title"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -201,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20120311081643) do
     t.integer  "promotion",           :default => 10
     t.boolean  "deleted",             :default => false
     t.integer  "role",                :default => 0
+    t.integer  "upgrade_state",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

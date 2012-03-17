@@ -1,0 +1,28 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      消息
+    .nav
+      %ul
+        %li= link_to "系统通知", messages_url
+        %li= link_to "私信", my_messages_url, :class => "on"
+        .clearfix
+    .tablestyle
+      %h3
+        共有#{@user.messages.count}个系统通知
+      %ul
+        - for msg in @messages
+          %li
+            .right
+              = check_box_tag "msg_#{msg.id}", msg.id
+            = link_to msg.title.html_safe, msg
+      
+      .action
+        = link_to "全选", js_void
+        |
+        = link_to "删除", js_void
+
+      = will_paginate @messages, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

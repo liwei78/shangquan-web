@@ -3,22 +3,21 @@ settings: &common
   admin_key:       'china'
   admin_account:   'admin'
   admin_password:  'admin'
-  company_type:    ['其他', '百货商场', '专卖店', '美食', '电子商务']
-  activity_type:   ['其他', '商场活动', '品牌活动', '美食活动', '电商活动']
+  site_role:            ["普通用户", "时尚设计师", "商家(专卖店)", "商家用户(百货店)", "品牌用户"]
+  site_upgrade_state:   ["无认证", "认证中", "认证成功"]
   
   crop_original:   "640>"
   crop_small:      "190x190#"
   crop_small_covert: "-gravity north -thumbnail 190x190^ -extent 190x190"
   
-  good_original:   "320>"
-  good_thumb:      "180x270#"
-  good_small:      "80x80#"
-  good_thumb_covert: "-gravity north -thumbnail 180x270^ -extent 180x270"
-  
   avatar_original: "190x190#"
   avatar_thumb:    "80x80#"
   avatar_small:    "30x30#"
   avatar_thumb_covert: "-gravity north -thumbnail 80x80^ -extent 80x80"
+  
+  upgrade_role_title: "您的申请已经收到"
+  upgrade_role_content: "您已经申请成为"
+  
   
 development:
   paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"

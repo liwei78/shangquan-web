@@ -1,0 +1,20 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      消息
+    .nav
+      %ul
+        %li= link_to "系统通知", messages_url, :class => @message.sysmsg? ? "on" : ""
+        %li= link_to "私信", my_messages_url, :class => !@message.sysmsg? ? "on" : ""
+        .clearfix
+    .tablestyle
+      .msg_title
+        = @message.title.html_safe
+      .msg_content
+        = @message.content.html_safe
+      
+      .action
+        = link_to "删除", @message, :method => :delete, :confirm => "点击确定继续"
+        
+.clearfix

@@ -21,8 +21,8 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get good" do
-    get :good
+  test "should get item" do
+    get :item
     assert_response :success
   end
 

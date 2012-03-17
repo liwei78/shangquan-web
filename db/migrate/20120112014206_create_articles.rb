@@ -38,7 +38,7 @@ class CreateArticles < ActiveRecord::Migration
       t.boolean  :is_activity, :default => false
       t.boolean  :is_company,  :default => false
       t.boolean  :is_brand,    :default => false
-      t.boolean  :is_good,     :default => false
+      t.boolean  :is_item,     :default => false
       t.boolean  :is_groupbuy, :default => false
       
       # 经营信息

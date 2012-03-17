@@ -55,8 +55,8 @@ class MainController < ApplicationController
   #   @page_title = "品牌"
   # end
   # 
-  # def good
-  #   @goods = Good.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+  # def item
+  #   @items = Item.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
   #   @page_title = "商品"
   # end
 

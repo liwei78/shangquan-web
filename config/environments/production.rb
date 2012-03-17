@@ -44,7 +44,7 @@ Shangquan::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # add admin assets here
-  config.assets.precompile += %w( flowplayer.js )
+  config.assets.precompile += %w( flowplayer.js login.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

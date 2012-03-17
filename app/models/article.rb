@@ -12,7 +12,7 @@ class Article < ActiveRecord::Base
   scope :is_brand,   :conditions => ["articles.is_brand = ?", true]
   scope :is_activity,:conditions => ["articles.is_activity = ?", true]
   scope :is_company, :conditions => ["articles.is_company = ?", true]
-  scope :is_good,    :conditions => ["articles.is_good = ?", true]
+  scope :is_item,    :conditions => ["articles.is_item = ?", true]
   
   scope :block,    :conditions => ["articles.state = ?", 0]
   scope :auditing, :conditions => ["articles.state = ?", 1]
