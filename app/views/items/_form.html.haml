@@ -1,0 +1,54 @@
+= form_for(item) do |f|
+  %table{:width => "100%", :cellpadding => 4}
+    %tbody
+      %tr
+        %td{:width => 100}
+          名称
+        %td
+          = f.text_field :title, :class => ""
+      %tr
+        %td
+          货号
+        %td
+          = f.text_field :unique_id, :class => ""
+      %tr
+        %td
+          价格
+        %td
+          = f.text_field :price, :class => "input small"
+          元
+      %tr
+        %td
+          品牌
+        %td
+          = radio_button_tag :brand, "my", true, :onclick => "$('#my_brand').show();$('#sys_brand').hide();", :id => "my_brands"
+          = label_tag(:my_brands, "我的品牌库")
+          = radio_button_tag :brand, "sys", false, :onclick => "$('#my_brand').hide();$('#sys_brand').show();", :id => "all_brands"
+          = label_tag(:all_brands, "系统品牌库")
+      %tr#my_brand
+        %td
+        %td
+          = select_tag :my_brand_id, options_for_select(@user.brands.formal.map{|b| [b.name, b.id]}, :include_blank => true)
+      %tr#sys_brand.hide
+        %td
+          
+        %td
+          = select_tag :sys_brand_id, options_for_select(Brand.formal.all.map{|b| [b.name, b.id]})
+
+      %tr
+        %td
+          海报
+        %td
+          - unless item.new_record?
+            = image_tag(item.poster.url(:thumb))
+            %br
+          = f.file_field :poster
+
+.btn
+  .right
+    = link_to "返回", items_url
+  = submit_tag("确定")
+  
+            
+          
+            

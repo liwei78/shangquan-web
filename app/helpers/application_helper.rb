@@ -23,6 +23,10 @@ module ApplicationHelper
     session[:user_id]||cookies[:user_id]
   end
   
+  def current_user?(user)
+    current_user_id == user.id
+  end
+  
   # used for front site nav
   def nav_class(nav)
     'on' if action_name == nav or controller_name == nav.pluralize
@@ -33,7 +37,7 @@ module ApplicationHelper
   end
   
   def nbsp(n=1)
-    raw("nbsp;"*n)
+    raw("&nbsp;"*n)
   end
   
   def flashplayer(code)

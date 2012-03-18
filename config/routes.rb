@@ -1,9 +1,5 @@
 Shangquan::Application.routes.draw do
 
-  get "brands/index"
-
-  get "brands/show"
-
   mount Ckeditor::Engine => '/ckeditor'
   
   # resources :companies, :only => [:show] do
@@ -30,6 +26,11 @@ Shangquan::Application.routes.draw do
   # end
   
   resources :brands
+  resources :items do
+    collection do
+      get 'my', 'store'
+    end
+  end
   
   resources :articles, :only => [:show] do
     member do

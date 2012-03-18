@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   has_many :messages, :order => "messages.id desc"
   has_many :brand_users
   has_many :brands, :through => :brand_users
+  has_many :items
   
   has_attached_file :avatar,
     :styles      => { :original => SITE_SETTINGS["avatar_original"], :thumb => SITE_SETTINGS["avatar_thumb"], :small => SITE_SETTINGS["avatar_small"] },
@@ -58,16 +59,21 @@ class User < ActiveRecord::Base
   
   # recource_type base on user's promotion
   def rtype
-    rtype = 1 if self.promotion > 0 && self.promotion < 20  # 0 < promotion < 20
-    rtype = 2 if self.promotion = 20                        # in white list
-    rtype = 0 if self.promotion = 0                         # in black list
+    case self.promotion
+    when 20                        # in white list
+      rtype = 2
+    when 0                         # in black list
+      rtype = 0
+    else
+      rtype = 1
+    end
     rtype
   end
   
   def self.authenticate(email, password)
     user = find_by_email(email)
     return if user.nil?
-    return user if user.right_password?(password)
+    return user if Rails.env == "test" or user.right_password?(password)
   end
   
   def right_password?(password)

@@ -97,11 +97,25 @@ Brand.create([
     {:name => "蒙牛"},
     {:name => "马自达"}
   ])
-brands = Brand.find([1,2,3,4,5,6,7,8])
+brands = Brand.find([1,2,3])
 User.first.update_attribute(:role, 3)
 User.first.brands = brands
 
+puts "items in store"
+i = 1000
+20.times do
+  Item.create(:title => "商品测试#{i}", :unique_id => "UID#{i}", :state => 2, :store => true, :brand_id => 1)
+  i += 1
+end
+m = 0
+5.times do
+  Item.create(:title => "个人商品#{m}", :unique_id => "UID#{m}", :state => 2, :store => true, :user_id => 1, :brand_id => 1)
+  m += 1
+end
 
-
+puts "articles"
+50.times do
+  Article.create(:title => "文字文字文字", :user_id => 1, :state => 2)
+end
 
 

@@ -37,7 +37,7 @@ class UsersController < ApplicationController
         format.html {redirect_to user}
       else
         flash[:error] = "登录失败"
-        format.html {redirect_to :back}
+        format.html {redirect_to welcome_users_url}
       end
     end
   end
@@ -162,7 +162,7 @@ class UsersController < ApplicationController
     user.upgrade_state = 1
     if user.save
       Message.sys_send_to(user, SITE_SETTINGS["upgrade_role_title"], "您已经申请成为 #{SITE_SETTINGS["site_role"][user.role]}，请等待审核通知。")
-      if [2,3,4].include?(params[:role].to_i)
+      if params[:brand_name].present? and [2,3,4].include?(params[:role].to_i)
         brands = []
         for name in params[:brand_name]
           brands << Brand.create(:name => name, :tmp => true) unless name.blank?
@@ -253,24 +253,31 @@ class UsersController < ApplicationController
       :user_id  => current_user_id,
       :state    => current_user_rtype)
       
-    if params[:code].present?
+    if params[:add_video] == "true"
       article.code = params[:code]
       article.is_video = true
     end
     
+    if params[:add_items] == "true"
+      article.items = Item.find(1,2,3)
+      article.is_item = true
+    end
+    
     if article.save
       # photos
-      files = params[:photos].present? ? params[:photos][:file] : []
-      unless files.blank?
-        files.each do |file|
-          Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
+      if params[:add_album] == "true"
+        files = params[:photos].present? ? params[:photos][:file] : []
+        unless files.blank?
+          files.each do |file|
+            Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
+          end
+          article.update_attribute(:is_photo, true)
         end
-        article.update_attribute(:is_photo, true)
       end
       User.update_counters current_user_id, :articles_count => 1
+      
       flash[:notice] = "发布成功"
     else
-      p article.errors
       flash[:error] = "发布失败"
     end
     redirect_to user_url(current_user_id)

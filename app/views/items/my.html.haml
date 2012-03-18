@@ -1,0 +1,22 @@
+%ul.items_list
+  - for item in @items
+    %li
+      .poster
+        = image_tag(item.poster.url(:small), :width => 60, :height => 60)
+      .info
+        .title
+          = check_box_tag "items[]", item.id
+          = item.title
+        .brand
+          - if item.brand_id.present?
+            %span 品牌
+            = item.brand.name
+      .clearfix
+.clearfix
+
+.action
+  .right
+    = link_to "返回", items_url
+  = link_to("确定关联", js_void, :onclick => '$("#test").html("hah");')
+  
+  

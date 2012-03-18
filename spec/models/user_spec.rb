@@ -8,5 +8,6 @@ describe User do
       :password => "1234",
       :password_confirmation => "1234")
     User.last.should eq(user)
+    User.count.should eq(1)
   end
 end

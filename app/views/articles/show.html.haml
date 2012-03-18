@@ -22,6 +22,22 @@
           = image_tag(@article.poster.url)
       .content
         = @article.content.html_safe
+      .sharebox
+        分享到：
+        = link_to "", js_void, :class => "sina"
+        = link_to "", js_void, :class => "tx"
+        = link_to "", js_void, :class => "rr"
+        = link_to "", js_void, :class => "qz"
+      - if @article.items.present?
+        .items
+          .item_title
+            关联商品
+          %ul
+            - for item in @article.items
+              %li= image_tag(item.poster.url(:small), :width => 60, :height => 60)
+            .clearfix
+          .clearfix
+        
     .content
     .comments
 .clearfix

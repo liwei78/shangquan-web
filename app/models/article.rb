@@ -4,6 +4,8 @@ class Article < ActiveRecord::Base
   has_many :feeds, :as => :klass
   has_many :photos, :as => :klass
   has_many :comments, :as => :klass
+  has_many :article_items
+  has_many :items, :through => :article_items
   acts_as_taggable
   
   scope :is_article, :conditions => ["articles.is_article = ?", true]

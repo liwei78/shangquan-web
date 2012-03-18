@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317163804) do
+ActiveRecord::Schema.define(:version => 20120318144339) do
 
   create_table "activity_reports", :force => true do |t|
     t.string   "title"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20120317163804) do
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "article_items", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -157,10 +164,10 @@ ActiveRecord::Schema.define(:version => 20120317163804) do
     t.string   "unique_id"
     t.string   "title"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
-    t.string   "brand_name"
     t.integer  "brand_id"
     t.text     "content"
     t.integer  "state",                                             :default => 1
+    t.boolean  "store",                                             :default => false
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"

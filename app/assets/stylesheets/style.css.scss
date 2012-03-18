@@ -342,7 +342,7 @@ $layout-width: 954px;
     }
     .shareitem {
       float: left;
-      margin: 0 14px 14px 0;
+      margin: 0 10px 12px 0;
       display: inline;
       background: white;
       width: 222px;
@@ -366,7 +366,9 @@ $layout-width: 954px;
     }
   }
 }
-
+.nopadding {
+  padding: 0 !important;
+}
 .shareview {
   float: left;
   width: 722px;
@@ -467,9 +469,63 @@ $layout-width: 954px;
       .content {
         font-size: 14px;
         line-height: 20px;
+        width: 654px;
         margin: 0 auto;
         padding: 16px 0 0;
+      }
+      .sharebox {
         width: 654px;
+        margin: 0 auto;
+        text-align: right;
+        color: grey;
+        a {
+          background: image-url("platformico.gif") no-repeat -72px -48px;
+          display: inline-block;
+          vertical-align: middle;
+          height: 18px;
+          margin-right: 6px;
+          width: 16px;
+        }
+        a.sina {
+          width: 20px;
+        }
+        a.sina:hover {
+          background-position: -72px 0;
+        }
+        a.tx {
+          background-position: 0 -48px;
+        }
+        a.tx:hover {
+          background-position: 0 0;
+        }
+        a.rr {
+          background-position: -24px -48px;
+        }
+        a.rr:hover {
+          background-position: -24px 0;
+        }
+        a.qz {
+          background-position: -48px -48px;
+        }
+        a.qz:hover {
+          background-position: -48px 0;
+        }
+      }
+      .items {
+        width: 654px;
+        margin: 0 auto;
+        .item_title {
+          line-height: 40px;
+        }
+        ul {
+          li {
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin-right: 8px;
+            margin-bottom: 8px;
+          }
+        }
       }
     }
   }
@@ -559,9 +615,12 @@ $layout-width: 954px;
         background: image-url('input_bg.gif') repeat-x top;
         font-size: 16px;
       }
+      .wide {
+        width: 500px !important;
+      }
       td {
-        padding-bottom: 16px;
-        vertical-align: top;
+        padding: 16px 0;
+        vertical-align: middle;
       }
       .select {
         width: 239px;
@@ -576,6 +635,9 @@ $layout-width: 954px;
         margin: 0;
         overflow: hidden;
         padding: 0;
+      }
+      .bg {
+        background-color: #efefef;
       }
     }
     .btn {
