@@ -20,7 +20,7 @@
       - if @article.poster.file?
         .poster
           = image_tag(@article.poster.url)
-      - @article.content.present?
+      - if @article.content.present?
         .content
           = @article.content.html_safe
       .sharebox
