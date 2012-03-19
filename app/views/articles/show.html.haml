@@ -20,8 +20,9 @@
       - if @article.poster.file?
         .poster
           = image_tag(@article.poster.url)
-      .content
-        = @article.content.html_safe
+      - @article.content.present?
+        .content
+          = @article.content.html_safe
       .sharebox
         分享到：
         = link_to "", js_void, :class => "sina"

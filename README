@@ -1,0 +1,19 @@
+install:
+  bundle install --local
+  cp Gemfile.version Gemfile
+  cp config/database.yml.version config/database.yml
+
+enviroment:
+  ruby-1.9.2-p290
+  rails-3.1.0
+
+push:
+  git push shangquan-web master
+  
+update:
+  git checkout -f
+  git pull
+  
+url:
+  http://211.103.203.236/
+  http://211.103.203.236:4000/
