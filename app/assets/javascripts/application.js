@@ -10,4 +10,5 @@
 //= require hoverIntent
 //= require superfish
 //= require jquery.masonry.min
+//= require jquery.imagesloaded.min
 //= require site

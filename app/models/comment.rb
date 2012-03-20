@@ -6,4 +6,7 @@ class Comment < ActiveRecord::Base
   scope :promote, :conditions => ["comments.resource_type = ?", 0]
   scope :block,   :conditions => ["comments.resource_type = ?", 1]
   scope :deleted, :conditions => ["comments.resource_type = ?", 2]
+  
+  scope :top, :limit => 5, :order => "comments.id asc"
+  
 end

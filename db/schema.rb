@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(:version => 20120318144339) do
     t.integer  "klass_id"
     t.integer  "klass_type"
     t.text     "content"
-    t.integer  "resource_type", :default => 1
+    t.integer  "state",      :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,5 @@
 #encoding: utf-8
-
+require 'open-uri'
 # test account
 puts "Create Test Account"
 User.create([
@@ -115,7 +115,13 @@ end
 
 puts "articles"
 50.times do
-  Article.create(:title => "文字文字文字", :user_id => 1, :state => 2)
+  a = Article.create(:title => "aaa", :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(6)}.jpg")))
+  i = rand(5)
+  comments = []
+  i.times do
+    comments << Comment.create(:user_id => 2, :state => 2, :content => "文字"*20 )
+  end
+  a.comments << comments
 end
 
 
