@@ -23,8 +23,8 @@ module ApplicationHelper
     session[:user_id]||cookies[:user_id]
   end
   
-  def current_user?(user)
-    current_user_id == user.id
+  def is_me?(user)
+    current_user_id.to_i == user.id
   end
   
   # used for front site nav

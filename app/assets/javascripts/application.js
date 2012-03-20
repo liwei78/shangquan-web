@@ -7,4 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require ckeditor/ckeditor
+//= require hoverIntent
+//= require superfish
+//= require jquery.masonry.min
 //= require site

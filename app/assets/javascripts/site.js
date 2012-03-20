@@ -1,3 +1,14 @@
+$(document).ready(function() { 
+    $('ul.sf-menu').superfish(); 
+
+    var $container = $('#sharelist');
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.shareitem'
+      });
+    });
+});
+
 $(window).scroll(function(){
   if($('#pagewrap').length==1) {
     if($(this).scrollTop()>61){

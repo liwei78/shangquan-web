@@ -1,12 +1,14 @@
 .sharelist.nopadding
   .list#sharelist
+    - i = 1
     - for article in @articles
       .shareitem
         .box
           .title
             = link_to article.title, article
-          .content
-            = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article
+          - i.times do
+            .content
+              = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article
           .action
             = link_to raw("喜欢(<span id='likes_count_#{article.id}'>#{article.likes_count}</span>)"), like_article_url(article), :remote => true, :method => :post
             
@@ -15,5 +17,9 @@
             = link_to "分享", share_article_url(article), :remote => true, :method => :post
             
             = link_to "收藏", collect_article_url(article), :remote => true, :method => :post
+      - if i==5
+        - i = 1
+      - else
+        - i += 1
     .clearfix
 .clearfix

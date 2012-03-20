@@ -1,5 +1,6 @@
 # encoding: utf-8
 class MainController < ApplicationController
+  layout "layoutfullwidth"
   def index
     # if params[:tag].present?
     #   @articles = Article.white.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
@@ -8,7 +9,7 @@ class MainController < ApplicationController
     #   @articles = Article.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
     #   @page_title = "时尚"
     # end
-    @articles = Article.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")||[]
+    @articles = Article.white.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
     @page_title = "时尚"
   end
 
