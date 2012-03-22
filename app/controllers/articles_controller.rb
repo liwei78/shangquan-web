@@ -4,6 +4,8 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @user = @article.user
+    @current_user = get_current_user
+    @comments = @article.comments.paginate(:page => params[:page], :per_page => 20, :order => "id desc")
   end
 
   # def view

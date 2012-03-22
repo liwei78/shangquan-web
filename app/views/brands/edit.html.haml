@@ -5,10 +5,10 @@
       品牌
     .nav
       %ul
-        %li= link_to "列表", items_url
+        %li= link_to "列表", brands_url
         %li= link_to "编辑", js_void, :class => "on"
         .clearfix
     .formstyle
-      = render :partial => "form", :locals => {:item => @item}
+      = render :partial => "form", :locals => {:brand => @brand}
         
 .clearfix

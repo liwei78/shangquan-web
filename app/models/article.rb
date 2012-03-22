@@ -1,10 +1,10 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
   belongs_to :user
-  after_create :create_user_feed
+  # after_create :create_user_feed
   has_many :feeds, :as => :klass
   has_many :photos, :as => :klass
-  has_many :comments, :as => :klass
+  has_many :comments, :as => :klass, :include => :user
   has_many :article_items
   has_many :items, :through => :article_items
   acts_as_taggable

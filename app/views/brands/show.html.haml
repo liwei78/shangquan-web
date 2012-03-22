@@ -1,2 +1,23 @@
-<h1>Brands#show</h1>
-<p>Find me in app/views/brands/show.html.erb</p>
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      品牌
+    .nav
+      %ul
+        %li= link_to "列表", brands_url
+        %li= link_to "查看", @brand, :class => "on"
+        .clearfix
+    .tablestyle
+      %table{:width => "100%", :cellpadding => "4"}
+        %tr
+          %td{:width => "190"}
+            = image_tag(@brand.logo.url(:small))
+          %td
+            .right
+              = link_to "编辑", edit_brand_url(@brand)
+              = link_to "删除", @brand, :method => :delete, :confirm => "点击确定继续"
+            = @brand.name
+        
+        
+.clearfix

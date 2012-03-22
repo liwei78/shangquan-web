@@ -1,0 +1,21 @@
+= form_for(brand) do |f|
+  %table{:width => "100%", :cellpadding => "4"}
+    - unless @brand.new_record?
+      %tr
+        %td
+          
+        %td
+          = image_tag(@brand.logo.url)
+    %tr
+      %td
+        LOGO
+      %td
+        = f.file_field :logo
+    %tr
+      %td
+        名称
+      %td
+        = f.text_field :name, :class => "input"
+
+  .btn
+    = submit_tag "确定", :class => "submit"

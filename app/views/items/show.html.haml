@@ -1,0 +1,44 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      商品
+    .nav
+      %ul
+        %li= link_to "列表", items_url
+        %li= link_to "查看", @item, :class => "on"
+        .clearfix
+    .formstyle
+      %table{:width => "100%", :cellpadding => "4"}
+        %tr
+          %td{:width => "70"}
+            
+          %td
+            = image_tag(@item.poster.url(:small))
+        %tr
+          %td
+            名称
+          %td
+            .right
+              = link_to "编辑", edit_item_url(@item)
+              = link_to "删除", @item, :method => :delete, :confirm => "点击确定继续"
+            = @item.title
+        %tr
+          %td
+            货号
+          %td
+            = @item.unique_id
+        %tr
+          %td
+            价格
+          %td
+            = @item.price
+            元
+        %tr
+          %td
+            品牌
+          %td
+            = image_tag(@item.brand.logo.url())
+        
+        
+.clearfix

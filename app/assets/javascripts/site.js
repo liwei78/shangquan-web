@@ -14,10 +14,10 @@ $(document).ready(function() {
     $(this).removeClass('hover');
   });
   
-  var shareListItem = '216px';
-  var shareListWidth = shareListItem * 5;
-  $('.sharelist .shareitem').each( function(){ sum += $(this).width(); });
-  $('#holder > div').width( sum );
+  // var shareListItem = '216px';
+  // var shareListWidth = shareListItem * 5;
+  // $('.sharelist .shareitem').each( function(){ sum += $(this).width(); });
+  // $('#holder > div').width( sum );
 });
 
 $(window).scroll(function(){

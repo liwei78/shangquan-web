@@ -1,2 +1,21 @@
-<h1>Brands#index</h1>
-<p>Find me in app/views/brands/index.html.erb</p>
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      品牌
+    .nav
+      %ul
+        %li= link_to "列表", brands_url, :class => "on"
+        .clearfix
+    .tablestyle
+      .add
+        = link_to "添加", new_brand_url, :class => "btnstyle"
+      %table{:width => "100%", :cellpadding => "4"}
+        - for brand in @brands
+          %tr
+            %td{:width => "120"}
+              = link_to image_tag(brand.logo.url(:small), :width => 110), brand
+            %td
+              = link_to brand.name, brand
+        
+.clearfix

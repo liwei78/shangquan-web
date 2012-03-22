@@ -1,1 +1,1 @@
-alert("分享成功");
+$('#shares_count_<%= @article.id %>').html('<%= @article.shares_count %>');

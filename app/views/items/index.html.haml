@@ -1,4 +1,22 @@
-.links
-  = link_to "添加一个商品", new_item_url
-  = link_to "我的商品库", my_items_url
-  = link_to "网站产品库", store_items_url
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      商品
+    .nav
+      %ul
+        %li= link_to "列表", items_url, :class => "on"
+        .clearfix
+    .tablestyle
+      .add
+        = link_to "添加", new_item_url, :class => "btnstyle"
+      %table{:width => "100%", :cellpadding => "4"}
+        - for item in @items
+          %tr
+            %td{:width => "70"}
+              = link_to image_tag(item.poster.url(:small), :width => 60), item
+            %td
+              = link_to item.title, item
+      = will_paginate @brands, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

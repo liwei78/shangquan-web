@@ -1,0 +1,29 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      我的品牌
+    .nav
+      %ul
+        %li= link_to "我的品牌", brands_users_url, :class => "on"
+        %li= link_to "我的商品", items_users_url
+        %li= link_to "我的活动", activities_users_url
+        .clearfix
+    .tablestyle
+      %h3
+        共有#{@user.messages.count}个系统通知
+      %ul
+        - for msg in @messages
+          %li
+            .right
+              = check_box_tag "msg", msg.id
+            = link_to raw(msg.read? ? "#{msg.title.html_safe}" : "<strong>#{msg.title.html_safe}</strong>"), msg
+      
+      .action
+        = link_to "全选", js_void
+        |
+        = link_to "删除", js_void
+
+      = will_paginate @messages, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

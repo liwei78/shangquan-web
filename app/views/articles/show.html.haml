@@ -20,25 +20,67 @@
       - if @article.poster.file?
         .poster
           = image_tag(@article.poster.url)
+      - if @article.photos.present?
+        .photos
+          %ul
+            - for photo in @article.photos
+              %li=link_to image_tag(photo.file.url(:small), :width => 160, :height => 160), photo.file.url
+            .clearfix
+          .clearfix
+      - if @article.video_code.present?
+        .video
+          =@article.video_code.html_safe
       - if @article.content.present?
         .content
           = @article.content.html_safe
+      - if @article.items.present?
+        .items
+          %table{:width => "100%", :cellpadding => "4"}
+            - for item in @article.items
+              %tr
+                %td{:width => 70}= link_to image_tag(item.poster.url(:small)), item.poster.url
+                %td= item.title
+                %td
+                  = item.price
+                  元
       .sharebox
         分享到：
         = link_to "", js_void, :class => "sina"
         = link_to "", js_void, :class => "tx"
         = link_to "", js_void, :class => "rr"
         = link_to "", js_void, :class => "qz"
-      - if @article.items.present?
-        .items
-          .item_title
-            关联商品
-          %ul
-            - for item in @article.items
-              %li= image_tag(item.poster.url(:small), :width => 60, :height => 60)
-            .clearfix
+      - if @article.tags.present?
+        .tags
+          标签：
+          - for tag in @article.tags
+            = link_to tag.name, "#"
+      .comments
+        %h2
+          评论
+        .newcomment
+          .avatar
+            = image_tag(@current_user.avatar.url(:small))
+          .newinput
+            = form_tag(write_article_url(@article)) do
+              = text_area_tag :content, "", :class => "input"
+              %br
+              = submit_tag("确定", :class => "btnstyle")
           .clearfix
-        
-    .content
-    .comments
+        .commentslist
+          - for comment in @comments
+            .comment
+              .avatar
+                = link_to(image_tag(comment.user.avatar.url(:small)), comment.user)
+              .info
+                .name
+                  .right
+                    = link_to "回复", js_void
+                  = link_to(comment.user.name, comment.user)
+                .comment_content= comment.content.html_safe
+                .time= comment.created_from_now
+              .clearfix
+          = will_paginate @comments, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
 .clearfix
+
+
+

@@ -3,53 +3,10 @@ require 'open-uri'
 # test account
 puts "Create Test Account"
 User.create([
-  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234"},
-  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234"},
-  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234"}]
+  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar1.jpg"))},
+  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar2.jpg"))},
+  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar3.jpg"))}]
 )
-
-# 
-# # fake account
-# puts "Create Some Fake Account"
-# 20.times do
-#   user = User.new
-#   user.name       = Faker::Name.name
-#   user.email      = Faker::Internet.email
-#   user.password   = "1234"
-#   user.created_at = Time.now
-#   user.updated_at = Time.now
-#   user.save
-# end
-# 
-# # Some Article for users/1
-# puts "50 Articles for users/1"
-# 50.times do
-#   Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => Faker::Lorem.paragraphs(paragraph_count = 3), :user_id => 1, :article_type =>'article')
-# end
-# puts "200 Articles for All Users rand"
-# 200.times do
-#   Article.create(:title => Faker::Lorem.sentence(word_count = 4), :content => '<p>'+Faker::Lorem.paragraphs(paragraph_count = 3).join('</p><p>')+'</p>', :user_id => rand(22), :article_type =>'article')
-# end
-# 
-# puts "50 Companies"
-# 50.times do
-#   Company.create(:title => Faker::Lorem.sentence(word_count = 4))
-# end
-# 
-# puts "50 Activities"
-# 50.times do
-#   Activity.create(:title => Faker::Lorem.sentence(word_count = 4), :schedule => "2012年1月1日-2012年1月15日", :address => "巴黎春天中山公园店")
-# end
-# 
-# puts "50 Brands"
-# 50.times do
-#   Brand.create(:title => Faker::Lorem.sentence(word_count = 1), :nation => 1, :letter => "A", :category_id => 1 )
-# end
-# 
-# puts "50 Items"
-# 50.times do
-#   Item.create(:title => Faker::Lorem.sentence(word_count = 1), :price => 200.80, :brand_id => 1, :likes_count => 200)
-# end
 
 Area.create([
   {:name => "西单", :position => "1"}, 
@@ -73,6 +30,7 @@ Category.create([
   {:name => "团购", :position => "7"}]
 )
 
+
 puts "aaa@123.com sysmsg for 50"
 50.times do
   Message.create(:user_id => 1, :sysmsg => true, :title => "测试标题长度", :content => "文字文字"*20)
@@ -88,14 +46,13 @@ end
 
 puts "10 brands"
 Brand.create([
-    {:name => "特步"},
-    {:name => "NBA"},
-    {:name => "CBA"},
-    {:name => "英超"},
-    {:name => "美特斯邦威"},
-    {:name => "锐步"},
-    {:name => "蒙牛"},
-    {:name => "马自达"}
+    {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg"))},
+    {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg"))},
+    {:name => "姬芮", :logo => open(Rails.root.join('tmp', "brand3.jpg"))},
+    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg"))},
+    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg"))},
+    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg"))},
+    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg"))},
   ])
 brands = Brand.find([1,2,3])
 User.first.update_attribute(:role, 3)
@@ -109,19 +66,26 @@ i = 1000
 end
 m = 0
 5.times do
-  Item.create(:title => "个人商品#{m}", :unique_id => "UID#{m}", :state => 2, :store => true, :user_id => 1, :brand_id => 1)
+  Item.create(:title => "个人商品#{m}", :unique_id => "UID#{m}", :state => 2, :store => true, :user_id => 1, :brand_id => 1, :poster => open(Rails.root.join('tmp', "item#{rand(4)}.jpg")))
   m += 1
 end
 
+comment_array = ["我太喜欢这个了，强烈推荐给大家。", "有写什么牌子吗？", "这个风格很适合你！", "仙女下凡。", "好可爱呀~"]
+
 puts "articles"
-50.times do
+10.times do
   a = Article.create(:title => "aaa", :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(6)}.jpg")))
   i = rand(5)
   comments = []
   i.times do
-    comments << Comment.create(:user_id => 2, :state => 2, :content => "文字"*20 )
+    comments << Comment.create(:user_id => 2, :state => 2, :content => comment_array[rand(4)] )
   end
-  a.comments << comments
+  photos = []
+  i.times do
+    photos << Photo.create(:file => open(Rails.root.join('tmp', "photo#{rand(7)}.jpg")) )
+  end
+  a.photos = photos
+  a.comments = comments
 end
 
 

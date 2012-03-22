@@ -19,6 +19,9 @@ settings: &common
   avatar_small:    "30x30#"
   avatar_thumb_covert: "-gravity north -thumbnail 80x80^ -extent 80x80"
   
+  brand_original: "180x100"
+  brand_small: "118x60"
+  
   upgrade_role_title: "您的申请已经收到"
   upgrade_role_content: "您已经申请成为"
   

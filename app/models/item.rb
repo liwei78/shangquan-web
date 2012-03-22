@@ -17,6 +17,6 @@ class Item < ActiveRecord::Base
     :convert_options => {:small => SITE_SETTINGS["item_small_covert"]},
     :url             => SITE_SETTINGS["paperclip_url"],
     :path            => SITE_SETTINGS["paperclip_path"],
-    :default_url     => "nopic.jpg"
+    :default_url     => "itemnopic.jpg"
   
 end

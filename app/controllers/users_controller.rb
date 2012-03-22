@@ -254,7 +254,7 @@ class UsersController < ApplicationController
       :state    => current_user_rtype)
       
     if params[:add_video] == "true"
-      article.code = params[:code]
+      article.video_code = params[:code]
       article.is_video = true
     end
     

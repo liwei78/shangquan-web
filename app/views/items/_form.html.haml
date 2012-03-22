@@ -5,12 +5,12 @@
         %td{:width => 100}
           名称
         %td
-          = f.text_field :title, :class => ""
+          = f.text_field :title, :class => "input"
       %tr
         %td
           货号
         %td
-          = f.text_field :unique_id, :class => ""
+          = f.text_field :unique_id, :class => "input"
       %tr
         %td
           价格
@@ -40,14 +40,12 @@
           海报
         %td
           - unless item.new_record?
-            = image_tag(item.poster.url(:thumb))
+            = image_tag(item.poster.url)
             %br
           = f.file_field :poster
 
-.btn
-  .right
-    = link_to "返回", items_url
-  = submit_tag("确定")
+  .btn
+    = submit_tag("确定", :class => "submit")
   
             
           

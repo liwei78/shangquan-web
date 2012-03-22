@@ -21,7 +21,7 @@
                 .comment
                   .avatar= link_to image_tag(comment.user.avatar.url(:small), :width=>30, :height => 30), comment.user, :target => "_blank"
                   .intro
-                    = link_to article.user.name, article.user, :target => "_blank"
+                    = link_to comment.user.name, comment.user, :target => "_blank"
                     = comment.content.html_safe
                   .clearfix
                 
