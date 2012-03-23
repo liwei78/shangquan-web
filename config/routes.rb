@@ -11,10 +11,9 @@ Shangquan::Application.routes.draw do
     end
   end
   
-  resources :articles, :only => [:show] do
+  resources :articles do
     member do
-      get 'view'
-      post 'write', 'like', 'share', 'collect'
+      post 'write', 'like', 'share', 'collect', 'del_photo'
     end
   end
   

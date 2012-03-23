@@ -1,0 +1,67 @@
+= form_for(article) do |f|
+  %table{:width => "100%", :cellpadding => 4}
+    %tbody
+      %tr
+        %td{:width => 100}
+        %td
+          = f.check_box :is_article
+          = label_tag(:article_is_article, "这是时尚文章")
+      %tr
+        %td
+          标题
+        %td
+          = f.text_field :title, :class => "input wide"
+      %tr
+        %td
+          海报
+        %td
+          - unless article.new_record?
+            = image_tag(article.poster.url)
+            %br
+          = f.file_field :poster
+      %tr
+        %td
+        %td
+          = f.check_box :is_photo
+          = label_tag(:article_is_photo, "它关联一个相册")
+      - if article.photos.present?
+        - for photo in article.photos
+          %tr
+            %td
+              相册
+            %td
+              .right
+                = link_to "删除", del_photo_article_url(article, :pid => photo.id), :method => :post, :confirm => "点击确定继续"
+              = image_tag(photo.file.url(:small))
+      %tr
+        %td
+        %td
+          = f.check_box :is_video
+          = label_tag(:article_is_video, "它关联一段视频")
+      - if article.video_code.present?
+        %tr
+          %td
+            视频
+          %td
+            = f.text_field :video_code, :class => "input wide"
+      %tr
+        %td
+        %td
+          = f.check_box :is_item
+          = label_tag(:article_is_item, "它关联了商品")
+      - if article.items.present?
+        - for item in article.items
+          %tr
+            %td
+              商品
+            %td
+              = image_tag(item.poster.url(:small))
+      
+      
+
+  .btn
+    = submit_tag("确定", :class => "submit")
+  
+            
+          
+            

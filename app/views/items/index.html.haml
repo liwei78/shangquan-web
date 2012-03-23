@@ -17,6 +17,6 @@
               = link_to image_tag(item.poster.url(:small), :width => 60), item
             %td
               = link_to item.title, item
-      = will_paginate @brands, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+      = will_paginate @items, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
         
 .clearfix

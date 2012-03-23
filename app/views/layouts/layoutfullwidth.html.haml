@@ -18,6 +18,7 @@
                   %li.w90
                     =link_to "#{current_user_name}", user_url(current_user_id)
                     %ul
+                      %li=link_to "我的文章", articles_url
                       %li=link_to "我的品牌", brands_url
                       %li=link_to "我的商品", items_url
                       %li=link_to "我的活动", avatarsetting_users_url
@@ -38,6 +39,7 @@
               = link_to "新活动", js_void, :class => "new-discover"
             %ul
               %li= link_to "首页", root_url, :class => "index"
+              %li= link_to "时尚", ""
               %li= link_to "商家", ""
               %li= link_to "品牌", ""
               %li= link_to "活动", ""

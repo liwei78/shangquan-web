@@ -1,0 +1,24 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      文章
+    .nav
+      %ul
+        %li= link_to "列表", articles_url, :class => "on"
+        .clearfix
+    .tablestyle
+      .add
+        = link_to "添加", share_users_url, :class => "btnstyle"
+      %table{:width => "100%", :cellpadding => "4"}
+        - for article in @articles
+          %tr
+            %td{:width => "70"}
+              = link_to image_tag(article.poster.url(:small), :width => 60), article
+            %td
+              = link_to article.title, article
+            %td{:width => "50"}
+              = link_to "编辑", edit_article_url(article)
+      = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

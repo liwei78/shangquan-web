@@ -71,10 +71,16 @@ m = 0
 end
 
 comment_array = ["我太喜欢这个了，强烈推荐给大家。", "有写什么牌子吗？", "这个风格很适合你！", "仙女下凡。", "好可爱呀~"]
-
+titles_array = [
+  "这是一款超漂亮的欧莱雅化妆包。一些长款的化妆品都可以放的，以前那些长款睫毛膏，唇彩，化妆镜，放不进的烦恼一去不返啦，嘿嘿。而且材质也很柔软呢，放在包包里，梳妆台上都是不错的选择~ 特别推荐给大家",
+  "现代简约水晶灯客厅卧室餐厅灯吸顶灯饰灯具",
+  "IZZUE风 燕尾下摆 大连帽长风衣 男★加厚毛内胆两色",
+  "日系杂志款条纹拼接不对称连帽男士长袖牛仔衬衫",
+  "欧美范真丝亚麻男士修身T恤"]
 puts "articles"
 10.times do
-  a = Article.create(:title => "aaa", :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(6)}.jpg")))
+  a = Article.create(:title => titles_array[rand(4)], :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(6)}.jpg")), :is_article => true, 
+    :is_video => true, :video_code => '<embed src="http://player.youku.com/player.php/sid/XMzY5ODkwNjU2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>')
   i = rand(5)
   comments = []
   i.times do
@@ -84,6 +90,7 @@ puts "articles"
   i.times do
     photos << Photo.create(:file => open(Rails.root.join('tmp', "photo#{rand(7)}.jpg")) )
   end
+  a.update_attribute(:is_photo, true) if i > 0
   a.photos = photos
   a.comments = comments
 end

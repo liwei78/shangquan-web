@@ -2,13 +2,13 @@
 .mainbox
   .formbox
     .title
-      商品
+      文章
     .nav
       %ul
-        %li= link_to "列表", items_url
+        %li= link_to "列表", articles_url
         %li= link_to "编辑", js_void, :class => "on"
         .clearfix
     .formstyle
-      = render :partial => "form", :locals => {:item => @item}
+      = render :partial => "form", :locals => {:article => @article}
         
 .clearfix
