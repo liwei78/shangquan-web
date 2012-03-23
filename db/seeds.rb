@@ -80,7 +80,7 @@ titles_array = [
 puts "articles"
 10.times do
   a = Article.create(:title => titles_array[rand(4)], :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(6)}.jpg")), :is_article => true, 
-    :is_video => true, :video_code => '<embed src="http://player.youku.com/player.php/sid/XMzY5ODkwNjU2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>')
+    :is_video => true, :video_code => '<embed src="http://player.youku.com/player.php/sid/XMzA3NjMyMzQ4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>')
   i = rand(5)
   comments = []
   i.times do

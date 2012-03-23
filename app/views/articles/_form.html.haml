@@ -56,6 +56,16 @@
               商品
             %td
               = image_tag(item.poster.url(:small))
+      %tr
+        %td
+          内容
+        %td
+          = f.cktext_area("content", :input_html => {:cols => 10, :rows => 10}, :toolbar => 'Basic')
+      %tr
+        %td
+          标签
+        %td
+          = f.text_field :tag_list, :class => "input wide"
       
       
 

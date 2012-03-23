@@ -29,7 +29,7 @@
           .clearfix
       - if @article.video_code.present?
         .video
-          =@article.video_code.html_safe
+          = @article.video_code.html_safe
       - if @article.content.present?
         .content
           = @article.content.html_safe
