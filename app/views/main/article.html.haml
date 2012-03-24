@@ -1,31 +1,30 @@
-.articles_list.left
-  - for article in @articles
-    - if article.user_id.present?
-      .item
-        .poster
+.sharelist.nopadding
+  .list#sharelist
+    - for article in @articles
+      .shareitem
+        .box
+          .content
+            = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article, :target => "_blank"
+          .title
+            = link_to article.title, article, :target => "_blank"
+          - if article.user_id.present?
+            .info
+              .avatar= link_to image_tag(article.user.avatar.url(:small), :width=>30, :height => 30), article.user, :target => "_blank"
+              .intro
+                = link_to article.user.name, article.user, :target => "_blank"
+                发表于
+                = article.created_from_now
+              .clearfix
+          - if article.comments.present?
+            .comments
+              - for comment in article.comments.top
+                .comment
+                  .avatar= link_to image_tag(comment.user.avatar.url(:small), :width=>30, :height => 30), comment.user, :target => "_blank"
+                  .intro
+                    = link_to comment.user.name, comment.user, :target => "_blank"
+                    = comment.content.html_safe
+                  .clearfix
+                
           .action
-            = link_to raw("喜欢(<span id='likes_count_#{article.id}'>#{article.likes_count}</span>)"), like_article_url(article), :remote => true, :method => :post
-            = link_to "评论", view_article_url(article)
-          = link_to image_tag(article.poster.url(:thumb), :width => "180", :height => "270"), user_article_url(article.user_id, article)
-        .userbox
-          = link_to image_tag(article.user.avatar.url(:small), :width => 40, :height => 40), article.user
-          = link_to article.user.name, article.user, :class => "user_name"
-    - else
-      .item
-        .poster
-          .action
-            = link_to raw("喜欢(<span id='likes_count_#{article.id}'>#{article.likes_count}</span>)"), like_article_url(article), :remote => true, :method => :post
-            = link_to "评论", view_article_url(article)
-          = link_to image_tag(article.poster.url(:thumb), :width => "180", :height => "270"), view_article_url(article)
-        .title
-          = link_to article.title, view_article_url(article)
-  .clearfix
-  = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
-  
-.articles_tags.right
-  %ul
-    -for tag in Article.tag_counts
-      %li= link_to tag, nav_article_url(:tag => URI.encode(tag.name))
-  .clearfix
-
+    .clearfix
 .clearfix

@@ -11,6 +11,8 @@ class CreateItems < ActiveRecord::Migration
       t.text     :content
       t.integer  :state, :default => 1 # 系统内容类型 0:block 1:auditing 2:white 3:deleted
       t.boolean  :store, :default => false
+      t.integer  :collects_count, :default => 0
+      t.string   :summary
       
       # 封面
       t.string   :poster_file_name

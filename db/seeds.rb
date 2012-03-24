@@ -63,7 +63,7 @@ User.first.brands = brands
 puts "items in store"
 i = 1000
 50.times do
-  Item.create(:title => "商品测试#{i}", :unique_id => "UID#{i}", :state => 2, :store => true, :brand_id => rand(7))
+  Item.create(:title => "商品测试#{i}", :unique_id => "UID#{i}", :state => 2, :store => true, :brand_id => rand(7), :poster => open(Rails.root.join('tmp', "item#{rand(5)}.jpg")))
   i += 1
 end
 m = 0

@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20120318144339) do
     t.string   "city"
     t.string   "map"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
+    t.string   "buy_place"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -168,6 +169,8 @@ ActiveRecord::Schema.define(:version => 20120318144339) do
     t.text     "content"
     t.integer  "state",                                             :default => 1
     t.boolean  "store",                                             :default => false
+    t.integer  "collects_count",                                    :default => 0
+    t.string   "summary"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"

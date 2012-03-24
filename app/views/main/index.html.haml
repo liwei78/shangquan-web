@@ -1,30 +1,147 @@
-.sharelist.nopadding
-  .list#sharelist
-    - for article in @articles
-      .shareitem
-        .box
-          .content
-            = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article, :target => "_blank"
-          .title
-            = link_to article.title, article, :target => "_blank"
-          - if article.user_id.present?
-            .info
-              .avatar= link_to image_tag(article.user.avatar.url(:small), :width=>30, :height => 30), article.user, :target => "_blank"
-              .intro
-                = link_to article.user.name, article.user, :target => "_blank"
-                发表于
-                = article.created_from_now
-              .clearfix
-          - if article.comments.present?
-            .comments
-              - for comment in article.comments.top
-                .comment
-                  .avatar= link_to image_tag(comment.user.avatar.url(:small), :width=>30, :height => 30), comment.user, :target => "_blank"
-                  .intro
-                    = link_to comment.user.name, comment.user, :target => "_blank"
-                    = comment.content.html_safe
-                  .clearfix
-                
-          .action
+.slider
+  .sliderpic#slider
+    %ul
+      %li= link_to image_tag("slider1.jpg"), root_url, :target => "_blank"
+      %li= link_to image_tag("slider2.jpg"), root_url, :target => "_blank"
+      %li= link_to image_tag("slider3.jpg"), root_url, :target => "_blank"
+      %li= link_to image_tag("slider4.jpg"), root_url, :target => "_blank"
     .clearfix
-.clearfix
+  .slidernav
+    %ul#slidernav
+      %li= link_to "文字1", root_url, :target => "_blank"
+      %li= link_to "文字2", root_url, :target => "_blank"
+      %li= link_to "文字3", root_url, :target => "_blank"
+      %li= link_to "文字4", root_url, :target => "_blank"
+    .clearfix
+  .other
+    %ul
+      %li
+        %h3= link_to "标题标题标题标题", ""
+        %p 文字文字文字文字文字
+      %li
+        %h3= link_to "标题标题标题标题", ""
+        %p 文字文字文字文字文字
+      %li
+        %h3= link_to "标题标题标题标题", ""
+        %p 文字文字文字文字文字
+      %li
+        %h3= link_to "标题标题标题标题", ""
+        %p 文字文字文字文字文字
+.slidershadow
+
+.likebar
+  = link_to "分享达人购物故事", "", :target => "_blank", :class => "share"
+  = link_to "收集喜爱，结交朋友", "", :target => "_blank", :class => "addme"
+  = link_to "来知美，做聪明生活家！ ", "", :target => "_blank", :class => "likeme"
+
+.maincontent
+  .left.todaystar
+    %h2 
+      %span
+        今日达人
+        %em
+          Star
+    .bigshow.left
+      = link_to image_tag(User.last.avatar.url, :width => 300, :height => 300), ""
+    .ta.right
+      .name
+        = link_to "用户名", "", :target => "_blank"
+        %span.starv{:title => "商圈认证达人"}
+        = link_to "关注", "", :class => "followstyle"
+      .intro
+        = "文字"*30
+      .items
+        .title
+          TA的分享
+        %ul
+          - for item in Item.limit(8)
+            %li= link_to image_tag(item.poster.url(:small)), ""
+          .clearfix
+        .clearfix
+    .clearfix
+  .right.sitestar
+    %h2
+      .right.more
+        = link_to "更多", "", :target => "_blank"
+      %span
+        商圈达人
+    %ul
+      - 4.times do
+        %li
+          .avatar.left
+            = link_to image_tag(User.last.avatar.url(:thumb), :width => 60, :height => 60), "", :target => "_blank"
+          .info.right
+            = link_to "NAME", ""
+            = "文字"*10
+            .follow
+              = link_to "关注", "", :class => "followstyle"
+          .clearfix
+  .clearfix
+  .gather-items
+    %h2
+      %span 达人推荐
+    %ul
+      - 6.times do
+        %li
+          .poster.left
+            = link_to image_tag(Item.last.poster.url(:small), :width => 140, :height => 140), Item.last, :target => "_blank"
+          .info.left
+            .name
+              = link_to Item.last.user.name, Item.last.user, :target => "_blank"
+              %span
+                推荐
+            .price
+              ￥
+              = Item.last.price
+            .summary
+              = Item.last.summary
+              = "文字"*10
+            .collects_count
+              %span= Item.last.collects_count
+              个收藏
+            .collect_btn
+              = link_to "收藏", "", :class => "collectstyle"
+          .clearfix
+      .clearfix
+    .clearfix
+  .left.weektheme
+  .right.events
+  .clearfix
+        
+.adbox
+  .left.ad= image_tag('ad1.png')
+  .right.ad= image_tag('ad2.jpg')
+  .clearfix
+  
+.maincontent
+  .themes.left
+    %h2
+      %span 时尚主题
+    .title
+      风衣主题
+    %p
+      总是被各种时装周上品位“独特”的妖孽惊得肝儿疼，转念想想，还是挑件好风衣吧！经典款是绝不会出错的安全牌，而花些小心思的改良设计亦可让你很出挑。
+    .banner.left
+    .item_list.right
+      %ul
+        - 6.times do
+          %li= image_tag(Item.first.poster.url(:small))
+        .clearfix
+    .clearfix
+  .events.right
+    %h2
+      %span 近期活动
+    
+  .clearfix
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

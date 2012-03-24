@@ -18,6 +18,18 @@ $(document).ready(function() {
   // var shareListWidth = shareListItem * 5;
   // $('.sharelist .shareitem').each( function(){ sum += $(this).width(); });
   // $('#holder > div').width( sum );
+  
+  $("#slider").easySlider({
+	  auto: true, 
+	  continuous: true, 
+	  numeric: false, 
+	  controlsShow: false,
+	  outerControll: true,
+	  onChangedCallback: function(n){
+	    $("#slidernav li").removeClass("on");
+	    $("#slidernav li:eq("+n+")").addClass("on");}
+	});
+  
 });
 
 $(window).scroll(function(){
