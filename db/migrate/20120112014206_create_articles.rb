@@ -67,6 +67,7 @@ class CreateArticles < ActiveRecord::Migration
       
       # 价格
       t.decimal  :price, :precision => 8, :scale =>2, :default=>0.00
+      t.string   :buy_place
       
       t.timestamps
     end

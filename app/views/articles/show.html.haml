@@ -24,7 +24,7 @@
         .photos
           %ul
             - for photo in @article.photos
-              %li=link_to image_tag(photo.file.url(:small), :width => 160, :height => 160), photo.file.url
+              %li=link_to image_tag(photo.file.url(:small), :width => 160, :height => 160), photo.file.url, :class => "thickbox", :rel => "article-photos"
             .clearfix
           .clearfix
       - if @article.video_code.present?
@@ -38,7 +38,7 @@
           %table{:width => "100%", :cellpadding => "4"}
             - for item in @article.items
               %tr
-                %td{:width => 70}= link_to image_tag(item.poster.url(:small)), item.poster.url
+                %td{:width => 70}= link_to image_tag(item.poster.url(:small)), item.poster.url, :class => "thickbox", :rel => "item-photos"
                 %td= item.title
                 %td
                   = item.price

@@ -21,6 +21,10 @@ body {
   background-color: #F0EEEE;
 }
 
+table {
+	table-layout:fixed;
+}
+
 a {
   text-decoration: none;
   color: $secondary_color; }
@@ -858,6 +862,11 @@ $layout-width: 954px;
       .add {
         margin-bottom: 10px;
         text-align: right;
+      }
+      tr {
+        th {
+          text-align: left;
+        }
       }
     }
   }

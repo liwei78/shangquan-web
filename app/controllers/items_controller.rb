@@ -74,5 +74,7 @@ class ItemsController < ApplicationController
   def store
     @items = Item.in_store.white.all
   end
+  
+  
 
 end
