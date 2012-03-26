@@ -1,32 +1,20 @@
 .slider
   .sliderpic#slider
     %ul
-      %li= link_to image_tag("slider1.jpg"), root_url, :target => "_blank"
-      %li= link_to image_tag("slider2.jpg"), root_url, :target => "_blank"
-      %li= link_to image_tag("slider3.jpg"), root_url, :target => "_blank"
-      %li= link_to image_tag("slider4.jpg"), root_url, :target => "_blank"
+      - for banner in Banner.sliders
+        %li= link_to image_tag(banner.poster.url), banner.gourl, :target => "_blank"
     .clearfix
   .slidernav
     %ul#slidernav
-      %li= link_to "文字1", root_url, :target => "_blank"
-      %li= link_to "文字2", root_url, :target => "_blank"
-      %li= link_to "文字3", root_url, :target => "_blank"
-      %li= link_to "文字4", root_url, :target => "_blank"
+      - for banner in Banner.sliders
+        %li= link_to banner.title, js_void
     .clearfix
   .other
     %ul
-      %li
-        %h3= link_to "标题标题标题标题", ""
-        %p 文字文字文字文字文字
-      %li
-        %h3= link_to "标题标题标题标题", ""
-        %p 文字文字文字文字文字
-      %li
-        %h3= link_to "标题标题标题标题", ""
-        %p 文字文字文字文字文字
-      %li
-        %h3= link_to "标题标题标题标题", ""
-        %p 文字文字文字文字文字
+      - for tiny in Banner.tinies
+        %li
+          %h3= link_to tiny.title, tiny.gourl, :target => "_blank"
+          %p= tiny.summary
 .slidershadow
 
 .likebar
@@ -122,6 +110,7 @@
     %p
       总是被各种时装周上品位“独特”的妖孽惊得肝儿疼，转念想想，还是挑件好风衣吧！经典款是绝不会出错的安全牌，而花些小心思的改良设计亦可让你很出挑。
     .banner.left
+      = image_tag("banner1.jpg")
     .item_list.right
       %ul
         - 6.times do
@@ -131,10 +120,43 @@
   .events.right
     %h2
       %span 近期活动
-    
+    %ul
+      - 3.times do
+        %li
+          .avatar.left
+            = link_to image_tag(User.last.avatar.url(:thumb), :width => 60, :height => 60), "", :target => "_blank"
+          .info.right
+            = link_to "NAME", ""
+            = "文字"*10
+            .follow
+              = link_to "关注", "", :class => "followstyle"
+          .clearfix
   .clearfix
-        
-        
+
+.adbox
+  .left.ad= image_tag('ad1.png')
+  .right.ad= image_tag('ad2.jpg')
+  .clearfix
+
+.maincontent
+  - 4.times do
+    %h2
+      %span 女装配饰
+    .hot_items
+      %ul
+        - 6.times do
+          %li
+            .poster= image_tag(Item.first.poster.url(:small), :width => 140, :height => 140)
+            .title
+              .right.price
+                ￥
+                = Item.first.price
+              = link_to Item.first.title, ""
+            .summary
+              = Item.first.summary
+        .clearfix
+      
+  
         
         
         

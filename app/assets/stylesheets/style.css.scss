@@ -1140,9 +1140,59 @@ $layout-width: 954px;
   }
   .themes {
     width: $left_width;
+    .item_list {
+      width: 150px;
+      ul {
+        li {
+          float: left;
+          margin: 0 0 10px 10px;
+        }
+      }
+    }
   }
   .events {
     width: $right_width;
+    ul {
+      li {
+        border-bottom: 1px dotted #868686;
+        padding: 9px 0 0;
+        height: 69px;
+        .avatar {
+          width: 60px;
+          height: 60px;
+        }
+        .info {
+          width: 198px;
+          height: 60px;
+          color: #888;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .hot_items {
+    ul {
+      li {
+        float: left;
+        width: 140px;
+        height: 185px;
+        overflow: hidden;
+        margin-right: 10px;
+        display: inline;
+        font-size: 12px;
+        a {
+          font-size: 12px;
+        }
+        .title {
+          line-height: 24px;
+        }
+        .summary {
+          height: 18px;
+          line-height: 18px;
+          color: grey;
+        }
+      }
+    }
   }
 }
 

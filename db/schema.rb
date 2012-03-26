@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318144339) do
+ActiveRecord::Schema.define(:version => 20120326073254) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "title"
+    t.string   "summary"
+    t.text     "content"
+    t.string   "opening_date"
+    t.integer  "status",              :default => 0
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "activity_reports", :force => true do |t|
     t.string   "title"
@@ -84,6 +98,20 @@ ActiveRecord::Schema.define(:version => 20120318144339) do
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "banners", :force => true do |t|
+    t.string   "title"
+    t.string   "summary"
+    t.string   "gourl"
+    t.integer  "position",            :default => 0
+    t.integer  "category",            :default => 0
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "brand_users", :force => true do |t|
     t.integer  "user_id"

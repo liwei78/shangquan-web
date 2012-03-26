@@ -11,8 +11,8 @@ settings: &common
   crop_small_covert: "-gravity north -thumbnail 190x190^ -extent 190x190"
   
   item_original:   "640>"
-  item_small:      "60x60#"
-  item_small_covert: "-gravity north -thumbnail 60x60^ -extent 60x60"
+  item_small:      "140x140#"
+  item_small_covert: "-gravity north -thumbnail 140x140^ -extent 140x140"
   
   avatar_original: "190x190#"
   avatar_thumb:    "80x80#"
@@ -21,6 +21,11 @@ settings: &common
   
   brand_original: "180x100"
   brand_small: "118x60"
+  
+  activity_original: "950x300"
+  activity_middle: "446x200"
+  
+  banner_original: "950x300"
   
   upgrade_role_title: "您的申请已经收到"
   upgrade_role_content: "您已经申请成为"

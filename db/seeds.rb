@@ -68,7 +68,7 @@ i = 1000
 end
 m = 0
 5.times do
-  Item.create(:title => "个人商品#{m}", :unique_id => "UID#{m}", :state => 2, :store => true, :user_id => 1, :brand_id => 1, :poster => open(Rails.root.join('tmp', "item#{rand(5)}.jpg")))
+  Item.create(:title => "个人商品#{m}", :summary => "精美的镂空设计",  :unique_id => "UID#{m}", :state => 2, :store => true, :user_id => 1, :brand_id => 1, :poster => open(Rails.root.join('tmp', "item#{rand(5)}.jpg")))
   m += 1
 end
 
@@ -96,4 +96,28 @@ puts "articles"
   a.comments = comments
 end
 
+puts "1 activity"
+Activity.create(
+  :title => "饭，到，爱！", 
+  :summary => "甭管你是饭点儿想来顿丰盛大餐，还是深夜炖锅红烧肉报复社会；也甭管你是一碗面一头蒜给个杨幂都不换的务实派，还是吃到黑松露就必须追加一碟鱼子酱才舒坦的龟毛派，此时此刻你最想吃的是什么？",
+  :content => "你是一碗面一颗蒜给个杨幂都不换的务实派？还是吃到黑松露就必须追加一碟鱼子酱才舒坦的龟毛派？此时此刻你最想吃的是什么？快快晒出来呀!
+  1，在这里发布你最想吃的食品图片参与活动，还可以给这些美食投票（点击图片上的喜欢）并参与评论。
+  2，是吃货必须找到靠谱组织，联个盟神马的才会搜索到更多美食啊!
+  参与方式（选择以下任一方式即可）：
+  1，点击页面右上角“上传主题分享”按钮将你参与活动的图片上传到你的图格中即可。
+  2，上传你已分享的美食图片，在描述中加入#想吃的#然后保存。
+  3，使用知美收集工具采集网页上的美食图片，在描述中加入#想吃的#。",
+  :opening_date => "活动日期：3月26日-4月1日",
+  :poster => open(Rails.root.join('tmp', "activity.jpg")))
 
+puts "4 banners"
+Banner.create([
+    {:title => "卫衣躁动史",    :gourl => "#", :position => 1, :category => 0, :poster => open(Rails.root.join('tmp', "slider1.jpg"))},
+    {:title => "真男人要护肤",   :gourl => "#", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},
+    {:title => "我是你的明灯",   :gourl => "#", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
+    {:title => "注册商圈N喜临门", :gourl => "#", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
+    {:title => "0元抢小米手机",       :summary => "白拿小米第五期！上期获奖：Crazycat",  :gourl => "#", :position => 1, :category => 1},
+    {:title => "脚踏两只鞋",         :summary => "女人都喜欢穿休闲鞋的男人",           :gourl => "#", :position => 2, :category => 1},
+    {:title => "通勤利器撑气场",       :summary => "一个好的通勤包，绝对助你出挑",         :gourl => "#", :position => 3, :category => 1},
+    {:title => "来商圈，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",             :gourl => "#", :position => 4, :category => 1}
+  ])
