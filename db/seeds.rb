@@ -6,8 +6,11 @@
 puts "Create Test Account"
 User.create([
   {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar1.jpg"))},
-  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar2.jpg"))},
-  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar3.jpg"))}]
+  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar2.jpg")), :star => true, :suggest => true},
+  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar3.jpg")), :todaystar => true},]
+  {:email => "ddd@123.com", :name => "DDD", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar4.jpg")), :star => true, :suggest => true},]
+  {:email => "eee@123.com", :name => "EEE", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar5.jpg")), :star => true, :suggest => true},]
+  {:email => "fff@123.com", :name => "FFF", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar6.jpg")), :star => true, :suggest => true}]
 )
 
 Area.create([
@@ -108,7 +111,8 @@ Activity.create(
   2，上传你已分享的美食图片，在描述中加入#想吃的#然后保存。
   3，使用知美收集工具采集网页上的美食图片，在描述中加入#想吃的#。",
   :opening_date => "活动日期：3月26日-4月1日",
-  :poster => open(Rails.root.join('tmp', "activity.jpg")))
+  :poster => open(Rails.root.join('tmp', "activity.jpg"))
+)
 
 puts "4 banners"
 Banner.create([

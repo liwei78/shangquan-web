@@ -9,8 +9,11 @@ class CreateItems < ActiveRecord::Migration
       t.decimal  :price, :precision => 8, :scale =>2, :default=>0.00
       t.integer  :brand_id
       t.text     :content
-      t.integer  :state, :default => 1 # 系统内容类型 0:block 1:auditing 2:white 3:deleted
-      t.boolean  :store, :default => false
+      t.integer  :state,          :default => 1 # 系统内容类型 0:block 1:auditing 2:white 3:deleted
+      t.boolean  :store,          :default => false
+      t.boolean  :suggest,        :default => false        # 首页推荐
+      t.integer  :likes_count,    :default => 0
+      t.integer  :comments_count, :default => 0
       t.integer  :collects_count, :default => 0
       t.string   :summary
       

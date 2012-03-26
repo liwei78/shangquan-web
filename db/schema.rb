@@ -197,6 +197,9 @@ ActiveRecord::Schema.define(:version => 20120326073254) do
     t.text     "content"
     t.integer  "state",                                             :default => 1
     t.boolean  "store",                                             :default => false
+    t.boolean  "suggest",                                           :default => false
+    t.integer  "likes_count",                                       :default => 0
+    t.integer  "comments_count",                                    :default => 0
     t.integer  "collects_count",                                    :default => 0
     t.string   "summary"
     t.string   "poster_file_name"
@@ -274,6 +277,10 @@ ActiveRecord::Schema.define(:version => 20120326073254) do
     t.boolean  "deleted",             :default => false
     t.integer  "role",                :default => 0
     t.integer  "upgrade_state",       :default => 0
+    t.integer  "star",                :default => 0
+    t.boolean  "todaystar",           :default => false
+    t.boolean  "suggest",             :default => false
+    t.string   "intro"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

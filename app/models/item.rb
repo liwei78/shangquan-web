@@ -10,6 +10,7 @@ class Item < ActiveRecord::Base
   scope :white,    :conditions => ["items.state = ?", 2]
   scope :deleted,  :conditions => ["items.state = ?", 3]
   scope :in_store,  :conditions => ["items.store = ?", true]
+  scope :is_suggest,  :conditions => ["items.suggest = ?", true]
   
   
   has_attached_file :poster,

@@ -22,6 +22,10 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean  :deleted,       :default => false
       t.integer  :role,          :default => 0         # 0:normal普通用户, 1:时尚设计师, 2:company商家用户(专卖店), 3:company商家用户(百货店),  4:brand品牌用户
       t.integer  :upgrade_state, :default => 0         # 0:无, 1:申请中, 2:申请通过, 3:申请拒绝
+      t.integer  :star,          :default => 0         # 0:无, 1:认证达人, 2:认证商家
+      t.boolean  :todaystar,     :default => false     # 今日达人
+      t.boolean  :suggest,       :default => false     # 首页推荐
+      t.string   :intro                                # 首页推荐语，管理员填写
 
       t.timestamps
     end

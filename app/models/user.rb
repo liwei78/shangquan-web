@@ -54,8 +54,12 @@ class User < ActiveRecord::Base
     :path        => SITE_SETTINGS["paperclip_path"],
     :default_url => "avatar190.jpg"
 
-  scope :white,  :conditions => ["users.promotion = ?", 20]
-  scope :black,  :conditions => ["users.promotion = ?", 0]
+  scope :white,      :conditions => ["users.promotion = ?", 20]
+  scope :black,      :conditions => ["users.promotion = ?", 0]
+  scope :todaystar,  :conditions => ["todaystar = ?", true]
+  scope :stars,      :conditions => ["star = ?", 1]
+  scope :compstars,  :conditions => ["star = ?", 2]
+  scope :is_suggest, :conditions => ["suggest = ?", true]
   
   # recource_type base on user's promotion
   def rtype

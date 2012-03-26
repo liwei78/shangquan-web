@@ -29,24 +29,25 @@
         今日达人
         %em
           Star
-    .bigshow.left
-      = link_to image_tag(User.last.avatar.url, :width => 300, :height => 300), ""
-    .ta.right
-      .name
-        = link_to "用户名", "", :target => "_blank"
-        %span.starv{:title => "商圈认证达人"}
-        = link_to "关注", "", :class => "followstyle"
-      .intro
-        = "文字"*30
-      .items
-        .title
-          TA的分享
-        %ul
-          - for item in Item.limit(8)
-            %li= link_to image_tag(item.poster.url(:small), :width => 60, :height => 60), ""
+    - if @todaystar.present?
+      .bigshow.left
+        = link_to image_tag(@todaystar.avatar.url, :width => 300, :height => 300), @todaystar
+      .ta.right
+        .name
+          = link_to @todaystar.name, @todaystar, :target => "_blank"
+          %span.starv{:title => "认证达人"}
+          = link_to "关注", "", :class => "followstyle"
+        .intro
+          = @todaystar.intro.html_safe
+        .items
+          .title
+            TA的分享
+          %ul
+            - for item in @todaystar.items.is_suggest.limit(8)
+              %li= link_to image_tag(item.poster.url(:small), :width => 60, :height => 60), item, :target => "_blank"
+            .clearfix
           .clearfix
-        .clearfix
-    .clearfix
+      .clearfix
   .right.sitestar
     %h2
       .right.more
@@ -54,13 +55,13 @@
       %span
         商圈达人
     %ul
-      - 4.times do
+      - for star in User.stars.is_suggest
         %li
           .avatar.left
-            = link_to image_tag(User.last.avatar.url(:thumb), :width => 60, :height => 60), "", :target => "_blank"
+            = link_to image_tag(star.avatar.url(:thumb), :width => 60, :height => 60), star, :target => "_blank"
           .info.right
-            = link_to "NAME", ""
-            = "文字"*10
+            = link_to star.name, star, :target => "_blank"
+            = star.intro
             .follow
               = link_to "关注", "", :class => "followstyle"
           .clearfix
