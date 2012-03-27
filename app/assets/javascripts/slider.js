@@ -1,32 +1,3 @@
-/*
- * 	Easy Slider 1.7 - jQuery plugin
- *	written by Alen Grakalic	
- *	http://cssglobe.com/post/4004/easy-slider-15-the-easiest-jquery-plugin-for-sliding
- *
- *	Copyright (c) 2009 Alen Grakalic (http://cssglobe.com)
- *	Dual licensed under the MIT (MIT-LICENSE.txt)
- *	and GPL (GPL-LICENSE.txt) licenses.
- *
- *	Built for jQuery library
- *	http://jquery.com
- *
- */
- 
-/*
- *	markup example for $("#slider").easySlider();
- *	
- * 	<div id="slider">
- *		<ul>
- *			<li><img src="images/01.jpg" alt="" /></li>
- *			<li><img src="images/02.jpg" alt="" /></li>
- *			<li><img src="images/03.jpg" alt="" /></li>
- *			<li><img src="images/04.jpg" alt="" /></li>
- *			<li><img src="images/05.jpg" alt="" /></li>
- *		</ul>
- *	</div>
- *
- */
-
 (function($) {
 
     $.fn.easySlider = function(options) {
@@ -122,9 +93,8 @@
             };
             
             if (options.outerControll) {
-                $("#slidernav li a")
-      						.click(function() {
-      						    animate($("#slidernav li a").index($(this)), true);
+                $("#slidernav li a").click(function() {
+    						    animate($("#slidernav li a").index($(this)), true);
     						});
             };
 
@@ -132,14 +102,6 @@
                 i = parseInt(i) + 1;
                 $("li", "#" + options.numericId).removeClass("current");
                 $("li#" + options.numericId + i).addClass("current");
-            };
-
-            function showMeta(i) {
-                document.getElementById("fss_meta").style.display = "block";
-                debugger;
-                var a = $("ul", obj);
-                $("#fss_meta h3").html($("#fss ul:nth-child(" + i + ") img").attr("alt"));
-                $("#fss_meta p").html(options.metaInfo[i - 1]);
             };
 
             function adjust() {
@@ -181,15 +143,15 @@
                     if (!options.vertical) {
                         p = (t * w * -1);
                         $("ul", obj).animate(
-							{ marginLeft: p },
-							{ queue: false, duration: speed, complete: adjust }
-						);
+            							{ marginLeft: p },
+            							{ queue: false, duration: speed, complete: adjust }
+            						);
                     } else {
                         p = (t * h * -1);
                         $("ul", obj).animate(
-							{ marginTop: p },
-							{ queue: false, duration: speed, complete: adjust }
-						);
+            							{ marginTop: p },
+            							{ queue: false, duration: speed, complete: adjust }
+            						);
                     };
 
                     if (!options.continuous && options.controlsFade) {
@@ -211,7 +173,6 @@
 
                     if (clicked) clearTimeout(timeout);
                     if (options.auto && dir == "next" && !clicked) {
-                        ;
                         timeout = setTimeout(function() {
                             animate("next", false);
                         }, diff * options.speed + options.pause);
@@ -223,7 +184,6 @@
             // init
             var timeout;
             if (options.auto) {
-                ;
                 timeout = setTimeout(function() {
                     animate("next", false);
                 }, options.pause);
@@ -231,8 +191,7 @@
 
             if (options.numeric) setCurrent(0);
             
-            if (options.onChangedCallback)
-                options.onChangedCallback(0);
+            if (options.onChangedCallback) options.onChangedCallback(0);
 
             if (options.outerControll) setCurrent(0);
 

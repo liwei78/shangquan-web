@@ -11,5 +11,5 @@
 //= require superfish
 //= require jquery.masonry.min
 //= require jquery.imagesloaded.min
-//= require easyslider
+//= require slider
 //= require site
