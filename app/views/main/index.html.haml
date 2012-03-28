@@ -70,23 +70,22 @@
     %h2
       %span 达人推荐
     %ul
-      - 6.times do
+      - for item in @top_items
         %li
           .poster.left
-            = link_to image_tag(Item.last.poster.url(:small), :width => 140, :height => 140), Item.last, :target => "_blank"
+            = link_to image_tag(item.poster.url(:small), :width => 140, :height => 140), item, :target => "_blank"
           .info.left
             .name
-              = link_to Item.last.user.name, Item.last.user, :target => "_blank"
+              = link_to item.user.name, item.user, :target => "_blank"
               %span
                 推荐
             .price
               ￥
-              = Item.last.price
+              = item.price
             .summary
-              = Item.last.summary
-              = "文字"*10
+              = item.summary.truncate(20, :omission => "...")
             .collects_count
-              %span= Item.last.collects_count
+              %span= item.collects_count
               个收藏
             .collect_btn
               = link_to "收藏", "", :class => "collectstyle"
@@ -107,28 +106,33 @@
     %h2
       %span 时尚主题
     .title
-      风衣主题
+      = link_to @top_activity.title, @top_activity, :target => "_blank"
     %p
-      总是被各种时装周上品位“独特”的妖孽惊得肝儿疼，转念想想，还是挑件好风衣吧！经典款是绝不会出错的安全牌，而花些小心思的改良设计亦可让你很出挑。
+      = @top_activity.summary
     .banner.left
-      = image_tag("banner1.jpg")
+      = link_to image_tag(@top_activity.poster.url(:middle), :width => 446, :height => 200), @top_activity, :target => "_blank"
     .item_list.right
       %ul
-        - 6.times do
-          %li= image_tag(Item.first.poster.url(:small), :width => 60, :height => 60)
+        - for item in @top_activity_items
+          %li= link_to image_tag(item.poster.url(:small), :width => 60, :height => 60), item, :target => "_blank"
         .clearfix
     .clearfix
   .events.right
     %h2
       %span 近期活动
     %ul
-      - 3.times do
+      - for activity in @suggest_activities
         %li
           .avatar.left
-            = link_to image_tag(User.last.avatar.url(:thumb), :width => 60, :height => 60), "", :target => "_blank"
+            = link_to image_tag(activity.logo.url, :width => 60, :height => 60), activity, :target => "_blank"
           .info.right
-            = link_to "NAME", ""
-            = "文字"*10
+            .title
+              .right
+                %span= activity.shares_count
+                人分享
+              = link_to activity.title, activity, :target => "_blank"
+            .summary
+              = activity.summary.truncate(30, :omission => "...")
             .follow
               = link_to "关注", "", :class => "followstyle"
           .clearfix

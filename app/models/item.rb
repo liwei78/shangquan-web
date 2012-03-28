@@ -4,14 +4,16 @@ class Item < ActiveRecord::Base
   belongs_to :user
   has_many :article_items
   has_many :articles, :through => :article_items
+  has_many :activity_items
+  has_many :activities, :through => :activity_items
   
-  scope :block,    :conditions => ["items.state = ?", 0]
-  scope :auditing, :conditions => ["items.state = ?", 1]
-  scope :white,    :conditions => ["items.state = ?", 2]
-  scope :deleted,  :conditions => ["items.state = ?", 3]
-  scope :in_store,  :conditions => ["items.store = ?", true]
+  scope :block,       :conditions => ["items.state = ?", 0]
+  scope :auditing,    :conditions => ["items.state = ?", 1]
+  scope :white,       :conditions => ["items.state = ?", 2]
+  scope :deleted,     :conditions => ["items.state = ?", 3]
+  scope :in_store,    :conditions => ["items.store = ?", true]
   scope :is_suggest,  :conditions => ["items.suggest = ?", true]
-  
+  scope :is_top,      :conditions => ["items.top = ?", true]
   
   has_attached_file :poster,
     :styles          => {:original => SITE_SETTINGS["item_original"], :small => ""},

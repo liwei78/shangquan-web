@@ -11,10 +11,12 @@ class CreateItems < ActiveRecord::Migration
       t.text     :content
       t.integer  :state,          :default => 1 # 系统内容类型 0:block 1:auditing 2:white 3:deleted
       t.boolean  :store,          :default => false
-      t.boolean  :suggest,        :default => false        # 首页推荐
+      t.boolean  :suggest,        :default => false        # 推荐
+      t.boolean  :top,            :default => false        # 置顶，用于首页推荐
       t.integer  :likes_count,    :default => 0
       t.integer  :comments_count, :default => 0
       t.integer  :collects_count, :default => 0
+      t.integer  :position,       :default => 0            # 排序，用户首页推荐顺序
       t.string   :summary
       
       # 封面

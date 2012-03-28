@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120326073254) do
+ActiveRecord::Schema.define(:version => 20120328091150) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -19,10 +19,24 @@ ActiveRecord::Schema.define(:version => 20120326073254) do
     t.text     "content"
     t.string   "opening_date"
     t.integer  "status",              :default => 0
+    t.boolean  "suggest",             :default => false
+    t.boolean  "top",                 :default => false
+    t.integer  "shares_count",        :default => 0
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_items", :force => true do |t|
+    t.integer  "activity_id"
+    t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -198,9 +212,11 @@ ActiveRecord::Schema.define(:version => 20120326073254) do
     t.integer  "state",                                             :default => 1
     t.boolean  "store",                                             :default => false
     t.boolean  "suggest",                                           :default => false
+    t.boolean  "top",                                               :default => false
     t.integer  "likes_count",                                       :default => 0
     t.integer  "comments_count",                                    :default => 0
     t.integer  "collects_count",                                    :default => 0
+    t.integer  "position",                                          :default => 0
     t.string   "summary"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
