@@ -1,44 +1,55 @@
 = render :partial => "users/usersidebox"
-.mainbox
-  .formbox
-    .title
-      商品
-    .nav
-      %ul
-        %li= link_to "列表", items_url
-        %li= link_to "查看", @item, :class => "on"
+.shareview
+  .show
+    .head
+      .right
+        = link_to raw("<span id='likes_count_#{@item.id}'>#{@item.likes_count}</span><em></em>"), like_item_url(@item), :remote => true, :method => :post, :class => "like"
+      .block
+        .avatar
+          = link_to image_tag(@user.avatar.url(:small), :width => 60, :height => 60), @user
+        .info
+          .name
+            = link_to @user.name, @user
+          .time
+            = @item.created_at.to_s(:db)
         .clearfix
-    .formstyle
-      %table{:width => "100%", :cellpadding => "4"}
-        %tr
-          %td{:width => "70"}
-            
-          %td
-            = image_tag(@item.poster.url(:small))
-        %tr
-          %td
-            名称
-          %td
-            .right
-              = link_to "编辑", edit_item_url(@item)
-              = link_to "删除", @item, :method => :delete, :confirm => "点击确定继续"
-            = @item.title
-        %tr
-          %td
-            货号
-          %td
-            = @item.unique_id
-        %tr
-          %td
-            价格
-          %td
-            = @item.price
-            元
-        %tr
-          %td
-            品牌
-          %td
-            = image_tag(@item.brand.logo.url())
-        
-        
+      .clearfix
+    .intro
+    .body
+      - if @item.poster.file?
+        .poster
+          = image_tag(@item.poster.url)
+      .sharebox
+        分享到：
+        = link_to "", js_void, :class => "sina"
+        = link_to "", js_void, :class => "tx"
+        = link_to "", js_void, :class => "rr"
+        = link_to "", js_void, :class => "qz"
+      .comments
+        %h2
+          评论
+        .newcomment
+          .avatar
+            = image_tag(@current_user.avatar.url(:small), :width => 30, :height => 30)
+          .newinput
+            = form_tag(write_item_url(@item)) do
+              = text_area_tag :content, "", :class => "input"
+              %br
+              = submit_tag("确定", :class => "btnstyle")
+          .clearfix
+        .commentslist
+          - for comment in @comments
+            .comment
+              .avatar
+                = link_to(image_tag(comment.user.avatar.url(:small), :width => 30, :height => 30), comment.user)
+              .info
+                .name
+                  .right
+                    = link_to "回复", js_void
+                  = link_to(comment.user.name, comment.user)
+                .comment_content= comment.content.html_safe
+                .time= comment.created_from_now
+              .clearfix
+          = will_paginate @comments, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
 .clearfix
+

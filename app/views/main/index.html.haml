@@ -105,18 +105,19 @@
   .themes.left
     %h2
       %span 时尚主题
-    .title
-      = link_to @top_activity.title, @top_activity, :target => "_blank"
-    %p
-      = @top_activity.summary
-    .banner.left
-      = link_to image_tag(@top_activity.poster.url(:middle), :width => 446, :height => 200), @top_activity, :target => "_blank"
-    .item_list.right
-      %ul
-        - for item in @top_activity_items
-          %li= link_to image_tag(item.poster.url(:small), :width => 60, :height => 60), item, :target => "_blank"
-        .clearfix
-    .clearfix
+    - if @top_activity.present?
+      .title
+        = link_to @top_activity.title, @top_activity, :target => "_blank"
+      %p
+        = @top_activity.summary
+      .banner.left
+        = link_to image_tag(@top_activity.poster.url(:middle), :width => 446, :height => 200), @top_activity, :target => "_blank"
+      .item_list.right
+        %ul
+          - for item in @top_activity_items
+            %li= link_to image_tag(item.poster.url(:small), :width => 60, :height => 60), item, :target => "_blank"
+          .clearfix
+      .clearfix
   .events.right
     %h2
       %span 近期活动
@@ -132,7 +133,7 @@
                 人分享
               = link_to activity.title, activity, :target => "_blank"
             .summary
-              = activity.summary.truncate(30, :omission => "...")
+              = activity.summary.truncate(30, :omission => "...") if activity.summary.present?
             .follow
               = link_to "关注", "", :class => "followstyle"
           .clearfix
@@ -144,21 +145,23 @@
   .clearfix
 
 .maincontent
-  - 4.times do
+  - for category in Category.top(4)
     %h2
-      %span 女装配饰
+      .right.more
+        = link_to "更多", items_url, :target => "_blank"
+      %span= category.name
     .hot_items
       %ul
-        - 6.times do
+        - for item in category.items.is_suggest.limit(6)
           %li
-            .poster= image_tag(Item.first.poster.url(:small), :width => 140, :height => 140)
+            .poster= link_to image_tag(item.poster.url(:small), :width => 140, :height => 140), item, :target => "_blank"
             .title
               .right.price
                 ￥
-                = Item.first.price
-              = link_to Item.first.title, ""
+                = item.price
+              = link_to item.title, item, :target => "_blank"
             .summary
-              = Item.first.summary
+              = item.summary.truncate(10, :omission => "...") if item.summary.present?
         .clearfix
       
   

@@ -8,8 +8,10 @@ class ItemsController < ApplicationController
   end
   
   def show
-    @user = get_current_user
-    @item = @user.items.find(params[:id])
+    @current_user = get_current_user
+    @item = Item.find(params[:id])
+    @comments = @item.comments.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    @user = @item.user
   end
   
   def new
@@ -64,6 +66,27 @@ class ItemsController < ApplicationController
     item.destroy
     flash[:notice] = "删除成功"
     redirect_to items_url
+  end
+  
+  def write
+    item = Item.find(params[:id])
+    comment = item.comments.new(:content => params[:content], :user_id => current_user_id)
+    if comment.save
+      item.increment!(:comments_count)
+      flash[:notice] = "评论成功"
+    else
+      flash[:error] = "评论失败"
+    end
+    redirect_to :back
+  end
+  
+  def like
+    @item = Item.find(params[:id])
+    @item.increment!(:likes_count)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def my

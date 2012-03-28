@@ -9,6 +9,9 @@ Shangquan::Application.routes.draw do
     collection do
       get 'my', 'store'
     end
+    member do
+      post 'write', 'like'
+    end
   end
   
   resources :articles do

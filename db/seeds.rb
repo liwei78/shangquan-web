@@ -66,7 +66,7 @@ User.first.brands = brands
 puts "items in store"
 i = 1000
 50.times do
-  Item.create(:title => "商品测试#{i}", :unique_id => "UID#{i}", :state => 2, :store => true, :brand_id => rand(7), :poster => open(Rails.root.join('tmp', "item#{rand(5)}.jpg")))
+  Item.create(:title => "商品测试#{i}", :unique_id => "UID#{i}", :user_id => 5,  :state => 2, :store => true, :brand_id => rand(7), :poster => open(Rails.root.join('tmp', "item#{rand(5)}.jpg")))
   i += 1
 end
 puts "user 1 items"
@@ -77,12 +77,12 @@ m = 0
 end
 puts "index top items"
 Item.create([
-  {:title => "双肩带性感V领棉质背心", :summary => "双肩带棉质背心，性感的V字领内搭也精彩。", :price => 68,  :user_id => 2, :top => true, :poster => open(Rails.root.join('tmp', "itemtop1.jpg"))},
-  {:title => "NINE WEST 迷人彩色花朵装饰鱼嘴设计女士高跟鞋16色", :summary => "玖熙花朵鱼嘴高跟鞋，鞋子必须要最好的。", :price => 1550,  :user_id => 2, :top => true, :poster => open(Rails.root.join('tmp', "itemtop2.jpg"))},
-  {:title => "复古青春系 走进色彩国度 完美主义 二色撞色雪纺衫", :summary => "撞色雪纺衫，2012最流行的高调撞色美学。", :price => 79, :user_id => 3, :top => true, :poster => open(Rails.root.join('tmp', "itemtop3.jpg"))},
-  {:title => "大爱亮色，玫红", :summary => "玫红色连衣裙裤，颜色超亮叠穿效果别致。", :price => 79.2, :user_id => 3, :top => true, :poster => open(Rails.root.join('tmp', "itemtop4.jpg"))},
-  {:title => "[一身带裤子]limited edition 复古图案 套装 两款", :summary => "复古图案子套装，束口领型，更有味道。", :price => 226.9, :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop5.jpg"))},
-  {:title => "Kusso Molly】Crazy Label Treeson Ren 阿人 5寸 現貨", :summary => "正版5寸阿仁玩偶，爱他的玩家不要错过。", :price => 350, :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop6.jpg"))},
+  {:title => "双肩带性感V领棉质背心", :summary => "双肩带棉质背心，性感的V字领内搭也精彩。",                                 :price => 68,    :user_id => 2, :top => true, :poster => open(Rails.root.join('tmp', "itemtop1.jpg"))},
+  {:title => "NINE WEST 迷人彩色花朵装饰鱼嘴设计女士高跟鞋16色", :summary => "玖熙花朵鱼嘴高跟鞋，鞋子必须要最好的。",               :price => 1550,  :user_id => 2, :top => true, :poster => open(Rails.root.join('tmp', "itemtop2.jpg"))},
+  {:title => "复古青春系 走进色彩国度 完美主义 二色撞色雪纺衫", :summary => "撞色雪纺衫，2012最流行的高调撞色美学。",                  :price => 79,    :user_id => 3, :top => true, :poster => open(Rails.root.join('tmp', "itemtop3.jpg"))},
+  {:title => "大爱亮色，玫红", :summary => "玫红色连衣裙裤，颜色超亮叠穿效果别致。",                                      :price => 79.2,  :user_id => 3, :top => true, :poster => open(Rails.root.join('tmp', "itemtop4.jpg"))},
+  {:title => "[一身带裤子]limited edition 复古图案 套装 两款", :summary => "复古图案子套装，束口领型，更有味道。",             :price => 226.9, :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop5.jpg"))},
+  {:title => "Kusso Molly】Crazy Label Treeson Ren 阿人 5寸 現貨", :summary => "正版5寸阿仁玩偶，爱他的玩家不要错过。", :price => 350,   :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop6.jpg"))},
 ])
 
 
@@ -110,7 +110,6 @@ puts "articles"
   a.comments = comments
 end
 
-
 puts "1 activity"
 activity = Activity.create(
   :title => "饭，到，爱！", 
@@ -123,13 +122,16 @@ activity = Activity.create(
   2，上传你已分享的美食图片，在描述中加入#想吃的#然后保存。
   3，使用知美收集工具采集网页上的美食图片，在描述中加入#想吃的#。",
   :opening_date => "活动日期：3月26日-4月1日",
-  :poster => open(Rails.root.join('tmp', "activity.jpg"))
+  :poster => open(Rails.root.join('tmp', "activity.jpg"),
+  :top => true)
 )
 activity_items = Item.limit(6)
 activity_items.each do |item|
   item.update_attribute(:suggest, true)
 end
 activity.items = activity_items
+category1 = Category.find(1)
+category1.items = activity_items
 
 puts "4 banners"
 Banner.create([

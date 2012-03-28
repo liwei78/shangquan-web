@@ -17,7 +17,7 @@ class CreateItems < ActiveRecord::Migration
       t.integer  :comments_count, :default => 0
       t.integer  :collects_count, :default => 0
       t.integer  :position,       :default => 0            # 排序，用户首页推荐顺序
-      t.string   :summary
+      t.string   :summary                                  # 摘要
       
       # 封面
       t.string   :poster_file_name
