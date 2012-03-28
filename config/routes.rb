@@ -27,7 +27,6 @@ Shangquan::Application.routes.draw do
   end
 
   resources :users, :except => [:index, :destroy] do
-    resources :articles, :only => [:show]
     collection do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin

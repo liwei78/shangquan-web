@@ -7,7 +7,7 @@
         = link_to raw("<span id='shares_count_#{@article.id}'>#{@article.shares_count}</span><em></em>"), share_article_url(@article), :remote => true, :method => :post, :class => "share"
       .block
         .avatar
-          = link_to image_tag(@user.avatar.url(:small), :width => 60, :height => 60), @user
+          = link_to image_tag(@user.avatar.url(:thumb), :width => 60, :height => 60), @user
         .info
           .name
             = link_to @user.name, @user

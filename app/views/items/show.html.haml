@@ -6,7 +6,7 @@
         = link_to raw("<span id='likes_count_#{@item.id}'>#{@item.likes_count}</span><em></em>"), like_item_url(@item), :remote => true, :method => :post, :class => "like"
       .block
         .avatar
-          = link_to image_tag(@user.avatar.url(:small), :width => 60, :height => 60), @user
+          = link_to image_tag(@user.avatar.url(:thumb), :width => 60, :height => 60), @user
         .info
           .name
             = link_to @user.name, @user
