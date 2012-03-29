@@ -1,0 +1,30 @@
+.sharelist.nopadding
+  .list#sharelist
+    - for item in @items
+      .shareitem
+        .box
+          .content
+            = link_to image_tag(item.poster.url(:small), :width => 190, :height => 190), item, :target => "_blank"
+          .title
+            = link_to item.title, item, :target => "_blank"
+          - if item.user_id.present?
+            .info
+              .avatar= link_to image_tag(item.user.avatar.url(:small), :width=>30, :height => 30), item.user, :target => "_blank"
+              .intro
+                = link_to item.user.name, item.user, :target => "_blank"
+                发表于
+                = item.created_from_now
+              .clearfix
+          - if item.comments.present?
+            .comments
+              - for comment in item.comments.top
+                .comment
+                  .avatar= link_to image_tag(comment.user.avatar.url(:small), :width=>30, :height => 30), comment.user, :target => "_blank"
+                  .intro
+                    = link_to comment.user.name, comment.user, :target => "_blank"
+                    = comment.content.html_safe
+                  .clearfix
+                
+          .action
+    .clearfix
+.clearfix

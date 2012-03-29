@@ -22,6 +22,9 @@ class Article < ActiveRecord::Base
   scope :white,    :conditions => ["articles.state = ?", 2]
   scope :deleted,  :conditions => ["articles.state = ?", 3]
   
+  has_many :activity_articles
+  has_many :activities, :through => :activity_articles
+  
   has_attached_file :poster,
     :styles          => { :original => SITE_SETTINGS["crop_original"], :small => "" },
     :convert_options => {:small => SITE_SETTINGS["crop_small_covert"]},

@@ -1,0 +1,1 @@
+$('.items_list').prepend('<%=j render :partial => 'searchitem', :locals => {:items => @items} %>');

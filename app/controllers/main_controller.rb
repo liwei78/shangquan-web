@@ -9,24 +9,24 @@ class MainController < ApplicationController
     @suggest_activities = Activity.is_suggest.limit(3)
   end
 
-  def article
+  def articles
     @articles = Article.white.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
     @page_title = "时尚"
     render :layout => "layoutfullwidth"
   end
-  # 
-  # def activity
-  #   if params[:tag].present?
-  #     @activities = Activity.white.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   elsif params[:category].present?
-  #     @activities = Activity.white.where(["activity_category = ?", URI.decode(params[:category])]).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   elsif params[:area].present?
-  #     @activities = Activity.white.where(["activity_area = ?", URI.decode(params[:area])]).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   else
-  #     @activities = Activity.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   end
-  #   @page_title = "活动"
-  # end
+  
+  def activities
+    @activities = Activity.all
+    @page_title = "活动"
+  end
+  
+  def items
+    @items = Item.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
+    @page_title = "商品"
+    render :layout => "layoutfullwidth"
+  end
+  
+  
   # 
   # def company
   #   if params[:tag].present?

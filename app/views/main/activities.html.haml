@@ -1,0 +1,9 @@
+- for activity in @activities
+  .widebanner
+    = link_to image_tag(activity.poster.url), activity, :target => "_blank"
+  .showtitle
+    .right
+      = link_to "点击进入", activity, :target => "_blank"
+    已有
+    = activity.articles.count
+    个主题收集

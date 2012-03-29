@@ -42,11 +42,11 @@
               = link_to "新活动", js_void, :class => "new-discover"
             %ul
               %li= link_to "首页", root_url, :class => "index"
-              %li= link_to "时尚", ""
+              %li= link_to "时尚", "/main/articles"
               %li= link_to "商家", ""
               %li= link_to "品牌", ""
-              %li= link_to "活动", ""
-              %li= link_to "商品", ""
+              %li= link_to "活动", "/main/activities"
+              %li= link_to "商品", "/main/items"
               .clearfix
       .layoutfullwidth
         = yield

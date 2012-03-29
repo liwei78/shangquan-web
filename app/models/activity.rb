@@ -1,5 +1,8 @@
 class Activity < ActiveRecord::Base
   
+  has_many :activity_articles
+  has_many :articles, :through => :activity_articles
+  
   has_many :activity_items
   has_many :items, :through => :activity_items
   

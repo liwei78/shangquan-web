@@ -93,6 +93,28 @@ class ItemsController < ApplicationController
     end
   end
   
+  def minilike
+    @item = Item.find(params[:id])
+    user = get_current_user
+    @ok = false
+    unless user.like_items.include?(@item)
+      @item.increment!(:likes_count)
+      user.like_items << @item
+      @ok = true
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def search
+    @items = Item.find(:all, :conditions => ["unique_id like ?", "%"+params[:uid]+"%"], :include => :brand, :limit => 12)
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def my
     @user = get_current_user
     @items = @user.items.white

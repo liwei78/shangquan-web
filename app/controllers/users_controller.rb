@@ -127,6 +127,9 @@ class UsersController < ApplicationController
   
   def share
     @user = get_current_user
+    if params[:aid].present?
+      @activity = Activity.find(params[:aid])
+    end
   end
 
   def updatesetting
@@ -258,12 +261,19 @@ class UsersController < ApplicationController
       article.is_video = true
     end
     
-    if params[:add_items] == "true"
-      article.items = Item.find(1,2,3)
-      article.is_item = true
-    end
-    
     if article.save
+      # items
+      if params[:add_items] == "true"
+        items = Item.find(params[:items])
+        article.items = items
+        article.is_item = true
+        if params[:activity_id].present?
+          activity = Activity.find(params[:activity_id])
+          activity.items = items
+          activity.articles << article
+        end
+      end
+      
       # photos
       if params[:add_album] == "true"
         files = params[:photos].present? ? params[:photos][:file] : []

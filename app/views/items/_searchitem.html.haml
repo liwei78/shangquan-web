@@ -1,0 +1,13 @@
+- for item in items
+  %li
+    .poster
+      = image_tag(item.poster.url(:small), :width => 60, :height => 60)
+    .iteminfo
+      .itemtitle
+        = check_box_tag "items[]", item.id
+        = item.title
+      .itembrand
+        - if item.brand.present?
+          %span 品牌
+          = item.brand.name
+    .clearfix

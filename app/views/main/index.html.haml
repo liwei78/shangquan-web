@@ -88,7 +88,7 @@
               %span= item.collects_count
               个收藏
             .collect_btn
-              = link_to "收藏", "", :class => "collectstyle"
+              = link_to "喜欢", minilike_item_url(item), :remote => true, :method => :post, :class => "collectstyle"
           .clearfix
       .clearfix
     .clearfix

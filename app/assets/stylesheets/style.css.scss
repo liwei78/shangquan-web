@@ -60,7 +60,7 @@ ul, ol {
 .grey {
   color: grey;
 }
-$layout-width: 954px;
+$layout-width: 950px;
 .layout {
   width: $layout-width;
   margin: 0 auto;
@@ -487,6 +487,12 @@ $layout-width: 954px;
         .action {
           line-height: 40px;
           margin-bottom: 4px;
+        }
+        .special_intro {
+          width: 190px;
+          padding-top: 16px;
+          font-size: 12px;
+          line-height: 24px;
         }
       }
     }
@@ -1289,9 +1295,57 @@ a.collectstyle {
   margin: 24px auto;
 }
 
+.widebanner {
+  margin-bottom: 16px;
+}
 
+.showtitle {
+  border-left: 3px solid #65C5B3;
+  height: 46px;
+  line-height: 46px;
+  padding: 0 0 0 22px;
+  margin: 0 auto 16px;
+  background: white;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 1px 0 rgba(34,25,25,0.2);
+  font-size: 16px;
+}
 
+.showcontent {}
 
+.items_search {
+  width: 500px;
+  padding-top: 10px;
+  padding-left: 8px;
+  .items_list {
+    li {
+      width: 220px;
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      .poster {
+        width: 60px;
+        float: left;
+      }
+      .iteminfo {
+        width: 150px;
+        float: left;
+        margin-left: 10px;
+        .itemtitle {
+          line-height: 30px;
+        }
+        .itembrand {
+          line-height: 30px;
+          font-size: 12px;
+          span {
+            color: grey;
+          }
+        }
+      }
+    }
+  }
+}
 
 
 

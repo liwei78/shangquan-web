@@ -7,10 +7,10 @@ Shangquan::Application.routes.draw do
   resources :brands
   resources :items do
     collection do
-      get 'my', 'store'
+      get 'my', 'store', 'search'
     end
     member do
-      post 'write', 'like'
+      post 'write', 'like', 'minilike'
     end
   end
   
@@ -46,6 +46,9 @@ Shangquan::Application.routes.draw do
       post 'follow', 'unfollow', 'minifollow'
     end
   end
-
+  
+  match '/main/activities'  => 'main#activities', :via => :get
+  match '/main/items'       => 'main#items',      :via => :get
+  match '/main/articles'    => 'main#articles',   :via => :get
   root :to => 'main#index'
 end
