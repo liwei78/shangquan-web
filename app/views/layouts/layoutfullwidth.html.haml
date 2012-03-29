@@ -23,7 +23,10 @@
                       %li=link_to "我的商品", items_url
                       %li=link_to "我的活动", avatarsetting_users_url
                       %li=link_to "退出", logout_users_url
-                  %li=link_to "信息", messages_url
+                  %li
+                    - if @current_user.messages.unread.count > 0
+                      .new 新
+                    =link_to "信息", messages_url
                   %li=link_to "设置", setting_users_url
               - else
                 %ul.sf-menu

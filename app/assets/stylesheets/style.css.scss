@@ -201,6 +201,19 @@ $layout-width: 954px;
     text-align: center;
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
+    position: relative;
+    .new {
+      width: 60px;
+      height: 20px;
+      line-height: 20px;
+      position: absolute;
+      top: 10px;
+      right: 5px;
+      text-align: right;
+      color: red;
+      font-size: 8px;
+      a-index: 9999;
+    }
     a {
       text-decoration: none;
     }
@@ -299,6 +312,15 @@ $layout-width: 954px;
     font-size: 16px;
     font-weight: bold;
   }
+  .userintro {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    color: grey;
+    color: #666;
+    line-height: 22px;
+    font-size: 12px;
+  }
   .siterole {
     width: 190px;
     margin: 0 auto;
@@ -342,6 +364,33 @@ $layout-width: 954px;
           overflow: hidden;
         }
       }
+    }
+  }
+  .actionbox {
+    width: 190px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    a {
+      background: image-url('attention-mail.gif') no-repeat;
+      height: 36px;
+      display: inline-block;
+      line-height: 36px;
+      width: 81px;
+      padding-left: 63px;
+      font-size: 14px;
+      vertical-align: middle;
+      overflow: hidden;
+      background-position: 0 2px;
+      color: white;
+    }
+    a.follow-btn:active {
+      background-position: 0 -85px;
+      color: #FFFFFF;
+    }
+    a.unfollow-btn {
+      background-position: -161px -41px;
+      color: #999;
+      text-decoration: none;
     }
   }
   .following {

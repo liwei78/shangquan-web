@@ -10,6 +10,10 @@ class Item < ActiveRecord::Base
   has_many :category_items
   has_many :categories, :through => :category_items
   
+  # 用户与喜欢物品的关系
+  has_many :user_items
+  has_many :like_users, :through => :user_items, :source => :user
+  
   scope :block,       :conditions => ["items.state = ?", 0]
   scope :auditing,    :conditions => ["items.state = ?", 1]
   scope :white,       :conditions => ["items.state = ?", 2]

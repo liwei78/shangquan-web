@@ -284,5 +284,64 @@ class UsersController < ApplicationController
     
   end
   
+  def follow
+    @user = User.find(params[:id])
+    @ok = false
+    @msg = ""
+    if @user == @current_user
+      @msg = "亲，自己不能关注自己。"
+    else
+      if @current_user.following?(@user)
+        @msg = "亲，你已经关注过了"
+      else
+        @current_user.follow!(@user)
+        @ok = true
+        Message.sys_send_to(@user.id, "#{@current_user.name}关注了你", "<a href='/users/#{@current_user.id}' target='_blank'>#{@current_user.name}</a> 刚刚关注了你，现在去看看吧。")
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def minifollow
+    @user = User.find(params[:id])
+    @ok = false
+    @msg = ""
+    if @user == @current_user
+      @msg = "亲，自己不能关注自己。"
+    else
+      if @current_user.following?(@user)
+        @msg = "亲，你已经关注过了"
+      else
+        @current_user.follow!(@user)
+        @ok = true
+        Message.sys_send_to(@user.id, "#{@current_user.name}关注了你", "<a href='/users/#{@current_user.id}' target='_blank'>#{@current_user.name}</a> 刚刚关注了你，现在去看看吧。")
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def unfollow
+    @user = User.find(params[:id])
+    @current_user = get_current_user
+    @ok = false
+    @msg = ""
+    if @user == @current_user
+      @msg = "亲，自己不能操作自己。"
+    else
+      if !@current_user.following?(@user)
+        @msg = "亲，你已经取消关注过了"
+      else
+        @current_user.unfollow!(@user)
+        @ok = true
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
   
 end

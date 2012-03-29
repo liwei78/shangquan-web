@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
   end
   
   def show
-    @current_user = get_current_user
     @item = Item.find(params[:id])
     @comments = @item.comments.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
     @user = @item.user
@@ -82,7 +81,12 @@ class ItemsController < ApplicationController
   
   def like
     @item = Item.find(params[:id])
-    @item.increment!(:likes_count)
+    user = get_current_user
+    unless user.like_items.include?(@item)
+      @item.increment!(:likes_count)
+      user.like_items << @item
+      @plus_one = true
+    end
     respond_to do |format|
       format.html
       format.js

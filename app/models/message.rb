@@ -3,6 +3,7 @@ class Message < ActiveRecord::Base
   
   scope :sysmsg, :conditions => ["messages.sysmsg = ?", true]
   scope :mymsg,  :conditions => ["messages.sysmsg = ?", false]
+  scope :unread,  :conditions => ["messages.read = ?", false]
   
   def self.sys_send_to(uid, title, content)
     create(
@@ -11,4 +12,7 @@ class Message < ActiveRecord::Base
       :content => content, 
       :sysmsg  => true)
   end
+  
+  
+  
 end

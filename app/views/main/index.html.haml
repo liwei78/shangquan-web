@@ -36,7 +36,7 @@
         .name
           = link_to @todaystar.name, @todaystar, :target => "_blank"
           %span.starv{:title => "认证达人"}
-          = link_to "关注", "", :class => "followstyle"
+          = link_to "关注", minifollow_user_url(@todaystar), :method => :post, :remote => true, :class => "followstyle"
         .intro
           = @todaystar.intro
         .items
@@ -63,7 +63,7 @@
             = link_to star.name, star, :target => "_blank"
             = star.intro
             .follow
-              = link_to "关注", "", :class => "followstyle"
+              = link_to "关注", minifollow_user_url(star), :method => :post, :remote => true, :class => "followstyle"
           .clearfix
   .clearfix
   .gather-items

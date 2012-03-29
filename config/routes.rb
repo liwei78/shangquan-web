@@ -42,6 +42,9 @@ Shangquan::Application.routes.draw do
       get  'discover'
       post 'postdiscover'
     end
+    member do
+      post 'follow', 'unfollow', 'minifollow'
+    end
   end
 
   root :to => 'main#index'

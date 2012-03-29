@@ -3,6 +3,9 @@
     = image_tag(@user.avatar.url)
   .username
     = @user.name
+  - if @user.intro.present?
+    .userintro
+      = @user.intro
   .siterole
     = @user.site_role
     - if @user.role == 0 and is_me?(@user)
@@ -29,29 +32,30 @@
         .up
           粉丝
         .down
-          = @user.followers_count
+          = @user.followers.count
       %li
         .up
           关注
         .down
-          = @user.followings_count
+          = @user.following.count
       %li.noborder
         .up
           收藏
         .down
           = @user.favorites_count
       .clearfix
+  - unless @user == @current_user
+    .actionbox
+      - if @current_user.following?(@user)
+        = link_to "已关注", unfollow_user_url(@user), :method => :post, :remote => true, :class => "unfollow-btn", :confirm => "你要取消关注吗？"
+      - else
+        = link_to "关注", follow_user_url(@user), :method => :post, :remote => true, :class => "follow-btn"
+
   .following
     .title
       TA关注的人
     .list
       %ul
-        - for user in User.all
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
-          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user
+        - for user in @user.following
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user, :target => "_blank"
         .clearfix
