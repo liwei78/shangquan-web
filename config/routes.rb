@@ -50,5 +50,6 @@ Shangquan::Application.routes.draw do
   match '/main/activities'  => 'main#activities', :via => :get
   match '/main/items'       => 'main#items',      :via => :get
   match '/main/articles'    => 'main#articles',   :via => :get
+  match '/main/companies'   => 'main#companies',   :via => :get
   root :to => 'main#index'
 end

@@ -132,6 +132,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def discover
+    @user = get_current_user
+  end
+
   def updatesetting
     user = User.find(current_user_id)
     user.name = params[:name]
@@ -261,6 +265,10 @@ class UsersController < ApplicationController
       article.is_video = true
     end
     
+    if [2,3].include?(@current_user.role)
+      article.is_company = ture
+    end
+    
     if article.save
       # items
       if params[:add_items] == "true"
@@ -291,6 +299,20 @@ class UsersController < ApplicationController
       flash[:error] = "发布失败"
     end
     redirect_to user_url(current_user_id)
+    
+  end
+  
+  def postdiscover
+    report = ActivityReport.new
+    report.user_id = current_user_id
+    report.content = params[:content]
+    if report.save
+      flash[:notice] = "添加成功"
+      redirect_to user_url(current_user_id)
+    else
+      flash[:error] = "添加失败"
+      redirect_to :back
+    end
     
   end
   

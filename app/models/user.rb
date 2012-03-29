@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :messages, :order => "messages.id desc"
   has_many :brand_users
   has_many :brands, :through => :brand_users
+  has_many :activity_reports
   
   # 用户与喜欢物品的关系
   has_many :user_items

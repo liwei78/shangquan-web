@@ -9,14 +9,14 @@
         %li= link_to "活动", discover_users_url, :class => "on"
         .clearfix
     .formstyle
-      = form_tag(updatesetting_users_url, :multipart => true) do
+      = form_tag(postdiscover_users_url, :multipart => true) do
         %table{:width => '100%', :cellspadding => 6}
           %tr
-            %td{:width => 100} 
-            %td
+            %td{:width => 100} 内容
+            %td= text_area_tag :content, "", :cols => 40, :rows => 6, :class => " wide"
           %tr
-            %td{:width => 100} 
             %td
+            %td 请写下您观察到的活动概况，我们核实后，将开通该活动，并给予您适当的奖励。
         .btn
           = submit_tag "确定", :class => "submit"
         
