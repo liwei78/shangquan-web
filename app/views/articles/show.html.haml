@@ -59,7 +59,7 @@
           评论
         .newcomment
           .avatar
-            = image_tag(@current_user.avatar.url(:small))
+            = image_tag(@current_user.avatar.url(:small), :width => 30, :height => 30)
           .newinput
             = form_tag(write_article_url(@article)) do
               = text_area_tag :content, "", :class => "input"
@@ -70,7 +70,7 @@
           - for comment in @comments
             .comment
               .avatar
-                = link_to(image_tag(comment.user.avatar.url(:small)), comment.user)
+                = link_to(image_tag(comment.user.avatar.url(:small), :width => 30, :height => 30), comment.user)
               .info
                 .name
                   .right
