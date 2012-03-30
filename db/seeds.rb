@@ -34,6 +34,16 @@ Category.create([
   {:name => "团购", :position => "7"}]
 )
 
+Channel.create([
+  {:name => "化妆品", :position => "1"},
+  {:name => "男装", :position => "2"}, 
+  {:name => "女装", :position => "3"}, 
+  {:name => "鞋帽", :position => "4"},
+  {:name => "儿童用品", :position => "5"},
+  {:name => "运动户外", :position => "6"},
+  {:name => "首饰", :position => "7"}
+])
+
 
 puts "aaa@123.com sysmsg for 50"
 50.times do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120329131024) do
+ActiveRecord::Schema.define(:version => 20120330133829) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20120329131024) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
+    t.integer  "channel_id"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -162,6 +163,13 @@ ActiveRecord::Schema.define(:version => 20120329131024) do
   create_table "category_items", :force => true do |t|
     t.integer  "category_id"
     t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "channels", :force => true do |t|
+    t.string   "name"
+    t.integer  "position",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

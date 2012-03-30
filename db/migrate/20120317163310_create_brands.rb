@@ -1,7 +1,8 @@
 class CreateBrands < ActiveRecord::Migration
   def change
     create_table :brands do |t|
-      t.string :name
+      t.string  :name
+      t.integer :channel_id
       
       # logo
       t.string   :logo_file_name
