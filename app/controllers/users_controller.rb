@@ -266,7 +266,7 @@ class UsersController < ApplicationController
     end
     
     if [2,3].include?(@current_user.role)
-      article.is_company = ture
+      article.is_company = true
     end
     
     if article.save

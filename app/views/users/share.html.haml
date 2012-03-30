@@ -84,16 +84,15 @@
             %td
               = text_field_tag :unique_id, "", :class => "input", :style => "width: 500px;"
               = link_to "查找", js_void, :id => "search_link"
-              :javascript
-                $("#search_link").bind('click', function(){
-                  $.ajax('/items/search?uid='+$('#unique_id').val());
-                });
+              = hidden_field_tag :page, 1
               .items_search
                 %ul.items_list
-                  .clearfix
                 
               %br
-              输入商品货号，系统将自动找到它。
+              :javascript
+                $("#search_link").bind('click', function(){
+                  $.ajax('/items/search?uid='+$('#unique_id').val()+'&page='+$('#page').val());
+                });
           %tr
             %td
             %td

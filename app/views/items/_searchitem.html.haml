@@ -1,13 +1,32 @@
-- for item in items
-  %li
-    .poster
-      = image_tag(item.poster.url(:small), :width => 60, :height => 60)
-    .iteminfo
-      .itemtitle
-        = check_box_tag "items[]", item.id
-        = item.title
-      .itembrand
-        - if item.brand.present?
-          %span 品牌
-          = item.brand.name
-    .clearfix
+- if @blank
+  未找到您要的结果
+- else
+  - for item in items
+    %li
+      .poster
+        = image_tag(item.poster.url(:small), :width => 60, :height => 60)
+      .iteminfo
+        .itemtitle
+          = check_box_tag "items[]", item.id
+          = item.title
+        .itembrand
+          - if item.brand.present?
+            %span 品牌
+            = item.brand.name
+      .clearfix
+  .clearfix
+
+  .page#ajax_page
+    .right
+      第
+      = @page
+      \/
+      = @page_total
+      页
+      共有
+      %span= @items_count
+      条结果
+    - if @page > 1
+      = link_to "上一页", search_items_url(:uid => params[:uid], :page => @pre_page), :remote => true, :method => :get
+    - if @page < @page_total
+      = link_to "下一页", search_items_url(:uid => params[:uid], :page => @next_page), :remote => true, :method => :get

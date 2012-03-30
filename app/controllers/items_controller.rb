@@ -109,7 +109,17 @@ class ItemsController < ApplicationController
   end
   
   def search
-    @items = Item.find(:all, :conditions => ["unique_id like ?", "%"+params[:uid]+"%"], :include => :brand, :limit => 12)
+    if params[:uid].present?
+      @items       = Item.paginate(:conditions => ["unique_id like ?", "%"+params[:uid]+"%"], :include => :brand, :page => params[:page], :per_page => 6)
+      @items_count = Item.where("unique_id like ?", "%"+params[:uid]+"%").count
+      @page_total  = @items_count > 6 ? (@items_count%6==0 ? @items_count/6 : @items_count/6+1) : 1
+      @page        = params[:page].to_i
+      @pre_page    = @page>1 ? @page-1 : 1
+      @next_page   = @page+1
+      @blank       = false
+    else
+      @blank = true
+    end
     respond_to do |format|
       format.js
     end
