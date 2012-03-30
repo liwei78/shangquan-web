@@ -103,6 +103,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @current_user = get_current_user
     @feeds = @user.feeds.with_username.paginate(:page => params[:page], :per_page => 5)
     @articles = @user.articles
     @page_title = @user.name + "的空间"
@@ -252,6 +253,7 @@ class UsersController < ApplicationController
   end
   
   def postshare
+    @current_user = get_current_user
     article = Article.new(
       :title    => params[:title], 
       :content  => params[:content], 
@@ -318,6 +320,7 @@ class UsersController < ApplicationController
   
   def follow
     @user = User.find(params[:id])
+    @current_user = get_current_user
     @ok = false
     @msg = ""
     if @user == @current_user
@@ -338,6 +341,7 @@ class UsersController < ApplicationController
   
   def minifollow
     @user = User.find(params[:id])
+    @current_user = get_current_user
     @ok = false
     @msg = ""
     if @user == @current_user

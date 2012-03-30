@@ -1,8 +1,7 @@
 #encoding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :current_user
-  
+
   def dev?
     Rails.env == "development"
   end
@@ -25,10 +24,6 @@ class ApplicationController < ActionController::Base
 
   def loggin?
     (session[:signcode].present?||cookies[:signcode].present?)&&current_user_name.present?&&current_user_id.present? ? true : false
-  end
-  
-  def current_user
-    @current_user = get_current_user if loggin?
   end
   
   private

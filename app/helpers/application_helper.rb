@@ -11,6 +11,10 @@ module ApplicationHelper
     session[:signcode]||cookies[:signcode] ? true : false
   end
   
+  def get_current_user
+    User.find(session[:user_id]||cookies[:user_id]) if loggin?
+  end
+  
   def current_user_name
     session[:user_name]||cookies[:user_name]
   end

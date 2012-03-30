@@ -20,7 +20,7 @@
       %td
         投放频道
       %td
-        = f.select :channel_id, []+Channel.order('position asc').map{|ch| [ch.name, ch.id]}
+        = f.select :channel_id, [["", ""]]+Channel.order('position asc').map{|ch| [ch.name, ch.id]}
 
   .btn
     = submit_tag "确定", :class => "submit"

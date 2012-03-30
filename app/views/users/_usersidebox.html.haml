@@ -44,7 +44,7 @@
         .down
           = @user.favorites_count
       .clearfix
-  - unless @user == @current_user
+  - if @current_user.present? and @user != @current_user
     .actionbox
       - if @current_user.following?(@user)
         = link_to "已关注", unfollow_user_url(@user), :method => :post, :remote => true, :class => "unfollow-btn", :confirm => "你要取消关注吗？"

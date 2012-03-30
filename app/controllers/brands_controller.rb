@@ -1,6 +1,7 @@
 # encoding: utf-8
 class BrandsController < ApplicationController
-  before_filter :need_user_login
+  before_filter :need_user_login, :except => [:show]
+  
   def index
     @user = get_current_user
     @brands = @user.brands

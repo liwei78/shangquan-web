@@ -24,7 +24,7 @@
                       %li=link_to "我的活动", ""
                       %li=link_to "退出", logout_users_url
                   %li
-                    - if @current_user.messages.unread.count > 0
+                    - if get_current_user.messages.unread.count > 0
                       .new 新
                     =link_to "信息", messages_url
                   %li=link_to "设置", setting_users_url

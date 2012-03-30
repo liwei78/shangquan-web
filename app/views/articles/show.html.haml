@@ -55,17 +55,18 @@
           - for tag in @article.tags
             = link_to tag.name, "#"
       .comments
-        %h2
-          评论
-        .newcomment
-          .avatar
-            = image_tag(@current_user.avatar.url(:small), :width => 30, :height => 30)
-          .newinput
-            = form_tag(write_article_url(@article)) do
-              = text_area_tag :content, "", :class => "input"
-              %br
-              = submit_tag("确定", :class => "btnstyle")
-          .clearfix
+        - if @current_user.present?
+          %h2
+            评论
+          .newcomment
+            .avatar
+              = image_tag(@current_user.avatar.url(:small), :width => 30, :height => 30)
+            .newinput
+              = form_tag(write_article_url(@article)) do
+                = text_area_tag :content, "", :class => "input"
+                %br
+                = submit_tag("确定", :class => "btnstyle")
+            .clearfix
         .commentslist
           - for comment in @comments
             .comment

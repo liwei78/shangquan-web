@@ -1,6 +1,6 @@
 # encoding: utf-8
 class ItemsController < ApplicationController
-  before_filter :need_user_login
+  before_filter :need_user_login, :except => [:show]
   
   def index
     @user = get_current_user
@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @comments = @item.comments.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
     @user = @item.user
+    @current_user = get_current_user
   end
   
   def new
