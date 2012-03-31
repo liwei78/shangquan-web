@@ -457,7 +457,7 @@ $layout-width: 950px;
         margin: 0 auto;
         color: $grey;
         .title {
-          line-height: 36px;
+          line-height: 30px;
           font-size: 14px;
         }
         .info, .comments {
@@ -517,6 +517,22 @@ $layout-width: 950px;
         padding-bottom: 10px;
         span {
           color: #545454;
+        }
+      }
+      .brand_users {
+        .title {
+          font-size: 14px;
+          line-height: 30px;
+          margin-bottom: 6px;
+        }
+        ul {
+          li {
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin-right: 1px;
+            margin-bottom: 1px;
+          }
         }
       }
     }

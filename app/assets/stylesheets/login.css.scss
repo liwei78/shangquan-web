@@ -117,6 +117,32 @@ $layout-width: 774px;
       .btn {
         background: image-url("reg_btn.gif") no-repeat bottom;
       }
+      .submit {
+        border: 0;
+        background: image-url('signup_btn.gif') no-repeat left top;
+        height: 40px;
+        width: 123px;
+        text-indent: -9999px;
+        overflow: hidden;
+        cursor: pointer;
+        display: block;
+      }
+      .submit:hover {
+        background: image-url('signup_btn.gif') no-repeat left -40px;
+      }
+      .submit:active {
+        background: image-url('signup_btn.gif') no-repeat left -40px;
+      }
+      .reg_btn {
+        border: 0;
+        background: image-url('reg_btn.gif') no-repeat left top;
+        height: 40px;
+        width: 142px;
+        text-indent: -9999px;
+        overflow: hidden;
+        cursor: pointer;
+        display: block;
+      }
     }
   }
   .foot {

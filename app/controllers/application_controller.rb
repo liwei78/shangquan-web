@@ -26,13 +26,24 @@ class ApplicationController < ActionController::Base
     (session[:signcode].present?||cookies[:signcode].present?)&&current_user_name.present?&&current_user_id.present? ? true : false
   end
   
-  private
+  # private
   
   def need_user_login
+    # unless loggin?
+    #   flash[:notice] = "请登录"
+    #   redirect_to welcome_users_url
+    # end
     unless loggin?
-      flash[:notice] = "请登录"
-      redirect_to welcome_users_url
-    end 
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "请登录"
+          redirect_to welcome_users_url
+        end
+        format.js do
+          render :template => "application/need_user_login", :layout => false
+        end
+      end
+    end
   end
   
 end

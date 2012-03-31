@@ -56,5 +56,33 @@ class BrandsController < ApplicationController
     flash[:notice] = "删除成功"
     redirect_to brands_url
   end
+  
+  def follow
+    @user = get_current_user
+    @brand = Brand.find(params[:id])
+    @ok = false
+    unless @brand.followers.include?(@user)
+      @brand.followers << @user
+      @ok = true
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def minifollow
+    @user = get_current_user
+    @brand = Brand.find(params[:id])
+    @ok = false
+    unless @brand.followers.include?(@user)
+      @brand.followers << @user
+      @ok = true
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
 end

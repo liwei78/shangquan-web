@@ -26,10 +26,22 @@
                 = hidden_field_tag :activity_id, @activity.id
             %tr
               %td
-              %td 该文章将自动投稿到该活动。
+              %td 文章将自动投稿到该活动。
             %tr
               %td
               %td= link_to image_tag(@activity.poster.url(:middle)), @activity, :target => "_blank"
+          - if @brand.present?
+            %tr
+              %td{:width => 100} 品牌
+              %td
+                = link_to @brand.name, @name, :target => "_blank"
+                = hidden_field_tag :brand_id, @brand.id
+            %tr
+              %td
+              %td 文章将自动投稿到该品牌栏目内。
+            %tr
+              %td
+              %td= link_to image_tag(@brand.logo.url), @brand, :target => "_blank"
           %tr
             %td{:width => 100} 标题
             %td= text_field_tag :title, "", :class => "input wide"
@@ -84,14 +96,13 @@
             %td
               = text_field_tag :unique_id, "", :class => "input", :style => "width: 500px;"
               = link_to "查找", js_void, :id => "search_link"
-              = hidden_field_tag :page, 1
               .items_search
-                %ul.items_list
+                %ul.items_list#items_list
                 
               %br
               :javascript
                 $("#search_link").bind('click', function(){
-                  $.ajax('/items/search?uid='+$('#unique_id').val()+'&page='+$('#page').val());
+                  $.ajax('/items/search?uid='+$('#unique_id').val());
                 });
           %tr
             %td

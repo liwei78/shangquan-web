@@ -1,6 +1,6 @@
 .showtitle
   .right
-    = link_to "我要投稿", ""
+    = link_to "我要投稿", share_users_url(:bid => @brand), :target => "_blank"
   已有
   = @brand.articles.count
   个主题收集
@@ -19,8 +19,8 @@
                 = link_to "+关注", follow_brand_url(@brand), :remote => true, :method => :post, :class => "followstylebtn"
               .hot_count
                 人气：
-                %span
-                  = @brand.hot_count
+                %span{:id => "hoy_count_#{@brand_id}"}
+                  = @brand.followers.count
               .discount_count
                 折扣：
                 %span
@@ -28,6 +28,7 @@
                 条折扣信息
             .brand_box
               .line 品牌综合评价
+              .line 质量
               .line 款式
               .line 服务
               .line 
@@ -57,6 +58,7 @@
                   - for user in @brand.followers
                     %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user, :target => "_blank"
                   .clearfix
+                .clearfix
 
       - for article in @articles
         .shareitem

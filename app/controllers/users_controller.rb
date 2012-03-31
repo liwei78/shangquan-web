@@ -131,6 +131,9 @@ class UsersController < ApplicationController
     if params[:aid].present?
       @activity = Activity.find(params[:aid])
     end
+    if params[:bid].present?
+      @brand = Brand.find(params[:bid])
+    end
   end
 
   def discover
@@ -294,6 +297,14 @@ class UsersController < ApplicationController
           article.update_attribute(:is_photo, true)
         end
       end
+      
+      # brand's article
+      if params[:brand_id].present?
+        article.update_attribute(:is_brand, true)
+        brand = Brand.find(params[:brand_id])
+        brand.articles << article
+      end
+      
       User.update_counters current_user_id, :articles_count => 1
       
       flash[:notice] = "发布成功"
