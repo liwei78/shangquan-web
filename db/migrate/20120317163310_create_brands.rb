@@ -3,6 +3,10 @@ class CreateBrands < ActiveRecord::Migration
     create_table :brands do |t|
       t.string  :name
       t.integer :channel_id
+      t.integer :hot_count,      :default => 0
+      t.integer :discount_count, :default => 0
+      t.integer :scores_count,   :default => 0       # 评价次数
+      t.text    :intro
       
       # logo
       t.string   :logo_file_name

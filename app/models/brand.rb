@@ -1,6 +1,12 @@
 class Brand < ActiveRecord::Base
+  belongs_to :channel
   has_many :brand_users
   has_many :users, :through => :brand_users
+  has_many :brand_articles
+  has_many :articles, :through => :brand_articles 
+  has_many :likes, :as => :klass
+  has_many :followers, :through => :likes, :source => :user
+  
   scope :tmp, :conditions => ["tmp = ?", true]
   scope :formal, :conditions => ["tmp = ?", false]
   

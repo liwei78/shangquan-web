@@ -14,6 +14,12 @@ $(document).ready(function() {
     $(this).removeClass('hover');
   });
   
+  $('div.brands_list > ul > li').mouseover(function(){
+    $(this).addClass('hover');
+  }).mouseout(function(){
+    $(this).removeClass('hover');
+  });
+  
   // var shareListItem = '216px';
   // var shareListWidth = shareListItem * 5;
   // $('.sharelist .shareitem').each( function(){ sum += $(this).width(); });

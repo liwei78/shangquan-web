@@ -8,8 +8,10 @@ class BrandsController < ApplicationController
   end
 
   def show
-    @user = get_current_user
-    @brand = @user.brands.find(params[:id])
+    @brand = Brand.find(params[:id])
+    @articles = @brand.articles.paginate(:page => params[:page], :per_page => 50)
+    @page_title = "品牌：#{@brand.name}"
+    render :layout => "layoutfullwidth"
   end
 
   def edit

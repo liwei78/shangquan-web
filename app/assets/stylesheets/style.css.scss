@@ -495,6 +495,30 @@ $layout-width: 950px;
           line-height: 24px;
         }
       }
+      .brand_logo {}
+      .brand_name {
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .brand_action {
+        line-height: 24px;
+        border-bottom: 1px solid #efefef;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      .brand_box {
+        color: #000;
+        font-size: 12px;
+        line-height: 24px;
+        border-bottom: 1px solid #efefef;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        span {
+          color: #545454;
+        }
+      }
     }
   }
 }
@@ -1310,9 +1334,39 @@ a.collectstyle {
   z-index: 2;
   box-shadow: 0 1px 0 rgba(34,25,25,0.2);
   font-size: 16px;
+  .right {
+    margin-right: 22px;
+  }
 }
 
-.showcontent {}
+.showcontent {
+  background-color: white;
+  .brands_list {
+    margin-left: 35px;
+    padding: 20px;
+    ul {
+      li.hover {
+        border: 3px solid $primary_color;
+      }
+      li {
+        width: 186px;
+        height: 146px;
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border: 3px solid #eee;
+        .logo {
+          border-bottom: 1px solid #eee;
+        }
+        .name {
+          line-height: 30px;
+          height: 30px;
+          padding: 5px 10px 0 10px;
+        }
+      }
+    }
+  }
+}
 
 .items_search {
   width: 500px;
@@ -1347,5 +1401,13 @@ a.collectstyle {
   }
 }
 
-
+.followstylebtn {
+  background: image-url("floatbarbt.gif") no-repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+  display: inline-block;
+  height: 31px;
+  line-height: 31px;
+  text-align: center;
+  width: 55px;
+}
 

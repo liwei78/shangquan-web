@@ -1,23 +1,88 @@
-= render :partial => "users/usersidebox"
-.mainbox
-  .formbox
-    .title
-      品牌
-    .nav
-      %ul
-        %li= link_to "列表", brands_url
-        %li= link_to "查看", @brand, :class => "on"
-        .clearfix
-    .tablestyle
-      %table{:width => "100%", :cellpadding => "4"}
-        %tr
-          %td{:width => "190"}
-            = image_tag(@brand.logo.url(:small))
-          %td
-            .right
-              = link_to "编辑", edit_brand_url(@brand)
-              = link_to "删除", @brand, :method => :delete, :confirm => "点击确定继续"
-            = @brand.name
-        
-        
-.clearfix
+.showtitle
+  .right
+    = link_to "我要投稿", ""
+  已有
+  = @brand.articles.count
+  个主题收集
+.showcontent
+  .sharelist.nopadding
+    .list#sharelist
+      .shareitem
+        .box
+          .content
+            .brand_logo
+              = image_tag(@brand.logo.url)
+            .brand_name
+              = @brand.name
+            .brand_box
+              .right
+                = link_to "+关注", follow_brand_url(@brand), :remote => true, :method => :post, :class => "followstylebtn"
+              .hot_count
+                人气：
+                %span
+                  = @brand.hot_count
+              .discount_count
+                折扣：
+                %span
+                  = @brand.discount_count
+                条折扣信息
+            .brand_box
+              .line 品牌综合评价
+              .line 款式
+              .line 服务
+              .line 
+                .right
+                  = link_to "我来评价", ""
+                已有#{@brand.scores_count}个评价
+              
+            .brand_box
+              .brand_channel
+                %span
+                  品牌类型：
+                = @brand.channel.name if @brand.channel.present?
+              .brand_company
+                %span
+                  品牌商家：
+                = @brand.users.count
+                家商家
+                = link_to "[查看]", ""
+              .brand_intro
+                %span
+                  品牌介绍：
+                = @brand.intro.html_safe
+            .brand_users
+              .title
+                TA们也在关注
+                %ul
+                  - for user in @brand.followers
+                    %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user, :target => "_blank"
+                  .clearfix
+
+      - for article in @articles
+        .shareitem
+          .box
+            .content
+              = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article, :target => "_blank"
+            .title
+              = link_to article.title, article, :target => "_blank"
+            - if article.user_id.present?
+              .info
+                .avatar= link_to image_tag(article.user.avatar.url(:small), :width=>30, :height => 30), article.user, :target => "_blank"
+                .intro
+                  = link_to article.user.name, article.user, :target => "_blank"
+                  发表于
+                  = article.created_from_now
+                .clearfix
+            - if article.comments.present?
+              .comments
+                - for comment in article.comments.top
+                  .comment
+                    .avatar= link_to image_tag(comment.user.avatar.url(:small), :width=>30, :height => 30), comment.user, :target => "_blank"
+                    .intro
+                      = link_to comment.user.name, comment.user, :target => "_blank"
+                      = comment.content.html_safe
+                    .clearfix
+
+            .action
+      .clearfix
+  .clearfix

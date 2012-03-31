@@ -1,0 +1,15 @@
+- for channel in @channels
+  .showtitle
+    = channel.name
+  .showcontent
+    .brands_list.mb
+      %ul
+        - for brand in channel.brands
+          %li
+            .logo
+              = link_to image_tag(brand.logo.url), brand, :target => "_blank"
+            .name
+              .right
+                = link_to "关注", minifollow_brand_url(brand), :method => :post, :remote => true, :class => "followstyle"
+              = brand.name
+        .clearfix

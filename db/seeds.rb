@@ -45,6 +45,7 @@ Channel.create([
 ])
 
 
+
 puts "aaa@123.com sysmsg for 50"
 50.times do
   Message.create(:user_id => 1, :sysmsg => true, :title => "测试标题长度", :content => "文字文字"*20)
@@ -60,13 +61,20 @@ end
 
 puts "10 brands"
 Brand.create([
-    {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg"))},
-    {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg"))},
-    {:name => "姬芮", :logo => open(Rails.root.join('tmp', "brand3.jpg"))},
-    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg"))},
-    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg"))},
-    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg"))},
-    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg"))},
+    {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg")), :channel_id => 1, :intro => "玉兰油（OLAY）是中国区最大护肤品牌，在大陆已持续十年呈两位数增长。它是宝洁公司全球著名的护肤品牌，OLAY以全球高科技护肤研发技术为后盾，在深入了解中国女性对护肤和美的需要的基础上，不断扩大产品范围，目前已经涵盖了护肤和沐浴系列，真正帮助女性全面周到地呵护自己的肌肤。"},
+    {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :channel_id => 1},
+    {:name => "姬芮", :logo => open(Rails.root.join('tmp', "brand3.jpg")), :channel_id => 1},
+    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg")), :channel_id => 2},
+    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :channel_id => 2},
+    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :channel_id => 2},
+    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg")), :channel_id => 2},
+    {:name => "OLAY1", :logo => open(Rails.root.join('tmp', "brand1.jpg")), :channel_id => 2},
+    {:name => "欧莱雅1", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :channel_id => 2},
+    {:name => "姬芮1", :logo => open(Rails.root.join('tmp', "brand3.jpg")), :channel_id => 2},
+    {:name => "美宝莲1", :logo => open(Rails.root.join('tmp', "brand4.jpg")), :channel_id => 2},
+    {:name => "花花公子1", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :channel_id => 2},
+    {:name => "金利来1", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :channel_id => 2},
+    {:name => "卡帕1", :logo => open(Rails.root.join('tmp', "brand7.jpg")), :channel_id => 2},
   ])
 brands = Brand.find([1,2,3])
 User.first.update_attribute(:role, 3)
@@ -118,6 +126,12 @@ puts "articles"
   a.update_attribute(:is_photo, true) if i > 0
   a.photos = photos
   a.comments = comments
+end
+
+brand = Brand.first
+10.times do
+  a = Article.create(:title => titles_array[rand(4)], :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(7)}.jpg")), :is_article => true, :is_company => true)
+  brand.articles << a
 end
 
 puts "1 activity"

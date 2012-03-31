@@ -32,18 +32,9 @@ class MainController < ApplicationController
     render :layout => "layoutfullwidth"
   end
   
-  # def brand
-  #   if params[:tag].present?
-  #     @brands = Article.white.type_3.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   else
-  #     @brands = Article.white.type_3.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   end
-  #   @page_title = "品牌"
-  # end
-  # 
-  # def item
-  #   @items = Item.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-  #   @page_title = "商品"
-  # end
+  def brands
+    @channels = Channel.order('position asc')
+    @page_title = "品牌"
+  end
 
 end

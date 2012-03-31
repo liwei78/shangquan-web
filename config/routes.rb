@@ -4,7 +4,11 @@ Shangquan::Application.routes.draw do
   
   resources :brands
   resources :activities
-  resources :brands
+  resources :brands do
+    member do
+      post 'minifollow', 'follow'
+    end
+  end
   resources :items do
     collection do
       get 'my', 'store', 'search'
@@ -50,6 +54,7 @@ Shangquan::Application.routes.draw do
   match '/main/activities'  => 'main#activities', :via => :get
   match '/main/items'       => 'main#items',      :via => :get
   match '/main/articles'    => 'main#articles',   :via => :get
-  match '/main/companies'   => 'main#companies',   :via => :get
+  match '/main/companies'   => 'main#companies',  :via => :get
+  match '/main/brands'      => 'main#brands',     :via => :get
   root :to => 'main#index'
 end
