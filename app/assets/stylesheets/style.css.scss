@@ -880,7 +880,7 @@ $layout-width: 950px;
       }
       td {
         padding: 16px 0;
-        vertical-align: middle;
+        vertical-align: top;
       }
       .select {
         width: 239px;
@@ -1389,8 +1389,12 @@ a.collectstyle {
   padding-top: 10px;
   padding-left: 8px;
   .items_list {
+    li.hover {
+      background-color: #efefef;
+    }
     li {
       width: 220px;
+      height: 80px;
       float: left;
       margin-right: 10px;
       margin-bottom: 10px;
@@ -1403,10 +1407,18 @@ a.collectstyle {
         float: left;
         margin-left: 10px;
         .itemtitle {
-          line-height: 30px;
+          line-height: 24px;
+          font-size: 12px;
         }
         .itembrand {
-          line-height: 30px;
+          line-height: 24px;
+          font-size: 12px;
+          span {
+            color: grey;
+          }
+        }
+        .itemprice {
+          line-height: 24px;
           font-size: 12px;
           span {
             color: grey;

@@ -148,7 +148,6 @@ activity = Activity.create(
   :opening_date => "活动日期：3月26日-4月1日",
   :poster => open(Rails.root.join('tmp', "activity.jpg"),
   :top => true)
-)
 activity_items = Item.limit(6)
 activity_items.each do |item|
   item.update_attribute(:suggest, true)

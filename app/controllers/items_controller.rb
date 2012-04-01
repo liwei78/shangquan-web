@@ -110,11 +110,11 @@ class ItemsController < ApplicationController
   end
   
   def search
-    if params[:uid].present?
-      @items       = Item.paginate(:conditions => ["unique_id like ?", "%"+params[:uid]+"%"], :include => :brand, :page => params[:page], :per_page => 6)
-      @items_count = Item.where("unique_id like ?", "%"+params[:uid]+"%").count
+    if params[:title].present?
+      @items       = Item.paginate(:conditions => ["title like ?", "%"+params[:title]+"%"], :include => :brand, :page => params[:page], :per_page => 6)
+      @items_count = Item.where("title like ?", "%"+params[:title]+"%").count
       @page_total  = @items_count > 6 ? (@items_count%6==0 ? @items_count/6 : @items_count/6+1) : 1
-      @page        = params[:page].to_i
+      @page        = params[:page].present? ? params[:page].to_i : 1
       @pre_page    = @page>1 ? @page-1 : 1
       @next_page   = @page+1
       @blank       = false

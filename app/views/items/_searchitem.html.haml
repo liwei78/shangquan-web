@@ -2,17 +2,21 @@
   未找到您要的结果
 - else
   - for item in items
-    %li
+    %li{:id => "search_item_#{item.id}", :class => "search_item"}
       .poster
         = image_tag(item.poster.url(:small), :width => 60, :height => 60)
       .iteminfo
         .itemtitle
           = check_box_tag "items[]", item.id
           = item.title
-        .itembrand
-          - if item.brand.present?
+        - if item.brand.present?
+          .itembrand
             %span 品牌
             = item.brand.name
+        .itemprice
+          %span 价格
+          = item.price
+          ￥
       .clearfix
   .clearfix
 
@@ -27,6 +31,13 @@
       %span= @items_count
       条结果
     - if @page > 1
-      = link_to "上一页", search_items_url(:uid => params[:uid], :page => @pre_page), :remote => true, :method => :get
+      = link_to "上一页", search_items_url(:title => params[:title], :page => @pre_page), :remote => true, :method => :get
     - if @page < @page_total
-      = link_to "下一页", search_items_url(:uid => params[:uid], :page => @next_page), :remote => true, :method => :get
+      = link_to "下一页", search_items_url(:title => params[:title], :page => @next_page), :remote => true, :method => :get
+      
+:javascript
+  $('li.search_item').mouseover(function(){
+    $(this).addClass('hover');
+  }).mouseout(function(){
+    $(this).removeClass('hover');
+  });
