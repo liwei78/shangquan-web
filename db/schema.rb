@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330170614) do
+ActiveRecord::Schema.define(:version => 20120401051649) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -275,6 +275,15 @@ ActiveRecord::Schema.define(:version => 20120330170614) do
     t.boolean  "read",       :default => false
     t.string   "title"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "photo_temps", :force => true do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

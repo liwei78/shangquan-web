@@ -45,6 +45,11 @@ module Shangquan
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Add additional load paths for your own custom dirs
+    # %w(observers mailers middleware).each do |dir|
+    #   config.autoload_paths << "#{Rails.root}/app/#{dir}"
+    # end
   end
 end
 

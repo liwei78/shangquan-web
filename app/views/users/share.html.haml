@@ -5,6 +5,74 @@
     function change_div(dividname) {
       $('#'+dividname).toggle();}
       
+    $(document).ready(function() {
+    
+      $('#file_upload').uploadify({
+        'uploader'  : '/uploadify.swf',
+        'script'    : '#{uploadphototemp_url(:format => :json)}',
+        'cancelImg' : '/images/cancel.png',
+        'folder'    : '/uploadtmps',
+        'buttonImg' : '/images/swfupload.jpg',
+        // 'scriptData'  : {
+        //   '_http_accept': 'application/javascript',
+        //   'authenticity_token':'#{form_authenticity_token}'},
+        'auto'        : true,
+        'onProgress'  : function(){
+          $('#progress').show();
+        },
+        'onComplete'  : function(event, ID, fileObj, response, data) {
+          var dat = eval('(' + response + ')'); 
+          var preview_url = dat.tmpurl;
+          $('#progress').hide();
+          $('#preview_img').attr('src', preview_url);
+          $('#preview').show();
+        }
+      });
+      
+      $('#brand_search').keyup(function() {
+        if ($(this).val().length > 0) {
+          $.ajax({
+            type: 'POST',
+            url:  '#{brand_name_search_url(:format => :js)}',
+            data: {'s': $(this).val()},
+            beforeSend: function(){$('#brand_search').addClass('loading');},
+            success:    function(){$('#brand_search').removeClass('loading');}
+          });
+        } else {
+          $("#brand_search_results").html('');
+          $("#brand_search_results").hide();}
+      });
+      
+      $('#item_search').keyup(function() {
+        if ($(this).val().length > 0) {
+          $.ajax({
+            type: 'POST',
+            url:  '#{item_name_search_url(:format => :js)}',
+            data: {'s': $(this).val()},
+            beforeSend: function(){$('#item_search').addClass('loading');},
+            success:    function(){$('#item_search').removeClass('loading');}
+          });
+        } else {
+          $("#item_search_results").html('');
+          $("#item_search_results").hide();}
+      });
+      
+      $('#itemtag_input').focus(function(){
+        $('#itemtag_input_label').fadeIn(500);
+      });
+      $('#itemtag_input').blur(function(){
+        $('#itemtag_input_label').fadeOut(500);
+      });
+          
+      $('#styletag_input').focus(function(){
+        $('#styletag_input_label').fadeIn(500);
+      });
+      $('#styletag_input').blur(function(){
+        $('#styletag_input_label').fadeOut(500);
+      });
+          
+    });
+      
 = render :partial => "users/usersidebox"
 .mainbox
   .formbox
@@ -15,114 +83,112 @@
         %li= link_to "分享", share_users_url, :class => "on"
         %li= link_to "活动", discover_users_url
         .clearfix
-    .formstyle
-      = form_tag(postshare_users_url, :multipart => true) do
-        %table{:width => '100%', :cellpadding => 4}
-          - if @activity.present?
-            %tr
-              %td{:width => 100} 活动
-              %td
-                = link_to @activity.title, @activity, :target => "_blank"
-                = hidden_field_tag :activity_id, @activity.id
-            %tr
-              %td
-              %td 文章将自动投稿到该活动。
-            %tr
-              %td
-              %td= link_to image_tag(@activity.poster.url(:middle)), @activity, :target => "_blank"
-          - if @brand.present?
-            %tr
-              %td{:width => 100} 品牌
-              %td
-                = link_to @brand.name, @name, :target => "_blank"
-                = hidden_field_tag :brand_id, @brand.id
-            %tr
-              %td
-              %td 文章将自动投稿到该品牌栏目内。
-            %tr
-              %td
-              %td= link_to image_tag(@brand.logo.url), @brand, :target => "_blank"
-          %tr
-            %td{:width => 100} 标题
-            %td= text_field_tag :title, "", :class => "input wide"
-          %tr
-            %td 封面图片
-            %td= file_field_tag :poster
+    .sharebox
+      .previewbox
+        .progress#progress.hide
+          = image_tag("loadinggray.gif")
+        .preview#preview.hide
+          = image_tag("nopic.jpg", :width => 180, :height => 270, :id => "preview_img")
+      .inputbox
+        .tr
+          = file_field_tag :file, :id => "file_upload"
+          .clearfix
+            
+        .tr
+          = text_area_tag :content, "", :class => "textarea"
+        .action
+          %ul
+            %li= link_to "晒物品", js_void,  :class => "btn1", :id => "showitem"
+            %li= link_to "秀搭配", js_void,  :class => "btn2", :id => "showstyle"
+            %li= link_to "活动线报", js_void, :class => "btn3", :id => "showdiscount"
+            .clearfix
+        .showitem_div.hide
+          .tinytable
+            .tr
+              .th 商品名称
+              .td= text_field_tag :item_name, "", :class => "input", :id => "item_search"
+              .clearfix
+              #item_search_results
+              .clearfix
+            .tr
+              .th 商品品牌
+              .td
+                = text_field_tag :brand_name, "", :class => "input", :id => "brand_search"
+              .clearfix
+              #brand_search_results
+              .clearfix
+            .tr
+              .th 商品价格
+              .td= text_field_tag :price, "", :class => "input"
+              .clearfix
+            .tr
+              .th 购买地点
+              .td= text_field_tag :place, "", :class => "input"
+              .clearfix
+            .tr
+              .th 标签
+              .td
+                = text_field_tag :itemtag, "", :class => "input", :id => "itemtag_input"
+                %span#itemtag_input_label.hide 空格区分
+              .clearfix
+              
+        .showstyle_div.hide
+          .tinytable
+            .tr
+              .th 标签
+              .td
+                = text_field_tag :styletag, "", :class => "input", :id => "styletag_input"
+                %span#styletag_input_label.hide 空格区分
+              .clearfix
 
-          %tr
-            %td 
-            %td
-              = check_box_tag "add_album", "true", false, :onclick => "$('#upload_div').toggle();$('.addmore').toggle();"
-              = label_tag(:add_album, "我要增加系列图集")
-          %tr#upload_div.hide.bg
-            %td 图集
-            %td
-              = file_field_tag "photos[file][]"
-          %tr.addmore.hide.bg
-            %td
-            %td
-              = link_to("增加上传", js_void, :onclick => "add_upload_file();")
-
-          %tr
-            %td 
-            %td 
-              = check_box_tag "add_items", "true", false, :onclick => "$('#item_tb').toggle();"
-              = label_tag(:add_items, "我要关联商品")
-          %tr#item_tb.hide
-            %td{:colspan => 2}
-              %table{:width => '100%', :cellspadding => 6}
-                %tr
-                  %td{:width => 100, :valign => "top"}
-                    %span.help
-                      =link_to "商品名称", js_void
-                  %td
-                    = text_field_tag :item_title, "", :class => "input", :style => "width: 500px;"
-                    = link_to "查找", js_void, :id => "search_link"
-                    = hidden_field_tag :page, 1
-                    .items_search
-                      %ul.items_list#items_list
-
-                    %br
-                    :javascript
-                      $("#search_link").bind('click', function(){
-                        $.ajax('/items/search?title='+$('#item_title').val());
-                      });
-                %tr
-                  %td
-                  %td
-                    .items_box
-                %tr
-                  %td
-                    购买地点
-                  %td
-                    = text_field_tag :buy_place, "", :class => "input wide"
+        .showdiscount_div.hide
+          .tinytable
+            .tr
+              .th 商场名称
+              .td
+                = text_field_tag :shop_name, "", :class => "input"
+              .clearfix
+            .tr
+              .th 品牌名称
+              .td
+                = text_field_tag :brand_name, "", :class => "input"
+              .clearfix
+            .tr
+              .th 开始时间
+              .td
+                = text_field_tag :begin_time, "", :class => "input"
+              .clearfix
+            .tr
+              .th 结束时间
+              .td
+                = text_field_tag :end_time, "", :class => "input"
+              .clearfix
               
 
-          %tr
-            %td 
-            %td
-              = check_box_tag "add_video", "true", false, :onclick => "$('#video_div').toggle();"
-              = label_tag(:add_video, "我要增加一段视频")
-          %tr#video_div.hide.bg
-            %td 视频代码
-            %td
-              = text_field_tag :code, "", :class => "input wide"
-              %br
-              %small.grey 支持优酷/土豆/酷6/六间房/56网/音悦台/搜狐/奇艺的swf格式的视频代码,如 http://www.youku.com/sample.swf
+        .submitdiv
+          = hidden_field_tag :is_type
+          = submit_tag "发表", :class => "btnstyle"
+        :javascript
+          $('#showitem').click(function(){
+            $('.showitem_div').toggle('fade');
+            $('.showstyle_div').hide();
+            $('.showdiscount_div').hide();
+            $('#is_type').attr('value', 'showitem');
+          });
+          $('#showstyle').click(function(){
+            $('.showitem_div').hide();
+            $('.showstyle_div').toggle('fade');
+            $('.showdiscount_div').hide();
+            $('#is_type').attr('value', 'showstyle');
+          });
+          $('#showdiscount').click(function(){
+            $('.showitem_div').hide();
+            $('.showstyle_div').hide();
+            $('.showdiscount_div').toggle('fade');
+            $('#is_type').attr('value', 'showdiscount');
+          });
+      .clearfix
 
-          %tr
-            %td 内容
-            %td= cktext_area_tag("content", "", :input_html => {:cols => 10, :rows => 10}, :toolbar => 'Basic')
-          %tr
-            %td 标签
-            %td= text_field_tag :tag_list, "", :class => "input"
-
-          
-        
-              
-        
-        .btn
-          = submit_tag "确定", :class => "submit"
-          %span#test
         
 .clearfix
+

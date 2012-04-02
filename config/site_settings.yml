@@ -6,6 +6,8 @@ settings: &common
   site_role:            ["普通用户", "时尚设计师", "商家(专卖店)", "商家用户(百货店)", "品牌用户"]
   site_upgrade_state:   ["无认证", "认证中", "认证成功"]
   
+  temp_original:   "640>"
+  
   crop_original:   "640>"
   crop_small:      "190x190#"
   crop_small_covert: "-gravity north -thumbnail 190x190^ -extent 190x190"
@@ -34,12 +36,18 @@ settings: &common
 development:
   paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"
   paperclip_path: ":rails_root/public/upload_files/:class/:attachment/:id/:style/:filename"
+  temp_url:  "http://localhost:3000/uploadtmps/:class/:attachment/:id/:style/:filename"
+  temp_path: ":rails_root/public/uploadtmps/:class/:attachment/:id/:style/:filename"
   <<: *common
 test:
   paperclip_url:  "http://localhost:3000/upload_files/:class/:attachment/:id/:style/:filename"
   paperclip_path: ":rails_root/public/upload_files/:class/:attachment/:id/:style/:filename"
+  temp_url:  "http://localhost:3000/uploadtmps/:class/:attachment/:id/:style/:filename"
+  temp_path: ":rails_root/public/uploadtmps/:class/:attachment/:id/:style/:filename"
   <<: *common
 production:
   paperclip_url:  "http://211.103.203.236/:class/:attachment/:id/:style/:filename"
   paperclip_path: "/var/www/shangquan/web/public/:class/:attachment/:id/:style/:filename"
+  temp_url:       "http://211.103.203.236/uploadtmps/:class/:attachment/:id/:style/:filename"
+  temp_path:      "/var/www/shangquan/web/public/uploadtmps/:class/:attachment/:id/:style/:filename"
   <<: *common

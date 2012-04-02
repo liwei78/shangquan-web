@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   before_create :encrypt_something
   before_update :change_password
   
-  has_many :articles, :order => "articles.id desc"
+  has_many :articles, :order => "articles.id desc", :include => :comments
   has_many :feeds,    :order => "feeds.id desc"
   has_many :items, :order => "items.id desc"
   has_many :photos, :as => :klass

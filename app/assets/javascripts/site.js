@@ -36,6 +36,26 @@ $(document).ready(function() {
 	    $("#slidernav li:eq("+n+")").addClass("on");}
 	});
   
+  // $('#uploadphototempform').fileupload({
+  //     dataType: 'json',
+  //     url: '/uploadphototemp',
+  //     done: function (e, data) {
+  //         $.each(data.result, function (index, file) {
+  //             $('<p/>').text(file.name).appendTo($('.preview'));
+  //         });
+  //     }
+  // });
+
+  // $('#fileupload').fileupload({
+  //         dataType: 'json',
+  //         url: 'server/php/',
+  //         done: function (e, data) {
+  //             $.each(data.result, function (index, file) {
+  //                 $('<p/>').text(file.name).appendTo(document.body);
+  //             });
+  //         }
+  //     });
+
 });
 
 $(window).scroll(function(){

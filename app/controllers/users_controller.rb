@@ -104,8 +104,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @current_user = get_current_user
-    @feeds = @user.feeds.with_username.paginate(:page => params[:page], :per_page => 5)
-    @articles = @user.articles
+    # @feeds = @user.feeds.paginate(:include => :user, :page => params[:page], :per_page => 5)
+    @articles = @user.articles.paginate(:page => params[:page], :per_page => 20)
     @page_title = @user.name + "的空间"
     render :layout => "layoutfullwidth"
   end

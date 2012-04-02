@@ -1,0 +1,17 @@
+%ul
+  - for item in items
+    %li= item.title
+
+:javascript
+  $(document).ready(function() {
+    $('#item_search_results > ul > li').mouseover(function(){
+      $(this).addClass('hover');
+    }).mouseout(function(){
+      $(this).removeClass('hover');
+    });
+
+    $('#item_search_results > ul > li').click(function(){
+      $('#item_search').attr('value', $(this).html());
+      $('#item_search_results').hide();
+    });
+  })
