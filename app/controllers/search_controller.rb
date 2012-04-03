@@ -1,5 +1,6 @@
 # encoding: utf-8
 class SearchController < ApplicationController
+  
   def brand_name_search
     if params[:s].present?
       @brands = Brand.find(:all, :conditions => ["name like ?", '%'+params[:s]+'%'])

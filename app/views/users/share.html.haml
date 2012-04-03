@@ -23,8 +23,10 @@
         'onComplete'  : function(event, ID, fileObj, response, data) {
           var dat = eval('(' + response + ')'); 
           var preview_url = dat.tmpurl;
+          var tmpfile_id  = dat.tmpid;
           $('#progress').hide();
           $('#preview_img').attr('src', preview_url);
+          $('#photo_temp_id').attr('value', tmpfile_id);
           $('#preview').show();
         }
       });
@@ -89,104 +91,109 @@
           = image_tag("loadinggray.gif")
         .preview#preview.hide
           = image_tag("nopic.jpg", :width => 180, :height => 270, :id => "preview_img")
+      
       .inputbox
-        .tr
-          = file_field_tag :file, :id => "file_upload"
-          .clearfix
-            
-        .tr
-          = text_area_tag :content, "", :class => "textarea"
-        .action
-          %ul
-            %li= link_to "晒物品", js_void,  :class => "btn1", :id => "showitem"
-            %li= link_to "秀搭配", js_void,  :class => "btn2", :id => "showstyle"
-            %li= link_to "活动线报", js_void, :class => "btn3", :id => "showdiscount"
+        = form_tag(postshare_users_url, :multipart => true) do
+          .tr
+            = file_field_tag :file, :id => "file_upload"
             .clearfix
-        .showitem_div.hide
-          .tinytable
-            .tr
-              .th 商品名称
-              .td= text_field_tag :item_name, "", :class => "input", :id => "item_search"
+            
+          .tr
+            = text_area_tag :content, "", :class => "textarea"
+          .action
+            %ul
+              %li= link_to "晒物品", js_void,  :class => "btn1", :id => "showitem"
+              %li= link_to "秀搭配", js_void,  :class => "btn2", :id => "showstyle"
+              %li= link_to "活动线报", js_void, :class => "btn3", :id => "showdiscount"
               .clearfix
-              #item_search_results
-              .clearfix
-            .tr
-              .th 商品品牌
-              .td
-                = text_field_tag :brand_name, "", :class => "input", :id => "brand_search"
-              .clearfix
-              #brand_search_results
-              .clearfix
-            .tr
-              .th 商品价格
-              .td= text_field_tag :price, "", :class => "input"
-              .clearfix
-            .tr
-              .th 购买地点
-              .td= text_field_tag :place, "", :class => "input"
-              .clearfix
-            .tr
-              .th 标签
-              .td
-                = text_field_tag :itemtag, "", :class => "input", :id => "itemtag_input"
-                %span#itemtag_input_label.hide 空格区分
-              .clearfix
+          .showitem_div.hide
+            .tinytable
+              .tr
+                .th 商品名称
+                .td
+                  = text_field_tag :item_name, "", :class => "input", :id => "item_search"
+                  %span#itemtag_input_label.hide
+                .clearfix
+                #item_search_results
+                .clearfix
+              .tr
+                .th 商品品牌
+                .td
+                  = text_field_tag :brand_name, "", :class => "input", :id => "brand_search"
+                .clearfix
+                #brand_search_results
+                .clearfix
+              .tr
+                .th 商品价格
+                .td= text_field_tag :price, "", :class => "input"
+                .clearfix
+              .tr
+                .th 购买地点
+                .td= text_field_tag :place, "", :class => "input"
+                .clearfix
+              .tr
+                .th 标签
+                .td
+                  = text_field_tag :itemtag, "", :class => "input", :id => "itemtag_input"
+                  %span#itemtag_input_label.hide 空格区分
+                .clearfix
               
-        .showstyle_div.hide
-          .tinytable
-            .tr
-              .th 标签
-              .td
-                = text_field_tag :styletag, "", :class => "input", :id => "styletag_input"
-                %span#styletag_input_label.hide 空格区分
-              .clearfix
+          .showstyle_div.hide
+            .tinytable
+              .tr
+                .th 标签
+                .td
+                  = text_field_tag :styletag, "", :class => "input", :id => "styletag_input"
+                  %span#styletag_input_label.hide 空格区分
+                .clearfix
 
-        .showdiscount_div.hide
-          .tinytable
-            .tr
-              .th 商场名称
-              .td
-                = text_field_tag :shop_name, "", :class => "input"
-              .clearfix
-            .tr
-              .th 品牌名称
-              .td
-                = text_field_tag :brand_name, "", :class => "input"
-              .clearfix
-            .tr
-              .th 开始时间
-              .td
-                = text_field_tag :begin_time, "", :class => "input"
-              .clearfix
-            .tr
-              .th 结束时间
-              .td
-                = text_field_tag :end_time, "", :class => "input"
-              .clearfix
+          .showdiscount_div.hide
+            .tinytable
+              .tr
+                .th 商场名称
+                .td
+                  = text_field_tag :shop_name, "", :class => "input"
+                .clearfix
+              .tr
+                .th 品牌名称
+                .td
+                  = text_field_tag :brand_name, "", :class => "input"
+                .clearfix
+              .tr
+                .th 开始时间
+                .td
+                  = text_field_tag :begin_time, "", :class => "input"
+                .clearfix
+              .tr
+                .th 结束时间
+                .td
+                  = text_field_tag :end_time, "", :class => "input"
+                .clearfix
               
 
-        .submitdiv
-          = hidden_field_tag :is_type
-          = submit_tag "发表", :class => "btnstyle"
-        :javascript
-          $('#showitem').click(function(){
-            $('.showitem_div').toggle('fade');
-            $('.showstyle_div').hide();
-            $('.showdiscount_div').hide();
-            $('#is_type').attr('value', 'showitem');
-          });
-          $('#showstyle').click(function(){
-            $('.showitem_div').hide();
-            $('.showstyle_div').toggle('fade');
-            $('.showdiscount_div').hide();
-            $('#is_type').attr('value', 'showstyle');
-          });
-          $('#showdiscount').click(function(){
-            $('.showitem_div').hide();
-            $('.showstyle_div').hide();
-            $('.showdiscount_div').toggle('fade');
-            $('#is_type').attr('value', 'showdiscount');
-          });
+          .submitdiv
+            = hidden_field_tag :is_type
+            = hidden_field_tag :photo_temp_id
+            = submit_tag "发表", :class => "btnstyle"
+          :javascript
+            $('#showitem').click(function(){
+              $('.showitem_div').toggle('fade');
+              $('.showstyle_div').hide();
+              $('.showdiscount_div').hide();
+              $('#is_type').attr('value', 'showitem');
+            });
+            $('#showstyle').click(function(){
+              $('.showitem_div').hide();
+              $('.showstyle_div').toggle('fade');
+              $('.showdiscount_div').hide();
+              $('#is_type').attr('value', 'showstyle');
+            });
+            $('#showdiscount').click(function(){
+              $('.showitem_div').hide();
+              $('.showstyle_div').hide();
+              $('.showdiscount_div').toggle('fade');
+              $('#is_type').attr('value', 'showdiscount');
+            });
       .clearfix
 
         

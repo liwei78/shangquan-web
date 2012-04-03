@@ -11,7 +11,7 @@
     });
 
     $('#item_search_results > ul > li').click(function(){
-      $('#item_search').attr('value', $(this).html());
+      $('#item_search').attr('value', $(this).text());
       $('#item_search_results').hide();
     });
   })

@@ -8,7 +8,7 @@ class PhotoTempsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.json { render :json => {'status' => status, 'tmpurl' => tmpfile.file.url}}
+      format.json { render :json => {'status' => status, 'tmpurl' => tmpfile.file.url, 'tmpid' => tmpfile.id}}
     end
   end
 end
