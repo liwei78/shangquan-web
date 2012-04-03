@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Item < ActiveRecord::Base
+  acts_as_taggable
   has_many :photos, :as => :klass
   belongs_to :brand
   belongs_to :user

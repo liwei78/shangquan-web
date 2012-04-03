@@ -15,10 +15,20 @@
         .clearfix
       .clearfix
     .intro
-    .body
+    .body.itembody
+      - if @item.price.present?
+        .price-label
+          %span.leftfold
+          %span.rightfold
+            ￥
+            = @item.price
+          .clearfix
       - if @item.poster.file?
         .poster
           = image_tag(@item.poster.url)
+      - if @item.content.present?
+        .content
+          = @item.content.html_safe
       .sharebox
         分享到：
         = link_to "", js_void, :class => "sina"

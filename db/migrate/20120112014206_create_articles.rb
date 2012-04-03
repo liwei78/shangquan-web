@@ -40,6 +40,7 @@ class CreateArticles < ActiveRecord::Migration
       t.boolean  :is_brand,    :default => false
       t.boolean  :is_item,     :default => false
       t.boolean  :is_groupbuy, :default => false
+      t.boolean  :is_discount, :default => false
       
       # 经营信息
       t.string   :schedule
@@ -50,6 +51,12 @@ class CreateArticles < ActiveRecord::Migration
       t.string   :bus_info
       t.string   :discount
       t.string   :website
+      
+      # 促销信息
+      t.string   :shop_name
+      t.string   :brand_name
+      t.string   :begin_time
+      t.string   :end_time
 
       # 品牌信息
       t.string   :brand_name

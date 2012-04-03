@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.integer  "collects_count",                                    :default => 0
     t.integer  "position",                                          :default => 0
     t.string   "summary"
+    t.string   "buy_place"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"

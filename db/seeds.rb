@@ -1,6 +1,4 @@
 #encoding: utf-8
-# rand(7), include 0...7, uninclude 7.
-
 
 # test account
 puts "Create Test Account"
@@ -99,8 +97,8 @@ Item.create([
   {:title => "NINE WEST 迷人彩色花朵装饰鱼嘴设计女士高跟鞋16色", :summary => "玖熙花朵鱼嘴高跟鞋，鞋子必须要最好的。",               :price => 1550,  :user_id => 2, :top => true, :poster => open(Rails.root.join('tmp', "itemtop2.jpg"))},
   {:title => "复古青春系 走进色彩国度 完美主义 二色撞色雪纺衫", :summary => "撞色雪纺衫，2012最流行的高调撞色美学。",                  :price => 79,    :user_id => 3, :top => true, :poster => open(Rails.root.join('tmp', "itemtop3.jpg"))},
   {:title => "大爱亮色，玫红", :summary => "玫红色连衣裙裤，颜色超亮叠穿效果别致。",                                      :price => 79.2,  :user_id => 3, :top => true, :poster => open(Rails.root.join('tmp', "itemtop4.jpg"))},
-  {:title => "[一身带裤子]limited edition 复古图案 套装 两款", :summary => "复古图案子套装，束口领型，更有味道。",             :price => 226.9, :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop5.jpg"))},
-  {:title => "Kusso Molly】Crazy Label Treeson Ren 阿人 5寸 現貨", :summary => "正版5寸阿仁玩偶，爱他的玩家不要错过。", :price => 350,   :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop6.jpg"))},
+  {:title => "limited edition 复古图案 套装 两款", :summary => "复古图案子套装，束口领型，更有味道。",             :price => 226.9, :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop5.jpg"))},
+  {:title => "Kusso Molly Crazy Label Treeson Ren 阿人 5寸 現貨", :summary => "正版5寸阿仁玩偶，爱他的玩家不要错过。", :price => 350,   :user_id => 4, :top => true, :poster => open(Rails.root.join('tmp', "itemtop6.jpg"))},
 ])
 
 
@@ -146,7 +144,7 @@ activity = Activity.create(
   2，上传你已分享的美食图片，在描述中加入#想吃的#然后保存。
   3，使用收集工具采集网页上的美食图片，在描述中加入#想吃的#。",
   :opening_date => "活动日期：3月26日-4月1日",
-  :poster => open(Rails.root.join('tmp', "activity.jpg"),
+  :poster => open(Rails.root.join('tmp', "activity.jpg")),
   :top => true)
 activity_items = Item.limit(6)
 activity_items.each do |item|

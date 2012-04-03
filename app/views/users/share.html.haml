@@ -72,6 +72,29 @@
       $('#styletag_input').blur(function(){
         $('#styletag_input_label').fadeOut(500);
       });
+      
+      $('#shareform').submit(function(){
+        var content = $('#content').val();
+        var poster  = $('#photo_temp_id').val();
+        var checkok = false;
+        if (content == ''){
+          alert('亲，内容不能为空。');
+          $('#content').focus();
+          return false;
+        }
+        if (poster == ''){
+          alert('亲，图片不传是种损失啊。');
+          return false;
+        }
+        if (content != '' && poster != ''){
+          $('#btnloading').show();
+          $('#postsharebtn').attr("disabled", "disabled");
+          return true;
+        }else{
+          return false
+        }
+        return false
+      });
           
     });
       
@@ -85,15 +108,32 @@
         %li= link_to "分享", share_users_url, :class => "on"
         %li= link_to "活动", discover_users_url
         .clearfix
-    .sharebox
+
+    .postdone.hide
+      .donewords
+      .targetlink
+
+    .sharebox#postsharediv
       .previewbox
         .progress#progress.hide
           = image_tag("loadinggray.gif")
         .preview#preview.hide
           = image_tag("nopic.jpg", :width => 180, :height => 270, :id => "preview_img")
-      
+          
       .inputbox
-        = form_tag(postshare_users_url, :multipart => true) do
+        = form_tag(postshare_users_url, :multipart => true, :remote => true, :id => "shareform") do
+          - if @activity.present?
+            .tr
+              = hidden_field_tag :activity_id, @activity.id
+              投稿到活动
+              = link_to @activity.title, @activity, :target => "_blank"
+              .clearfix
+          - if @brand.present?
+            .tr
+              = hidden_field_tag :brand_id, @brand.id
+              投稿到品牌
+              = link_to @brand.title, @brand, :target => "_blank"
+              .clearfix
           .tr
             = file_field_tag :file, :id => "file_upload"
             .clearfix
@@ -111,7 +151,7 @@
               .tr
                 .th 商品名称
                 .td
-                  = text_field_tag :item_name, "", :class => "input", :id => "item_search"
+                  = text_field_tag :item_name, "", :class => "input", :id => "item_search", :autocomplete => "off"
                   %span#itemtag_input_label.hide
                 .clearfix
                 #item_search_results
@@ -119,7 +159,7 @@
               .tr
                 .th 商品品牌
                 .td
-                  = text_field_tag :brand_name, "", :class => "input", :id => "brand_search"
+                  = text_field_tag :brand_name, "", :class => "input", :id => "brand_search", :autocomplete => "off"
                 .clearfix
                 #brand_search_results
                 .clearfix
@@ -174,7 +214,9 @@
           .submitdiv
             = hidden_field_tag :is_type
             = hidden_field_tag :photo_temp_id
-            = submit_tag "发表", :class => "btnstyle"
+            = submit_tag "发表", :class => "btnstyle", :id => "postsharebtn"
+            %span#btnloading.hide
+              = image_tag('indicator.gif')
           :javascript
             $('#showitem').click(function(){
               $('.showitem_div').toggle('fade');

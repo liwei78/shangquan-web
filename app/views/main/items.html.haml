@@ -1,7 +1,13 @@
 .sharelist.nopadding
   .list#sharelist
     - for item in @items
-      .shareitem
+      .shareitem.itembody2
+        - if item.price.present?
+          .price-label
+            %span.rightfold
+              ￥
+              = item.price
+            .clearfix
         .box
           .content
             = link_to image_tag(item.poster.url(:small), :width => 190, :height => 190), item, :target => "_blank"

@@ -985,6 +985,9 @@ $layout-width: 950px;
 .btnstyle:active {
   background-position: -192px top;
 }
+.btndisable {
+  background-position: -288px top;
+}
 
 .slider {
   width: 950px;
@@ -1621,10 +1624,74 @@ a.collectstyle {
 
 }
 
+.postdone {
+  padding: 50px 0;
+  .donewords {
+    line-height: 30px;
+    text-align: center;
+  }
+  .targetlink {
+    text-align: center;
+    line-height: 30px;
+  }
+}
 
 
+.itembody {
+  position: relative;
+  .price-label {
+    position: absolute;
+    left: -8px;
+    top: 50px;
+    .leftfold {
+      display: block;
+      background: image-url('pricelabel.png') no-repeat left top;
+      background-position: 0 -158px;
+      width: 8px;
+      height: 38px;
+      float: left;
+    }
+    .rightfold {
+      display: block;
+      background: image-url('pricelabel.png') no-repeat right top;
+      float: left;
+      font-family: Helvetica,arial,Verdana;
+      color: white;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+      font-weight: 600;
+      background-position: right -158px;
+      height: 38px;
+      padding-right: 16px;
+      font-size: 24px;
+      line-height: 27px;
+    }
+  }
+}
 
-
+.itembody2 {
+  position: relative;
+  z-index: 9999;
+  .price-label {
+    position: absolute;
+    left: -6px;
+    top: 30px;
+    .rightfold {
+      display: block;
+      background: image-url('pricelabel.png') no-repeat right top;
+      float: left;
+      font-family: Helvetica,arial,Verdana;
+      color: white;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+      font-weight: 600;
+      background-position: right -158px;
+      height: 38px;
+      padding-left: 16px;
+      padding-right: 16px;
+      font-size: 18px;
+      line-height: 27px;
+    }
+  }
+}
 
 
 
