@@ -10,7 +10,7 @@ class MainController < ApplicationController
   end
 
   def articles
-    @articles = Article.white.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
+    @articles = Article.allow_published.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
     @page_title = "时尚"
     render :layout => "layoutfullwidth"
   end
@@ -27,7 +27,7 @@ class MainController < ApplicationController
   end
   
   def companies
-    @articles = Article.is_company.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
+    @articles = Article.is_company.allow_published.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
     @page_title = "商家"
     render :layout => "layoutfullwidth"
   end

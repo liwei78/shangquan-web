@@ -33,16 +33,22 @@
       - if @article.content.present?
         .content
           = @article.content.html_safe
-      - if @article.items.present?
+      - if @article.article_items.present?
         .items
-          %table{:width => "100%", :cellpadding => "4"}
-            - for item in @article.items
+          %table{:width => "100%", :cellpadding => "6"}
+            - for item in @article.article_items
               %tr
-                %td{:width => 70}= link_to image_tag(item.poster.url(:small), :width => 70, :height => 70), item, :target => "_blank"
-                %td= item.title
+                %td{:width => 70}= link_to image_tag(item.poster.url(:small), :width => 70, :height => 70), item.poster.url, :target => "_blank"
+                %td{:width => 200}= item.name
+                %td
+                  = item.brand
                 %td
                   = item.price
                   元
+                %td
+                  = item.category
+                %td
+                  = item.buy_place
       .sharebox
         分享到：
         = link_to "", js_void, :class => "sina"

@@ -31,18 +31,19 @@
       });
 
       // item name
-      $('#item_search').keyup(function() {
+      $('#item_search').live('keyup', function() {
         if ($(this).val().length > 0) {
+          var whois = $(this);
           $.ajax({
             type: 'POST',
             url:  '#{item_name_search_url(:format => :json)}',
             data: {'s': $(this).val()},
             beforeSend: function(){
-              $('#item_search').addClass('loading');
+              $('this').addClass('loading');
               $('#item_search_results').remove();
             },
             success: function(data){
-              $('#item_search').removeClass('loading');
+              $(this).removeClass('loading');
               var items = [];
               $.each(data, function(index, entry) {
                 items.push('<li>' + entry['title'] + '</li>');
@@ -50,31 +51,33 @@
               $('<ul/>', {
                 'id': 'item_search_results',
                 html: items.join('')
-              }).insertAfter($('#item_search'));
+              }).insertAfter(whois);
             }
           });
         } else {
           $("#item_search_results").remove();}
       });
+
       
       $('#item_search_results > li').live('mouseover', function(){
         $(this).addClass('hover');});
       $('#item_search_results > li').live('mouseout', function(){
         $(this).removeClass('hover');});
       $('#item_search_results > li').live('click', function(){
-        $('#item_search').attr('value', $(this).text());
+        $(this).parent().prev().attr('value', $(this).text());
         $('#item_search_results').remove();});
       
       // brand name
-      $('#brand_search').keyup(function() {
+      $('#brand_search').live('keyup', function() {
         if ($(this).val().length > 0) {
+          var whois = $(this);
           $.ajax({
             type: 'POST',
             url:  '#{brand_name_search_url(:format => :json)}',
             data: {'s': $(this).val()},
-            beforeSend: function(){$('#brand_search').addClass('loading');},
+            beforeSend: function(){$(this).addClass('loading');},
             success:    function(data){
-              $('#brand_search').removeClass('loading');
+              $(this).removeClass('loading');
               var items = [];
               $.each(data, function(index, entry) {
                 items.push('<li>' + entry['name'] + '</li>');
@@ -82,7 +85,7 @@
               $('<ul/>', {
                 'id': 'brand_search_results',
                 html: items.join('')
-              }).insertAfter($('#brand_search'));
+              }).insertAfter(whois);
             }
           });
         } else {
@@ -94,7 +97,7 @@
       $('#brand_search_results > li').live('mouseout', function(){
         $(this).removeClass('hover');});
       $('#brand_search_results > li').live('click', function(){
-        $('#brand_search').attr('value', $(this).text());
+        $(this).parent().prev().attr('value', $(this).text());
         $('#brand_search_results').remove();});
       
       $('#taginput').focus(function(){
@@ -152,7 +155,7 @@
           = image_tag("nopic.jpg", :width => 180, :height => 270, :id => "preview_img")
           
       .inputbox
-        = form_tag(postshare_users_url, :multipart => true, :remote => true, :id => "shareform") do
+        = form_tag(postshare_users_url, :multipart => true, :id => "shareform") do
           - if @activity.present?
             .tr
               = hidden_field_tag :activity_id, @activity.id
@@ -181,23 +184,32 @@
           .showitem_div
             .tinytable
               .tr
+                .th 商品类别
+                .td
+                  = select_tag 'items[category][]', options_for_select(['','帽子','鞋','上衣','裤子','裙子','袜子','包'])
+                .clearfix
+              .tr
                 .th 商品名称
                 .td
-                  = text_field_tag :item_name, "", :class => "input", :id => "item_search", :autocomplete => "off"
+                  = text_field_tag 'items[name][]', "", :class => "input", :id => "item_search", :autocomplete => "off"
                 .clearfix
               .tr
                 .th 商品品牌
                 .td
-                  = text_field_tag :brand_name, "", :class => "input", :id => "brand_search", :autocomplete => "off"
+                  = text_field_tag 'items[brand][]', "", :class => "input", :id => "brand_search", :autocomplete => "off"
                   #brand_search_results
                 .clearfix
               .tr
                 .th 商品价格
-                .td= text_field_tag :price, "", :class => "input"
+                .td= text_field_tag 'items[price][]', "", :class => "input"
                 .clearfix
               .tr
                 .th 购买地点
-                .td= text_field_tag :place, "", :class => "input"
+                .td= text_field_tag 'items[buy_place][]', "", :class => "input"
+                .clearfix
+              .tr
+                .th 商品图片
+                .td= file_field_tag 'items[poster][]'
                 .clearfix
               
 

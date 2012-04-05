@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
   create_table "article_items", :force => true do |t|
     t.integer  "article_id"
     t.integer  "item_id"
+    t.string   "category"
+    t.string   "name"
+    t.string   "brand"
+    t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
+    t.string   "buy_place"
+    t.string   "item_uniqueid"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -96,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.boolean  "is_brand",                                          :default => false
     t.boolean  "is_item",                                           :default => false
     t.boolean  "is_groupbuy",                                       :default => false
+    t.boolean  "is_discount",                                       :default => false
     t.string   "schedule"
     t.string   "place"
     t.string   "address"
@@ -104,7 +115,10 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.string   "bus_info"
     t.string   "discount"
     t.string   "website"
+    t.string   "shop_name"
     t.string   "brand_name"
+    t.string   "begin_time"
+    t.string   "end_time"
     t.string   "brand_desc"
     t.string   "groupbuy_desc"
     t.string   "category"
@@ -241,7 +255,7 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.string   "title"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.integer  "brand_id"
-    t.text     "content"
+    t.text     "content",                                           :default => ""
     t.integer  "state",                                             :default => 1
     t.boolean  "store",                                             :default => false
     t.boolean  "suggest",                                           :default => false
@@ -251,7 +265,6 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.integer  "collects_count",                                    :default => 0
     t.integer  "position",                                          :default => 0
     t.string   "summary"
-    t.string   "buy_place"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"

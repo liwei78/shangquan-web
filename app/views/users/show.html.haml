@@ -22,7 +22,7 @@
             - if article.title.present?
               = link_to article.title, article, :target => "_blank"
             - else
-              = link_to article.content.html_safe, article, :target => "_blank"
+              = link_to article.content.truncate(20, :omission => "..."), article, :target => "_blank"
           - if article.user_id.present?
             .info
               .avatar= link_to image_tag(article.user.avatar.url(:small), :width=>30, :height => 30), article.user, :target => "_blank"

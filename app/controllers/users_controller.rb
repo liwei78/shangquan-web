@@ -422,6 +422,29 @@ class UsersController < ApplicationController
           activity = Activity.find(params[:activity_id])
           activity.articles << article
         end
+        
+        if params[:items].present?
+          items = params[:items]
+          i = 0
+          categories = items['category']
+          names      = items['name']
+          brands     = items['brand']
+          prices     = items['price']
+          buy_places = items['buy_place']
+          posters    = items['poster']
+          names.count.times do
+            article_item            = ArticleItem.new
+            article_item.article_id = article.id
+            article_item.category   = categories[i]
+            article_item.name       = names[i]
+            article_item.brand      = brands[i]
+            article_item.price      = prices[i]
+            article_item.buy_place  = buy_places[i]
+            article_item.poster     = posters[i]     if posters.present?
+            article_item.save
+            i += 1
+          end
+        end
     
         User.update_counters current_user_id, :articles_count => 1
     
@@ -451,7 +474,7 @@ class UsersController < ApplicationController
     # end
 
     respond_to do |format|
-      format.html { redirect_to user_url(current_user_id) }
+      format.html { redirect_to @targeturl }
       format.js
     end
     

@@ -23,6 +23,7 @@ class Article < ActiveRecord::Base
   scope :auditing, :conditions => ["articles.state = ?", 1]
   scope :white,    :conditions => ["articles.state = ?", 2]
   scope :deleted,  :conditions => ["articles.state = ?", 3]
+  scope :allow_published,  :conditions => ["articles.state = ? or articles.state = ?", 1, 2]
   
   has_many :activity_articles
   has_many :activities, :through => :activity_articles
