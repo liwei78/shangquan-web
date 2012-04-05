@@ -1,11 +1,10 @@
 - content_for :header do
   :javascript
-    function add_upload_file() {
-      $('#upload_div').clone().insertBefore('.addmore');}
-    function change_div(dividname) {
-      $('#'+dividname).toggle();}
-      
     $(document).ready(function() {
+    
+      $('#moreitem').click(function(){
+        $('.showitem_div').clone().insertAfter('.showitem_div');
+      });
     
       $('#file_upload').uploadify({
         'uploader'  : '/uploadify.swf',
@@ -30,47 +29,79 @@
           $('#preview').show();
         }
       });
-      
-      $('#brand_search').keyup(function() {
-        if ($(this).val().length > 0) {
-          $.ajax({
-            type: 'POST',
-            url:  '#{brand_name_search_url(:format => :js)}',
-            data: {'s': $(this).val()},
-            beforeSend: function(){$('#brand_search').addClass('loading');},
-            success:    function(){$('#brand_search').removeClass('loading');}
-          });
-        } else {
-          $("#brand_search_results").html('');
-          $("#brand_search_results").hide();}
-      });
-      
+
+      // item name
       $('#item_search').keyup(function() {
         if ($(this).val().length > 0) {
           $.ajax({
             type: 'POST',
-            url:  '#{item_name_search_url(:format => :js)}',
+            url:  '#{item_name_search_url(:format => :json)}',
             data: {'s': $(this).val()},
-            beforeSend: function(){$('#item_search').addClass('loading');},
-            success:    function(){$('#item_search').removeClass('loading');}
+            beforeSend: function(){
+              $('#item_search').addClass('loading');
+              $('#item_search_results').remove();
+            },
+            success: function(data){
+              $('#item_search').removeClass('loading');
+              var items = [];
+              $.each(data, function(index, entry) {
+                items.push('<li>' + entry['title'] + '</li>');
+              });
+              $('<ul/>', {
+                'id': 'item_search_results',
+                html: items.join('')
+              }).insertAfter($('#item_search'));
+            }
           });
         } else {
-          $("#item_search_results").html('');
-          $("#item_search_results").hide();}
+          $("#item_search_results").remove();}
       });
       
-      $('#itemtag_input').focus(function(){
-        $('#itemtag_input_label').fadeIn(500);
+      $('#item_search_results > li').live('mouseover', function(){
+        $(this).addClass('hover');});
+      $('#item_search_results > li').live('mouseout', function(){
+        $(this).removeClass('hover');});
+      $('#item_search_results > li').live('click', function(){
+        $('#item_search').attr('value', $(this).text());
+        $('#item_search_results').remove();});
+      
+      // brand name
+      $('#brand_search').keyup(function() {
+        if ($(this).val().length > 0) {
+          $.ajax({
+            type: 'POST',
+            url:  '#{brand_name_search_url(:format => :json)}',
+            data: {'s': $(this).val()},
+            beforeSend: function(){$('#brand_search').addClass('loading');},
+            success:    function(data){
+              $('#brand_search').removeClass('loading');
+              var items = [];
+              $.each(data, function(index, entry) {
+                items.push('<li>' + entry['name'] + '</li>');
+              });
+              $('<ul/>', {
+                'id': 'brand_search_results',
+                html: items.join('')
+              }).insertAfter($('#brand_search'));
+            }
+          });
+        } else {
+          $("#brand_search_results").remove();}
       });
-      $('#itemtag_input').blur(function(){
-        $('#itemtag_input_label').fadeOut(500);
+      
+      $('#brand_search_results > li').live('mouseover', function(){
+        $(this).addClass('hover');});
+      $('#brand_search_results > li').live('mouseout', function(){
+        $(this).removeClass('hover');});
+      $('#brand_search_results > li').live('click', function(){
+        $('#brand_search').attr('value', $(this).text());
+        $('#brand_search_results').remove();});
+      
+      $('#taginput').focus(function(){
+        $('#taginput_label').fadeIn(500);
       });
-          
-      $('#styletag_input').focus(function(){
-        $('#styletag_input_label').fadeIn(500);
-      });
-      $('#styletag_input').blur(function(){
-        $('#styletag_input_label').fadeOut(500);
+      $('#taginput').blur(function(){
+        $('#taginput_label').fadeOut(500);
       });
       
       $('#shareform').submit(function(){
@@ -106,7 +137,7 @@
     .nav
       %ul
         %li= link_to "分享", share_users_url, :class => "on"
-        %li= link_to "活动", discover_users_url
+        %li= link_to "活动线报", discover_users_url
         .clearfix
 
     .postdone.hide
@@ -137,31 +168,28 @@
           .tr
             = file_field_tag :file, :id => "file_upload"
             .clearfix
-            
           .tr
             = text_area_tag :content, "", :class => "textarea"
+          .tr
+            .right
+              %span#taginput_label.hide 空格区分
+            = text_area_tag :tag, "", :class => "taginput", :id => "taginput"
           .action
             %ul
-              %li= link_to "晒物品", js_void,  :class => "btn1", :id => "showitem"
-              %li= link_to "秀搭配", js_void,  :class => "btn2", :id => "showstyle"
-              %li= link_to "活动线报", js_void, :class => "btn3", :id => "showdiscount"
+              %li= link_to "增加物品", js_void,  :class => "btn1", :id => "moreitem"
               .clearfix
-          .showitem_div.hide
+          .showitem_div
             .tinytable
               .tr
                 .th 商品名称
                 .td
                   = text_field_tag :item_name, "", :class => "input", :id => "item_search", :autocomplete => "off"
-                  %span#itemtag_input_label.hide
-                .clearfix
-                #item_search_results
                 .clearfix
               .tr
                 .th 商品品牌
                 .td
                   = text_field_tag :brand_name, "", :class => "input", :id => "brand_search", :autocomplete => "off"
-                .clearfix
-                #brand_search_results
+                  #brand_search_results
                 .clearfix
               .tr
                 .th 商品价格
@@ -171,71 +199,13 @@
                 .th 购买地点
                 .td= text_field_tag :place, "", :class => "input"
                 .clearfix
-              .tr
-                .th 标签
-                .td
-                  = text_field_tag :itemtag, "", :class => "input", :id => "itemtag_input"
-                  %span#itemtag_input_label.hide 空格区分
-                .clearfix
-              
-          .showstyle_div.hide
-            .tinytable
-              .tr
-                .th 标签
-                .td
-                  = text_field_tag :styletag, "", :class => "input", :id => "styletag_input"
-                  %span#styletag_input_label.hide 空格区分
-                .clearfix
-
-          .showdiscount_div.hide
-            .tinytable
-              .tr
-                .th 商场名称
-                .td
-                  = text_field_tag :shop_name, "", :class => "input"
-                .clearfix
-              .tr
-                .th 品牌名称
-                .td
-                  = text_field_tag :brand_name, "", :class => "input"
-                .clearfix
-              .tr
-                .th 开始时间
-                .td
-                  = text_field_tag :begin_time, "", :class => "input"
-                .clearfix
-              .tr
-                .th 结束时间
-                .td
-                  = text_field_tag :end_time, "", :class => "input"
-                .clearfix
               
 
           .submitdiv
-            = hidden_field_tag :is_type
             = hidden_field_tag :photo_temp_id
             = submit_tag "发表", :class => "btnstyle", :id => "postsharebtn"
             %span#btnloading.hide
               = image_tag('indicator.gif')
-          :javascript
-            $('#showitem').click(function(){
-              $('.showitem_div').toggle('fade');
-              $('.showstyle_div').hide();
-              $('.showdiscount_div').hide();
-              $('#is_type').attr('value', 'showitem');
-            });
-            $('#showstyle').click(function(){
-              $('.showitem_div').hide();
-              $('.showstyle_div').toggle('fade');
-              $('.showdiscount_div').hide();
-              $('#is_type').attr('value', 'showstyle');
-            });
-            $('#showdiscount').click(function(){
-              $('.showitem_div').hide();
-              $('.showstyle_div').hide();
-              $('.showdiscount_div').toggle('fade');
-              $('#is_type').attr('value', 'showdiscount');
-            });
       .clearfix
 
         
