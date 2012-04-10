@@ -56,6 +56,9 @@ $(document).ready(function() {
   //         }
   //     });
 
+
+  
+
 });
 
 $(window).scroll(function(){
@@ -66,4 +69,8 @@ $(window).scroll(function(){
       $('#site_nav').removeClass('topfixed');}
   }
 });
+
+function reply_to(name) {
+  $('#comment_input').focus().val('回复:'+name+' ');
+}
 

@@ -8,7 +8,7 @@ class CreateArticleItems < ActiveRecord::Migration
       t.string  :brand
       t.decimal :price, :precision => 8, :scale =>2, :default=>0.00
       t.string  :buy_place
-      t.string  :item_uniqueid
+      t.string  :unique_id
       
       # 封面
       t.string   :poster_file_name

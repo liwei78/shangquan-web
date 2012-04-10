@@ -1,6 +1,7 @@
 class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
+      t.integer  :user_id
       t.string   :title
       t.string   :summary
       t.text     :content
@@ -9,6 +10,7 @@ class CreateActivities < ActiveRecord::Migration
       t.boolean  :suggest, :default => false  # 是否首页推荐
       t.boolean  :top,     :default => false  # 是否首页置顶
       t.integer  :shares_count, :default => 0 # 分享次数
+
       # 小图标
       t.string   :logo_file_name
       t.string   :logo_content_type

@@ -69,7 +69,7 @@
               = image_tag(@current_user.avatar.url(:small), :width => 30, :height => 30)
             .newinput
               = form_tag(write_article_url(@article)) do
-                = text_area_tag :content, "", :class => "input"
+                = text_area_tag :content, "", :class => "input", :id => "comment_input"
                 %br
                 = submit_tag("确定", :class => "btnstyle")
             .clearfix
@@ -81,7 +81,7 @@
               .info
                 .name
                   .right
-                    = link_to "回复", js_void
+                    = link_to "回复", js_void, :onclick => "reply_to('#{comment.user.name}');"
                   = link_to(comment.user.name, comment.user)
                 .comment_content= comment.content.html_safe
                 .time= comment.created_from_now

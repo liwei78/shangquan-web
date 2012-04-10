@@ -99,7 +99,41 @@
       $('#brand_search_results > li').live('click', function(){
         $(this).parent().prev().attr('value', $(this).text());
         $('#brand_search_results').remove();});
+
+
+      // unique_id item
+      $('#uniqueid_search').live('keyup', function() {
+        if ($(this).val().length > 0) {
+          var whois = $(this);
+          $.ajax({
+            type: 'POST',
+            url:  '#{uniqueid_search_url(:format => :json)}',
+            data: {'uid': $(this).val()},
+            beforeSend: function(){$(this).addClass('loading');},
+            success:    function(data){
+              $(this).removeClass('loading');
+              var items = [];
+              $.each(data, function(index, entry) {
+                items.push('<li>' + entry['unique_id'] + '</li>');
+              });
+              $('<ul/>', {
+                'id': 'uniqueid_search_results',
+                html: items.join('')
+              }).insertAfter(whois);
+            }
+          });
+        } else {
+          $("#uniqueid_search_results").remove();}
+      });
       
+      $('#uniqueid_search_results > li').live('mouseover', function(){
+        $(this).addClass('hover');});
+      $('#uniqueid_search_results > li').live('mouseout', function(){
+        $(this).removeClass('hover');});
+      $('#uniqueid_search_results > li').live('click', function(){
+        $(this).parent().prev().attr('value', $(this).text());
+        $('#uniqueid_search_results').remove();});
+
       $('#taginput').focus(function(){
         $('#taginput_label').fadeIn(500);
       });
@@ -166,7 +200,7 @@
             .tr
               = hidden_field_tag :brand_id, @brand.id
               投稿到品牌
-              = link_to @brand.title, @brand, :target => "_blank"
+              = link_to @brand.name, @brand, :target => "_blank"
               .clearfix
           .tr
             = file_field_tag :file, :id => "file_upload"
@@ -199,6 +233,13 @@
                   = text_field_tag 'items[brand][]', "", :class => "input", :id => "brand_search", :autocomplete => "off"
                   #brand_search_results
                 .clearfix
+              .tr
+                .th 商品货号
+                .td
+                  = text_field_tag 'items[uniqueid][]', "", :class => "input", :id => "uniqueid_search", :autocomplete => "off"
+                  #uniqueid_search_results
+                .clearfix
+
               .tr
                 .th 商品价格
                 .td= text_field_tag 'items[price][]', "", :class => "input"

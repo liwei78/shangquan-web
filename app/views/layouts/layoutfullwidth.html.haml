@@ -39,7 +39,13 @@
           .layoutfullwidth
             .new-action.right
               = link_to "新分享", share_users_url, :class => "new-share"
-              = link_to "活动线报", discover_users_url, :class => "new-discover"
+              - if loggin?
+                - if [2,3,4].include?(get_current_user.role)
+                  = link_to "新活动", discover_users_url, :class => "new-activity"
+                - else
+                  = link_to "活动线报", discover_users_url, :class => "new-discover"
+              - else
+                = link_to "活动线报", discover_users_url, :class => "new-discover"
             %ul
               %li= link_to "首页", root_url, :class => "index"
               %li= link_to "时尚", "/main/articles"

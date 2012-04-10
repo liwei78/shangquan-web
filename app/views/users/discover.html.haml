@@ -9,15 +9,35 @@
         %li= link_to "活动线报", discover_users_url, :class => "on"
         .clearfix
     .formstyle
-      = form_tag(postdiscover_users_url, :multipart => true) do
-        %table{:width => '100%', :cellspadding => 6}
-          %tr
-            %td{:width => 100} 内容
-            %td= text_area_tag :content, "", :cols => 40, :rows => 6, :class => " wide"
-          %tr
-            %td
-            %td 请写下您观察到的活动概况，我们核实后，将开通该活动，并给予您适当的奖励。
-        .btn
-          = submit_tag "确定", :class => "submit"
+      - if [2,3,4].include?(@user.role)
+        = form_tag(postactivity_users_url, :multipart => true) do
+          %table{:width => '100%', :cellspadding => 6}
+            %tr
+              %td{:width => 100} 标题
+              %td= text_field_tag 'activity[title]', "", :cols => 40, :rows => 6, :class => "input"
+            %tr
+              %td 活动时间
+              %td= text_field_tag 'activity[opening_date]', "", :cols => 40, :rows => 6, :class => "input"
+            %tr
+              %td 内容
+              %td= text_area_tag 'activity[content]', "", :cols => 40, :rows => 6, :class => " wide"
+            %tr
+              %td 横幅海报
+              %td
+                = file_field_tag 'activity[poster]'
+                950x300 px
+          .btn
+            = submit_tag "确定", :class => "submit"
+      - else
+        = form_tag(postdiscover_users_url) do
+          %table{:width => '100%', :cellspadding => 6}
+            %tr
+              %td{:width => 100} 内容
+              %td= text_area_tag :content, "", :cols => 40, :rows => 6, :class => " wide"
+            %tr
+              %td
+              %td 请写下您观察到的活动概况，我们核实后，将开通该活动，并给予您适当的奖励。
+          .btn
+            = submit_tag "确定", :class => "submit"
         
 .clearfix

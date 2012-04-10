@@ -32,7 +32,7 @@ class UsersController < ApplicationController
           session[:signcode]  = user.signcode
           session[:user_name] = user.name
           session[:user_id]   = user.id
-          session[:rtype]   = user.rtype
+          session[:rtype]     = user.rtype
         end
         format.html {redirect_to user}
       else
@@ -248,7 +248,6 @@ class UsersController < ApplicationController
         User.update_counters current_user_id, :articles_count => 1
         flash[:notice] = "发布成功"
       else
-        p article.errors
         flash[:error] = "发布失败"
       end
 
@@ -429,6 +428,7 @@ class UsersController < ApplicationController
           categories = items['category']
           names      = items['name']
           brands     = items['brand']
+          uniqueids  = items['uniqueid']
           prices     = items['price']
           buy_places = items['buy_place']
           posters    = items['poster']
@@ -438,6 +438,7 @@ class UsersController < ApplicationController
             article_item.category   = categories[i]
             article_item.name       = names[i]
             article_item.brand      = brands[i]
+            article_item.unique_id  = uniqueids[i]
             article_item.price      = prices[i]
             article_item.buy_place  = buy_places[i]
             article_item.poster     = posters[i]     if posters.present?
@@ -481,7 +482,7 @@ class UsersController < ApplicationController
   end
   
   def postdiscover
-    report = ActivityReport.new
+    report         = ActivityReport.new
     report.user_id = current_user_id
     report.content = params[:content]
     if report.save
@@ -489,9 +490,20 @@ class UsersController < ApplicationController
       redirect_to user_url(current_user_id)
     else
       flash[:error] = "添加失败"
-      redirect_to :back
+      redirect_to discover_users_url
     end
-    
+  end
+
+  def postactivity
+    activity         = Activity.new(params[:activity])
+    activity.user_id = current_user_id
+    if activity.save
+      flash[:notice] = "添加成功"
+      redirect_to activity
+    else
+      flash[:error] = "添加失败"
+      redirect_to discover_users_url
+    end
   end
   
   def follow

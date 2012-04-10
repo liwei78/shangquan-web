@@ -17,5 +17,7 @@
               = link_to image_tag(brand.logo.url(:small), :width => 110), brand
             %td
               = link_to brand.name, brand
+            %td
+              = link_to "edit", edit_brand_url(brand)
         
 .clearfix

@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120401051649) do
 
   create_table "activities", :force => true do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.string   "summary"
     t.text     "content"
@@ -71,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.string   "brand"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.string   "buy_place"
-    t.string   "item_uniqueid"
+    t.string   "unique_id"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
