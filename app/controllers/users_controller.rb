@@ -147,10 +147,7 @@ class UsersController < ApplicationController
   def share
     @user = get_current_user
     if params[:aid].present?
-      @activity = Activity.find(params[:aid])
-    end
-    if params[:bid].present?
-      @brand = Brand.find(params[:bid])
+      @archetype = Archetype.find(params[:aid])
     end
   end
 
@@ -439,6 +436,12 @@ class UsersController < ApplicationController
 
       if article.save
     
+        # archetype's articles
+        if params[:archetype_id].present?
+          archetype = Archetype.find(params[:archetype_id])
+          archetype.articles << article
+        end
+        
         # brand's article
         if params[:brand_id].present?
           article.update_attribute(:is_brand, true)

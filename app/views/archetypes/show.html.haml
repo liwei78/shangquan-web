@@ -1,10 +1,13 @@
 .showtitle
   .right
-    = link_to "我要投稿", share_users_url(:bid => @archetype), :target => "_blank"
-    = link_to "我要线报", find_users_url(:bid => @archetype), :target => "_blank"
-  已有
-  = @archetype.articles.count
-  个主题收集
+    = link_to "我要投稿", share_users_url(:aid => @archetype), :target => "_blank"
+    = link_to "我要线报", find_users_url(:aid => @archetype), :target => "_blank"
+  = @archetype.category.present? ? @archetype.category.name + " : " : ""
+  = @archetype.name
+  %span.small  
+    已有
+    = @archetype.articles.count
+    个主题收集
 .showcontent
   .sharelist.nopadding
     .list#sharelist
@@ -20,7 +23,7 @@
                 = link_to "+关注", follow_archetype_url(@archetype), :remote => true, :method => :post, :class => "followstylebtn"
               .hot_count
                 人气：
-                %span{:id => "hoy_count_#{@archetype_id}"}
+                %span{:id => "hoy_count_#{@archetype.id}"}
                   = @archetype.followers.count
             .archetype_box
               .line 品牌综合评价
@@ -35,17 +38,11 @@
             .archetype_box
               .archetype_channel
                 %span
-                  品牌类型：
+                  类型：
                 = @archetype.channel.name if @archetype.channel.present?
-              .archetype_company
-                %span
-                  品牌商家：
-                = @archetype.users.count
-                家商家
-                = link_to "[查看]", ""
               .archetype_intro
                 %span
-                  品牌介绍：
+                  介绍：
                 = @archetype.intro.html_safe
             .archetype_users
               .title
@@ -62,7 +59,10 @@
             .content
               = link_to image_tag(article.poster.url(:small), :width => 190, :height => 190), article, :target => "_blank"
             .title
-              = link_to article.title, article, :target => "_blank"
+              - if article.title.present?
+                = link_to article.title, article, :target => "_blank"
+              - else
+                = link_to article.content.truncate(100, :omission => "..."), article, :target => "_blank"
             - if article.user_id.present?
               .info
                 .avatar= link_to image_tag(article.user.avatar.url(:small), :width=>30, :height => 30), article.user, :target => "_blank"

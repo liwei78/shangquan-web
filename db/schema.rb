@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415092715) do
+ActiveRecord::Schema.define(:version => 20120416054714) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -57,9 +57,16 @@ ActiveRecord::Schema.define(:version => 20120415092715) do
     t.datetime "updated_at"
   end
 
-  create_table "archetype_types", :force => true do |t|
-    t.string   "name"
-    t.integer  "position"
+  create_table "archetype_articles", :force => true do |t|
+    t.integer  "archetype_id"
+    t.integer  "article_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "archetype_users", :force => true do |t|
+    t.integer  "archetype_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120415092715) do
     t.integer  "likes_count",       :default => 0
     t.integer  "shares_count",      :default => 0
     t.integer  "comments_count",    :default => 0
+    t.integer  "scores_count",      :default => 0
     t.text     "intro"
     t.string   "logo_file_name"
     t.string   "logo_content_type"

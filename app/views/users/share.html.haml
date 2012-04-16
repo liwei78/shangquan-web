@@ -200,11 +200,12 @@
               投稿到活动
               = link_to @activity.title, @activity, :target => "_blank"
               .clearfix
-          - if @brand.present?
+          - if @archetype.present?
             .tr
-              = hidden_field_tag :brand_id, @brand.id
-              投稿到品牌
-              = link_to @brand.name, @brand, :target => "_blank"
+              = hidden_field_tag :archetype_id, @archetype.id
+              投稿到
+              = @archetype.channel.name if @archetype.channel.present?
+              = link_to @archetype.name, @archetype, :target => "_blank"
               .clearfix
           .tr
             = file_field_tag :file, :id => "file_upload"

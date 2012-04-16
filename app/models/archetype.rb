@@ -1,10 +1,14 @@
 class Archetype < ActiveRecord::Base
 
   belongs_to :channel
+  belongs_to :category
+
   has_many :archetype_users
   has_many :users, :through => :archetype_users
+
   has_many :archetype_articles
   has_many :articles, :through => :archetype_articles 
+
   has_many :likes, :as => :klass
   has_many :followers, :through => :likes, :source => :user
 

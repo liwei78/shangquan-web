@@ -12,6 +12,7 @@ class CreateArchetypes < ActiveRecord::Migration
       t.integer :likes_count,    :default => 0
       t.integer :shares_count,   :default => 0
       t.integer :comments_count, :default => 0
+      t.integer :scores_count,   :default => 0       # 评价次数
       t.text    :intro
       
       # logo

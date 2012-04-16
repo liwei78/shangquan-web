@@ -3,18 +3,18 @@ class ArchetypesController < ApplicationController
   before_filter :need_user_login, :except => [:show]
   
   def show
-    @data = Archetype.find(params[:id])
-    @articles = @data.articles.paginate(:page => params[:page], :per_page => 50)
-    @page_title = "#{@data.typename}：#{@data.name}"
+    @archetype = Archetype.find(params[:id])
+    @articles = @archetype.articles.paginate(:page => params[:page], :per_page => 50)
+    @page_title = "#{@archetype.category.present? ? @archetype.category.name + " : " : ""}#{@archetype.name}"
     render :layout => "layoutfullwidth"
   end
   
   def follow
     @user = get_current_user
-    @data = Archetype.find(params[:id])
+    @archetype = Archetype.find(params[:id])
     @ok = false
-    unless @data.followers.include?(@user)
-      @data.followers << @user
+    unless @archetype.followers.include?(@user)
+      @archetype.followers << @user
       @ok = true
     end
     respond_to do |format|
@@ -25,10 +25,10 @@ class ArchetypesController < ApplicationController
 
   def minifollow
     @user = get_current_user
-    @data = Archetype.find(params[:id])
+    @archetype = Archetype.find(params[:id])
     @ok = false
-    unless @data.followers.include?(@user)
-      @data.followers << @user
+    unless @archetype.followers.include?(@user)
+      @archetype.followers << @user
       @ok = true
     end
     respond_to do |format|

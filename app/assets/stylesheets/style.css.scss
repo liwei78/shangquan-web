@@ -506,20 +506,20 @@ $layout-width: 950px;
           line-height: 24px;
         }
       }
-      .brand_logo {}
-      .brand_name {
+      .archetype_logo {}
+      .archetype_name {
         height: 30px;
         line-height: 30px;
         font-size: 16px;
         margin-bottom: 10px;
       }
-      .brand_action {
+      .archetype_action {
         line-height: 24px;
         border-bottom: 1px solid #efefef;
         margin-bottom: 10px;
         padding-bottom: 10px;
       }
-      .brand_box {
+      .archetype_box {
         color: #000;
         font-size: 12px;
         line-height: 24px;
@@ -530,7 +530,7 @@ $layout-width: 950px;
           color: #545454;
         }
       }
-      .brand_users {
+      .archetype_users {
         .title {
           font-size: 14px;
           line-height: 30px;
@@ -1377,6 +1377,10 @@ a.collectstyle {
   font-size: 16px;
   .right {
     margin-right: 22px;
+  }
+  .small {
+    font-size: 12px;
+    color: grey;
   }
 }
 

@@ -32,7 +32,7 @@
           = @article.video_code.html_safe
       - if @article.content.present?
         .content
-          = @article.content.html_safe
+          = simple_format(@article.content.html_safe)
       - if @article.article_items.present?
         .items
           %table{:width => "100%", :cellpadding => "6"}

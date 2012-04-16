@@ -8,7 +8,9 @@
         %li= link_to "列表", articles_url
         %li= link_to "编辑", js_void, :class => "on"
         .clearfix
-    .formstyle
+    .formstyle#idname
       = render :partial => "form", :locals => {:article => @article}
+    :javascript
+      
         
 .clearfix
