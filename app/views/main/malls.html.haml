@@ -4,7 +4,7 @@
   .showcontent
     .comusers_list.mb
       %ul
-        - for company in area.companies
+        - for company in area.malls
           %li
             .logo
               = link_to image_tag(company.logo.url, :width => 180, :height => 180), company, :target => "_blank"

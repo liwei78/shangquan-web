@@ -1,9 +1,9 @@
 .showtitle
   .right
-    = link_to "我要投稿", share_users_url(:bid => @brand), :target => "_blank"
-    = link_to "品牌线报", find_users_url(:bid => @brand), :target => "_blank"
+    = link_to "我要投稿", share_users_url(:bid => @archetype), :target => "_blank"
+    = link_to "我要线报", find_users_url(:bid => @archetype), :target => "_blank"
   已有
-  = @brand.articles.count
+  = @archetype.articles.count
   个主题收集
 .showcontent
   .sharelist.nopadding
@@ -11,23 +11,18 @@
       .shareitem
         .box
           .content
-            .brand_logo
-              = image_tag(@brand.logo.url)
-            .brand_name
-              = @brand.name
-            .brand_box
+            .archetype_logo
+              = image_tag(@archetype.logo.url)
+            .archetype_name
+              = @archetype.name
+            .archetype_box
               .right
-                = link_to "+关注", follow_brand_url(@brand), :remote => true, :method => :post, :class => "followstylebtn"
+                = link_to "+关注", follow_archetype_url(@archetype), :remote => true, :method => :post, :class => "followstylebtn"
               .hot_count
                 人气：
-                %span{:id => "hoy_count_#{@brand_id}"}
-                  = @brand.followers.count
-              .discount_count
-                折扣：
-                %span
-                  = @brand.discount_count
-                条折扣信息
-            .brand_box
+                %span{:id => "hoy_count_#{@archetype_id}"}
+                  = @archetype.followers.count
+            .archetype_box
               .line 品牌综合评价
               .line 质量
               .line 款式
@@ -35,28 +30,28 @@
               .line 
                 .right
                   = link_to "我来评价", ""
-                已有#{@brand.scores_count}个评价
+                已有#{@archetype.scores_count}个评价
               
-            .brand_box
-              .brand_channel
+            .archetype_box
+              .archetype_channel
                 %span
                   品牌类型：
-                = @brand.channel.name if @brand.channel.present?
-              .brand_company
+                = @archetype.channel.name if @archetype.channel.present?
+              .archetype_company
                 %span
                   品牌商家：
-                = @brand.users.count
+                = @archetype.users.count
                 家商家
                 = link_to "[查看]", ""
-              .brand_intro
+              .archetype_intro
                 %span
                   品牌介绍：
-                = @brand.intro.html_safe
-            .brand_users
+                = @archetype.intro.html_safe
+            .archetype_users
               .title
                 TA们也在关注
                 %ul
-                  - for user in @brand.followers
+                  - for user in @archetype.followers
                     %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user, :target => "_blank"
                   .clearfix
                 .clearfix

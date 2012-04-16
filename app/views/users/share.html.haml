@@ -3,7 +3,7 @@
     $(document).ready(function() {
     
       $('#moreitem').click(function(){
-        $('.showitem_div').clone().insertAfter('.showitem_div');
+        $('#showitem_div:first').clone().insertBefore('#insertBeforeMe');
       });
     
       $('#file_upload').uploadify({
@@ -166,15 +166,19 @@
           
     });
       
-= render :partial => "users/usersidebox"
-.mainbox
+
+.mainbox.fullwidth
   .formbox
     .title
       发表
     .nav
       %ul
         %li= link_to "分享", share_users_url, :class => "on"
-        %li= link_to "活动线报", discover_users_url
+        - if [2,3,4].include?(@user.role)
+          %li= link_to "新活动", discover_users_url
+        - else
+          %li= link_to "活动线报", discover_users_url
+        
         .clearfix
 
     .postdone.hide
@@ -186,7 +190,7 @@
         .progress#progress.hide
           = image_tag("loadinggray.gif")
         .preview#preview.hide
-          = image_tag("nopic.jpg", :width => 180, :height => 270, :id => "preview_img")
+          = image_tag("nopic.jpg", :width => 390, :height => 490, :id => "preview_img")
           
       .inputbox
         = form_tag(postshare_users_url, :multipart => true, :id => "shareform") do
@@ -207,15 +211,15 @@
             .clearfix
           .tr
             = text_area_tag :content, "", :class => "textarea"
-          .tr
-            .right
-              %span#taginput_label.hide 空格区分
-            = text_area_tag :tag, "", :class => "taginput", :id => "taginput"
+          /.tr
+          /  .right
+          /    %span#taginput_label.hide 空格区分
+          /  = text_area_tag :tag, "", :class => "taginput", :id => "taginput"
           .action
             %ul
               %li= link_to "增加物品", js_void,  :class => "btn1", :id => "moreitem"
               .clearfix
-          .showitem_div
+          .showitem_div#showitem_div
             .tinytable
               .tr
                 .th 商品类别
@@ -254,7 +258,7 @@
                 .clearfix
               
 
-          .submitdiv
+          .submitdiv#insertBeforeMe
             = hidden_field_tag :photo_temp_id
             = submit_tag "发表", :class => "btnstyle", :id => "postsharebtn"
             %span#btnloading.hide

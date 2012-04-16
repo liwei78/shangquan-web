@@ -1,0 +1,61 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      = @page_title
+    .nav
+    .formstyle
+      - if @brand.present?
+        = form_tag(findbrand_users_url, :multipart => true) do
+          = hidden_field_tag :brand_id, @brand.id
+          %table{:width => '100%', :cellspadding => 6}
+            %tr
+              %td{:width => 100} 品牌
+              %td= link_to image_tag(@brand.logo.url), @brand, :target => "_blank"
+            %tr
+              %td
+              %td 请在下面填写您发现的品牌活动信息
+            %tr
+              %td 活动时间
+              %td= text_field_tag 'activity[opening_date]', "", :cols => 40, :rows => 6, :class => "input"
+            %tr
+              %td 文字描述
+              %td= text_area_tag 'activity[content]', "", :cols => 40, :rows => 6, :class => " wide"
+            %tr
+              %td 实拍图片
+              %td
+                = file_field_tag 'activity[photo]'
+                950x300 px
+            %tr
+              %td 信息来源
+              %td= text_field_tag 'activity[info_from]', "", :cols => 40, :rows => 6, :class => "input"
+          .btn
+            = submit_tag "确定", :class => "submit"
+      - if @comuser.present?
+        = form_tag(findcompany_users_url, :multipart => true) do
+          = hidden_field_tag :user_id, @comuser.id
+          %table{:width => '100%', :cellspadding => 6}
+            %tr
+              %td{:width => 100} 商家
+              %td= link_to image_tag(@comuser.avatar.url), @comuser, :target => "_blank"
+            %tr
+              %td
+              %td 请在下面填写您发现的商家活动信息
+            %tr
+              %td 活动时间
+              %td= text_field_tag 'activity[opening_date]', "", :cols => 40, :rows => 6, :class => "input"
+            %tr
+              %td 文字描述
+              %td= text_area_tag 'activity[content]', "", :cols => 40, :rows => 6, :class => " wide"
+            %tr
+              %td 实拍图片
+              %td
+                = file_field_tag 'activity[photo]'
+                950x300 px
+            %tr
+              %td 信息来源
+              %td= text_field_tag 'activity[info_from]', "", :cols => 40, :rows => 6, :class => "input"
+          .btn
+            = submit_tag "确定", :class => "submit"
+        
+.clearfix

@@ -1,0 +1,61 @@
+.userbox.left
+  .avatar
+    = image_tag(@user.avatar.url)
+  .username
+    = @user.name
+  - if @user.intro.present?
+    .userintro
+      = @user.intro
+  .siterole
+    = @user.site_role
+    - if @user.role == 0 and is_me?(@user)
+      = link_to "升级", upgrade_users_url 
+    - if @user.upgrade_state == 1 and is_me?(@user)
+      审核中
+  - if [2,3,4].include?(@user.role)
+    .brands
+      .grey
+        品牌
+      %ul
+        - for brand in @user.brands.formal
+          %li= brand.name
+        .clearfix
+      
+  .userinfo
+    %ul
+      %li
+        .up
+          文章
+        .down
+          = @user.articles_count
+      %li
+        .up
+          粉丝
+        .down
+          = @user.followers.count
+      %li
+        .up
+          关注
+        .down
+          = @user.following.count
+      %li.noborder
+        .up
+          收藏
+        .down
+          = @user.favorites_count
+      .clearfix
+  - if @current_user.present? and @user != @current_user
+    .actionbox
+      - if @current_user.following?(@user)
+        = link_to "已关注", unfollow_user_url(@user), :method => :post, :remote => true, :class => "unfollow-btn", :confirm => "你要取消关注吗？"
+      - else
+        = link_to "关注", follow_user_url(@user), :method => :post, :remote => true, :class => "follow-btn"
+
+  .following
+    .title
+      TA关注的人
+    .list
+      %ul
+        - for user in @user.following
+          %li= link_to image_tag(user.avatar.url(:small), :width => 30, :height => 30), user, :target => "_blank"
+        .clearfix

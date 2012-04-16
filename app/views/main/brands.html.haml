@@ -10,6 +10,6 @@
               = link_to image_tag(brand.logo.url), brand, :target => "_blank"
             .name
               .right
-                = link_to "关注", minifollow_brand_url(brand), :method => :post, :remote => true, :class => "followstyle"
+                = link_to "关注", minifollow_archetype_url(brand), :method => :post, :remote => true, :class => "followstyle"
               = brand.name
         .clearfix

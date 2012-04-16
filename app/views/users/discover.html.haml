@@ -6,7 +6,7 @@
     .nav
       %ul
         %li= link_to "分享", share_users_url
-        %li= link_to "活动线报", discover_users_url, :class => "on"
+        %li= link_to ([1,2,3].include?(@user.role) ? "新活动" : "活动线报"), discover_users_url, :class => "on"
         .clearfix
     .formstyle
       - if [2,3,4].include?(@user.role)

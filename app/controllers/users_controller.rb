@@ -106,8 +106,26 @@ class UsersController < ApplicationController
     @current_user = get_current_user
     # @feeds = @user.feeds.paginate(:include => :user, :page => params[:page], :per_page => 5)
     @articles = @user.articles.paginate(:page => params[:page], :per_page => 20)
-    @page_title = @user.name + "的空间"
-    render :layout => "layoutfullwidth"
+    case @user.role
+    when 0
+      @page_title = @user.name + "的空间"
+    when 1
+      @page_title = "设计师: " + @user.name + "的空间"
+    when 2
+      @page_title = "商家: " + @user.name + "的空间"
+    when 3
+      @page_title = "商场: " + @user.name + "的空间"
+    when 4
+      @page_title = "品牌专卖店: " + @user.name + "的空间"
+    else
+      @page_title = @user.name + "的空间"
+    end
+    
+    if [2,3,4].include?(@user.role)
+      render :template => "users/comusershow"
+    else
+      render :layout => "layoutfullwidth", :template => "users/show"
+    end
   end
   
   def setting
@@ -138,6 +156,18 @@ class UsersController < ApplicationController
 
   def discover
     @user = get_current_user
+  end
+
+  def find
+    @user = get_current_user
+    if params[:uid].present?
+     @comuser = User.find(params[:uid])
+     @page_title = "商家线报"
+    end
+    if params[:bid].present?
+      @brand   = Brand.find(params[:bid])
+      @page_title = "品牌线报"
+    end
   end
 
   def updatesetting
@@ -424,7 +454,6 @@ class UsersController < ApplicationController
         
         if params[:items].present?
           items = params[:items]
-          i = 0
           categories = items['category']
           names      = items['name']
           brands     = items['brand']
@@ -432,6 +461,7 @@ class UsersController < ApplicationController
           prices     = items['price']
           buy_places = items['buy_place']
           posters    = items['poster']
+          i = 0
           names.count.times do
             article_item            = ArticleItem.new
             article_item.article_id = article.id
@@ -442,6 +472,7 @@ class UsersController < ApplicationController
             article_item.price      = prices[i]
             article_item.buy_place  = buy_places[i]
             article_item.poster     = posters[i]     if posters.present?
+            article_item.user_id    = current_user_id
             article_item.save
             i += 1
           end

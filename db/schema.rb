@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120401051649) do
+ActiveRecord::Schema.define(:version => 20120415092715) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -57,6 +57,32 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.datetime "updated_at"
   end
 
+  create_table "archetype_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "archetypes", :force => true do |t|
+    t.string   "name"
+    t.integer  "channel_id"
+    t.integer  "category_id"
+    t.integer  "area_id"
+    t.integer  "position",          :default => 0
+    t.integer  "hot_count",         :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "shares_count",      :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.text     "intro"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.integer  "position"
@@ -66,13 +92,21 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
 
   create_table "article_items", :force => true do |t|
     t.integer  "article_id"
-    t.integer  "item_id"
+    t.integer  "user_id"
     t.string   "category"
     t.string   "name"
     t.string   "brand"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
     t.string   "buy_place"
     t.string   "unique_id"
+    t.boolean  "is_new",                                            :default => false
+    t.boolean  "suggest",                                           :default => false
+    t.boolean  "top",                                               :default => false
+    t.integer  "likes_count",                                       :default => 0
+    t.integer  "comments_count",                                    :default => 0
+    t.integer  "collects_count",                                    :default => 0
+    t.integer  "position",                                          :default => 0
+    t.string   "summary"
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
@@ -224,6 +258,13 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
     t.datetime "updated_at"
   end
 
+  create_table "districts", :force => true do |t|
+    t.integer  "area_id"
+    t.integer  "archetype_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "feeds", :force => true do |t|
     t.integer  "user_id"
     t.integer  "klass_id"
@@ -251,7 +292,6 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
   end
 
   create_table "items", :force => true do |t|
-    t.integer  "user_id"
     t.string   "unique_id"
     t.string   "title"
     t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
@@ -324,6 +364,16 @@ ActiveRecord::Schema.define(:version => 20120401051649) do
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
+  create_table "reports", :force => true do |t|
+    t.string   "report_type"
+    t.integer  "user_id"
+    t.string   "opening_date"
+    t.text     "content"
+    t.string   "info_from"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

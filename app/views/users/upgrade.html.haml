@@ -34,7 +34,7 @@
       });
     });
     function add_more(){
-      $('<tr id="com2_input_more"><td></td><td colspan="2"><input class="input" name="brand_name[]" type="text" value=""></td></tr>').insertAfter('#com2_input');}
+      $('<tr id="com2_input_more"><td></td><td colspan="2"><input class="input" name="brand_name[]" type="text" value=""><span class="grey">请输入一个品牌名称</span></td></tr>').insertAfter('#com2_input');}
     
   
 = render :partial => "users/usersidebox"
@@ -53,49 +53,51 @@
             %td{:width => 100} 等级
             %td
               = radio_button_tag :role, 0, @user.role==0
-              普通用户
+              = label_tag(:role_0, '普通用户')
             %td.grey
               
           %tr
             %td
             %td
               = radio_button_tag :role, 1, @user.role==1
-              时尚设计师
+              = label_tag(:role_1, '时尚设计师')
             %td.grey
               独立专栏显示您的发布内容
 
           %tr
             %td
             %td
-              = radio_button_tag :role, 2, @user.role==2, :id => "com1"
-              商家用户(专卖店)
+              = radio_button_tag :role, 2, @user.role==2
+              = label_tag(:role_2, '商家用户')
             %td.grey
-              可拥有一个品牌栏目
+              您可拥有一个品牌
           %tr.hide.input_tr#com1_input
             %td
               品牌名称
             %td{:colspan => 2}
               = text_field_tag "brand_name[]", "", :class => "input"
+              %span.grey 请输入一个品牌名称
 
           %tr
             %td
             %td
               = radio_button_tag :role, 3, @user.role==3
-              商家用户(百货店)
+              = label_tag(:role_3, '商场用户')
             %td.grey
-              可拥有多个品牌栏目
+              您可拥有多个品牌
           %tr.hide.input_tr#com2_input
             %td
               品牌名称
             %td{:colspan => 2}
               = text_field_tag "brand_name[]", "", :class => "input"
+              %span.grey 请输入一个品牌名称
               = link_to("增加", js_void, :onclick => "add_more();")
 
           %tr
             %td
             %td
               = radio_button_tag :role, 4, @user.role==4
-              品牌用户
+              = label_tag(:role_4, '品牌用户')
             %td.grey
               可拥有品牌专栏
           %tr.hide.input_tr#brand_input
@@ -103,6 +105,7 @@
               品牌名称
             %td{:colspan => 2}
               = text_field_tag "brand_name[]", "", :class => "input"
+              %span.grey 请输入一个品牌名称
             
           
         .btn

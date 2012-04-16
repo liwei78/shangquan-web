@@ -36,15 +36,15 @@ class User < ActiveRecord::Base
   before_create :encrypt_something
   before_update :change_password
   
-  has_many :articles, :order => "articles.id desc", :include => :comments
-  has_many :feeds,    :order => "feeds.id desc"
-  has_many :items, :order => "items.id desc"
-  has_many :photos, :as => :klass
-  has_many :comments, :order => "comments.id desc"
-  has_many :messages, :order => "messages.id desc"
+  has_many :articles,      :order => "articles.id desc", :include => :comments
+  has_many :article_items, :order => "items.id desc"
+  has_many :photos,        :as => :klass
+  has_many :comments,      :order => "comments.id desc"
+  has_many :messages,      :order => "messages.id desc"
   has_many :brand_users
-  has_many :brands, :through => :brand_users
+  has_many :brands,        :through => :brand_users
   has_many :activity_reports
+  has_many :article_items
   
   # 用户与喜欢物品的关系
   has_many :user_items

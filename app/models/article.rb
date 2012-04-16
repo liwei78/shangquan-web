@@ -6,7 +6,6 @@ class Article < ActiveRecord::Base
   has_many :photos, :as => :klass
   has_many :comments, :as => :klass, :include => :user
   has_many :article_items
-  has_many :items, :through => :article_items
   has_many :brand_articles
   has_many :brands, :through => :brand_articles
   acts_as_taggable

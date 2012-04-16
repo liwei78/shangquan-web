@@ -3,7 +3,6 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.integer  :user_id
       t.string   :unique_id # 货号
       t.string   :title
       t.decimal  :price, :precision => 8, :scale =>2, :default=>0.00

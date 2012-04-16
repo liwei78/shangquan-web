@@ -43,7 +43,7 @@
           .title
             TA的分享
           %ul
-            - for item in @todaystar.items.is_suggest.limit(8)
+            - for item in @todaystar.article_items.is_top.limit(8)
               %li= link_to image_tag(item.poster.url(:small), :width => 60, :height => 60), item, :target => "_blank"
             .clearfix
           .clearfix
@@ -88,7 +88,7 @@
               %span= item.collects_count
               个收藏
             .collect_btn
-              = link_to "喜欢", minilike_item_url(item), :remote => true, :method => :post, :class => "collectstyle"
+              = link_to "喜欢", minilike_article_item_url(item), :remote => true, :method => :post, :class => "collectstyle"
           .clearfix
       .clearfix
     .clearfix
