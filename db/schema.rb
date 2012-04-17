@@ -265,6 +265,7 @@ ActiveRecord::Schema.define(:version => 20120416054714) do
     t.integer  "klass_type"
     t.text     "content"
     t.integer  "state",      :default => 1
+    t.integer  "star",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -317,6 +318,8 @@ ActiveRecord::Schema.define(:version => 20120416054714) do
     t.integer  "collects_count",                                    :default => 0
     t.integer  "position",                                          :default => 0
     t.string   "summary"
+    t.integer  "stars_count",                                       :default => 0
+    t.integer  "stars_score",                                       :default => 0
     t.string   "poster_file_name"
     t.string   "poster_content_type"
     t.integer  "poster_file_size"

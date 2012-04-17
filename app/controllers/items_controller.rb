@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @comments = @item.comments.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
-    @user = @item.user
+    @user = get_current_user
     @current_user = get_current_user
   end
   
@@ -70,7 +70,11 @@ class ItemsController < ApplicationController
   
   def write
     item = Item.find(params[:id])
-    comment = item.comments.new(:content => params[:content], :user_id => current_user_id)
+    comment = item.comments.new(:content => params[:content], :user_id => current_user_id, :star => params[:star].to_i)
+    if params[:star].present?
+      item.stars_score += params[:star].to_i
+      item.stars_count += 1
+    end
     if comment.save
       item.increment!(:comments_count)
       flash[:notice] = "评论成功"

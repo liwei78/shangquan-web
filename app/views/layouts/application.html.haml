@@ -49,11 +49,11 @@
                 = link_to "时尚", "/main/articles"
                 %span                
                   -
-                  = link_to "晒单", ""
+                  = link_to "晒单", tag_articles_url(:tag => URI.encode('晒单')), :target => "_blank"
                   -
-                  = link_to "自拍", ""
+                  = link_to "自拍", tag_articles_url(:tag => URI.encode('自拍')), :target => "_blank"
                   -
-                  = link_to "逛街", ""
+                  = link_to "逛街", tag_articles_url(:tag => URI.encode('逛街')), :target => "_blank"
 
               %li= link_to "商家", "/main/companies"
               %li= link_to "商场", "/main/malls"

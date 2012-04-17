@@ -6,6 +6,7 @@ class CreateComments < ActiveRecord::Migration
       t.integer  :klass_type
       t.text     :content
       t.integer  :state, :default => 1   # 0:block, 1:auditing, 2:white, 3:deleted
+      t.integer  :star,  :default => 0
       t.timestamps
     end
   end

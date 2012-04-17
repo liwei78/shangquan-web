@@ -6,6 +6,12 @@ class ArticlesController < ApplicationController
     @user = get_current_user
     @articles = @user.articles.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
   end
+
+  def tag
+    @user = get_current_user
+    @count = Article.tagged_with(URI.decode(params[:tag])).count
+    @articles = Article.tagged_with(URI.decode(params[:tag])).paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+  end
   
   def show
     @article = Article.find(params[:id])

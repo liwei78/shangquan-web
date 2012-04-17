@@ -17,7 +17,10 @@ class CreateItems < ActiveRecord::Migration
       t.integer  :collects_count, :default => 0
       t.integer  :position,       :default => 0            # 排序，用户首页推荐顺序
       t.string   :summary                                  # 摘要
-      
+
+      t.integer  :stars_count,    :default => 0
+      t.integer  :stars_score,    :default => 0
+
       # 封面
       t.string   :poster_file_name
       t.string   :poster_content_type

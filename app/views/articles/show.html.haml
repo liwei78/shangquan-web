@@ -59,7 +59,7 @@
         .tags
           标签：
           - for tag in @article.tags
-            = link_to tag.name, "#"
+            = link_to tag.name, tag_articles_url(:tag => URI.encode(tag.name))
       .comments
         - if @current_user.present?
           %h2

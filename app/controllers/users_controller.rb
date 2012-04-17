@@ -284,7 +284,8 @@ class UsersController < ApplicationController
       :title    => params[:title], 
       :content  => params[:content], 
       :user_id  => current_user_id,
-      :state    => current_user_rtype)
+      :state    => current_user_rtype,
+      :tag_list => params[:tag_list])
     
     # poster
     # TODO: not well.....but iam sooo tired

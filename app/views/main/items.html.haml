@@ -13,7 +13,7 @@
             = link_to image_tag(item.poster.url(:small), :width => 190, :height => 190), item, :target => "_blank"
           .title
             = link_to item.title, item, :target => "_blank"
-          - if item.user_id.present?
+          - if false and item.user_id.present?
             .info
               .avatar= link_to image_tag(item.user.avatar.url(:small), :width=>30, :height => 30), item.user, :target => "_blank"
               .intro

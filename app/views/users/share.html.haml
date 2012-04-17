@@ -1,5 +1,9 @@
 - content_for :header do
   :javascript
+    function appendtag(name) {
+      var hasTag = $('#taginput').val();
+      $('#taginput').val(hasTag+" "+name);
+    }
     $(document).ready(function() {
     
       $('#moreitem').click(function(){
@@ -212,10 +216,15 @@
             .clearfix
           .tr
             = text_area_tag :content, "", :class => "textarea"
-          /.tr
-          /  .right
-          /    %span#taginput_label.hide 空格区分
-          /  = text_area_tag :tag, "", :class => "taginput", :id => "taginput"
+          .tr
+            .right
+              %span#taginput_label.hide 空格区分
+            = text_area_tag :tag_list, "", :class => "taginput", :id => "taginput"
+            .sometags
+              %span.grey 热门标签: 
+              = link_to '晒单', js_void, :onclick => "appendtag('晒单')"
+              = link_to '自拍', js_void, :onclick => "appendtag('自拍')"
+              = link_to '逛街', js_void, :onclick => "appendtag('逛街')"
           .action
             %ul
               %li= link_to "增加物品", js_void,  :class => "btn1", :id => "moreitem"

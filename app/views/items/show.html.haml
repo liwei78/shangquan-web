@@ -46,6 +46,13 @@
               = form_tag(write_item_url(@item)) do
                 = text_area_tag :content, "", :class => "input"
                 %br
+                = radio_button_tag :star, 1, false, :class => "star"
+                = radio_button_tag :star, 2, false, :class => "star"
+                = radio_button_tag :star, 3, false, :class => "star"
+                = radio_button_tag :star, 4, false, :class => "star"
+                = radio_button_tag :star, 5, false, :class => "star"
+                .clearfix
+                %br
                 = submit_tag("确定", :class => "btnstyle")
             .clearfix
         .commentslist
@@ -58,7 +65,16 @@
                   .right
                     = link_to "回复", js_void
                   = link_to(comment.user.name, comment.user)
-                .comment_content= comment.content.html_safe
+                .comment_content
+                  .right
+                    = radio_button_tag "star_#{comment.id}", 1, 1==comment.star, :class => "star"
+                    = radio_button_tag "star_#{comment.id}", 2, 2==comment.star, :class => "star"
+                    = radio_button_tag "star_#{comment.id}", 3, 3==comment.star, :class => "star"
+                    = radio_button_tag "star_#{comment.id}", 4, 4==comment.star, :class => "star"
+                    = radio_button_tag "star_#{comment.id}", 5, 5==comment.star, :class => "star"
+                    :javascript
+                      $('input[name=star_#{comment.id}]').rating({'readOnly': true, 'select': #{comment.star}});
+                  = comment.content.html_safe
                 .time= comment.created_from_now
               .clearfix
           = will_paginate @comments, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

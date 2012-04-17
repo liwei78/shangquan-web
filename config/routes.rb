@@ -33,6 +33,9 @@ Shangquan::Application.routes.draw do
   end
   
   resources :articles do
+    collection do
+      get 'tag'
+    end
     member do
       post 'write', 'like', 'share', 'collect', 'del_photo'
     end
