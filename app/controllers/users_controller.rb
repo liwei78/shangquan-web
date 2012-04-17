@@ -157,13 +157,10 @@ class UsersController < ApplicationController
 
   def find
     @user = get_current_user
-    if params[:uid].present?
-     @comuser = User.find(params[:uid])
-     @page_title = "商家线报"
-    end
-    if params[:bid].present?
-      @brand   = Brand.find(params[:bid])
-      @page_title = "品牌线报"
+    @report = Report.new
+    if params[:aid].present?
+     @archetype = Archetype.find(params[:aid])
+     @page_title = @archetype.name + "线报"
     end
   end
 
@@ -380,6 +377,22 @@ class UsersController < ApplicationController
     else
       flash[:error] = "添加失败"
       redirect_to discover_users_url
+    end
+  end
+
+  def postreport
+    report         = Report.new(params[:report])
+    report.user_id = current_user_id
+    if report.save
+      files = params[:photos].present? ? params[:photos][:file] : []
+      files.each do |file|
+        Photo.create(:file => file, :klass_type => "Report", :klass_id => report.id) if file.present?
+      end
+      flash[:notice] = "线报添加成功"
+      redirect_to user_url(current_user_id)
+    else
+      flash[:error] = "线报添加失败"
+      redirect_to find_users_url
     end
   end
   

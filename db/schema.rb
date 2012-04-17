@@ -377,7 +377,9 @@ ActiveRecord::Schema.define(:version => 20120416054714) do
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "reports", :force => true do |t|
-    t.string   "report_type"
+    t.integer  "channel_id"
+    t.integer  "category_id"
+    t.integer  "area_id"
     t.integer  "user_id"
     t.string   "opening_date"
     t.text     "content"

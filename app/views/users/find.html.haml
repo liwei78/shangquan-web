@@ -1,3 +1,7 @@
+- content_for :header do
+  :javascript
+    function add_upload_file() {
+      $('#upload_div').clone().insertBefore('.addmore');}
 = render :partial => "users/usersidebox"
 .mainbox
   .formbox
@@ -5,56 +9,38 @@
       = @page_title
     .nav
     .formstyle
-      - if @brand.present?
-        = form_tag(findbrand_users_url, :multipart => true) do
-          = hidden_field_tag :brand_id, @brand.id
+      - if @archetype.present?
+        = form_for(@report, :url => postreport_users_url, :html => {:multipart => true}) do |f|
+          = f.hidden_field :category_id,  :value => @archetype.category_id
+          = f.hidden_field :channel_id,   :value => @archetype.channel_id
+          = f.hidden_field :area_id,      :value => @archetype.area_id
           %table{:width => '100%', :cellspadding => 6}
-            %tr
-              %td{:width => 100} 品牌
-              %td= link_to image_tag(@brand.logo.url), @brand, :target => "_blank"
+            - if @archetype.present?
+              %tr
+                %td{:width => 100}
+                  = @archetype.category.name
+                %td
+                  = link_to image_tag(@archetype.logo.url), @archetype, :target => "_blank"
             %tr
               %td
-              %td 请在下面填写您发现的品牌活动信息
+              %td 请在下面填写您发现的信息
             %tr
               %td 活动时间
-              %td= text_field_tag 'activity[opening_date]', "", :cols => 40, :rows => 6, :class => "input"
+              %td= f.text_field :opening_date, :cols => 40, :rows => 6, :class => "input"
             %tr
               %td 文字描述
-              %td= text_area_tag 'activity[content]', "", :cols => 40, :rows => 6, :class => " wide"
+              %td= f.text_area :content, :cols => 40, :rows => 6, :class => " wide"
             %tr
               %td 实拍图片
               %td
-                = file_field_tag 'activity[photo]'
-                950x300 px
-            %tr
-              %td 信息来源
-              %td= text_field_tag 'activity[info_from]', "", :cols => 40, :rows => 6, :class => "input"
-          .btn
-            = submit_tag "确定", :class => "submit"
-      - if @comuser.present?
-        = form_tag(findcompany_users_url, :multipart => true) do
-          = hidden_field_tag :user_id, @comuser.id
-          %table{:width => '100%', :cellspadding => 6}
-            %tr
-              %td{:width => 100} 商家
-              %td= link_to image_tag(@comuser.avatar.url), @comuser, :target => "_blank"
-            %tr
+                = link_to("增加上传", js_void, :onclick => "add_upload_file();")
+            %tr#upload_div
               %td
-              %td 请在下面填写您发现的商家活动信息
-            %tr
-              %td 活动时间
-              %td= text_field_tag 'activity[opening_date]', "", :cols => 40, :rows => 6, :class => "input"
-            %tr
-              %td 文字描述
-              %td= text_area_tag 'activity[content]', "", :cols => 40, :rows => 6, :class => " wide"
-            %tr
-              %td 实拍图片
               %td
-                = file_field_tag 'activity[photo]'
-                950x300 px
-            %tr
+                = file_field_tag "photos[file][]"
+            %tr.addmore
               %td 信息来源
-              %td= text_field_tag 'activity[info_from]', "", :cols => 40, :rows => 6, :class => "input"
+              %td= f.text_field :info_from, :cols => 40, :rows => 6, :class => "input"
           .btn
             = submit_tag "确定", :class => "submit"
         
