@@ -283,230 +283,73 @@ class UsersController < ApplicationController
   
   def postshare
     @current_user = get_current_user
+    article = Article.new(
+      :title    => params[:title], 
+      :content  => params[:content], 
+      :user_id  => current_user_id,
+      :state    => current_user_rtype)
     
-    if params[:is_type].present?
-      
-      # items
-      if params[:is_type] == "showitem"
-        if params[:item_id].present?
-          # TODO
-        else
-          item = Item.new
-          item.title     = params[:item_name]
-          item.content   = params[:content]
-          item.price     = params[:price]
-          item.tag_list  = params[:itemtag]
-          item.buy_place = params[:place]
-          item.user_id   = current_user_id
-          item.state     = current_user_rtype
-          
-          # poster
-          if params[:photo_temp_id].present?
-            tmpfile     = PhotoTemp.find(params[:photo_temp_id])
-            item.poster = open(tmpfile.file.path)
-          end
-          
-          if item.save
-            if params[:brand_name].present?
-              brand = Brand.find_by_title(params[:brand_name])
-              brand.items << item if brand.present?
-            end
-            
-            @done = true
-            @targeturl = item_url(item)
-          else
-            @done = false
-            @targeturl = user_url(current_user_id)
-          end
-        end
-        
-      end
-      
-      # article
-      if params[:is_type] == "showstyle"
-        article = Article.new(
-          :title      => params[:title], 
-          :content    => params[:content], 
-          :user_id    => current_user_id,
-          :state      => current_user_rtype,
-          :is_article => true)
-          
-        if params[:photo_temp_id].present?
-          tmpfile = PhotoTemp.find(params[:photo_temp_id])
-          article.poster = open(tmpfile.file.path)
-        end
-        
-        # role
-        if [2,3].include?(@current_user.role)
-          article.is_company = true
-        end
-        
-        if article.save
-
-          # brand's article
-          if params[:brand_id].present?
-            article.update_attribute(:is_brand, true)
-            brand = Brand.find(params[:brand_id])
-            brand.articles << article
-          end
-
-          # activity
-          if params[:activity_id].present?
-            activity = Activity.find(params[:activity_id])
-            activity.articles << article
-          end
-
-          User.update_counters current_user_id, :articles_count => 1
-
-          @done = true
-          @targeturl = article_url(article)
-        else
-          @done = false
-          @targeturl = user_url(current_user_id)
-        end
-      end
-      
-      # discount
-      if params[:is_type] == "showdiscount"
-        article = Article.new(
-          :title       => params[:title], 
-          :content     => params[:content], 
-          :shop_name   => params[:shop_name], 
-          :brand_name  => params[:brand_name], 
-          :begin_time  => params[:begin_time], 
-          :end_time    => params[:end_time], 
-          :user_id     => current_user_id,
-          :state       => current_user_rtype,
-          :is_discount => true)
-          
-        if params[:photo_temp_id].present?
-          tmpfile = PhotoTemp.find(params[:photo_temp_id])
-          article.poster = open(tmpfile.file.path)
-        end
-        
-        # role
-        if [2,3].include?(@current_user.role)
-          article.is_company = true
-        end
-        
-        if article.save
-
-          # brand's article
-          if params[:brand_id].present?
-            article.update_attribute(:is_brand, true)
-            brand = Brand.find(params[:brand_id])
-            brand.articles << article
-          end
-
-          # activity
-          if params[:activity_id].present?
-            activity = Activity.find(params[:activity_id])
-            activity.articles << article
-          end
-
-          User.update_counters current_user_id, :articles_count => 1
-
-          @done = true
-          @targeturl = article_url(article)
-        else
-          @done = false
-          @targeturl = user_url(current_user_id)
-        end
-      end
-      
-    else
-      
-      article = Article.new(
-        :title    => params[:title], 
-        :content  => params[:content], 
-        :user_id  => current_user_id,
-        :state    => current_user_rtype)
-      
-      # poster
-      # TODO: not well.....but iam sooo tired
-      if params[:photo_temp_id].present?
-        tmpfile = PhotoTemp.find(params[:photo_temp_id])
-        article.poster = open(tmpfile.file.path)
-      end
-
-      # role
-      if [2,3].include?(@current_user.role)
-        article.is_company = true
-      end
-
-      if article.save
-    
-        # archetype's articles
-        if params[:archetype_id].present?
-          archetype = Archetype.find(params[:archetype_id])
-          archetype.articles << article
-        end
-        
-        # brand's article
-        if params[:brand_id].present?
-          article.update_attribute(:is_brand, true)
-          brand = Brand.find(params[:brand_id])
-          brand.articles << article
-        end
-    
-        # activity
-        if params[:activity_id].present?
-          activity = Activity.find(params[:activity_id])
-          activity.articles << article
-        end
-        
-        if params[:items].present?
-          items = params[:items]
-          categories = items['category']
-          names      = items['name']
-          brands     = items['brand']
-          uniqueids  = items['uniqueid']
-          prices     = items['price']
-          buy_places = items['buy_place']
-          posters    = items['poster']
-          i = 0
-          names.count.times do
-            article_item            = ArticleItem.new
-            article_item.article_id = article.id
-            article_item.category   = categories[i]
-            article_item.name       = names[i]
-            article_item.brand      = brands[i]
-            article_item.unique_id  = uniqueids[i]
-            article_item.price      = prices[i]
-            article_item.buy_place  = buy_places[i]
-            article_item.poster     = posters[i]     if posters.present?
-            article_item.user_id    = current_user_id
-            article_item.save
-            i += 1
-          end
-        end
-    
-        User.update_counters current_user_id, :articles_count => 1
-    
-        @done = true
-        @targeturl = article_url(article)
-      else
-        @done = false
-        @targeturl = user_url(current_user_id)
-      end
-
+    # poster
+    # TODO: not well.....but iam sooo tired
+    if params[:photo_temp_id].present?
+      tmpfile = PhotoTemp.find(params[:photo_temp_id])
+      article.poster = open(tmpfile.file.path)
     end
+
+    if article.save
+  
+      # archetype's articles
+      if params[:archetype_id].present?
+        archetype = Archetype.find(params[:archetype_id])
+        archetype.articles << article
+        article.update_attributes(
+          :category_id => archetype.category_id, 
+          :channel_id  => archetype.channel_id, 
+          :area_id     => archetype.area_id
+        )
+      end
+
+      # activity
+      if params[:activity_id].present?
+        activity = Activity.find(params[:activity_id])
+        activity.articles << article
+      end
       
-    # if params[:add_video] == "true"
-    #   article.video_code = params[:code]
-    #   article.is_video = true
-    # end
-    
-    # photos
-    # if params[:add_album] == "true"
-    #   files = params[:photos].present? ? params[:photos][:file] : []
-    #   unless files.blank?
-    #     files.each do |file|
-    #       Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
-    #     end
-    #     article.update_attribute(:is_photo, true)
-    #   end
-    # end
+      if params[:items].present?
+        items = params[:items]
+        categories = items['category']
+        names      = items['name']
+        brands     = items['brand']
+        uniqueids  = items['uniqueid']
+        prices     = items['price']
+        buy_places = items['buy_place']
+        posters    = items['poster']
+        i = 0
+        names.count.times do
+          article_item            = ArticleItem.new
+          article_item.article_id = article.id
+          article_item.category   = categories[i]
+          article_item.name       = names[i]
+          article_item.brand      = brands[i]
+          article_item.unique_id  = uniqueids[i]
+          article_item.price      = prices[i]
+          article_item.buy_place  = buy_places[i]
+          article_item.poster     = posters[i]     if posters.present?
+          article_item.user_id    = current_user_id
+          article_item.save
+          i += 1
+        end
+      end
+  
+      User.update_counters current_user_id, :articles_count => 1
+  
+      @done = true
+      @targeturl = article_url(article)
+    else
+      @done = false
+      @targeturl = user_url(current_user_id)
+    end
+
 
     respond_to do |format|
       format.html { redirect_to @targeturl }

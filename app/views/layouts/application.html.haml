@@ -45,7 +45,16 @@
                 = link_to "活动线报", discover_users_url, :class => "new-discover"
             %ul
               %li= link_to "首页", root_url, :class => "index"
-              %li= link_to "时尚", "/main/articles"
+              %li
+                = link_to "时尚", "/main/articles"
+                %span                
+                  -
+                  = link_to "晒单", ""
+                  -
+                  = link_to "自拍", ""
+                  -
+                  = link_to "逛街", ""
+
               %li= link_to "商家", "/main/companies"
               %li= link_to "商场", "/main/malls"
               %li= link_to "品牌", "/main/brands"

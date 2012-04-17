@@ -2,6 +2,7 @@ class Archetype < ActiveRecord::Base
 
   belongs_to :channel
   belongs_to :category
+  belongs_to :area
 
   has_many :archetype_users
   has_many :users, :through => :archetype_users

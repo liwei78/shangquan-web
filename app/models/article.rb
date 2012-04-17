@@ -8,6 +8,11 @@ class Article < ActiveRecord::Base
   has_many :article_items
   has_many :brand_articles
   has_many :brands, :through => :brand_articles
+
+  belongs_to :area
+  belongs_to :channel
+  belongs_to :category
+
   acts_as_taggable
   
   scope :is_article, :conditions => ["articles.is_article = ?", true]

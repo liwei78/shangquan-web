@@ -13,38 +13,29 @@ User.create([
 
 
 Area.create([
-  {:name => "西单", :position => "1"}, 
-  {:name => "朝阳", :position => "2"}, 
-  {:name => "中关村", :position => "3"}, 
-  {:name => "王府井/东单", :position => "4"},
-  {:name => "大望路", :position => "5"},
-  {:name => "三里屯", :position => "6"},
-  {:name => "建外大街", :position => "7"},
-  {:name => "建外大街", :position => "8"},
-  {:name => "崇文门", :position => "9"}]
-)
+  {:name => "西单",       :position => 1}, 
+  {:name => "朝阳",       :position => 2}, 
+  {:name => "中关村",     :position => 3}, 
+  {:name => "王府井/东单", :position => 4},
+  {:name => "大望路",     :position => 5},
+  {:name => "三里屯",     :position => 6},
+  {:name => "建外大街",   :position => 7},
+  {:name => "崇文门",     :position => 8}
+])
 
 Category.create([
   {:name => "品牌", :position => 1},
   {:name => "商场", :position => 2},
   {:name => "商家", :position => 3},  
-  {:name => "美食", :position => 4}, 
-  {:name => "专卖店", :position => 5}, 
-  {:name => "电子商务", :position => 6},
-  {:name => "化妆品", :position => 7},
-  {:name => "折扣店", :position => 8},
-  {:name => "团购", :position => 9}]
-  
-)
+  {:name => "餐饮", :position => 4}, 
+  {:name => "团购", :position => 5},
+])
 
 Channel.create([
-  {:name => "化妆品", :position => "1"},
-  {:name => "男装", :position => "2"}, 
-  {:name => "女装", :position => "3"}, 
-  {:name => "鞋帽", :position => "4"},
-  {:name => "儿童用品", :position => "5"},
-  {:name => "运动户外", :position => "6"},
-  {:name => "首饰", :position => "7"}
+  {:name => "化妆品", :position => 1},
+  {:name => "男装", :position => 2}, 
+  {:name => "女装", :position => 3}, 
+  {:name => "鞋帽", :position => 4},
 ])
 
 
@@ -67,15 +58,15 @@ Archetype.create([
     {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg")),  :category_id => 1, :channel_id => 1, :intro => "玉兰油（OLAY）是中国区最大护肤品牌，在大陆已持续十年呈两位数增长。它是宝洁公司全球著名的护肤品牌，OLAY以全球高科技护肤研发技术为后盾，在深入了解中国女性对护肤和美的需要的基础上，不断扩大产品范围，目前已经涵盖了护肤和沐浴系列，真正帮助女性全面周到地呵护自己的肌肤。"},
     {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
     {:name => "姬芮", :logo => open(Rails.root.join('tmp', "brand3.jpg")),   :category_id => 1, :channel_id => 1, :intro => ""},
-    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg")), :category_id => 1, :channel_id => 2, :intro => ""},
-    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :category_id => 1, :channel_id => 2, :intro => ""},
-    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :category_id => 1, :channel_id => 2, :intro => ""},
-    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg")),   :category_id => 1, :channel_id => 2, :intro => ""},
+    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
+    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
+    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
+    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg")),   :category_id => 1, :channel_id => 1, :intro => ""},
 
     {:name => "hq尚客", :logo => open(Rails.root.join('tmp', "com4.jpg")), :category_id => 3, :intro => ""},
     {:name => "天虹", :logo => open(Rails.root.join('tmp', "com6.jpg")), :category_id => 3, :intro => ""},
     
-    {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => "玉兰油（OLAY）是中国区最大护肤品牌，在大陆已持续十年呈两位数增长。它是宝洁公司全球著名的护肤品牌，OLAY以全球高科技护肤研发技术为后盾，在深入了解中国女性对护肤和美的需要的基础上，不断扩大产品范围，目前已经涵盖了护肤和沐浴系列，真正帮助女性全面周到地呵护自己的肌肤。"},
+    {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => ""},
     {:name => "国泰百货", :logo => open(Rails.root.join('tmp', "com2.jpg")), :category_id => 2, :intro => ""},
     {:name => "新世界", :logo => open(Rails.root.join('tmp', "com3.jpg")), :category_id => 2, :intro => ""},
     {:name => "西单商场", :logo => open(Rails.root.join('tmp', "com5.jpg")), :category_id => 2, :intro => ""},
@@ -124,7 +115,7 @@ titles_array = [
   "欧美范真丝亚麻男士修身T恤"]
 puts "articles"
 10.times do
-  a = Article.create(:title => titles_array[rand(4)], :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(7)}.jpg")), :is_article => true, :is_company => true)
+  a = Article.create(:content => titles_array[rand(4)], :user_id => 1, :state => 2, :poster => open(Rails.root.join('tmp', "tmp#{rand(7)}.jpg")), :is_article => true, :is_company => true)
   i = rand(5)
   comments = []
   i.times do

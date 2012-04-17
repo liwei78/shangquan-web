@@ -10,6 +10,10 @@ class CreateArticles < ActiveRecord::Migration
       t.string   :other_title
       t.text     :summary
       t.text     :content
+
+      t.integer  :area_id
+      t.integer  :channel_id
+      t.integer  :category_id
       
       # 视频代码
       t.string   :video_code

@@ -106,7 +106,12 @@ $layout-width: 950px;
         text-align: center;
         margin-right: 10px;
         span {
-          color: $grey;
+          font-size: 12px;
+          font-weight: normal;
+          a {
+            font-size: 12px;
+            font-weight: normal;
+          }
         }
         a {
           font-weight: bold;
