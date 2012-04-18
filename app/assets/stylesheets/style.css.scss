@@ -383,7 +383,7 @@ $layout-width: 950px;
     }
   }
   .actionbox {
-    width: 190px;
+    width: 200px;
     margin: 0 auto;
     margin-bottom: 16px;
     a {
@@ -407,6 +407,12 @@ $layout-width: 950px;
       background-position: -161px -41px;
       color: #999;
       text-decoration: none;
+    }
+    a.letter {
+      background-position: -327px -132px;
+      width: 44px;
+      padding: 0;
+      text-indent:-999em;
     }
   }
   .following {
@@ -733,6 +739,10 @@ $layout-width: 950px;
         a.qz:hover {
           background-position: -48px 0;
         }
+      }
+      .sharebox2 {
+        width: 654px;
+        margin: 20px auto;
       }
       .comments {
         width: 654px;

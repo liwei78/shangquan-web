@@ -48,6 +48,7 @@
     .actionbox
       - if @current_user.following?(@user)
         = link_to "已关注", unfollow_user_url(@user), :method => :post, :remote => true, :class => "unfollow-btn", :confirm => "你要取消关注吗？"
+        = link_to "私信", new_message_url(:to => @user), :target => "_blank", :class => "letter"
       - else
         = link_to "关注", follow_user_url(@user), :method => :post, :remote => true, :class => "follow-btn"
 

@@ -11,11 +11,11 @@ Shangquan::Application.routes.draw do
 
   resources :brands
   resources :activities
-  resources :brands do
-    member do
-      post 'minifollow', 'follow'
-    end
-  end
+  #resources :brands do
+  #  member do
+  #    post 'minifollow', 'follow'
+  #  end
+  #end
 
   resources :article_items, :only => [:show] do
     member do

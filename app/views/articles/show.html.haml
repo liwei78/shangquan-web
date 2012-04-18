@@ -49,12 +49,26 @@
                   = item.category
                 %td
                   = item.buy_place
-      .sharebox
-        分享到：
-        = link_to "", js_void, :class => "sina"
-        = link_to "", js_void, :class => "tx"
-        = link_to "", js_void, :class => "rr"
-        = link_to "", js_void, :class => "qz"
+      .sharebox2
+        /分享到：
+        /= link_to "", js_void, :class => "sina"
+        /= link_to "", js_void, :class => "tx"
+        /= link_to "", js_void, :class => "rr"
+        /= link_to "", js_void, :class => "qz"
+        :plain
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop">
+          <a class="jiathis_button_qzone"></a>
+          <a class="jiathis_button_tsina"></a>
+          <a class="jiathis_button_tqq"></a>
+          <a class="jiathis_button_renren"></a>
+          <a class="jiathis_button_kaixin001"></a>
+          <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+          <a class="jiathis_counter_style"></a>
+          </div>
+          <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+          <!-- JiaThis Button END -->
+        .clearfix
       - if @article.tags.present?
         .tags
           标签：

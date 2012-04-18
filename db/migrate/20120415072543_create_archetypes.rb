@@ -15,6 +15,10 @@ class CreateArchetypes < ActiveRecord::Migration
       t.integer :scores_count,   :default => 0       # 评价次数
       t.text    :intro
       
+      t.float   :latitude
+      t.float   :longitude
+      t.boolean :gmaps
+      
       # logo
       t.string   :logo_file_name
       t.string   :logo_content_type
