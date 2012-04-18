@@ -1,9 +1,9 @@
 class CreateBanners < ActiveRecord::Migration
   def change
     create_table :banners do |t|
-      t.string :title
-      t.string :summary
-      t.string :gourl
+      t.string  :title
+      t.string  :summary
+      t.string  :gourl
       t.integer :position, :default => 0
       t.integer :category, :default => 0 #0:首页滚动 1:滚动右侧4栏 
       

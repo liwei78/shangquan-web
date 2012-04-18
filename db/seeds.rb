@@ -161,12 +161,26 @@ category.items = Item.limit(6)
 
 puts "4 banners"
 Banner.create([
-    {:title => "卫衣躁动史",    :gourl => "#", :position => 1, :category => 0, :poster => open(Rails.root.join('tmp', "slider1.jpg"))},
-    {:title => "真男人要护肤",   :gourl => "#", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},
-    {:title => "我是你的明灯",   :gourl => "#", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
-    {:title => "注册商圈N喜临门", :gourl => "#", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
-    {:title => "0元抢小米手机",       :summary => "白拿小米第五期！上期获奖：Crazycat",  :gourl => "#", :position => 1, :category => 1},
-    {:title => "脚踏两只鞋",         :summary => "女人都喜欢穿休闲鞋的男人",           :gourl => "#", :position => 2, :category => 1},
-    {:title => "通勤利器撑气场",       :summary => "一个好的通勤包，绝对助你出挑",         :gourl => "#", :position => 3, :category => 1},
-    {:title => "来商圈，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",             :gourl => "#", :position => 4, :category => 1}
+    {:title => "卫衣躁动史",    :gourl => "/pages/4", :position => 1, :category => 0, :poster => open(Rails.root.join('tmp', "slider1.jpg"))},
+    {:title => "真男人要护肤",   :gourl => "/pages/5", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},
+    {:title => "我是你的明灯",   :gourl => "/pages/6", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
+    {:title => "注册商圈N喜临门", :gourl => "/pages/7", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
+    {:title => "0元抢小米手机",       :summary => "白拿小米第五期！上期获奖：Crazycat",  :gourl => "/pages/8", :position => 1, :category => 1},
+    {:title => "脚踏两只鞋",         :summary => "女人都喜欢穿休闲鞋的男人",           :gourl => "/pages/9", :position => 2, :category => 1},
+    {:title => "通勤利器撑气场",       :summary => "一个好的通勤包，绝对助你出挑",         :gourl => "/pages/7", :position => 3, :category => 1},
+    {:title => "来商圈，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",             :gourl => "/pages/8", :position => 4, :category => 1}
   ])
+
+puts "pages"
+Page.create([
+  {:title => "网站帮助", :content => "", :category_id => 0},
+  {:title => "关于我们", :content => "", :category_id => 0},
+  {:title => "联系我们", :content => "", :category_id => 0},
+  {:title => "版权声明", :content => "", :category_id => 0},
+  {:title => "奇虎诉腾讯垄断案开审", :content => "", :category_id => 1},
+  {:title => "中国类Instagram创业凶猛生长", :content => "", :category_id => 1},
+  {:title => "网游再掀上市潮欲迎第二春：六公司近期争赴IPO", :content => "", :category_id => 1},
+  {:title => "公告1", :content => "", :category_id => 2},
+  {:title => "公告2", :content => "", :category_id => 2},
+  {:title => "公告3", :content => "", :category_id => 2},
+])

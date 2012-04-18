@@ -1812,5 +1812,27 @@ div.star-rating-readonly a{cursor:default !important}
 div.star-rating{background:transparent!important;overflow:hidden!important}
 /* END jQuery.Rating Plugin CSS */
 
+.pagebox {
+  width: 808px;
+  border-top: 3px solid #65C5B3;
+  background: white;
+  margin: 0 auto;
+  .pagetitle {
+    width: 716px;
+    margin: 0 auto;
+    border-bottom: 1px solid #E0DEDE;
+    padding-top: 8px;
+    line-height: 40px;
+    font-size: 20px;
+  }
+  .pagecontent {
+    width: 716px;
+    margin: 0 auto;
+    line-height: 22px;
+    color: #888;
+    padding: 20px 0;
+  }
+}
+
 
 
