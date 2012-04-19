@@ -339,8 +339,8 @@ class UsersController < ApplicationController
         end
       end
   
-      User.update_counters current_user_id, :articles_count => 1
-  
+      User.update_counters current_user_id, :articles_count => 1, :score => 1
+
       @done = true
       @targeturl = article_url(article)
     else

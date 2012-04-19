@@ -4,6 +4,8 @@ Shangquan::Application.routes.draw do
   
   resources :pages
 
+  resources :coupons, :only => [:show]
+
   resources :archetypes do
     member do
       post 'minifollow', 'follow'

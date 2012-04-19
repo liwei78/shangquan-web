@@ -25,6 +25,8 @@ class Archetype < ActiveRecord::Base
   has_many :districts
   has_many :areas, :through => :districts
 
+  has_many :coupons
+
   has_attached_file :logo,
     :styles          => {:original => SITE_SETTINGS["brand_original"], :small => SITE_SETTINGS["brand_small"]},
     :url             => SITE_SETTINGS["paperclip_url"],

@@ -1,0 +1,15 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      优惠券
+    .tablestyle
+      .msg_title
+        = @coupon.dateintro
+      .msg_title
+        = @coupon.dateintro
+      .msg_content
+        = @coupon.content.html_safe
+      
+        
+.clearfix

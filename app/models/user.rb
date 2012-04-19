@@ -113,6 +113,10 @@ class User < ActiveRecord::Base
   def site_upgrade_state
     SITE_SETTINGS["site_upgrade_state"][self.upgrade_state]
   end
+
+  def getascore
+    User.update_counters self.id, :score => 1
+  end
   
   private
   

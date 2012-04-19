@@ -27,7 +27,11 @@ class Article < ActiveRecord::Base
   scope :auditing, :conditions => ["articles.state = ?", 1]
   scope :white,    :conditions => ["articles.state = ?", 2]
   scope :deleted,  :conditions => ["articles.state = ?", 3]
-  scope :allow_published,  :conditions => ["articles.state = ? or articles.state = ?", 1, 2]
+  scope :allow_published,  :conditions => ["articles.state = ?", 2]
+
+  def state_name
+    ["屏蔽", "审核", "通过", "删除"][self.state]
+  end
   
   has_many :activity_articles
   has_many :activities, :through => :activity_articles

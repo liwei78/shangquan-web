@@ -25,16 +25,23 @@
                 人气：
                 %span{:id => "hoy_count_#{@archetype.id}"}
                   = @archetype.followers.count
-            .archetype_box
-              .line 品牌综合评价
-              .line 质量
-              .line 款式
-              .line 服务
-              .line 
-                .right
-                  = link_to "我来评价", ""
-                已有#{@archetype.scores_count}个评价
-              
+            /.archetype_box
+            /  .line 品牌综合评价
+            /  .line 质量
+            /  .line 款式
+            /  .line 服务
+            /  .line 
+            /    .right
+            /      = link_to "我来评价", ""
+            /    已有#{@archetype.scores_count}个评价
+            - if @archetype.coupons.count > 0
+              .archetype_box
+                %ul
+                  - for coupon in @archetype.coupons
+                    %li
+                      %span
+                        优惠券：
+                      = link_to coupon.dateintro, coupon, :target => "_blank"
             .archetype_box
               .archetype_channel
                 %span

@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer  :followers_count,  :default => 0
       t.integer  :followings_count, :default => 0
       t.integer  :favorites_count,  :default => 0
+      t.integer  :scores,           :default => 0
 
       t.string   :avatar_file_name
       t.string   :avatar_content_type
