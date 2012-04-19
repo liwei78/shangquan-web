@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418154135) do
+ActiveRecord::Schema.define(:version => 20120419150520) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(:version => 20120418154135) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "applies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "archetype_id"
+    t.boolean  "passed",       :default => false
+    t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -442,6 +451,7 @@ ActiveRecord::Schema.define(:version => 20120418154135) do
     t.integer  "followers_count",     :default => 0
     t.integer  "followings_count",    :default => 0
     t.integer  "favorites_count",     :default => 0
+    t.integer  "scores",              :default => 0
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

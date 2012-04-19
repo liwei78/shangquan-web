@@ -68,6 +68,8 @@ Shangquan::Application.routes.draw do
       post 'postactivity'
       get  'find'
       post 'postreport'
+      get  'apply'
+      post 'postapply'
     end
     member do
       post 'follow', 'unfollow', 'minifollow'

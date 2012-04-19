@@ -66,8 +66,8 @@ $layout-width: 774px;
 .mainbox {
   .top {
     background: image-url("login_top.gif") no-repeat top;
-    height: 70px;
-    line-height: 70px;
+    height: 69px;
+    line-height: 69px;
     font-size: 18px;
     word-spacing: 10px;
     font-family: "微软雅黑";
@@ -81,7 +81,7 @@ $layout-width: 774px;
     }
   }
   .main {
-    width: 744px;
+    width: 745px;
     margin: 0 auto;
     padding-top: 30px;
     background-color: #fff;
@@ -148,7 +148,7 @@ $layout-width: 774px;
   .foot {
     background: image-url("login_top.gif") no-repeat bottom;
     font-size: 0;
-    height: 10px;
+    height: 9px;
   }
 }
 

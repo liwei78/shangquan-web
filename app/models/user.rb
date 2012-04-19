@@ -49,6 +49,9 @@ class User < ActiveRecord::Base
   # 用户与喜欢物品的关系
   has_many :user_items
   has_many :like_items, :through => :user_items, :source => :item
+
+  has_many :applies
+  has_many :owns, :through => :applies, :source => :archetype
   
 
   # following and followed

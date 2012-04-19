@@ -8,10 +8,13 @@
       = @user.intro
   .siterole
     = @user.site_role
-    - if @user.role == 0 and is_me?(@user)
-      = link_to "升级", upgrade_users_url 
-    - if @user.upgrade_state == 1 and is_me?(@user)
-      审核中
+    %small
+      积分:
+      = @user.scores
+    /- if @user.role == 0 and is_me?(@user)
+    /  = link_to "升级", upgrade_users_url 
+    /- if @user.upgrade_state == 1 and is_me?(@user)
+    /  审核中
   - if [2,3,4].include?(@user.role)
     .brands
       .grey

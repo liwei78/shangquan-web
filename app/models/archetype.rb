@@ -7,6 +7,9 @@ class Archetype < ActiveRecord::Base
   has_many :archetype_users
   has_many :users, :through => :archetype_users
 
+  has_many :applies
+  has_many :owners, :through => :applies, :source => :user
+
   has_many :archetype_articles
   has_many :articles, :through => :archetype_articles 
 
