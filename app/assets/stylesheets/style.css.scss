@@ -92,6 +92,38 @@ $layout-width: 950px;
       padding-top: 8px;
     }
     .action {}
+    .searchbox {
+      width: 160px;
+      position: relative;
+      z-index: 12;
+      .searchinput {
+        height: 29px;
+        width: 123px;
+        padding-left: 6px;
+        border: 1px solid #CCCACA;
+        border-top: 1px solid #C2C0C0;
+        line-height: 30px	9;
+        vertical-align: middle;
+        color: #999;
+        background: image-url("topsearchtfbg.gif") left top repeat-x;
+        background-color: #FAF7F7;
+        position: absolute;
+        right: 29px;
+        top: 10px;
+      }
+      .searchbtn {
+        width: 29px;
+        height: 30px;
+        vertical-align: bottom;
+        display: inline-block;
+        background: image-url("search.gif") no-repeat left top transparent;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        text-indent:-999em;
+        overflow: hidden;
+      }
+    }
   }
   .nav {
     $height: 43px;
@@ -1833,6 +1865,39 @@ div.star-rating{background:transparent!important;overflow:hidden!important}
     padding: 20px 0;
   }
 }
+
+.searchresults {
+  background-color: white;
+  ul {
+    padding: 20px;
+    width: 700px;
+    li {
+      margin-bottom: 20px;
+      .searchtitle {
+        text-decoration: underline;
+        cursor: auto;
+        font-weight: normal;
+        font-size: medium;
+        a {
+          color: blue;
+        }
+      }
+      .searchcontent {
+        font-size: 12px;
+        color: small;
+        line-height: 120%;
+      }
+      .searchlink {
+        color: green;
+        font-size: 12px;
+        .time {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
 
 
 

@@ -79,6 +79,7 @@ Shangquan::Application.routes.draw do
     end
   end
   
+  match '/search'             => 'search#index',    :via => :get, :as => :search
   match '/main/activities'    => 'main#activities', :via => :get
   match '/main/items'         => 'main#items',      :via => :get
   match '/main/articles'      => 'main#articles',   :via => :get

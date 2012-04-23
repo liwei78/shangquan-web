@@ -1,0 +1,15 @@
+.searchresults
+  %ul
+    - for article in @articles
+      %li
+        .searchtitle
+          = link_to article.content.truncate(20, :omission => "...").html_safe, article, :target => "_blank"
+        .searchcontent
+          = article.content.truncate(200, :omission => "...").html_safe
+        .searchlink
+          = article_url(article)
+          %span.time
+            = article.created_from_now
+
+    - if @articles.present?
+      = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

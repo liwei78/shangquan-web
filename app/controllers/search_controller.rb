@@ -1,7 +1,19 @@
 # encoding: utf-8
 class SearchController < ApplicationController
 
-  before_filter :need_user_login
+  before_filter :need_user_login, :except => [:index]
+
+  def index
+    if params[:k].present?
+      if params[:k] == "read"
+        @articles = Article.white.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+      else
+        @articles = Article.white.paginate(:conditions => ["content like ?", "%"+URI.decode(params[:k])+"%"], :page => params[:page], :per_page => 10, :order => "id desc")
+      end
+    else
+      @articles = []    
+    end
+  end
   
   def item_name_search
     if params[:s].present?
