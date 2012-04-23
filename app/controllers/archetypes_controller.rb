@@ -4,6 +4,7 @@ class ArchetypesController < ApplicationController
   
   def show
     @archetype = Archetype.find(params[:id])
+    @user = get_current_user
     @articles = @archetype.articles.paginate(:page => params[:page], :per_page => 50)
     @page_title = "#{@archetype.category.present? ? @archetype.category.name + " : " : ""}#{@archetype.name}"
     render :layout => "layoutfullwidth"

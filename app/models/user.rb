@@ -51,7 +51,9 @@ class User < ActiveRecord::Base
   has_many :like_items, :through => :user_items, :source => :item
 
   has_many :applies
-  has_many :owns, :through => :applies, :source => :archetype
+  has_many :owns, :through => :applies, :source => :archetype, :conditions => ["applies.passed = ?", true]
+  has_many :pending_applies, :through => :applies, :source => :archetype, :conditions => ["applies.passed = ?", true]
+  has_many :brands, :through => :applies, :source => :archetype, :conditions => ["archetypes.category_id = ? and applies.passed = ?", 1, true]
   
 
   # following and followed

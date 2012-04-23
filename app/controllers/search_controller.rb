@@ -15,10 +15,10 @@ class SearchController < ApplicationController
   def brand_name_search
     if params[:s].present?
       user = get_current_user
-      if [2,3,4].include?(user.role)
-        @brands = user.brands.formal
+      if user.brands.present?
+        @brands = user.brands
       else
-        @brands = Brand.find(:all, :conditions => ["name like ?", '%'+params[:s]+'%'])
+        @brands = Archetype.find(:all, :conditions => ["archetypes.category_id = 1 and archetypes.name like ?", '%'+params[:s]+'%'])
       end
     end
     respond_to do |format|

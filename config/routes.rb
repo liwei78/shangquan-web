@@ -2,6 +2,8 @@ Shangquan::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   
+  resources :maps, :only => [:index]
+
   resources :pages
 
   resources :coupons, :only => [:show]
@@ -68,8 +70,9 @@ Shangquan::Application.routes.draw do
       post 'postactivity'
       get  'find'
       post 'postreport'
-      get  'apply'
+      post 'apply'
       post 'postapply'
+      get  'newactivity'
     end
     member do
       post 'follow', 'unfollow', 'minifollow'

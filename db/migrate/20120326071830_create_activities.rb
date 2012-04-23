@@ -2,6 +2,7 @@ class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
       t.integer  :user_id
+      t.integer  :archetype_id
       t.string   :title
       t.string   :summary
       t.text     :content
@@ -21,6 +22,10 @@ class CreateActivities < ActiveRecord::Migration
       t.string   :poster_content_type
       t.integer  :poster_file_size
       t.datetime :poster_updated_at
+
+      # map
+      t.string   :latitude
+      t.string   :longitude
 
       t.timestamps
     end

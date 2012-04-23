@@ -1,16 +1,6 @@
 #encoding: utf-8
 
-# test account
-puts "Create Test Account"
-User.create([
-  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar1.jpg")), :role => 2},
-  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar2.jpg")), :star => true, :suggest => true, :intro => "轻微强迫症和严重妄想症，依赖快门按下时的存在感。不拘小节但专注细节。终极目标"},
-  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar3.jpg")), :todaystar => true, :intro => "外表时尚，内心保守派，喜欢新鲜有趣的事物，梦想当一名时装设计师。爱尝试各种搭"},
-  {:email => "ddd@123.com", :name => "DDD", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar4.jpg")), :star => true, :suggest => true, :intro => "一枚爱流浪的巨蟹座文艺女青年。卖文为生，海边的咖啡店主，酒、音乐、文字都是生"},
-  {:email => "eee@123.com", :name => "EEE", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar5.jpg")), :star => true, :suggest => true, :intro => "80后，靠谱女青年，护肤达人，喜欢各种美好的东西，简单叙述生活中的点点滴滴。"},
-  {:email => "fff@123.com", :name => "FFF", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar6.jpg")), :star => true, :suggest => true, :intro => "不宅会死星人，萝莉脸爷们心，总在搜寻一切搞怪重口味，vintage格子制服复"}])
-
-
+puts "Default data"
 
 Area.create([
   {:name => "西单",       :position => 1}, 
@@ -38,20 +28,23 @@ Channel.create([
   {:name => "鞋帽", :position => 4},
 ])
 
+HotTag.create([
+  {:name => "晒单", :position => 1},
+  {:name => "自拍", :position => 2},
+  {:name => "逛街", :position => 3},
+])
+
+# test account
+puts "Create Test Account"
+User.create([
+  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar1.jpg")), :role => 2},
+  {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar2.jpg")), :star => true, :suggest => true, :intro => "轻微强迫症和严重妄想症，依赖快门按下时的存在感。不拘小节但专注细节。终极目标"},
+  {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar3.jpg")), :todaystar => true, :intro => "外表时尚，内心保守派，喜欢新鲜有趣的事物，梦想当一名时装设计师。爱尝试各种搭"},
+  {:email => "ddd@123.com", :name => "DDD", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar4.jpg")), :star => true, :suggest => true, :intro => "一枚爱流浪的巨蟹座文艺女青年。卖文为生，海边的咖啡店主，酒、音乐、文字都是生"},
+  {:email => "eee@123.com", :name => "EEE", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar5.jpg")), :star => true, :suggest => true, :intro => "80后，靠谱女青年，护肤达人，喜欢各种美好的东西，简单叙述生活中的点点滴滴。"},
+  {:email => "fff@123.com", :name => "FFF", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar6.jpg")), :star => true, :suggest => true, :intro => "不宅会死星人，萝莉脸爷们心，总在搜寻一切搞怪重口味，vintage格子制服复"}])
 
 
-puts "aaa@123.com sysmsg for 50"
-50.times do
-  Message.create(:user_id => 1, :sysmsg => true, :title => "测试标题长度", :content => "文字文字"*20)
-end
-
-puts "aaa@123.com msg from other for 50"
-20.times do
-  Message.create(:user_id => 1, :send_by => 2,  :title => "好友私信测试标题长度", :content => "文字文字"*20)
-end
-20.times do
-  Message.create(:user_id => 1, :send_by => 3,  :title => "好友私信测试标题长度", :content => "文字文字"*20)
-end
 
 
 Archetype.create([
@@ -154,12 +147,16 @@ activity = Activity.create(
   3，使用收集工具采集网页上的美食图片，在描述中加入#想吃的#。",
   :opening_date => "活动日期：3月26日-4月1日",
   :poster => open(Rails.root.join('tmp', "activity.jpg")),
-  :top => true)
+  :top => true,
+  :status => 1,
+  :latitude => "3990876",
+  :longitude => "11639742"
+)
 
 category = Category.find(1)
 category.items = Item.limit(6)
 
-puts "4 banners"
+puts "banners"
 Banner.create([
     {:title => "卫衣躁动史",    :gourl => "/pages/4", :position => 1, :category => 0, :poster => open(Rails.root.join('tmp', "slider1.jpg"))},
     {:title => "真男人要护肤",   :gourl => "/pages/5", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},

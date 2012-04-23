@@ -149,10 +149,18 @@ class UsersController < ApplicationController
     if params[:aid].present?
       @archetype = Archetype.find(params[:aid])
     end
+    if params[:acid].present?
+      @activity = Activity.find(params[:acid])
+    end
   end
 
   def discover
     @user = get_current_user
+  end
+
+  def apply
+    @user = get_current_user
+    @archetype = Archetype.find(params[:aid])
   end
 
   def find
@@ -162,6 +170,11 @@ class UsersController < ApplicationController
      @archetype = Archetype.find(params[:aid])
      @page_title = @archetype.name + "线报"
     end
+  end
+
+  def newactivity
+    @user = get_current_user
+    @activity = Activity.new
   end
 
   def updatesetting
@@ -209,73 +222,6 @@ class UsersController < ApplicationController
       flash[:error] = '申请失败。'
     end
     redirect_to upgrade_users_url
-  end
-  
-  def postpublish
-    article = Article.new(
-      :title    => params[:title], 
-      :content  => params[:content], 
-      :tag_list => params[:tag_list],
-      :poster   => params[:poster],
-      :user_id  => current_user_id,
-      :state    => current_user_rtype)
-
-      # video code
-      if params[:relate_0] == "0"
-        article.is_article = true
-      end
-
-      # video code
-      if params[:relate_2] == "2"
-        article.code = params[:code]
-        article.is_video = true
-      end
-
-      # activity and company
-      if params[:relate_3] == "3"
-        article.schedule    = params[:schedule]
-        article.address     = params[:address]
-        article.category    = params[:category]
-        article.area        = params[:area]
-        article.is_activity = true
-        article.is_company  = true
-      end
-      
-      # brand
-      if params[:relate_4] == "4"
-        article.brand_name = params[:brand_name]
-        article.brand_desc = params[:brand_desc]
-        article.is_brand = true
-      end
-      
-      # item
-      if params[:relate_5] == "5"
-        article.price = params[:price]
-        article.is_item = true
-      end
-
-      # groupbuy
-      if params[:relate_6] == "6"
-        article.groupbuy_desc = params[:groupbuy_desc]
-        article.is_groupbuy = true
-      end
-
-      if article.save
-        # photos
-        if params[:relate_1] == "1"
-          files = params[:photos].present? ? params[:photos][:file] : []
-          files.each do |file|
-            Photo.create(:file => file, :klass_type => "Article", :klass_id => article.id) if file.present?
-          end
-          article.update_attribute(:is_photo, true)
-        end
-        User.update_counters current_user_id, :articles_count => 1
-        flash[:notice] = "发布成功"
-      else
-        flash[:error] = "发布失败"
-      end
-
-    redirect_to articles_user_url(current_user_id)
   end
   
   def postshare
@@ -372,6 +318,8 @@ class UsersController < ApplicationController
   def postactivity
     activity         = Activity.new(params[:activity])
     activity.user_id = current_user_id
+    activity.latitude  = params[:latitude]  if params[:latitude].present?
+    activity.longitude = params[:longitude] if params[:longitude].present?
     if activity.save
       flash[:notice] = "添加成功"
       redirect_to activity
@@ -395,6 +343,19 @@ class UsersController < ApplicationController
       flash[:error] = "线报添加失败"
       redirect_to find_users_url
     end
+  end
+
+  def postapply
+    apply              = Apply.new
+    apply.user_id      = current_user_id
+    apply.archetype_id = params[:aid]
+    apply.reason       = params[:reason]
+    if apply.save
+      flash[:notice] = "申请成功"
+    else
+      flash[:error]  = "申请失败"
+    end
+    redirect_to user_url(current_user_id)
   end
   
   def follow

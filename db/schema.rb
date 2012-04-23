@@ -11,10 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419150520) do
+ActiveRecord::Schema.define(:version => 20120422040146) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "archetype_id"
     t.string   "title"
     t.string   "summary"
     t.text     "content"
@@ -31,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20120419150520) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.string   "latitude"
+    t.string   "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -92,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20120419150520) do
     t.integer  "comments_count",    :default => 0
     t.integer  "scores_count",      :default => 0
     t.text     "intro"
+    t.string   "latitude"
+    t.string   "longitude"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -308,6 +313,13 @@ ActiveRecord::Schema.define(:version => 20120419150520) do
   end
 
   add_index "feeds", ["user_id"], :name => "index_feeds_on_user_id"
+
+  create_table "hot_tags", :force => true do |t|
+    t.string   "name"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "item_reports", :force => true do |t|
     t.string   "title"

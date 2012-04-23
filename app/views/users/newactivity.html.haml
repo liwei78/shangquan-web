@@ -1,0 +1,38 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      发表
+    .nav
+      %ul
+        %li= link_to "新活动", newactivity_users_url, :class => "on"
+        .clearfix
+    .formstyle
+      - if @user.owns.present?
+        = form_tag(postactivity_users_url, :multipart => true) do
+          %table{:width => '100%', :cellspadding => 6}
+            %tr
+              %td{:width => 100} 资源
+              %td= select_tag 'activity[archetype_id]', options_for_select(@user.owns.map{|a| [a.name, a.id]})
+            %tr
+              %td 标题
+              %td= text_field_tag 'activity[title]', "", :cols => 40, :rows => 6, :class => "input"
+            %tr
+              %td 活动时间
+              %td= text_field_tag 'activity[opening_date]', "", :cols => 40, :rows => 6, :class => "input"
+            %tr
+              %td 内容
+              %td= text_area_tag 'activity[content]', "", :cols => 40, :rows => 6, :class => " wide"
+            %tr
+              %td 横幅海报
+              %td
+                = file_field_tag 'activity[poster]'
+                950x300 px
+            %tr
+              %td 地图
+              %td
+                = render :partial => "users/map"
+          .btn
+            = submit_tag "确定", :class => "submit"
+        
+.clearfix

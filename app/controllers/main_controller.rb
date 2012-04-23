@@ -16,7 +16,7 @@ class MainController < ApplicationController
   end
   
   def activities
-    @activities = Activity.all
+    @activities = Activity.opening
     @page_title = "活动"
   end
   

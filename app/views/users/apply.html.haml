@@ -5,13 +5,14 @@
       申请
     .formstyle
       = form_tag(postapply_users_url) do
+        = hidden_field_tag :aid, @archetype.id
         %table{:width => '100%', :cellspadding => 6}
           %tr
             %td{:width => 100} 申请资源
             %td= link_to @archetype.name, @archetype, :target => "_blank"
           %tr
             %td{:width => 100} 申请理由
-            %td= text_field_tag :reason, "", :class => ""
+            %td= text_area_tag :reason, "", :cols => 40, :rows => 6, :class => " wide"
 
         .btn
           = submit_tag "确定", :class => "submit"

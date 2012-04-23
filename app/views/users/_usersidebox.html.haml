@@ -15,12 +15,12 @@
     /  = link_to "升级", upgrade_users_url 
     /- if @user.upgrade_state == 1 and is_me?(@user)
     /  审核中
-  - if [2,3,4].include?(@user.role)
+  - if @user.brands.present?
     .brands
       .grey
         品牌
       %ul
-        - for brand in @user.brands.formal
+        - for brand in @user.brands
           %li= brand.name
         .clearfix
       

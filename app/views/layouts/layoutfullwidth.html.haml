@@ -38,8 +38,8 @@
           .layoutfullwidth
             .new-action.right
               = link_to "新分享", share_users_url, :class => "new-share"
-              - if loggin? and [2,3,4].include?(get_current_user.role)
-                = link_to "新活动", discover_users_url, :class => "new-activity"
+              - if loggin? and get_current_user.owns.present?
+                = link_to "新活动", newactivity_users_url, :class => "new-activity"
               - else
                 = link_to "活动线报", discover_users_url, :class => "new-discover"
             %ul
@@ -47,12 +47,10 @@
               %li
                 = link_to "时尚", "/main/articles"
                 %span                
-                  -
-                  = link_to "晒单", tag_articles_url(:tag => URI.encode('晒单')), :target => "_blank"
-                  -
-                  = link_to "自拍", tag_articles_url(:tag => URI.encode('自拍')), :target => "_blank"
-                  -
-                  = link_to "逛街", tag_articles_url(:tag => URI.encode('逛街')), :target => "_blank"
+                  - for tag in HotTag.order("position asc")
+                    -
+                    = link_to tag.name, tag_articles_url(:tag => URI.encode(tag.name)), :target => "_blank"
+
               %li= link_to "商家", "/main/companies"
               %li= link_to "商场", "/main/malls"
               %li= link_to "品牌", "/main/brands"

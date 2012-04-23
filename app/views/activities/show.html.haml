@@ -1,8 +1,11 @@
+- content_for :header do
+  - if @activity.has_map?
+    = javascript_include_tag "http://api.51ditu.com/js/maps.js"
 .widebanner
   = link_to image_tag(@activity.poster.url), share_users_url(:aid => @activity), :target => "_blank", :title => "我要发布"
 .showtitle
   .right
-    = link_to "我要发布", share_users_url(:aid => @activity), :target => "_blank"
+    = link_to "我要发布", share_users_url(:acid => @activity), :target => "_blank"
   已有
   = @activity.articles.count
   个主题收集
@@ -17,6 +20,17 @@
                 活动日期：
                 = @activity.opening_date
               = @activity.content.html_safe
+          - if @activity.has_map?
+            .mapbox
+              #map{:style => "width:190px;height:190px"}
+              :javascript
+                var map=new LTMaps("map");
+                var point=new LTPoint(#{@activity.longitude.to_i}, #{@activity.latitude.to_i});
+                map.centerAndZoom(point,1); 
+                var marker=new LTMarker(point);
+                map.addOverLay(marker);
+              .viewbig
+                = link_to "点击查看大图", maps_url(:latitude => @activity.latitude, :longitude => @activity.longitude)
           .tags
       - for article in @articles
         .shareitem

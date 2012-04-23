@@ -42,6 +42,19 @@
                       %span
                         优惠券：
                       = link_to coupon.dateintro, coupon, :target => "_blank"
+            - if @user
+              .archetype_box
+                - if @archetype.owners.present?
+                  .owners
+                    %span 所有者
+                    - for owner in @archetype.owners
+                      = link_to owner.name, owner, :target => "_blank"
+                - else
+                  .apply
+                    - if loggin? and @user.owns.present?
+
+                    - else
+                      = link_to "资源申请", apply_users_url(:aid => @archetype.id), :method => :post, :confirm => "确定申请该资源吗？"
             .archetype_box
               .archetype_channel
                 %span

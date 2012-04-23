@@ -1,0 +1,15 @@
+- content_for :header do
+  = javascript_include_tag "http://api.51ditu.com/js/maps.js"
+  = javascript_include_tag "http://api.51ditu.com/js/search.js"
+
+#map{:style => "width:800px;height:400px"}
+
+:javascript
+  map=new LTMaps("map");
+  map.addControl(new LTStandMapControl());
+  var point=new LTPoint(#{params[:longitude].to_i}, #{params[:latitude].to_i});
+  map.centerAndZoom(point,1); 
+  var marker=new LTMarker(point);
+  map.addOverLay(marker);
+
+
