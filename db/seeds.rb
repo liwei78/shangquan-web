@@ -37,7 +37,7 @@ HotTag.create([
 # test account
 puts "Create Test Account"
 User.create([
-  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar1.jpg")), :role => 2},
+  {:email => "aaa@123.com", :name => "AAA", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar1.jpg"))},
   {:email => "bbb@123.com", :name => "BBB", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar2.jpg")), :star => true, :suggest => true, :intro => "轻微强迫症和严重妄想症，依赖快门按下时的存在感。不拘小节但专注细节。终极目标"},
   {:email => "ccc@123.com", :name => "CCC", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar3.jpg")), :todaystar => true, :intro => "外表时尚，内心保守派，喜欢新鲜有趣的事物，梦想当一名时装设计师。爱尝试各种搭"},
   {:email => "ddd@123.com", :name => "DDD", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar4.jpg")), :star => true, :suggest => true, :intro => "一枚爱流浪的巨蟹座文艺女青年。卖文为生，海边的咖啡店主，酒、音乐、文字都是生"},
@@ -162,7 +162,7 @@ Banner.create([
     {:title => "真男人要护肤",   :gourl => "/pages/5", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},
     {:title => "我是你的明灯",   :gourl => "/pages/6", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
     {:title => "注册商圈N喜临门", :gourl => "/pages/7", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
-    {:title => "0元抢小米手机",       :summary => "白拿小米第五期！上期获奖：Crazycat",  :gourl => "/pages/8", :position => 1, :category => 1},
+    {:title => "0元抢小米手机",       :summary => "白拿小米第五期！",  :gourl => "/pages/8", :position => 1, :category => 1},
     {:title => "脚踏两只鞋",         :summary => "女人都喜欢穿休闲鞋的男人",           :gourl => "/pages/9", :position => 2, :category => 1},
     {:title => "通勤利器撑气场",       :summary => "一个好的通勤包，绝对助你出挑",         :gourl => "/pages/7", :position => 3, :category => 1},
     {:title => "来商圈，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",             :gourl => "/pages/8", :position => 4, :category => 1}

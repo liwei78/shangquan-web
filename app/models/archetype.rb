@@ -24,11 +24,13 @@ class Archetype < ActiveRecord::Base
   scope :is_brand,   :conditions => ["channel_id = ?", 1]
   scope :is_company, :conditions => ["category_id = ?", 2]
   scope :is_mall,    :conditions => ["category_id = ?", 1]
+  scope :is_repast,  :conditions => ["category_id = ?", 4]
   
   has_many :districts
   has_many :areas, :through => :districts
-
   has_many :coupons
+
+  has_many :activities
 
   has_attached_file :logo,
     :styles          => {:original => SITE_SETTINGS["brand_original"], :small => SITE_SETTINGS["brand_small"]},

@@ -41,4 +41,9 @@ class MainController < ApplicationController
     @page_title = "品牌"
   end
 
+  def repasts
+    @areas = Area.order("position asc")
+    @page_title = "餐饮"
+  end
+
 end
