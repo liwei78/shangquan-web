@@ -8,6 +8,7 @@ enviroment:
   rails-3.1.0
 
 push:
+  git add remote shangquan-web git@github.com:liwei78/shangquan-web.git
   git push shangquan-web master
   
 update:
