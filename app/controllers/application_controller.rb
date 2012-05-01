@@ -1,6 +1,8 @@
 #encoding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  
+  after_filter :win_user_score
 
   def dev?
     Rails.env == "development"
@@ -43,6 +45,12 @@ class ApplicationController < ActionController::Base
           render :template => "application/need_user_login", :layout => false
         end
       end
+    end
+  end
+  
+  def win_user_score
+    if request.method == "GET"
+      p params
     end
   end
   

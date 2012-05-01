@@ -1,0 +1,23 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      关注动态
+    .nav
+      %ul
+        %li= link_to "全部", feed_users_url, :class => (params[:about].nil? ? "on" : "")
+        %li= link_to "好友", feed_users_url(:about => "user"), :class => (params[:about]=="user" ? "on" : "")
+        %li= link_to "关注", feed_users_url(:about => "archetype"), :class => (params[:about]=="archetype" ? "on" : "")
+        %li= link_to "活动", feed_users_url(:about => "activity"), :class => (params[:about]=="activity" ? "on" : "")
+        .clearfix
+    .tablestyle
+      %ul
+        - for feed in @feeds
+          %li
+            .right.grey
+              = feed.created_from_now
+            = feed.content.html_safe
+
+      = will_paginate @feeds, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

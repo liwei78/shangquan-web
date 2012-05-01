@@ -34,6 +34,7 @@ class UsersController < ApplicationController
           session[:user_id]   = user.id
           session[:rtype]     = user.rtype
         end
+        user.win("login")
         format.html {redirect_to user}
       else
         flash[:error] = "登录失败"
@@ -79,6 +80,7 @@ class UsersController < ApplicationController
           :value => @user.rtype,
           :expires => 14.days.from_now
         }
+        user.win("create")
         format.html { redirect_to(@user, :notice => '注册成功') }
       else
         flash[:error] = "错误"
@@ -197,6 +199,12 @@ class UsersController < ApplicationController
     @user = get_current_user
     @users = @user.following.paginate(:page => params[:page], :per_page => 10)
     @page_title = "我关注谁"
+  end
+
+  def feed
+    @user = get_current_user
+    @feeds = @user.feeds.paginate(:page => params[:page], :per_page => 20)
+    @page_title = "关注动态"
   end
 
   def updatesetting
@@ -327,6 +335,7 @@ class UsersController < ApplicationController
       User.update_counters current_user_id, :articles_count => 1, :scores => 1
 
       @done = true
+      @current_user.win("postshare")
       @targeturl = article_url(article)
     else
       @done = false

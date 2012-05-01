@@ -178,3 +178,10 @@ Page.create([
   {:title => "公告2", :content => "", :category_id => 2},
   {:title => "公告3", :content => "", :category_id => 2},
 ])
+
+puts "score"
+Score.create([
+  {:flag => "login", :intro => "用户登陆", :point => 5},
+  {:flag => "create", :intro => "用户注册", :point => 10},
+  {:flag => "postshare", :intro => "用户发表分享", :point => 5},
+  ])

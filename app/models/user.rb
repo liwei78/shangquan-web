@@ -55,6 +55,8 @@ class User < ActiveRecord::Base
   has_many :shares
   has_many :reships, :through => :shares, :source => :article
   
+  has_many :feeds, :order => "id desc"
+  
 
   # following and followed
   has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
@@ -121,6 +123,12 @@ class User < ActiveRecord::Base
 
   def getascore
     User.update_counters self.id, :score => 1
+  end
+  
+  def win(score)
+    p "point"
+    p Score.find_by_flag(score).point
+    self.increment!(:scores, Score.find_by_flag(score).point) if score.present?
   end
   
   private
