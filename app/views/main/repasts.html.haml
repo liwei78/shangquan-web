@@ -1,5 +1,9 @@
 - for area in @areas
   .showtitle
+    .right
+      共
+      = area.repasts.count
+      家已入驻
     = area.name
   .showcontent
     .comusers_list.mb

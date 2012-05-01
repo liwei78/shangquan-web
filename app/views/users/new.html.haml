@@ -17,6 +17,8 @@
             显示昵称
           %td{:width => 220}
             = f.text_field :name, :class => "input"
+            .intro
+              1至16个字符
           %td
             - if @user.errors[:name].any?
               %span
@@ -35,6 +37,8 @@
             设置密码
           %td
             = f.password_field :password, :class => "input"
+            .intro
+              4至20位长度
           %td
             - if @user.errors[:password].any?
               %span

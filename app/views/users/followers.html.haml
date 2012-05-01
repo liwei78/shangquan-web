@@ -1,0 +1,23 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      谁关注我
+    .nav
+      %ul
+        %li= link_to "我的关注", follows_users_url
+        %li= link_to "谁关注我", followers_users_url, :class => "on"
+        %li= link_to "我关注谁", following_users_url
+        .clearfix
+    .tablestyle
+      %ul
+        - for user in @users
+          %li
+            .right
+              = link_to "访问空间", user, :target => "_blank"
+            = user.name
+            关注了你
+
+      = will_paginate @users, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

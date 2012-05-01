@@ -26,11 +26,15 @@ class Archetype < ActiveRecord::Base
   scope :is_mall,    :conditions => ["category_id = ?", 1]
   scope :is_repast,  :conditions => ["category_id = ?", 4]
   
-  has_many :districts
-  has_many :areas, :through => :districts
+  # has_many :districts
+  # has_many :areas, :through => :districts
   has_many :coupons
 
   has_many :activities
+  
+  def has_map?
+    self.latitude.present? and self.longitude.present?
+  end
 
   has_attached_file :logo,
     :styles          => {:original => SITE_SETTINGS["brand_original"], :small => SITE_SETTINGS["brand_small"]},

@@ -7,12 +7,17 @@
       %ul
         %li= link_to "昵称设置", setting_users_url, :class => "on"
         %li= link_to "用户头像", avatarsetting_users_url
+        %li= link_to "修改密码", setpwd_users_url
         .clearfix
     .formstyle
       = form_tag(updatesetting_users_url, :multipart => true) do
         %table{:width => '100%', :cellspadding => 6}
           %tr
-            %td{:width => 100} 显示昵称
+            %td{:width => 100} 登陆账号
+            %td
+              = @user.email
+          %tr
+            %td 显示昵称
             %td= text_field_tag :name, @user.name, :class => "input"
         .btn
           = submit_tag "确定", :class => "submit"

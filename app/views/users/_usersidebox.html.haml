@@ -43,9 +43,9 @@
           = @user.following.count
       %li.noborder
         .up
-          收藏
+          分享
         .down
-          = @user.favorites_count
+          = @user.shares_count
       .clearfix
   - if @current_user.present? and @user != @current_user
     .actionbox

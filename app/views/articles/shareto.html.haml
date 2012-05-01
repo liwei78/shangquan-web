@@ -5,7 +5,8 @@
       文章
     .nav
       %ul
-        %li= link_to "列表", articles_url, :class => "on"
+        %li= link_to "分享", shares_articles_url
+        %li= link_to "投稿", shareto_articles_url, :class => "on"
         .clearfix
     .tablestyle
       .add

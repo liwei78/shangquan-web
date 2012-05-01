@@ -136,6 +136,10 @@ class UsersController < ApplicationController
     @user = get_current_user
   end
   
+  def setpwd
+    @user = get_current_user
+  end
+  
   def messages
     @user = get_current_user
   end
@@ -175,6 +179,24 @@ class UsersController < ApplicationController
   def newactivity
     @user = get_current_user
     @activity = Activity.new
+  end
+
+  def follows
+    @user = get_current_user
+    @follows = @user.follows.paginate(:page => params[:page], :per_page => 10)
+    @page_title = "我的关注"
+  end
+
+  def followers
+    @user = get_current_user
+    @users = @user.followers.paginate(:page => params[:page], :per_page => 10)
+    @page_title = "谁关注我"
+  end
+
+  def following
+    @user = get_current_user
+    @users = @user.following.paginate(:page => params[:page], :per_page => 10)
+    @page_title = "我关注谁"
   end
 
   def updatesetting
@@ -224,6 +246,21 @@ class UsersController < ApplicationController
     redirect_to upgrade_users_url
   end
   
+  def updatepwd
+    user = get_current_user
+    if user.right_password?(params[:old_password])
+      if user.update_attributes(:password => params[:new_password], :password_confirmation => params[:new_password2])
+        flash[:notice] = "密码更改成功"
+      else
+        flash[:error] = "密码更改失败"
+      end
+    else
+      flash[:error] = "旧密码输入不正确"
+    end
+    p user.errors
+    redirect_to setpwd_users_url
+  end
+  
   def postshare
     @current_user = get_current_user
     article = Article.new(
@@ -249,7 +286,8 @@ class UsersController < ApplicationController
         article.update_attributes(
           :category_id => archetype.category_id, 
           :channel_id  => archetype.channel_id, 
-          :area_id     => archetype.area_id
+          :area_id     => archetype.area_id,
+          :shareto     => true
         )
       end
 
@@ -257,6 +295,7 @@ class UsersController < ApplicationController
       if params[:activity_id].present?
         activity = Activity.find(params[:activity_id])
         activity.articles << article
+        article.update_attributes(:shareto => true)
       end
       
       if params[:items].present?

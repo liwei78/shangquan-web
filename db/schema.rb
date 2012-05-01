@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120422040146) do
+ActiveRecord::Schema.define(:version => 20120429042429) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20120422040146) do
     t.boolean  "is_item",                                           :default => false
     t.boolean  "is_groupbuy",                                       :default => false
     t.boolean  "is_discount",                                       :default => false
+    t.boolean  "shareto",                                           :default => false
     t.string   "schedule"
     t.string   "place"
     t.string   "address"
@@ -428,6 +429,14 @@ ActiveRecord::Schema.define(:version => 20120422040146) do
     t.datetime "updated_at"
   end
 
+  create_table "shares", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "klass_type"
+    t.integer  "klass_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -462,7 +471,8 @@ ActiveRecord::Schema.define(:version => 20120422040146) do
     t.integer  "articles_count",      :default => 0
     t.integer  "followers_count",     :default => 0
     t.integer  "followings_count",    :default => 0
-    t.integer  "favorites_count",     :default => 0
+    t.integer  "likes_count",         :default => 0
+    t.integer  "shares_count",        :default => 0
     t.integer  "scores",              :default => 0
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"

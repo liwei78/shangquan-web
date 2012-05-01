@@ -12,23 +12,15 @@ class User < ActiveRecord::Base
   validates :password,
     :presence => true,
     :confirmation => true,
-    :length => {:within => 4..20},
-    :on => :create
+    :length => {:within => 4..20}
     
   validates :password_confirmation,
     :presence => true,
-    :length => {:within => 4..20},
-    :on => :create
-    
-  validates :password,
-    :allow_blank => true,
-    :length => {:within => 4..20},
-    :on => :update
+    :length => {:within => 4..20}
     
   validates :name,
     :presence => true,
-    :length => {:maximum => 16, :minimum => 1},
-    :allow_blank => true
+    :length => {:maximum => 16, :minimum => 1}
     
   validates :signcode,   :uniqueness => true
   validates :verifycode, :uniqueness => true
@@ -45,15 +37,23 @@ class User < ActiveRecord::Base
   has_many :brands,        :through => :brand_users
   has_many :activity_reports
   has_many :article_items
+  has_many :activities
   
   # 用户与喜欢物品的关系
   has_many :user_items
   has_many :like_items, :through => :user_items, :source => :item
 
   has_many :applies
-  has_many :owns, :through => :applies, :source => :archetype, :conditions => ["applies.passed = ?", true]
+  has_many :owns,            :through => :applies, :source => :archetype, :conditions => ["applies.passed = ?", true]
   has_many :pending_applies, :through => :applies, :source => :archetype, :conditions => ["applies.passed = ?", true]
-  has_many :brands, :through => :applies, :source => :archetype, :conditions => ["archetypes.category_id = ? and applies.passed = ?", 1, true]
+  has_many :brands,          :through => :applies, :source => :archetype, :conditions => ["archetypes.category_id = ? and applies.passed = ?", 1, true]
+  
+  has_many :likes
+  has_many :reads,   :class_name => 'Like', :conditions => ["likes.klass_type = ?", "Article"],   :include => :article
+  has_many :follows, :class_name => 'Like', :conditions => ["likes.klass_type = ?", "Archetype"]
+
+  has_many :shares
+  has_many :reships, :through => :shares, :source => :article
   
 
   # following and followed

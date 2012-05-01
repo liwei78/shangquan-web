@@ -1,0 +1,22 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      我的关注
+    .nav
+      %ul
+        %li= link_to "我的关注", follows_users_url, :class => "on"
+        %li= link_to "谁关注我", followers_users_url
+        %li= link_to "我关注谁", following_users_url
+        .clearfix
+    .tablestyle
+      %ul
+        - for follow in @follows
+          %li
+            .right
+              = link_to "不再关注", unfollow_archetype_url(follow.klass), :method => :post, :confirm => "点击确定继续"
+            = link_to follow.klass.name, follow.klass, :target => "_blank"
+
+      = will_paginate @follows, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+        
+.clearfix

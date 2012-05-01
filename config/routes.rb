@@ -10,11 +10,12 @@ Shangquan::Application.routes.draw do
 
   resources :archetypes do
     member do
-      post 'minifollow', 'follow'
+      post 'minifollow', 'follow', 'unfollow'
     end
   end
 
   resources :brands
+  
   resources :activities
   #resources :brands do
   #  member do
@@ -39,7 +40,7 @@ Shangquan::Application.routes.draw do
   
   resources :articles do
     collection do
-      get 'tag'
+      get 'tag', 'shares', 'shareto'
     end
     member do
       post 'write', 'like', 'share', 'collect', 'del_photo'
@@ -57,6 +58,7 @@ Shangquan::Application.routes.draw do
       get  'login',      :as => :welcome
       post 'checklogin', :as => :checklogin
       get  'logout',     :as => :logout
+      get  'checkback'
       get  'setting'
       post 'updatesetting'
       get  'avatarsetting'
@@ -73,6 +75,12 @@ Shangquan::Application.routes.draw do
       post 'apply'
       post 'postapply'
       get  'newactivity'
+      get  'setpwd'
+      post 'updatepwd'
+      get  'follows'
+      get  'followers'
+      get  'following'
+      get  'feed'
     end
     member do
       post 'follow', 'unfollow', 'minifollow'

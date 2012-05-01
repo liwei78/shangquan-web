@@ -8,6 +8,7 @@ class Activity < ActiveRecord::Base
   has_many :items, :through => :activity_items
 
   belongs_to :archetype
+  belongs_to :user
   
   scope :is_suggest,  :conditions => ["activities.suggest = ?", true]
   scope :opening, :conditions => ["activities.status = ?", 1]

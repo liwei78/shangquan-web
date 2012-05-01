@@ -944,7 +944,11 @@ $layout-width: 950px;
       }
       td {
         padding: 16px 0;
-        vertical-align: top;
+        vertical-align: middle;
+        .intro {
+          color: grey;
+          line-height: 24px;
+        }
       }
       .select {
         width: 239px;
@@ -1545,12 +1549,12 @@ a.collectstyle {
   .previewbox {
     float: left;
     position: relative;
-    border: 1px solid #BBB;
+    //border: 1px solid #efefef;
     width: 400px;
     height: 500px;
     padding: 5px;
     background: white;
-    box-shadow: 0 0 4px rgba(25,25,25,0.3);
+    //box-shadow: 0 0 4px rgba(25,25,25,0.3);
     .progress {
       width: 30px;
       height: 30px;
@@ -1565,12 +1569,12 @@ a.collectstyle {
       margin: 5px auto;
     }
   }
+  .tr {
+    margin-bottom: 10px;
+  }
   .inputbox {
     float: right;
     width: 440px;
-    .tr {
-      margin-bottom: 10px;
-    }
     .textarea {
       width: 400px;
       height: 200px;

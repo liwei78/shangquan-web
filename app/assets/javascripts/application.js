@@ -10,4 +10,6 @@
 //= require jquery.uploadify.v2.1.4.min
 //= require jquery.tools.min
 //= require jquery.rating
+//= require jquery.color
+//= require jquery.Jcrop
 //= require site

@@ -1,3 +1,7 @@
+- content_for :header do
+  - if @archetype.has_map?
+    = javascript_include_tag "http://api.51ditu.com/js/maps.js"
+
 .showtitle
   .right
     = link_to "我要投稿", share_users_url(:aid => @archetype), :target => "_blank"
@@ -34,6 +38,17 @@
             /    .right
             /      = link_to "我来评价", ""
             /    已有#{@archetype.scores_count}个评价
+            - if @archetype.has_map?
+              .mapbox
+                #map{:style => "width:190px;height:190px"}
+                :javascript
+                  var map=new LTMaps("map");
+                  var point=new LTPoint(#{@archetype.longitude.to_i}, #{@archetype.latitude.to_i});
+                  map.centerAndZoom(point,1); 
+                  var marker=new LTMarker(point);
+                  map.addOverLay(marker);
+                .viewbig
+                  = link_to "点击查看大图", maps_url(:latitude => @archetype.latitude, :longitude => @archetype.longitude)
             - if @archetype.coupons.count > 0
               .archetype_box
                 %ul

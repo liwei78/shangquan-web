@@ -1,10 +1,15 @@
 #encoding: utf-8
 class ArticlesController < ApplicationController
-  before_filter :need_user_login, :except => [:show]
+  before_filter :need_user_login, :except => [:show, :tag]
   
-  def index
+  def shares
     @user = get_current_user
-    @articles = @user.articles.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+    @articles = @user.articles.isshare.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
+  end
+
+  def shareto
+    @user = get_current_user
+    @articles = @user.articles.shareto.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
   end
 
   def tag
@@ -59,7 +64,15 @@ class ArticlesController < ApplicationController
   
   def like
     @article = Article.find(params[:id])
-    @article.increment!(:likes_count)
+    user = get_current_user
+    if @article.readers.include?(user)
+      @done = false
+    else
+      @article.readers << user
+      @article.increment!(:likes_count)
+      user.increment!(:likes_count)
+      @done = true
+    end
     respond_to do |format|
       format.html
       format.js
@@ -68,7 +81,15 @@ class ArticlesController < ApplicationController
   
   def share
     @article = Article.find(params[:id])
-    @article.increment!(:shares_count)
+    user = get_current_user
+    if @article.ships.include?(user)
+      @done = false
+    else
+      @article.ships << user
+      @article.increment!(:shares_count)
+      user.increment!(:shares_count)
+      @done = true
+    end
     respond_to do |format|
       format.html
       format.js

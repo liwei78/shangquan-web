@@ -36,7 +36,7 @@
                 var marker=new LTMarker(point);
                 map.addOverLay(marker);
               .viewbig
-                = link_to "点击查看大图", maps_url(:latitude => @activity.latitude, :longitude => @activity.longitude)
+                = link_to "点击查看大图", maps_url(:latitude => @activity.latitude, :longitude => @activity.longitude), :target => "_blank"
           .tags
       - for article in @articles
         .shareitem

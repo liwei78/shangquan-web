@@ -2,12 +2,16 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   # after_create :create_user_feed
-  has_many :feeds, :as => :klass
-  has_many :photos, :as => :klass
+  has_many :feeds,    :as => :klass
+  has_many :photos,   :as => :klass
   has_many :comments, :as => :klass, :include => :user
   has_many :article_items
-  has_many :brand_articles
-  has_many :brands, :through => :brand_articles
+
+  has_many :likes, :as => :klass
+  has_many :readers, :through => :likes, :source => :user
+  
+  has_many :shares, :as => :klass
+  has_many :ships, :through => :shares, :source => :user
 
   belongs_to :area
   belongs_to :channel
@@ -23,10 +27,13 @@ class Article < ActiveRecord::Base
   scope :is_company, :conditions => ["articles.is_company = ?", true]
   scope :is_item,    :conditions => ["articles.is_item = ?", true]
   
-  scope :block,    :conditions => ["articles.state = ?", 0]
-  scope :auditing, :conditions => ["articles.state = ?", 1]
-  scope :white,    :conditions => ["articles.state = ?", 2]
-  scope :deleted,  :conditions => ["articles.state = ?", 3]
+  scope :isshare,    :conditions => ["articles.shareto = ?", false]
+  scope :shareto,    :conditions => ["articles.shareto = ?", true]
+  
+  scope :block,            :conditions => ["articles.state = ?", 0]
+  scope :auditing,         :conditions => ["articles.state = ?", 1]
+  scope :white,            :conditions => ["articles.state = ?", 2]
+  scope :deleted,          :conditions => ["articles.state = ?", 3]
   scope :allow_published,  :conditions => ["articles.state = ?", 2]
 
   def state_name

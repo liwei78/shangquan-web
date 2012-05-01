@@ -45,6 +45,7 @@ class CreateArticles < ActiveRecord::Migration
       t.boolean  :is_item,     :default => false
       t.boolean  :is_groupbuy, :default => false
       t.boolean  :is_discount, :default => false
+      t.boolean  :shareto,     :default => false
       
       # 经营信息
       t.string   :schedule

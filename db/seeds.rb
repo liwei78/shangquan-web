@@ -45,8 +45,17 @@ User.create([
   {:email => "fff@123.com", :name => "FFF", :password => "1234", :password_confirmation => "1234", :avatar => open(Rails.root.join('tmp', "avatar6.jpg")), :star => true, :suggest => true, :intro => "不宅会死星人，萝莉脸爷们心，总在搜寻一切搞怪重口味，vintage格子制服复"}])
 
 
+aaa = User.find 1
+bbb = User.find 2
+ccc = User.find 3
+puts "ccc follow bbb"
+ccc.follow!(bbb)
+puts "aaa follow ccc"
+aaa.follow!(ccc)
+puts "ccc is test account, login with it."
 
 
+# puts "Archetypes"
 Archetype.create([
     {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg")),  :category_id => 1, :channel_id => 1, :intro => "玉兰油（OLAY）是中国区最大护肤品牌，在大陆已持续十年呈两位数增长。它是宝洁公司全球著名的护肤品牌，OLAY以全球高科技护肤研发技术为后盾，在深入了解中国女性对护肤和美的需要的基础上，不断扩大产品范围，目前已经涵盖了护肤和沐浴系列，真正帮助女性全面周到地呵护自己的肌肤。"},
     {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
@@ -59,26 +68,14 @@ Archetype.create([
     {:name => "hq尚客", :logo => open(Rails.root.join('tmp', "com4.jpg")), :category_id => 3, :intro => ""},
     {:name => "天虹", :logo => open(Rails.root.join('tmp', "com6.jpg")), :category_id => 3, :intro => ""},
     
-    {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => ""},
-    {:name => "国泰百货", :logo => open(Rails.root.join('tmp', "com2.jpg")), :category_id => 2, :intro => ""},
-    {:name => "新世界", :logo => open(Rails.root.join('tmp', "com3.jpg")), :category_id => 2, :intro => ""},
-    {:name => "西单商场", :logo => open(Rails.root.join('tmp', "com5.jpg")), :category_id => 2, :intro => ""},
-    {:name => "五彩城", :logo => open(Rails.root.join('tmp', "com7.jpg")), :category_id => 2, :intro => ""},
-    {:name => "世茂百货", :logo => open(Rails.root.join('tmp', "com8.jpg")), :category_id => 2, :intro => ""},
+    {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => "", :area_id => 1},
+    {:name => "国泰百货", :logo => open(Rails.root.join('tmp', "com2.jpg")), :category_id => 2, :intro => "", :area_id => 1},
+    {:name => "新世界", :logo => open(Rails.root.join('tmp', "com3.jpg")), :category_id => 2, :intro => "", :area_id => 1},
+    {:name => "西单商场", :logo => open(Rails.root.join('tmp', "com5.jpg")), :category_id => 2, :intro => "", :area_id => 1},
+    {:name => "五彩城", :logo => open(Rails.root.join('tmp', "com7.jpg")), :category_id => 2, :intro => "", :area_id => 1},
+    {:name => "世茂百货", :logo => open(Rails.root.join('tmp', "com8.jpg")), :category_id => 2, :intro => "", :area_id => 1},
 ])
 
-puts "xidan's companies"
-xidan = Area.find(1)
-companies1 = Archetype.find([8,9,10,11,12])
-for com in companies1
-  xidan.companies << com
-end
-puts "dawang's companies"
-dawang = Area.find(5)
-companies2 = Archetype.find([13,14,15])
-for cc in companies2
-  dawang.companies << cc
-end
 
 puts "items in store"
 i = 1000

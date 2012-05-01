@@ -18,16 +18,15 @@
                   %li.w90
                     =link_to "#{current_user_name}", user_url(current_user_id)
                     %ul
-                      %li=link_to "我的文章", articles_url
-                      %li=link_to "我的投稿", articles_url
+                      %li=link_to "我的分享", shares_articles_url
                       %li=link_to "我的商品", items_url
-                      %li=link_to "我的活动", activities_url
-                      %li=link_to "我的关注", ""
-                      %li=link_to "我的订阅", ""
-                      %li=link_to "订阅动态", ""
+                      - if Activity.count(:conditions => ["user_id = ?", current_user_id]) > 0
+                        %li=link_to "我的活动", activities_url
+                      %li=link_to "我的关注", follows_users_url
+                      %li=link_to "关注动态", feed_users_url
                       %li=link_to "退出", logout_users_url
                   %li
-                    - if get_current_user.messages.unread.count > 0
+                    - if Message.count(:conditions => ["user_id = ? and read = ?", current_user_id, false]) > 0
                       .new 新
                     =link_to "信息", messages_url
                   %li=link_to "设置", setting_users_url

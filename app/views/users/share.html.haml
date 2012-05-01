@@ -4,8 +4,10 @@
       var hasTag = $('#taginput').val();
       $('#taginput').val(hasTag+" "+name);
     }
-    $(document).ready(function() {
     
+    $(document).ready(function() {
+      var api;
+      
       $('#moreitem').click(function(){
         $('#showitem_div:first').clone().insertBefore('#insertBeforeMe');
       });
@@ -20,17 +22,23 @@
         //   '_http_accept': 'application/javascript',
         //   'authenticity_token':'#{form_authenticity_token}'},
         'auto'        : true,
-        'onProgress'  : function(){
-          $('#progress').show();
-        },
+        //'onProgress'  : function(){ $('#progress').show(); },
         'onComplete'  : function(event, ID, fileObj, response, data) {
           var dat = eval('(' + response + ')'); 
           var preview_url = dat.tmpurl;
           var tmpfile_id  = dat.tmpid;
-          $('#progress').hide();
+          //$('#progress').hide();
           $('#preview_img').attr('src', preview_url);
           $('#photo_temp_id').attr('value', tmpfile_id);
           $('#preview').show();
+          $('#preview_img').Jcrop({
+            onRelease: releaseCheck
+          },function(){
+            api = this;
+            api.setSelect([130,65,130+350,65+285]);
+            api.setOptions({ bgFade: true });
+            api.ui.selection.addClass('jcrop-selection');
+          });
         }
       });
 
@@ -190,14 +198,12 @@
       .targetlink
 
     .sharebox#postsharediv
-      .previewbox
-        .progress#progress.hide
-          = image_tag("loadinggray.gif")
-        .preview#preview.hide
-          = image_tag("nopic.jpg", :width => 390, :height => 490, :id => "preview_img")
+      = form_tag(postshare_users_url, :multipart => true, :id => "shareform") do
+        .previewbox
+          .preview#preview.hide
+            = image_tag("nopic.jpg", :id => "preview_img")
           
-      .inputbox
-        = form_tag(postshare_users_url, :multipart => true, :id => "shareform") do
+        .inputbox
           - if @activity.present?
             .tr
               = hidden_field_tag :activity_id, @activity.id
@@ -225,11 +231,11 @@
               = link_to '晒单', js_void, :onclick => "appendtag('晒单')"
               = link_to '自拍', js_void, :onclick => "appendtag('自拍')"
               = link_to '逛街', js_void, :onclick => "appendtag('逛街')"
-          .action
+          .action.hide
             %ul
               %li= link_to "增加物品", js_void,  :class => "btn1", :id => "moreitem"
               .clearfix
-          .showitem_div#showitem_div
+          .showitem_div#showitem_div.hide
             .tinytable
               .tr
                 .th 商品类别

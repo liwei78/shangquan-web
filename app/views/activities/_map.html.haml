@@ -1,0 +1,68 @@
+- content_for :header do
+  = javascript_include_tag "http://api.51ditu.com/js/maps.js"
+  = javascript_include_tag "http://api.51ditu.com/js/search.js"
+  :javascript
+    var map,search;
+    function showPoint(searchResult){
+      if(searchResult.count>0){
+        map.clearOverLays();
+        var poi=searchResult.searchPoints[0];	//取出第一个搜索结果点
+        var point=new LTPoint(poi.point[0],poi.point[1]);	//得到该点的坐标的LTPoint
+        map.centerAndZoom(point,0);
+        //var marker=new LTMarker(point);		//向地图上添加一个标记
+        //map.addOverLay(marker);
+        //var name=poi.name;
+        //LTEvent.bind(marker,"click",marker,function(){this.openInfoWinHtml(name)});	//标记点击的时候弹出信息
+      }
+      else{
+        alert('无结果');
+      }
+    }
+
+
+#map{:style => "width:480px;height:400px"}
+= hidden_field_tag "activity[latitude]", @activity.latitude, :id => "latitude"
+= hidden_field_tag "activity[longitude]", @activity.longitude, :id => "longitude"
+.search
+  = text_field_tag :city, "北京", :size => 5, :id => "city", :onChange => "search.setCity(this.value);"
+  市搜索
+  = text_field_tag :word, "天安门", :size => 10, :id => "word"
+  = button_tag "搜索", :type => "button", :onClick => "search.search(document.getElementById('word').value);"
+
+:javascript
+  var map=new LTMaps("map");
+
+  map.addControl(new LTStandMapControl());
+  search=new LTLocalSearch(showPoint);
+  map.centerAndZoom("beijing",5);
+
+  var control = new LTMarkControl();  
+  map.addControl(control);
+  function getPoi(){  
+    var poi = control.getMarkControlPoint();
+    var la = poi.getLatitude();
+    var lo = poi.getLongitude();
+    $('#latitude').val(la);
+    $('#longitude').val(lo);}
+  LTEvent.addListener( control , "mouseup" , getPoi ); 
+
+
+- if @activity.new_record?
+  :javascript
+    search.setCity('北京');
+    search.search('天安门');
+
+- else
+  - if @activity.longitude.present? and @activity.latitude.present?
+    :javascript
+      search.setCity('北京');
+      var point=new LTPoint(#{@activity.longitude.to_i}, #{@activity.latitude.to_i});
+      map.centerAndZoom(point,1); 
+      var marker=new LTMarker(point);
+      map.addOverLay(marker);
+  - else
+    :javascript
+      search.setCity('北京');
+      search.search('天安门');
+
+

@@ -1,0 +1,35 @@
+= render :partial => "users/usersidebox"
+.mainbox
+  .formbox
+    .title
+      设置
+    .nav
+      %ul
+        %li= link_to "昵称设置", setting_users_url
+        %li= link_to "用户头像", avatarsetting_users_url
+        %li= link_to "修改密码", setpwd_users_url, :class => "on"
+        .clearfix
+    .formstyle
+      = form_tag(updatepwd_users_url) do
+        %table{:width => '100%', :cellspadding => 6}
+          %tr
+            %td{:width => 100} 旧密码
+            %td
+              = password_field_tag :old_password, "", :class => "input"
+              %span.intro
+                4至20位长度
+          %tr
+            %td 新密码
+            %td
+              = password_field_tag :new_password, "", :class => "input"
+              - if @user.errors.any?
+                %span
+                  = @user.errors.join('，')
+          %tr
+            %td 重复新密码
+            %td
+              = password_field_tag :new_password2, "", :class => "input"
+        .btn
+          = submit_tag "确定", :class => "submit"
+        
+.clearfix
