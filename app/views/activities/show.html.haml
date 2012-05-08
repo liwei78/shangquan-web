@@ -25,7 +25,7 @@
               %strong
                 活动日期：
                 = @activity.opening_date
-              = @activity.content.html_safe
+              = @activity.content if @activity.content.present?
           - if @activity.has_map?
             .mapbox
               #map{:style => "width:190px;height:190px"}

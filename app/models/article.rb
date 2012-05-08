@@ -16,6 +16,8 @@ class Article < ActiveRecord::Base
   belongs_to :area
   belongs_to :channel
   belongs_to :category
+  belongs_to :archetype
+  belongs_to :activity
 
   acts_as_taggable
   

@@ -48,7 +48,7 @@
                   var marker=new LTMarker(point);
                   map.addOverLay(marker);
                 .viewbig
-                  = link_to "点击查看大图", maps_url(:latitude => @archetype.latitude, :longitude => @archetype.longitude)
+                  = link_to "点击查看大图", maps_url(:latitude => @archetype.latitude, :longitude => @archetype.longitude), :target => "_blank"
             - if @archetype.coupons.count > 0
               .archetype_box
                 %ul
@@ -71,10 +71,11 @@
                     - else
                       = link_to "资源申请", apply_users_url(:aid => @archetype.id), :method => :post, :confirm => "确定申请该资源吗？"
             .archetype_box
-              .archetype_channel
-                %span
-                  类型：
-                = @archetype.channel.name if @archetype.channel.present?
+              - if @archetype.channel.present?
+                .archetype_channel
+                  %span
+                    类型：
+                  = @archetype.channel.name 
               .archetype_intro
                 %span
                   介绍：

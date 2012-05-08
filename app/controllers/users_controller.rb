@@ -80,7 +80,7 @@ class UsersController < ApplicationController
           :value => @user.rtype,
           :expires => 14.days.from_now
         }
-        user.win("create")
+        @user.win("create")
         format.html { redirect_to(@user, :notice => '注册成功') }
       else
         flash[:error] = "错误"
@@ -267,6 +267,11 @@ class UsersController < ApplicationController
     end
     p user.errors
     redirect_to setpwd_users_url
+  end
+  
+  def publish
+    @photo = PhotoTemp.find(params[:photo_temp_id])
+    @user = get_current_user
   end
   
   def postshare

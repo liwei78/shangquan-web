@@ -23,6 +23,8 @@ settings: &common
   
   brand_original: "180x100"
   brand_small: "118x60"
+
+  archetype_original: "180x180"
   
   activity_original: "950x300"
   activity_middle: "446x200"
@@ -31,6 +33,16 @@ settings: &common
   
   upgrade_role_title: "您的申请已经收到"
   upgrade_role_content: "您已经申请成为"
+  
+  mail:
+    address: smtp.163.com
+    port: 25
+    domain:  shangquan.com
+    authentication: :login
+    user_name: fexi2006@163.com
+    password: liwei1978
+    sender: service
+    title: "来自商圈网的邮件"
   
   
 development:

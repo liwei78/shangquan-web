@@ -2,10 +2,9 @@
 .mainbox
   .formbox
     .title
+      = link_to @coupon.archetype.name, @coupon.archetype, :target => "_blank"
       优惠券
     .tablestyle
-      .msg_title
-        = @coupon.dateintro
       .msg_title
         = @coupon.dateintro
       .msg_content

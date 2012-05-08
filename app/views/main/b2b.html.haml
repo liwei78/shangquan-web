@@ -1,0 +1,19 @@
+- for area in @areas
+  .showtitle
+    .right
+      共
+      = area.b2bs.count
+      家已入驻
+    = area.name
+  .showcontent
+    .comusers_list.mb
+      %ul
+        - for company in area.b2bs
+          %li
+            .logo
+              = link_to image_tag(company.logo.url, :width => 180, :height => 180), company, :target => "_blank"
+            .name
+              .right
+                = link_to "关注", minifollow_archetype_url(company), :method => :post, :remote => true, :class => "followstyle"
+              = company.name
+        .clearfix

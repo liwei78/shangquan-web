@@ -35,9 +35,12 @@
         %tr
           %td
             
-          %td{:colspan => 2}
-            .right
+          %td
             = submit_tag("登录", :class => "submit")
+          %td
+            - if flash[:error].present?
+              %span
+                = flash[:error]
         %tr
           %td
             

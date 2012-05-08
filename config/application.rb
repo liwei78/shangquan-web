@@ -50,6 +50,8 @@ module Shangquan
     # %w(observers mailers middleware).each do |dir|
     #   config.autoload_paths << "#{Rails.root}/app/#{dir}"
     # end
+    
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| "#{html_tag}".html_safe }
   end
 end
 

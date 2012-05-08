@@ -201,7 +201,7 @@
       = form_tag(postshare_users_url, :multipart => true, :id => "shareform") do
         .previewbox
           .preview#preview.hide
-            = image_tag("nopic.jpg", :id => "preview_img")
+            = image_tag("nopic.jpg", :id => "preview_img", :width => 390, :height => 490)
           
         .inputbox
           - if @activity.present?
@@ -231,11 +231,11 @@
               = link_to '晒单', js_void, :onclick => "appendtag('晒单')"
               = link_to '自拍', js_void, :onclick => "appendtag('自拍')"
               = link_to '逛街', js_void, :onclick => "appendtag('逛街')"
-          .action.hide
+          .action
             %ul
               %li= link_to "增加物品", js_void,  :class => "btn1", :id => "moreitem"
               .clearfix
-          .showitem_div#showitem_div.hide
+          .showitem_div#showitem_div
             .tinytable
               .tr
                 .th 商品类别

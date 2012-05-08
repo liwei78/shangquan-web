@@ -66,6 +66,7 @@ Shangquan::Application.routes.draw do
       get  'upgrade'
       post 'upgraderole'
       get  'share'
+      post 'publish'
       post 'postshare'
       get  'discover'
       post 'postdiscover'
@@ -93,8 +94,9 @@ Shangquan::Application.routes.draw do
   match '/main/articles'      => 'main#articles',   :via => :get
   match '/main/companies'     => 'main#companies',  :via => :get
   match '/main/malls'         => 'main#malls',      :via => :get
-  match '/main/repasts'       => 'main#repasts',      :via => :get
+  match '/main/repasts'       => 'main#repasts',    :via => :get
   match '/main/brands'        => 'main#brands',     :via => :get
+  match '/main/b2b'           => 'main#b2b',        :via => :get
   match '/photo_temps/create' => 'photo_temps#create', :via => :post, :as => :uploadphototemp
   match '/brand_name_search'  => 'search#brand_name_search', :via => :post, :as => :brand_name_search
   match '/item_name_search'   => 'search#item_name_search',  :via => :post, :as => :item_name_search

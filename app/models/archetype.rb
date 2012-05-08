@@ -37,7 +37,7 @@ class Archetype < ActiveRecord::Base
   end
 
   has_attached_file :logo,
-    :styles          => {:original => SITE_SETTINGS["brand_original"], :small => SITE_SETTINGS["brand_small"]},
+    :styles          => {:original => SITE_SETTINGS["archetype_original"]},
     :url             => SITE_SETTINGS["paperclip_url"],
     :path            => SITE_SETTINGS["paperclip_path"],
     :default_url     => "nopic.jpg"

@@ -17,7 +17,7 @@
             %td{:width => "70"}
               = link_to image_tag(article.poster.url(:small), :width => 60), article
             %td
-              = link_to article.title, article
+              = link_to article.content.truncate(50, :omission => "..."), article
             %td{:width => "50"}
               = link_to "编辑", edit_article_url(article)
       = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"

@@ -19,6 +19,7 @@ Category.create([
   {:name => "商家", :position => 3},  
   {:name => "餐饮", :position => 4}, 
   {:name => "团购", :position => 5},
+  {:name => "电商", :position => 6},
 ])
 
 Channel.create([
@@ -58,22 +59,24 @@ puts "ccc is test account, login with it."
 # puts "Archetypes"
 Archetype.create([
     {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg")),  :category_id => 1, :channel_id => 1, :intro => "玉兰油（OLAY）是中国区最大护肤品牌，在大陆已持续十年呈两位数增长。它是宝洁公司全球著名的护肤品牌，OLAY以全球高科技护肤研发技术为后盾，在深入了解中国女性对护肤和美的需要的基础上，不断扩大产品范围，目前已经涵盖了护肤和沐浴系列，真正帮助女性全面周到地呵护自己的肌肤。"},
-    {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
-    {:name => "姬芮", :logo => open(Rails.root.join('tmp', "brand3.jpg")),   :category_id => 1, :channel_id => 1, :intro => ""},
-    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
-    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
-    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :category_id => 1, :channel_id => 1, :intro => ""},
-    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg")),   :category_id => 1, :channel_id => 1, :intro => ""},
+    {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
+    {:name => "姬芮", :logo => open(Rails.root.join('tmp', "brand3.jpg")),   :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
+    {:name => "美宝莲", :logo => open(Rails.root.join('tmp', "brand4.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
+    {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
+    {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
+    {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg")),   :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
 
-    {:name => "hq尚客", :logo => open(Rails.root.join('tmp', "com4.jpg")), :category_id => 3, :intro => ""},
-    {:name => "天虹", :logo => open(Rails.root.join('tmp', "com6.jpg")), :category_id => 3, :intro => ""},
+    {:name => "hq尚客", :logo => open(Rails.root.join('tmp', "com4.jpg")), :category_id => 3, :intro => "这是它的介绍。"},
+    {:name => "天虹", :logo => open(Rails.root.join('tmp', "com6.jpg")), :category_id => 3, :intro => "这是它的介绍。"},
     
-    {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => "", :area_id => 1},
-    {:name => "国泰百货", :logo => open(Rails.root.join('tmp', "com2.jpg")), :category_id => 2, :intro => "", :area_id => 1},
-    {:name => "新世界", :logo => open(Rails.root.join('tmp', "com3.jpg")), :category_id => 2, :intro => "", :area_id => 1},
-    {:name => "西单商场", :logo => open(Rails.root.join('tmp', "com5.jpg")), :category_id => 2, :intro => "", :area_id => 1},
-    {:name => "五彩城", :logo => open(Rails.root.join('tmp', "com7.jpg")), :category_id => 2, :intro => "", :area_id => 1},
-    {:name => "世茂百货", :logo => open(Rails.root.join('tmp', "com8.jpg")), :category_id => 2, :intro => "", :area_id => 1},
+    {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
+    {:name => "国泰百货", :logo => open(Rails.root.join('tmp', "com2.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
+    {:name => "新世界", :logo => open(Rails.root.join('tmp', "com3.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
+    {:name => "西单商场", :logo => open(Rails.root.join('tmp', "com5.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
+    {:name => "五彩城", :logo => open(Rails.root.join('tmp', "com7.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
+    {:name => "世茂百货", :logo => open(Rails.root.join('tmp', "com8.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
+    
+    {:name => "东方饺子王", :logo => open(Rails.root.join('tmp', "jiaoziwang.jpg")), :category_id => 4, :intro => "", :area_id => 1},
 ])
 
 
@@ -153,16 +156,47 @@ activity = Activity.create(
 category = Category.find(1)
 category.items = Item.limit(6)
 
+Activity.create([
+  {:title => "我有一颗玻璃心", 
+  :opening_date => "活动日期：3月26日-4月1日",
+  :poster => open(Rails.root.join('tmp', "slider1.jpg")),
+  :status => 1,
+  :latitude => "3990876",
+  :longitude => "11639742"},
+  
+  {:title => "男人的第二张名片", 
+  :opening_date => "活动日期：3月26日-4月1日",
+  :poster => open(Rails.root.join('tmp', "slider2.jpg")),
+  :status => 1,
+  :latitude => "3990876",
+  :longitude => "11639742"},
+  
+  {:title => "波点控", 
+  :opening_date => "活动日期：3月26日-4月1日",
+  :poster => open(Rails.root.join('tmp', "slider3.jpg")),
+  :status => 1,
+  :latitude => "3990876",
+  :longitude => "11639742"},
+  
+  {:title => "个性迷彩", 
+  :opening_date => "活动日期：3月26日-4月1日",
+  :poster => open(Rails.root.join('tmp', "slider4.jpg")),
+  :status => 1,
+  :latitude => "3990876",
+  :longitude => "11639742"},
+])
+
 puts "banners"
 Banner.create([
-    {:title => "卫衣躁动史",    :gourl => "/pages/4", :position => 1, :category => 0, :poster => open(Rails.root.join('tmp', "slider1.jpg"))},
-    {:title => "真男人要护肤",   :gourl => "/pages/5", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},
-    {:title => "我是你的明灯",   :gourl => "/pages/6", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
-    {:title => "注册商圈N喜临门", :gourl => "/pages/7", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
-    {:title => "0元抢小米手机",       :summary => "白拿小米第五期！",  :gourl => "/pages/8", :position => 1, :category => 1},
-    {:title => "脚踏两只鞋",         :summary => "女人都喜欢穿休闲鞋的男人",           :gourl => "/pages/9", :position => 2, :category => 1},
-    {:title => "通勤利器撑气场",       :summary => "一个好的通勤包，绝对助你出挑",         :gourl => "/pages/7", :position => 3, :category => 1},
-    {:title => "来商圈，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",             :gourl => "/pages/8", :position => 4, :category => 1}
+    {:title => "我有一颗玻璃心",  :gourl => "/activities/2", :position => 1, :category => 0, :poster => open(Rails.root.join('tmp', "slider1.jpg"))},
+    {:title => "男人的第二张名片", :gourl => "/activities/3", :position => 2, :category => 0, :poster => open(Rails.root.join('tmp', "slider2.jpg"))},
+    {:title => "波点控",  :gourl => "/activities/4", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
+    {:title => "个性迷彩", :gourl => "/activities/5", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
+    
+    {:title => "天天排队 惊喜免费",       :summary => "好礼不停，0元抢小米手机啦！",       :gourl => "/pages/9", :position => 1, :category => 1},
+    {:title => "平底鞋也完胜",         :summary => "爱美也要顾性命，平底鞋是必备良品",   :gourl => "/pages/10", :position => 2, :category => 1},
+    {:title => "武装到手指",       :summary => "要讲究，就要连指甲都无懈可击", :gourl => "/pages/11", :position => 3, :category => 1},
+    {:title => "来美寻，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",     :gourl => "/pages/12", :position => 4, :category => 1}
   ])
 
 puts "pages"
@@ -171,12 +205,11 @@ Page.create([
   {:title => "关于我们", :content => "", :category_id => 0},
   {:title => "联系我们", :content => "", :category_id => 0},
   {:title => "版权声明", :content => "", :category_id => 0},
-  {:title => "奇虎诉腾讯垄断案开审", :content => "", :category_id => 1},
-  {:title => "中国类Instagram创业凶猛生长", :content => "", :category_id => 1},
-  {:title => "网游再掀上市潮欲迎第二春：六公司近期争赴IPO", :content => "", :category_id => 1},
-  {:title => "公告1", :content => "", :category_id => 2},
-  {:title => "公告2", :content => "", :category_id => 2},
-  {:title => "公告3", :content => "", :category_id => 2},
+  
+  {:title => "天天排队 惊喜免费", :content => "好礼不停，0元抢小米手机啦！", :category_id => 2},
+  {:title => "平底鞋也完胜", :content => "爱美也要顾性命，平底鞋是必备良品", :category_id => 2},
+  {:title => "武装到手指", :content => "要讲究，就要连指甲都无懈可击", :category_id => 2},
+  {:title => "来美寻，怎么玩？猛击这里！", :content => "快速分享你喜欢的商品", :category_id => 2},
 ])
 
 puts "score"

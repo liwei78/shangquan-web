@@ -107,10 +107,11 @@ $layout-width: 774px;
       }
       table {
         tr {
-          height: 60px;
-          line-height: 60px;
           span {
             color: #F86;
+          }
+          td {
+            padding-bottom: 20px;
           }
         }
       }

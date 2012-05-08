@@ -16,10 +16,10 @@
           %td{:width => 76}
             显示昵称
           %td{:width => 220}
-            = f.text_field :name, :class => "input"
-            .intro
-              1至16个字符
-          %td
+            = f.text_field :name, :class => "input", :maxlength => 16
+            %br
+            1至16个字符
+          %td{:valign => "top"}
             - if @user.errors[:name].any?
               %span
                 昵称错误
@@ -28,7 +28,7 @@
             电子邮箱
           %td
             = f.text_field :email, :class => "input"
-          %td
+          %td{:valign => "top"}
             - if @user.errors[:email].any?
               %span
                 邮件错误
@@ -37,9 +37,9 @@
             设置密码
           %td
             = f.password_field :password, :class => "input"
-            .intro
-              4至20位长度
-          %td
+            %br
+            4至20位长度
+          %td{:valign => "top"}
             - if @user.errors[:password].any?
               %span
                 密码错误
