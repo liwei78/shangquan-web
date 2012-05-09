@@ -1,5 +1,5 @@
 .searchresults
-  %ul
+  %ul.results
     - for article in @articles
       %li
         .searchtitle
@@ -13,3 +13,23 @@
 
     - if @articles.present?
       = will_paginate @articles, :param_name => "page", :previous_label => "上一页", :next_label => "下一页"
+
+  .searchcate
+    %ul
+      %li= link_to "时尚", search_url(:k => params[:k]), :class => "#{"on" if params[:c].nil?}"
+      %li= "商家"
+      %li= "商场"
+      %li= "品牌"
+      %li= "餐饮"
+      %li= "电商"
+      %li= "活动"
+      %li= "商品"
+      / %li= link_to "商家", search_url(:k => params[:k], :c => "com"), :class => "#{"on" if params[:c] == "com"}"
+      / %li= link_to "商场", search_url(:k => params[:k], :c => "mall"), :class => "#{"on" if params[:c] == "mall"}"
+      / %li= link_to "品牌", search_url(:k => params[:k], :c => "brand"), :class => "#{"on" if params[:c] == "brand"}"
+      / %li= link_to "餐饮", search_url(:k => params[:k], :c => "re"), :class => "#{"on" if params[:c] == "re"}"
+      / %li= link_to "电商", search_url(:k => params[:k], :c => "b2b"), :class => "#{"on" if params[:c] == "b2b"}"
+      / %li= link_to "活动", search_url(:k => params[:k], :c => "act"), :class => "#{"on" if params[:c] == "act"}"
+      / %li= link_to "商品", search_url(:k => params[:k], :c => "item"), :class => "#{"on" if params[:c] == "item"}"
+
+  .clearfix

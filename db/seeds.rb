@@ -193,10 +193,10 @@ Banner.create([
     {:title => "波点控",  :gourl => "/activities/4", :position => 3, :category => 0, :poster => open(Rails.root.join('tmp', "slider3.jpg"))},
     {:title => "个性迷彩", :gourl => "/activities/5", :position => 4, :category => 0, :poster => open(Rails.root.join('tmp', "slider4.jpg"))},
     
-    {:title => "天天排队 惊喜免费",       :summary => "好礼不停，0元抢小米手机啦！",       :gourl => "/pages/9", :position => 1, :category => 1},
-    {:title => "平底鞋也完胜",         :summary => "爱美也要顾性命，平底鞋是必备良品",   :gourl => "/pages/10", :position => 2, :category => 1},
-    {:title => "武装到手指",       :summary => "要讲究，就要连指甲都无懈可击", :gourl => "/pages/11", :position => 3, :category => 1},
-    {:title => "来美寻，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",     :gourl => "/pages/12", :position => 4, :category => 1}
+    {:title => "天天排队 惊喜免费",       :summary => "好礼不停，0元抢小米手机啦！",       :gourl => "/pages/5", :position => 1, :category => 1},
+    {:title => "平底鞋也完胜",         :summary => "爱美也要顾性命，平底鞋是必备良品",   :gourl => "/pages/6", :position => 2, :category => 1},
+    {:title => "武装到手指",       :summary => "要讲究，就要连指甲都无懈可击", :gourl => "/pages/7", :position => 3, :category => 1},
+    {:title => "来美寻，怎么玩？猛击这里！", :summary => "快速分享你喜欢的商品",     :gourl => "/pages/8", :position => 4, :category => 1}
   ])
 
 puts "pages"

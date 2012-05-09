@@ -1888,7 +1888,8 @@ div.star-rating{background:transparent!important;overflow:hidden!important}
 
 .searchresults {
   background-color: white;
-  ul {
+  ul.results {
+    float: left;
     padding: 20px;
     width: 700px;
     li {
@@ -1916,8 +1917,23 @@ div.star-rating{background:transparent!important;overflow:hidden!important}
       }
     }
   }
+  .searchcate {
+    float: right;
+    width: 190px;
+    padding-left: 20px;
+    padding-top: 10px;
+    ul {
+      li {
+        line-height: 30px;
+        a.on {
+          color: white;
+          background-color: #1D8B75;
+        }
+      }
+    }
+  }
+  
 }
-
 
 
 

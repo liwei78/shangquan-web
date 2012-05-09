@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
     @comments = @item.comments.paginate(:page => params[:page], :per_page => 10, :order => "id desc")
     @user = get_current_user
     @current_user = get_current_user
+    @page_title = @item.title
   end
   
   def new

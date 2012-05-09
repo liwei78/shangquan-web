@@ -1,4 +1,3 @@
-= render :partial => "users/usersidebox"
 .shareview
   .show
     .head
@@ -6,10 +5,10 @@
         = link_to raw("<span id='likes_count_#{@item.id}'>#{@item.likes_count}</span><em></em>"), like_item_url(@item), :remote => true, :method => :post, :class => "like"
       .block
         .avatar
-          = link_to image_tag(@user.avatar.url(:thumb), :width => 60, :height => 60), @user
+          = image_tag(@item.poster.url(:small), :width => 60, :height => 60)
         .info
           .name
-            = link_to @user.name, @user
+            = @item.title
           .time
             = @item.created_at.to_s(:db)
         .clearfix

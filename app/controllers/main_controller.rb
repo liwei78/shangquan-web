@@ -21,7 +21,7 @@ class MainController < ApplicationController
   end
   
   def items
-    @items = Item.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
+    @items = Item.white.paginate(:page => params[:page], :per_page => 100, :order => "id desc")||[]
     @page_title = "商品"
     render :layout => "layoutfullwidth"
   end
