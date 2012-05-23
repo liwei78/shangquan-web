@@ -46,9 +46,9 @@ settings: &common
   
   
 development:
-  paperclip_url:  "http://localhost:5000/upload_files/:class/:attachment/:id/:style/:filename"
+  paperclip_url:  "http://118.88.58.107:5000/upload_files/:class/:attachment/:id/:style/:filename"
   paperclip_path: "/Users/apple/workspace/shangquan/github/files/public/upload_files/:class/:attachment/:id/:style/:filename"
-  temp_url:  "http://localhost:3000/uploadtmps/:class/:attachment/:id/:style/:filename"
+  temp_url:  "http://118.88.58.107:3000/uploadtmps/:class/:attachment/:id/:style/:filename"
   temp_path: ":rails_root/public/uploadtmps/:class/:attachment/:id/:style/:filename"
   <<: *common
 test:

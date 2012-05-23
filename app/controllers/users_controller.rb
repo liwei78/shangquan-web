@@ -93,14 +93,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if current_user.update_attributes(params[:user])
-        format.html { redirect_to :back, :notice => "更新成功" }
-      else
-        flash[:error] = "错误"
-        format.html { redirect_to :back }
-      end
-    end
+    # @current_user = get_current_user
+    # respond_to do |format|
+    #   if @current_user.update_attributes(params[:user])
+    #     p @current_user.errors
+    #     format.html { redirect_to :back, :notice => "更新成功" }
+    #   else
+    #     flash[:error] = "错误"
+    #     format.html { redirect_to :back }
+    #   end
+    # end
   end
 
   def show

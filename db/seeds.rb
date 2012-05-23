@@ -56,7 +56,7 @@ aaa.follow!(ccc)
 puts "ccc is test account, login with it."
 
 
-# puts "Archetypes"
+puts "Archetypes"
 Archetype.create([
     {:name => "OLAY", :logo => open(Rails.root.join('tmp', "brand1.jpg")),  :category_id => 1, :channel_id => 1, :intro => "玉兰油（OLAY）是中国区最大护肤品牌，在大陆已持续十年呈两位数增长。它是宝洁公司全球著名的护肤品牌，OLAY以全球高科技护肤研发技术为后盾，在深入了解中国女性对护肤和美的需要的基础上，不断扩大产品范围，目前已经涵盖了护肤和沐浴系列，真正帮助女性全面周到地呵护自己的肌肤。"},
     {:name => "欧莱雅", :logo => open(Rails.root.join('tmp', "brand2.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
@@ -65,9 +65,9 @@ Archetype.create([
     {:name => "花花公子", :logo => open(Rails.root.join('tmp', "brand5.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
     {:name => "金利来", :logo => open(Rails.root.join('tmp', "brand6.jpg")), :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
     {:name => "卡帕", :logo => open(Rails.root.join('tmp', "brand7.jpg")),   :category_id => 1, :channel_id => 1, :intro => "这是它的介绍。"},
-
-    {:name => "hq尚客", :logo => open(Rails.root.join('tmp', "com4.jpg")), :category_id => 3, :intro => "这是它的介绍。"},
-    {:name => "天虹", :logo => open(Rails.root.join('tmp', "com6.jpg")), :category_id => 3, :intro => "这是它的介绍。"},
+    
+    {:name => "hq尚客", :logo => open(Rails.root.join('tmp', "com4.jpg")), :category_id => 3, :intro => "这是它的介绍。", :area_id => 1},
+    {:name => "天虹", :logo => open(Rails.root.join('tmp', "com6.jpg")), :category_id => 3, :intro => "这是它的介绍。", :area_id => 1},
     
     {:name => "大悦城", :logo => open(Rails.root.join('tmp', "com1.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
     {:name => "国泰百货", :logo => open(Rails.root.join('tmp', "com2.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
@@ -76,7 +76,7 @@ Archetype.create([
     {:name => "五彩城", :logo => open(Rails.root.join('tmp', "com7.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
     {:name => "世茂百货", :logo => open(Rails.root.join('tmp', "com8.jpg")), :category_id => 2, :intro => "这是它的介绍。", :area_id => 1},
     
-    {:name => "东方饺子王", :logo => open(Rails.root.join('tmp', "jiaoziwang.jpg")), :category_id => 4, :intro => "", :area_id => 1},
+    {:name => "东方饺子王", :logo => open(Rails.root.join('tmp', "jiaoziwang.jpg")), :category_id => 4, :intro => "", :area_id => 1}
 ])
 
 

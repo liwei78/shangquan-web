@@ -12,11 +12,13 @@ class User < ActiveRecord::Base
   validates :password,
     :presence => true,
     :confirmation => true,
-    :length => {:within => 4..20}
+    :length => {:within => 4..20},
+    :on => :create
     
   validates :password_confirmation,
     :presence => true,
-    :length => {:within => 4..20}
+    :length => {:within => 4..20},
+    :on => :create
     
   validates :name,
     :presence => true,
@@ -126,8 +128,6 @@ class User < ActiveRecord::Base
   end
   
   def win(score)
-    p "point"
-    p Score.find_by_flag(score).point
     self.increment!(:scores, Score.find_by_flag(score).point) if score.present?
   end
   

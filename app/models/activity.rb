@@ -10,7 +10,7 @@ class Activity < ActiveRecord::Base
   belongs_to :archetype
   belongs_to :user
   
-  scope :is_suggest,  :conditions => ["activities.suggest = ?", true]
+  scope :is_suggest, :conditions => ["activities.suggest = ?", true]
   scope :opening, :conditions => ["activities.status = ?", 1]
   
   has_attached_file :logo, 

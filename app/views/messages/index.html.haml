@@ -10,7 +10,7 @@
         .clearfix
     .tablestyle
       %h3
-        共有#{@user.messages.count}条系统通知
+        共有#{@user.messages.sysmsg.count}条系统通知
       %ul
         - for msg in @messages
           %li
